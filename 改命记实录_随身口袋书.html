@@ -43,8 +43,10 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
 </style>
 </head>
 <body>
+<noscript><div style="background:#ffe0e0;color:#c00;padding:16px;text-align:center;font-size:16px;margin:8px 12px;border-radius:8px;border:2px solid #c00"><b>⚠ JavaScript 未启用</b><br>请在浏览器设置中启用 JavaScript，否则按钮无法点击。</div></noscript>
+
 <div class="topbar">
-<h1>改命记实录</h1>
+<h1><span id="js-status" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:red;margin-right:6px;vertical-align:middle"></span>改命记实录</h1>
 <div class="sub">随身口袋书 · 道之光</div>
 <input type="text" id="q" placeholder="搜索章节、概念、语录..." oninput="search()">
 </div>
@@ -191,7 +193,11 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
 <div class="ch-row"><span class="num">124</span><span class="title">吃酸性好还是碱性好</span><span class="tag"></span></div>
 <div class="ch-row"><span class="num">125</span><span class="title">扁平疣</span><span class="tag"><span class="tag tag-shu">术</span></span></div>
 <div class="ch-row"><span class="num">126</span><span class="title">改善酸性体质</span><span class="tag"></span></div>
-<div class="ch-row"><span class="num">127</span><span class="title">祝由术小儿退烧</span><span class="tag"><span class="tag tag-shu">术</span></span></div>
+<div class="ch-row"><span c
+
+... [OUTPUT TRUNCATED - 107 chars omitted out of 50107 total] ...
+
+</span></div>
 <div class="ch-row"><span 
 
 ... [OUTPUT TRUNCATED - 62285 chars omitted out of 112285 total] ...
@@ -462,6 +468,15 @@ span class="tag"></span></div>
 </div>
 <div class="footer"><p>《改命记实录》· 道之光 · 919章/141万字</p><p>仅供个人学习参考</p></div>
 <script>
+(function(){
+var s=document.getElementById('js-status');
+if(s){s.style.background='#4caf50';s.title='JS 运行正常';}
+window.onerror=function(m,src,line,col,err){
+var e=document.getElementById('js-status');
+if(e){e.style.background='red';e.title='JS Error: '+m};
+return false;
+};
+})();
 function switchTab(btn,p){
 document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.toggle('on',b===btn)});
 document.querySelectorAll('.panel').forEach(function(el){el.classList.remove('show')});
