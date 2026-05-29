@@ -1,0 +1,5993 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>改命记实录 · 随身口袋书 — 道之光</title>
+<style>
+:root {
+    --bg: #faf8f5;
+    --card: #fff;
+    --text: #2c2416;
+    --muted: #8b7355;
+    --accent: #b8860b;
+    --accent-light: #f5e6c8;
+    --dao: #8b4513;
+    --shu: #2e7d32;
+    --pianwai: #6a1b9a;
+    --border: #e8e0d5;
+    --header-bg: #1a1410;
+    --header-text: #f5e6c8;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+}
+
+/* Header */
+header {
+    background: var(--header-bg);
+    color: var(--header-text);
+    margin: 0 -16px;
+    padding: 32px 16px 24px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+header h1 {
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+header .subtitle {
+    font-size: 0.85em;
+    opacity: 0.7;
+    margin-bottom: 16px;
+}
+
+/* Search */
+.search-box {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    background: rgba(255,255,255,0.1);
+    color: var(--header-text);
+    font-size: 0.9em;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-box input::placeholder { color: rgba(255,255,255,0.4); }
+.search-box input:focus { border-color: var(--accent); }
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
+
+/* Main content */
+.intro { 
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.intro h2 { 
+    font-size: 1.1em;
+    color: var(--accent);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent-light);
+}
+
+.intro p { margin: 8px 0; font-size: 0.92em; }
+
+.stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+}
+
+.stat-item {
+    background: var(--accent-light);
+    border-radius: 8px;
+    padding: 8px 16px;
+    text-align: center;
+    flex: 1;
+    min-width: 80px;
+}
+
+.stat-item .num { font-size: 1.3em; font-weight: 700; color: var(--accent); }
+.stat-item .label { font-size: 0.75em; color: var(--muted); }
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 4px;
+    margin: 16px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+}
+
+.tab {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--muted);
+    font-size: 0.85em;
+    cursor: pointer;
+    white-space: nowrap;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.tab.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+/* Chapter table */
+.chapter-list {
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin: 16px 0;
+}
+
+.chapter-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.chapter-list th {
+    background: #f5f0e8;
+    padding: 10px 12px;
+    font-size: 0.8em;
+    text-align: left;
+    color: var(--muted);
+    font-weight: 600;
+    position: sticky;
+    top: 120px;
+    z-index: 10;
+}
+
+.chapter-list td {
+    padding: 8px 12px;
+    font-size: 0.85em;
+    border-bottom: 1px solid var(--border);
+}
+
+.chapter-list tr:last-child td { border-bottom: none; }
+.chapter-list tr:hover td { background: #fdfaf5; }
+
+.ch-num { width: 50px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ch-tags { width: 70px; text-align: right; }
+
+.tag {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    font-weight: 600;
+    margin-left: 2px;
+}
+
+.tag-dao { background: #fce4d6; color: #8b4513; }
+.tag-shu { background: #d5f5e3; color: #2e7d32; }
+.tag-pianwai { background: #f3e5f5; color: #6a1b9a; }
+.tag-end { background: #ffe082; color: #e65100; }
+
+/* Key concepts */
+.concepts {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    border: 1px solid var(--border);
+}
+
+.concepts h2 {
+    font-size: 1.1em;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.concept-card {
+    background: #fdfaf5;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.concept-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.concept-card h3 { font-size: 0.9em; color: var(--accent); margin-bottom: 4px; }
+.concept-card p { font-size: 0.78em; color: var(--muted); line-height: 1.5; }
+
+/* Teachings */
+.teachings {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    border: 1px solid var(--border);
+}
+
+.teachings h2 {
+    font-size: 1.1em;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.teaching-item {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.teaching-item:last-child { border-bottom: none; }
+
+.teaching-item .quote {
+    font-style: italic;
+    color: var(--dao);
+    margin-bottom: 4px;
+    font-size: 0.9em;
+    padding-left: 12px;
+    border-left: 3px solid var(--accent-light);
+}
+
+.teaching-item .source { font-size: 0.75em; color: var(--muted); }
+
+/* Characters */
+.characters {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    border: 1px solid var(--border);
+}
+
+.characters h2 { font-size: 1.1em; color: var(--accent); margin-bottom: 12px; }
+
+.char-card {
+    background: #fdfaf5;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+.char-card h3 { font-size: 0.9em; color: var(--accent); }
+.char-card p { font-size: 0.82em; color: var(--muted); margin-top: 4px; }
+
+/* Legend */
+.legend {
+    display: flex;
+    gap: 12px;
+    margin: 12px 0;
+    flex-wrap: wrap;
+    font-size: 0.78em;
+    color: var(--muted);
+}
+
+.legend span { display: flex; align-items: center; gap: 4px; }
+
+/* Footer */
+footer {
+    text-align: center;
+    margin: 32px 0;
+    padding: 20px;
+    color: var(--muted);
+    font-size: 0.8em;
+    border-top: 1px solid var(--border);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    header h1 { font-size: 1.2em; }
+    .chapter-list td { padding: 6px 8px; font-size: 0.78em; }
+    .ch-num { width: 36px; }
+    .ch-tags { width: 50px; }
+    .concept-grid { grid-template-columns: 1fr; }
+}
+
+/* Hidden rows for filtering */
+tr.hidden { display: none; }
+
+mark { background: #ffe082; padding: 0 2px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>改命记实录</h1>
+    <div class="subtitle">随身口袋书 · 道之光 著</div>
+    <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search" placeholder="搜索章节、概念、人物..." oninput="doSearch()">
+    </div>
+</header>
+
+<!-- Intro -->
+<div class="intro">
+    <h2>📖 关于本书</h2>
+    <p>《改命记实录》是道之光创作的都市修行小说，以第一人称讲述主角下山渡世的真实经历。师父匆匆教了他预测术、开了天眼、传了几本书，还没正式上山就让他下山渡世——"我在红尘中，渡世修行"。</p>
+    <p>这是一本可实操验证的风水记实小说，用科学解释玄学。不修仙、不玄幻、不筑基、不飞升——普通人都能看懂。书中以"道"（理论）和"术"（技法）两条主线交织，覆盖风水、八字、面相、象数疗法、道家养生、心理学、改命实践等领域。</p>
+    <p>状态：已完结 · 约141万字 · 919章 · 2025年完本</p>
+    
+    <div class="stats">
+        <div class="stat-item"><div class="num">919</div><div class="label">章节目录</div></div>
+        <div class="stat-item"><div class="num">141万</div><div class="label">字数</div></div>
+        <div class="stat-item"><div class="num">886+</div><div class="label">已收录目录</div></div>
+        <div class="stat-item"><div class="num">道·术</div><div class="label">理论+技法</div></div>
+        <div class="stat-item"><div class="num">篇外</div><div class="label">番外补充</div></div>
+    </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+    <button class="tab active" onclick="switchTab('all', this)">全部章节目录</button>
+    <button class="tab" onclick="switchTab('dao', this)">道 · 理论</button>
+    <button class="tab" onclick="switchTab('shu', this)">术 · 技法</button>
+    <button class="tab" onclick="switchTab('pianwai', this)">篇外/番外</button>
+    <button class="tab" onclick="switchTab('concepts', this)">核心概念</button>
+    <button class="tab" onclick="switchTab('teachings', this)">精华语录</button>
+    <button class="tab" onclick="switchTab('characters', this)">人物索引</button>
+</div>
+
+<!-- Chapter Catalog -->
+<div id="tab-chapters" class="chapter-list">
+    <div class="legend">
+        <span><span class="tag tag-dao">道</span> 理论/心法</span>
+        <span><span class="tag tag-shu">术</span> 具体技法</span>
+        <span><span class="tag tag-pianwai">篇外</span> 番外/补充</span>
+        <span><span class="tag tag-end">完结</span> 终章</span>
+    </div>
+    <table>
+        <thead>
+            <tr><th>章</th><th>标题</th><th>标签</th></tr>
+        </thead>
+        <tbody>
+            
+    <tr>
+        <td class="ch-num">1</td>
+        <td class="ch-title">风水比医学更科学</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">2</td>
+        <td class="ch-title">最惨高考</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">3</td>
+        <td class="ch-title">南上，应验</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">4</td>
+        <td class="ch-title">预测与化解的原理</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">5</td>
+        <td class="ch-title">婚姻占卜术</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">6</td>
+        <td class="ch-title">掐指神通术</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">7</td>
+        <td class="ch-title">封建迷信进课本</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">8</td>
+        <td class="ch-title">不要给别人算命</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">9</td>
+        <td class="ch-title">齐桓公怎么死的</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">10</td>
+        <td class="ch-title">法不轻施，道不轻传</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">11</td>
+        <td class="ch-title">开天眼</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">12</td>
+        <td class="ch-title">人总要有梦想</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">13</td>
+        <td class="ch-title">新加坡的第一个面相</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">14</td>
+        <td class="ch-title">幻灭，节食省钱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">15</td>
+        <td class="ch-title">压死骆驼的最后一根稻草</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">16</td>
+        <td class="ch-title">赤口，应验</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">17</td>
+        <td class="ch-title">语言隔阂阻挡不了的应验</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">18</td>
+        <td class="ch-title">搬家</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">19</td>
+        <td class="ch-title">美女如云</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">20</td>
+        <td class="ch-title">找不到组织的国际友人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">21</td>
+        <td class="ch-title">失之东隅，收之桑榆</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">22</td>
+        <td class="ch-title">拉肚子</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">23</td>
+        <td class="ch-title">采日光功</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">24</td>
+        <td class="ch-title">采阴补阳</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">25</td>
+        <td class="ch-title">第一次调风水之境煞</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">26</td>
+        <td class="ch-title">英语？华语？</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">27</td>
+        <td class="ch-title">清水煮面</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">28</td>
+        <td class="ch-title">剑指站桩功</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">29</td>
+        <td class="ch-title">绝处逢生的发财之路</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">30</td>
+        <td class="ch-title">红灯区的跟踪者</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">31</td>
+        <td class="ch-title">万事俱备</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">32</td>
+        <td class="ch-title">不刮东风</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">33</td>
+        <td class="ch-title">剑指出气</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">34</td>
+        <td class="ch-title">不再为钱所困</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">35</td>
+        <td class="ch-title">被家暴</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">36</td>
+        <td class="ch-title">女神被包养</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">37</td>
+        <td class="ch-title">招小人</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">38</td>
+        <td class="ch-title">性病</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">39</td>
+        <td class="ch-title">创业危险，打工安全？</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">40</td>
+        <td class="ch-title">手艺人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">41</td>
+        <td class="ch-title">一个圈里支棱三根小棍儿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">42</td>
+        <td class="ch-title">天不助力</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">43</td>
+        <td class="ch-title">没有我的教不会的学生</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">44</td>
+        <td class="ch-title">正宗的新加坡早餐</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">45</td>
+        <td class="ch-title">不能出门的怪病</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">46</td>
+        <td class="ch-title">人人都是神经病</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">47</td>
+        <td class="ch-title">洗心养神功</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">48</td>
+        <td class="ch-title">注意力就是生命力</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">49</td>
+        <td class="ch-title">很正确的废话</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">50</td>
+        <td class="ch-title">咱俩不是同一个物种</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">51</td>
+        <td class="ch-title">桃花乱乱开</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">52</td>
+        <td class="ch-title">啮指痛心</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">53</td>
+        <td class="ch-title">报恩宝宝</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">54</td>
+        <td class="ch-title">薄薄的大红包</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">55</td>
+        <td class="ch-title">修行的本质</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">56</td>
+        <td class="ch-title">念经念咒的原理</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">57</td>
+        <td class="ch-title">佛医断食治病</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">58</td>
+        <td class="ch-title">麦粒肿</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">59</td>
+        <td class="ch-title">悬针纹</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">60</td>
+        <td class="ch-title">《地藏菩萨本愿经》改命</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">61</td>
+        <td class="ch-title">念头会影响基因的表达</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">62</td>
+        <td class="ch-title">快乐的本质</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">63</td>
+        <td class="ch-title">皇帝的床只有一米多宽</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">64</td>
+        <td class="ch-title">记忆是可以遗传的</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">65</td>
+        <td class="ch-title">五行人之木</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">66</td>
+        <td class="ch-title">梵音咒语</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">67</td>
+        <td class="ch-title">一次又一次的显化</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">68</td>
+        <td class="ch-title">跟钉子较真儿的人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">69</td>
+        <td class="ch-title">有听没有懂</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">70</td>
+        <td class="ch-title">我明天可能会死</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">71</td>
+        <td class="ch-title">走火入魔的修行者</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">72</td>
+        <td class="ch-title">每15年刨一次坟</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">73</td>
+        <td class="ch-title">打通人体的财务通道</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">74</td>
+        <td class="ch-title">上市的风水公司</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">75</td>
+        <td class="ch-title">我爷爷要复活了？</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">76</td>
+        <td class="ch-title">真真假假</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">77</td>
+        <td class="ch-title">意念联系</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">78</td>
+        <td class="ch-title">能量引导术</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">79</td>
+        <td class="ch-title">你爱他吗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">80</td>
+        <td class="ch-title">养心补肾能量手印</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">81</td>
+        <td class="ch-title">祝由术便秘符</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">82</td>
+        <td class="ch-title">他一定是爱惨了我</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">83</td>
+        <td class="ch-title">最特别的大拇指</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">84</td>
+        <td class="ch-title">印度是最聪明的种族</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">85</td>
+        <td class="ch-title">跟房子八字不合</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">86</td>
+        <td class="ch-title">风煞</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">87</td>
+        <td class="ch-title">风煞的本质</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">88</td>
+        <td class="ch-title">免费的小姐</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">89</td>
+        <td class="ch-title">首富赚钱也得有压力</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">90</td>
+        <td class="ch-title">喝水不能改命，不喝水能</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">91</td>
+        <td class="ch-title">三元九运～抑郁/虚假</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">92</td>
+        <td class="ch-title">算命心理学</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">93</td>
+        <td class="ch-title">神奇的清洁工</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">94</td>
+        <td class="ch-title">重复的问题，我不会再犯</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">95</td>
+        <td class="ch-title">爱发脾气的人最脆弱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">96</td>
+        <td class="ch-title">尿毒症</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">97</td>
+        <td class="ch-title">三个月的薪水</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">98</td>
+        <td class="ch-title">命是天定还是人定</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">99</td>
+        <td class="ch-title">晕车象数疗法</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">100</td>
+        <td class="ch-title">八卦象数</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">101</td>
+        <td class="ch-title">腰痛</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">102</td>
+        <td class="ch-title">牙痛偏方</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">103</td>
+        <td class="ch-title">夜以继日</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">104</td>
+        <td class="ch-title">孔子是五行创始人？！</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">105</td>
+        <td class="ch-title">精通《易经》的都是骗子</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">106</td>
+        <td class="ch-title">儒家会算命吗</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">107</td>
+        <td class="ch-title">咳嗽的几个偏方</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">108</td>
+        <td class="ch-title">从手指看男性的不可描述</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">109</td>
+        <td class="ch-title">心理学的100不等于100</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">110</td>
+        <td class="ch-title">肉为财</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">111</td>
+        <td class="ch-title">改命？分分钟的事</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">112</td>
+        <td class="ch-title">断头婚</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">113</td>
+        <td class="ch-title">心理学的光环效应</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">114</td>
+        <td class="ch-title">九宫五行方位速记</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">115</td>
+        <td class="ch-title">象数疗法的话不适</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">116</td>
+        <td class="ch-title">心疼是哪儿疼？</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">117</td>
+        <td class="ch-title">先天八卦</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">118</td>
+        <td class="ch-title">光环效应的正面应用</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">119</td>
+        <td class="ch-title">一秒测运势</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">120</td>
+        <td class="ch-title">癌症的前兆</td>
+        <td class="ch-tags"><span class="tag tag-dao">道</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">121</td>
+        <td class="ch-title">癌变的原因</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">122</td>
+        <td class="ch-title">慧观</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">123</td>
+        <td class="ch-title">辟谷喝生水？</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">124</td>
+        <td class="ch-title">吃酸性好还是碱性好</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">125</td>
+        <td class="ch-title">扁平疣</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">126</td>
+        <td class="ch-title">改善酸性体质</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">127</td>
+        <td class="ch-title">祝由术小儿退烧</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">128</td>
+        <td class="ch-title">姓名学</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">129</td>
+        <td class="ch-title">开悟的骗子</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">130</td>
+        <td class="ch-title">识人之术（上）</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">131</td>
+        <td class="ch-title">识人之术（下）</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">132</td>
+        <td class="ch-title">远离妖孽</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">133</td>
+        <td class="ch-title">魂与魄的滋养</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">134</td>
+        <td class="ch-title">靠山</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">135</td>
+        <td class="ch-title">投射效应／虚假同感偏差</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">136</td>
+        <td class="ch-title">鼻炎</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">137</td>
+        <td class="ch-title">乌龙盘打</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">138</td>
+        <td class="ch-title">太岁的由来</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">139</td>
+        <td class="ch-title">辟邪解厄的正阳神水</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">140</td>
+        <td class="ch-title">何香生病</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">141</td>
+        <td class="ch-title">阶层的突破</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">142</td>
+        <td class="ch-title">经济危机是破圈的机会</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">143</td>
+        <td class="ch-title">人心即风水</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">144</td>
+        <td class="ch-title">玄学是一种推理</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">145</td>
+        <td class="ch-title">白志高回国</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">146</td>
+        <td class="ch-title">心理学的瞄定效应</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">147</td>
+        <td class="ch-title">灌顶VS姓名学</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">148</td>
+        <td class="ch-title">姓名禁忌汇总</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">149</td>
+        <td class="ch-title">法布施得智慧</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">150</td>
+        <td class="ch-title">无畏布施得健康长寿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">151</td>
+        <td class="ch-title">梅花易数（外应）</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">152</td>
+        <td class="ch-title">梅花易数起卦</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">153</td>
+        <td class="ch-title">什么是鬼？</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">154</td>
+        <td class="ch-title">称骨算命</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">155</td>
+        <td class="ch-title">提升感知力</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">156</td>
+        <td class="ch-title">人际关系的阴阳</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">157</td>
+        <td class="ch-title">子午决</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">158</td>
+        <td class="ch-title">介入他人因果的后果</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">159</td>
+        <td class="ch-title">何为济世渡人？</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">160</td>
+        <td class="ch-title">安神祖窍</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">161</td>
+        <td class="ch-title">男左女右怎么论</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">162</td>
+        <td class="ch-title">答小可爱问</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">163</td>
+        <td class="ch-title">见鬼说鬼话</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">164</td>
+        <td class="ch-title">洗头没洗明白</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">165</td>
+        <td class="ch-title">可算是把头洗明白了吧</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">166</td>
+        <td class="ch-title">财布施得财富</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">167</td>
+        <td class="ch-title">费曼学习法</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">168</td>
+        <td class="ch-title">心想事成长高</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">169</td>
+        <td class="ch-title">升阳跳／回春功</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">170</td>
+        <td class="ch-title">五行能量净化法</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">171</td>
+        <td class="ch-title">五行能量净化法2</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">172</td>
+        <td class="ch-title">朝天鼻</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">173</td>
+        <td class="ch-title">开悟的是骗子</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">174</td>
+        <td class="ch-title">五行生克关系</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">175</td>
+        <td class="ch-title">终身生长的五官</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">176</td>
+        <td class="ch-title">改命的两个主要渠道</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">177</td>
+        <td class="ch-title">改面相最快的方法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">178</td>
+        <td class="ch-title">夹脊养生</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">179</td>
+        <td class="ch-title">鱼小丸子</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">180</td>
+        <td class="ch-title">风水的调整</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">181</td>
+        <td class="ch-title">居家风水之厕所</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">182</td>
+        <td class="ch-title">掉进了厕所里</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">183</td>
+        <td class="ch-title">坎1宫</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">184</td>
+        <td class="ch-title">离9宫</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">185</td>
+        <td class="ch-title">理性情绪疗法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">186</td>
+        <td class="ch-title">魂魄与精气神</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">187</td>
+        <td class="ch-title">牙疼</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">188</td>
+        <td class="ch-title">记忆力差怎么改</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">189</td>
+        <td class="ch-title">消气操</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">190</td>
+        <td class="ch-title">道家养生改运</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">191</td>
+        <td class="ch-title">高血压的调整</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">192</td>
+        <td class="ch-title">近视1</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">193</td>
+        <td class="ch-title">近视</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">194</td>
+        <td class="ch-title">道家养生四宝</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">195</td>
+        <td class="ch-title">百脉通</td>
+        <td class="ch-tags"><span class="tag tag-shu">术</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">196</td>
+        <td class="ch-title">淫邪</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">197</td>
+        <td class="ch-title">东青龙西白虎</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">198</td>
+        <td class="ch-title">青龙宜动白虎宜静</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">199</td>
+        <td class="ch-title">命理之阴阳</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">200</td>
+        <td class="ch-title">孤阳煞</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">201</td>
+        <td class="ch-title">玄武和朱雀</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">202</td>
+        <td class="ch-title">自行推理</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">203</td>
+        <td class="ch-title">（天眼）叩齿和鸣天鼓</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">204</td>
+        <td class="ch-title">鬼宫</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">205</td>
+        <td class="ch-title">丢了个人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">206</td>
+        <td class="ch-title">找对象</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">207</td>
+        <td class="ch-title">儒释道三教合一</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">208</td>
+        <td class="ch-title">祖窍</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">209</td>
+        <td class="ch-title">好运气的来源</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">210</td>
+        <td class="ch-title">天眼</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">211</td>
+        <td class="ch-title">爱笑的人运气好</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">212</td>
+        <td class="ch-title">命脉九窍</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">213</td>
+        <td class="ch-title">感恩行骗者</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">214</td>
+        <td class="ch-title">借福气</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">215</td>
+        <td class="ch-title">人生课题</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">216</td>
+        <td class="ch-title">握固瞬间暖身法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">217</td>
+        <td class="ch-title">顺手</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">218</td>
+        <td class="ch-title">事情的大小</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">219</td>
+        <td class="ch-title">五行能量净化</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">220</td>
+        <td class="ch-title">魄力</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">221</td>
+        <td class="ch-title">开始加番外</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">222</td>
+        <td class="ch-title">精液治病</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">223</td>
+        <td class="ch-title">灵力</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">224</td>
+        <td class="ch-title">婚姻不顺，谁算谁准</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">225</td>
+        <td class="ch-title">知识的诅咒</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">226</td>
+        <td class="ch-title">星相效应</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">227</td>
+        <td class="ch-title">看头像</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">228</td>
+        <td class="ch-title">头像之阴阳</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">229</td>
+        <td class="ch-title">凭空算卦</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">230</td>
+        <td class="ch-title">诺基亚手机</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">231</td>
+        <td class="ch-title">真假大师</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">232</td>
+        <td class="ch-title">预测方法的高低贵贱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">233</td>
+        <td class="ch-title">天才</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">234</td>
+        <td class="ch-title">天才的崩溃</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">235</td>
+        <td class="ch-title">六爻基础</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">236</td>
+        <td class="ch-title">六爻的反断</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">237</td>
+        <td class="ch-title">断卦要给人希望</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">238</td>
+        <td class="ch-title">悟性</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">239</td>
+        <td class="ch-title">绝处逢生</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">240</td>
+        <td class="ch-title">决定我们命运的不是卦</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">241</td>
+        <td class="ch-title">头像预测的原理</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">242</td>
+        <td class="ch-title">头像与居家风水</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">243</td>
+        <td class="ch-title">送礼的诀窍</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">244</td>
+        <td class="ch-title">琪儿的&quot;破圈&quot;之路</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">245</td>
+        <td class="ch-title">保健品的套路</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">246</td>
+        <td class="ch-title">心脏越跳越有劲</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">247</td>
+        <td class="ch-title">申请绿卡</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">248</td>
+        <td class="ch-title">误入单身群</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">249</td>
+        <td class="ch-title">凭实力单身</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">250</td>
+        <td class="ch-title">心安，神才定</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">251</td>
+        <td class="ch-title">你的位置在哪里</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">252</td>
+        <td class="ch-title">照片的扬长避短</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">253</td>
+        <td class="ch-title">徒弟更厉害好不好</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">254</td>
+        <td class="ch-title">属相三合</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">255</td>
+        <td class="ch-title">属相相冲与六合</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">256</td>
+        <td class="ch-title">属相相刑</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">257</td>
+        <td class="ch-title">属相的克害破</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">258</td>
+        <td class="ch-title">命宫的婚配</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">259</td>
+        <td class="ch-title">单身信息发布</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">260</td>
+        <td class="ch-title">婚配和坎宫的化解</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">261</td>
+        <td class="ch-title">常见煞</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">262</td>
+        <td class="ch-title">你不知道自己多优秀</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">263</td>
+        <td class="ch-title">天若有情天亦老</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">264</td>
+        <td class="ch-title">改命的四种方法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">265</td>
+        <td class="ch-title">八字准不准</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">266</td>
+        <td class="ch-title">精神内耗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">267</td>
+        <td class="ch-title">杀死精神内耗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">268</td>
+        <td class="ch-title">面对的力量</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">269</td>
+        <td class="ch-title">内圣外王</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">270</td>
+        <td class="ch-title">直面的解决问题</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">271</td>
+        <td class="ch-title">不符合人性</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">272</td>
+        <td class="ch-title">梅毒终身制</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">273</td>
+        <td class="ch-title">再次遇见梅毒</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">274</td>
+        <td class="ch-title">知进退</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">275</td>
+        <td class="ch-title">爱是生命的意义</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">276</td>
+        <td class="ch-title">百人斩</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">277</td>
+        <td class="ch-title">天生我才必有用</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">278</td>
+        <td class="ch-title">弱水三千</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">279</td>
+        <td class="ch-title">妖娆的工作服</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">280</td>
+        <td class="ch-title">全部男人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">281</td>
+        <td class="ch-title">福祸相依</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">282</td>
+        <td class="ch-title">何香走了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">283</td>
+        <td class="ch-title">仙家是鬼吗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">284</td>
+        <td class="ch-title">宇宙的真相</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">285</td>
+        <td class="ch-title">伸出另一边的脸</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">286</td>
+        <td class="ch-title">佛家是无神论</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">287</td>
+        <td class="ch-title">道家是无神论</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">288</td>
+        <td class="ch-title">儒家是有神论</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">289</td>
+        <td class="ch-title">神阻挡骄傲的人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">290</td>
+        <td class="ch-title">奉献布施</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">291</td>
+        <td class="ch-title">花仙和树精</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">292</td>
+        <td class="ch-title">财多伤人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">293</td>
+        <td class="ch-title">天地之主</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">294</td>
+        <td class="ch-title">天道地道人道</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">295</td>
+        <td class="ch-title">心的维度</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">296</td>
+        <td class="ch-title">无脑才能爽</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">297</td>
+        <td class="ch-title">气沉丹田</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">298</td>
+        <td class="ch-title">艮八命宫</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">299</td>
+        <td class="ch-title">化煞</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">300</td>
+        <td class="ch-title">煞气为财</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">301</td>
+        <td class="ch-title">每个人都知道答案</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">302</td>
+        <td class="ch-title">煞气的大小</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">303</td>
+        <td class="ch-title">风水大战</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">304</td>
+        <td class="ch-title">艮宫补角</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">305</td>
+        <td class="ch-title">止痛象数</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">306</td>
+        <td class="ch-title">预防大于治疗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">307</td>
+        <td class="ch-title">房子的流年运势</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">308</td>
+        <td class="ch-title">法不责众吗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">309</td>
+        <td class="ch-title">最好的化解办法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">310</td>
+        <td class="ch-title">女主人住厕所？</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">311</td>
+        <td class="ch-title">现世报</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">312</td>
+        <td class="ch-title">皮肤过敏</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">313</td>
+        <td class="ch-title">十年没考下来的驾照</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">314</td>
+        <td class="ch-title">怪病</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">315</td>
+        <td class="ch-title">绝对的随心所欲</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">316</td>
+        <td class="ch-title">Jaya走了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">317</td>
+        <td class="ch-title">生命的觉醒</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">318</td>
+        <td class="ch-title">风水上的能量不足</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">319</td>
+        <td class="ch-title">何为吉日</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">320</td>
+        <td class="ch-title">疑罪从无</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">321</td>
+        <td class="ch-title">从迷茫中走出来</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">322</td>
+        <td class="ch-title">中宫太重要</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">323</td>
+        <td class="ch-title">万物皆可克</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">324</td>
+        <td class="ch-title">心静再做决定</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">325</td>
+        <td class="ch-title">师父大餐</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">326</td>
+        <td class="ch-title">不讲究风水</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">327</td>
+        <td class="ch-title">风水上的财务通道</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">328</td>
+        <td class="ch-title">附佛法外道</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">329</td>
+        <td class="ch-title">趋吉避凶</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">330</td>
+        <td class="ch-title">跳出五行之外</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">331</td>
+        <td class="ch-title">峦头和理气</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">332</td>
+        <td class="ch-title">力量的源泉</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">333</td>
+        <td class="ch-title">兼顾</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">334</td>
+        <td class="ch-title">不聚气</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">335</td>
+        <td class="ch-title">佛学院的执念</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">336</td>
+        <td class="ch-title">不同的结果</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">337</td>
+        <td class="ch-title">网评差PK网评差</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">338</td>
+        <td class="ch-title">存同求异</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">339</td>
+        <td class="ch-title">揭晓谜底</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">340</td>
+        <td class="ch-title">三元命原始算法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">341</td>
+        <td class="ch-title">三元命口诀</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">342</td>
+        <td class="ch-title">师出有名</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">343</td>
+        <td class="ch-title">生命密码</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">344</td>
+        <td class="ch-title">四个纬度</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">345</td>
+        <td class="ch-title">气场的感知</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">346</td>
+        <td class="ch-title">变易与不易</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">347</td>
+        <td class="ch-title">学会闭嘴</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">348</td>
+        <td class="ch-title">还阴债</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">349</td>
+        <td class="ch-title">因果</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">350</td>
+        <td class="ch-title">解读手机号</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">351</td>
+        <td class="ch-title">脾气好一切都好</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">352</td>
+        <td class="ch-title">断QQ号</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">353</td>
+        <td class="ch-title">开光的能量</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">354</td>
+        <td class="ch-title">祭祖</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">355</td>
+        <td class="ch-title">贫富在人心</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">356</td>
+        <td class="ch-title">八星全吉的手机号</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">357</td>
+        <td class="ch-title">两边不得罪</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">358</td>
+        <td class="ch-title">离9管眼睛</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">359</td>
+        <td class="ch-title">尖刺煞</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">360</td>
+        <td class="ch-title">和5的说法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">361</td>
+        <td class="ch-title">聊聊天儿流年大运</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">362</td>
+        <td class="ch-title">天赋的力量不可小觑</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">363</td>
+        <td class="ch-title">五行助运穿衣法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">364</td>
+        <td class="ch-title">易经培训班的套路</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">365</td>
+        <td class="ch-title">免费的课程</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">366</td>
+        <td class="ch-title">喜报</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">367</td>
+        <td class="ch-title">择吉的门派</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">368</td>
+        <td class="ch-title">金符经九星择日法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">369</td>
+        <td class="ch-title">择吉公式</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">370</td>
+        <td class="ch-title">别出心裁的验证</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">371</td>
+        <td class="ch-title">五行助运穿衣法详解</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">372</td>
+        <td class="ch-title">红煞日算法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">373</td>
+        <td class="ch-title">多重保障</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">374</td>
+        <td class="ch-title">长肉</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">375</td>
+        <td class="ch-title">五行穿衣的进阶版</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">376</td>
+        <td class="ch-title">卷帘水煞</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">377</td>
+        <td class="ch-title">人类的局限性</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">378</td>
+        <td class="ch-title">易经课程的套路</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">379</td>
+        <td class="ch-title">赚了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">380</td>
+        <td class="ch-title">对抗催眠和洗脑</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">381</td>
+        <td class="ch-title">妇科问题</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">382</td>
+        <td class="ch-title">心诚则灵</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">383</td>
+        <td class="ch-title">要不要出国打工</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">384</td>
+        <td class="ch-title">做生意还是劝退</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">385</td>
+        <td class="ch-title">脚踏实地的赚钱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">386</td>
+        <td class="ch-title">第一次出国游</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">387</td>
+        <td class="ch-title">捐的好特意</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">388</td>
+        <td class="ch-title">月经不调的小技巧</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">389</td>
+        <td class="ch-title">白龙王</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">390</td>
+        <td class="ch-title">指点</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">391</td>
+        <td class="ch-title">一问三不知</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">392</td>
+        <td class="ch-title">见识决定格局</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">393</td>
+        <td class="ch-title">你是怎么想的</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">394</td>
+        <td class="ch-title">自爆糗事</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">395</td>
+        <td class="ch-title">境界</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">396</td>
+        <td class="ch-title">通宵小作文</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">397</td>
+        <td class="ch-title">五行人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">398</td>
+        <td class="ch-title">考验的时候到了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">399</td>
+        <td class="ch-title">叫爸爸</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">400</td>
+        <td class="ch-title">啥时候的事儿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">401</td>
+        <td class="ch-title">要结婚的单身狗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">402</td>
+        <td class="ch-title">美人痣</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">403</td>
+        <td class="ch-title">脱下来吧</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">404</td>
+        <td class="ch-title">中国结惹的祸</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">405</td>
+        <td class="ch-title">傲慢与偏见</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">406</td>
+        <td class="ch-title">差点儿给我扣成0分</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">407</td>
+        <td class="ch-title">流动的运气</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">408</td>
+        <td class="ch-title">站起来的小动物</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">409</td>
+        <td class="ch-title">为难佛祖</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">410</td>
+        <td class="ch-title">财库</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">411</td>
+        <td class="ch-title">赚钱的风水</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">412</td>
+        <td class="ch-title">赚钱的本质</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">413</td>
+        <td class="ch-title">可以合作吗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">414</td>
+        <td class="ch-title">金钱是检验标准</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">415</td>
+        <td class="ch-title">车牌号</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">416</td>
+        <td class="ch-title">一句一个不承认</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">417</td>
+        <td class="ch-title">皆大欢喜</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">418</td>
+        <td class="ch-title">有问题吗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">419</td>
+        <td class="ch-title">面奔</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">420</td>
+        <td class="ch-title">事在人为</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">421</td>
+        <td class="ch-title">精神损失费</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">422</td>
+        <td class="ch-title">溏心蛋</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">423</td>
+        <td class="ch-title">异人异相</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">424</td>
+        <td class="ch-title">大神要送我书</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">425</td>
+        <td class="ch-title">旅游攻略</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">426</td>
+        <td class="ch-title">石头的能量</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">427</td>
+        <td class="ch-title">看到别人的想法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">428</td>
+        <td class="ch-title">眉心轮的修炼</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">429</td>
+        <td class="ch-title">石头和钉子</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">430</td>
+        <td class="ch-title">突破圈层的束缚</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">431</td>
+        <td class="ch-title">心理学的第一精髓</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">432</td>
+        <td class="ch-title">我长的很有实力</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">433</td>
+        <td class="ch-title">精神层面的有钱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">434</td>
+        <td class="ch-title">不正经的地方</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">435</td>
+        <td class="ch-title">脸往哪儿搁</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">436</td>
+        <td class="ch-title">回春功</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">437</td>
+        <td class="ch-title">艾滋病</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">438</td>
+        <td class="ch-title">不是猛龙不过江</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">439</td>
+        <td class="ch-title">业内百强</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">440</td>
+        <td class="ch-title">水主智也主欲</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">441</td>
+        <td class="ch-title">没有理由阻止</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">442</td>
+        <td class="ch-title">慈善拍卖会</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">443</td>
+        <td class="ch-title">快乐</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">444</td>
+        <td class="ch-title">反复流产</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">445</td>
+        <td class="ch-title">睡觉都没时间</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">446</td>
+        <td class="ch-title">虎口煞</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">447</td>
+        <td class="ch-title">我被拉黑了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">448</td>
+        <td class="ch-title">遣送的回旋镖</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">449</td>
+        <td class="ch-title">五帝钱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">450</td>
+        <td class="ch-title">血流不止</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">451</td>
+        <td class="ch-title">德不配位</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">452</td>
+        <td class="ch-title">糖尿病并发症</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">453</td>
+        <td class="ch-title">丘书妍的家世</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">454</td>
+        <td class="ch-title">见父母</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">455</td>
+        <td class="ch-title">电视影响男女科</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">456</td>
+        <td class="ch-title">狐狸毛</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">457</td>
+        <td class="ch-title">坎1宫的调整</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">458</td>
+        <td class="ch-title">抑郁症的阴阳</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">459</td>
+        <td class="ch-title">爱的解读</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">460</td>
+        <td class="ch-title">笨嘴笨舌的小菜鸟</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">461</td>
+        <td class="ch-title">鬼压床的风水化解</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">462</td>
+        <td class="ch-title">挑衅</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">463</td>
+        <td class="ch-title">拿雷劈债主</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">464</td>
+        <td class="ch-title">金钱不一定是试金石</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">465</td>
+        <td class="ch-title">入梦</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">466</td>
+        <td class="ch-title">唤醒世人的良知</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">467</td>
+        <td class="ch-title">被骗一辈子</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">468</td>
+        <td class="ch-title">内行骗外行</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">469</td>
+        <td class="ch-title">人有人道，鬼有鬼道</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">470</td>
+        <td class="ch-title">没话找话说</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">471</td>
+        <td class="ch-title">肾病中医院</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">472</td>
+        <td class="ch-title">梦的预示</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">473</td>
+        <td class="ch-title">全都可怜</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">474</td>
+        <td class="ch-title">干一天赔一天</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">475</td>
+        <td class="ch-title">给国足布个局</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">476</td>
+        <td class="ch-title">反作用的学习局</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">477</td>
+        <td class="ch-title">八大气场</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">478</td>
+        <td class="ch-title">【拓展的知识点】</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">479</td>
+        <td class="ch-title">大游年（看看就行）</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">480</td>
+        <td class="ch-title">八星掌中诀</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">481</td>
+        <td class="ch-title">游年爻变歌诀</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">482</td>
+        <td class="ch-title">八星记忆技巧</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">483</td>
+        <td class="ch-title">五行穿衣算是玩明白了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">484</td>
+        <td class="ch-title">天灾还是人祸</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">485</td>
+        <td class="ch-title">伤害心脑血管</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">486</td>
+        <td class="ch-title">炉灶的坐向</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">487</td>
+        <td class="ch-title">动了煞</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">488</td>
+        <td class="ch-title">生命的主动权</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">489</td>
+        <td class="ch-title">大数据验证一下</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">490</td>
+        <td class="ch-title">没有一片雪花是无辜的</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">491</td>
+        <td class="ch-title">字画的太极</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">492</td>
+        <td class="ch-title">水流震宫不相当</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">493</td>
+        <td class="ch-title">挂钟的风水</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">494</td>
+        <td class="ch-title">占卜</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">495</td>
+        <td class="ch-title">跪赢的？</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">496</td>
+        <td class="ch-title">厨卫同宫</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">497</td>
+        <td class="ch-title">九宫面相</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">498</td>
+        <td class="ch-title">下巴有痣</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">499</td>
+        <td class="ch-title">炉灶向吉</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">500</td>
+        <td class="ch-title">跟团一日游</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">501</td>
+        <td class="ch-title">贴心的导游</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">502</td>
+        <td class="ch-title">喜得贵子</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">503</td>
+        <td class="ch-title">只送不卖</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">504</td>
+        <td class="ch-title">最高等级的翡翠</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">505</td>
+        <td class="ch-title">真正的白金项链</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">506</td>
+        <td class="ch-title">交个朋友</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">507</td>
+        <td class="ch-title">八心八箭</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">508</td>
+        <td class="ch-title">传家宝</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">509</td>
+        <td class="ch-title">最有缘的人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">510</td>
+        <td class="ch-title">断子绝孙</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">511</td>
+        <td class="ch-title">打开气机</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">512</td>
+        <td class="ch-title">不害怕就没有伤害</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">513</td>
+        <td class="ch-title">累生累世的祖先</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">514</td>
+        <td class="ch-title">无所求必满载而归</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">515</td>
+        <td class="ch-title">赌船</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">516</td>
+        <td class="ch-title">赌博不科学</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">517</td>
+        <td class="ch-title">无情都在说法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">518</td>
+        <td class="ch-title">不服输不行</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">519</td>
+        <td class="ch-title">夜叉有八块腹肌</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">520</td>
+        <td class="ch-title">情绪是一味药</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">521</td>
+        <td class="ch-title">修真</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">522</td>
+        <td class="ch-title">钱只是俗世的工具</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">523</td>
+        <td class="ch-title">有病方为贵</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">524</td>
+        <td class="ch-title">这锅我是背定了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">525</td>
+        <td class="ch-title">阳气的总开关</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">526</td>
+        <td class="ch-title">又来一个新锅</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">527</td>
+        <td class="ch-title">业力是内因风水是外因</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">528</td>
+        <td class="ch-title">绿卡批了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">529</td>
+        <td class="ch-title">新手只会满仓</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">530</td>
+        <td class="ch-title">懒出了新境界</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">531</td>
+        <td class="ch-title">理由</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">532</td>
+        <td class="ch-title">典礼现场</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">533</td>
+        <td class="ch-title">幸运的晚宴</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">534</td>
+        <td class="ch-title">明抢</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">535</td>
+        <td class="ch-title">厄运专找贪心人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">536</td>
+        <td class="ch-title">双五鬼位</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">537</td>
+        <td class="ch-title">头朝哪儿睡</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">538</td>
+        <td class="ch-title">六度分隔理论</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">539</td>
+        <td class="ch-title">青瓦台诅咒</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">540</td>
+        <td class="ch-title">天才的商业模式</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">541</td>
+        <td class="ch-title">五星好评</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">542</td>
+        <td class="ch-title">肾结石</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">543</td>
+        <td class="ch-title">鹅卵石</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">544</td>
+        <td class="ch-title">说破无毒</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">545</td>
+        <td class="ch-title">五短身材</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">546</td>
+        <td class="ch-title">降血糖偏方</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">547</td>
+        <td class="ch-title">糖尿病的风水原因</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">548</td>
+        <td class="ch-title">以身试法手枪房</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">549</td>
+        <td class="ch-title">正北开门的化解</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">550</td>
+        <td class="ch-title">慈善与赚钱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">551</td>
+        <td class="ch-title">天地万物都在循环</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">552</td>
+        <td class="ch-title">慈悲</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">553</td>
+        <td class="ch-title">新加坡暴乱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">554</td>
+        <td class="ch-title">纳阴气的吉门</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">555</td>
+        <td class="ch-title">少挨点儿揍</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">556</td>
+        <td class="ch-title">使命</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">557</td>
+        <td class="ch-title">绿色通道</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">558</td>
+        <td class="ch-title">火能跨越维度</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">559</td>
+        <td class="ch-title">火能解蛊</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">560</td>
+        <td class="ch-title">好人有好报吗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">561</td>
+        <td class="ch-title">糊涂不难得</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">562</td>
+        <td class="ch-title">神仙不是无所不能</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">563</td>
+        <td class="ch-title">哪天能到账</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">564</td>
+        <td class="ch-title">傲气伤自己</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">565</td>
+        <td class="ch-title">我不能代替你强大</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">566</td>
+        <td class="ch-title">你礼貌吗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">567</td>
+        <td class="ch-title">懂事儿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">568</td>
+        <td class="ch-title">只能试一试</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">569</td>
+        <td class="ch-title">风占灾异最验</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">570</td>
+        <td class="ch-title">发怒可以辟邪</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">571</td>
+        <td class="ch-title">头眼清亮</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">572</td>
+        <td class="ch-title">明天同一时间</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">573</td>
+        <td class="ch-title">赚钱不要命</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">574</td>
+        <td class="ch-title">小费</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">575</td>
+        <td class="ch-title">开启修仙之旅</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">576</td>
+        <td class="ch-title">气醒了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">577</td>
+        <td class="ch-title">椅子烫腚</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">578</td>
+        <td class="ch-title">元神出窍</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">579</td>
+        <td class="ch-title">做法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">580</td>
+        <td class="ch-title">神仙批发市场</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">581</td>
+        <td class="ch-title">谁来救他们</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">582</td>
+        <td class="ch-title">索求</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">583</td>
+        <td class="ch-title">自助者天助</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">584</td>
+        <td class="ch-title">贩卖老仙儿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">585</td>
+        <td class="ch-title">正气不是软柿子</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">586</td>
+        <td class="ch-title">让相信光的人看到光</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">587</td>
+        <td class="ch-title">一切发生的必有利于我</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">588</td>
+        <td class="ch-title">写给抑郁的人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">589</td>
+        <td class="ch-title">情绪是修行的重要指标</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">590</td>
+        <td class="ch-title">灵族降临</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">591</td>
+        <td class="ch-title">要脸</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">592</td>
+        <td class="ch-title">你的心是不是自由的</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">593</td>
+        <td class="ch-title">做法事需要知道的事儿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">594</td>
+        <td class="ch-title">修正气</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">595</td>
+        <td class="ch-title">夫妻宫</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">596</td>
+        <td class="ch-title">一念之间</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">597</td>
+        <td class="ch-title">乾6宫</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">598</td>
+        <td class="ch-title">音乐连接能量</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">599</td>
+        <td class="ch-title">拯救仙家</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">600</td>
+        <td class="ch-title">邪门的导航</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">601</td>
+        <td class="ch-title">一切的发生都有原因</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">602</td>
+        <td class="ch-title">佛魔难辨</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">603</td>
+        <td class="ch-title">除了自我成长其他都不真实</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">604</td>
+        <td class="ch-title">神仙是怎么来的</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">605</td>
+        <td class="ch-title">乳腺问题</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">606</td>
+        <td class="ch-title">正心正念的人能不能收钱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">607</td>
+        <td class="ch-title">父母凭啥赚那么少的钱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">608</td>
+        <td class="ch-title">无条件的爱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">609</td>
+        <td class="ch-title">貔貅有没有屁眼儿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">610</td>
+        <td class="ch-title">三次用不了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">611</td>
+        <td class="ch-title">随的什么缘</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">612</td>
+        <td class="ch-title">额头接收天的能量</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">613</td>
+        <td class="ch-title">岁才可以退休</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">614</td>
+        <td class="ch-title">人本来就是人，何必费劲去修人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">615</td>
+        <td class="ch-title">水利万物吗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">616</td>
+        <td class="ch-title">我们是利益共同体</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">617</td>
+        <td class="ch-title">人为什么会愤怒</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">618</td>
+        <td class="ch-title">六煞</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">619</td>
+        <td class="ch-title">犯桃花</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">620</td>
+        <td class="ch-title">二十四山</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">621</td>
+        <td class="ch-title">补角的方法1</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">622</td>
+        <td class="ch-title">补角的方法2</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">623</td>
+        <td class="ch-title">升官发财局</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">624</td>
+        <td class="ch-title">失眠的风水问题</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">625</td>
+        <td class="ch-title">失眠的偏方</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">626</td>
+        <td class="ch-title">降三高和利尿减肥的偏方</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">627</td>
+        <td class="ch-title">打破业力才能改命</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">628</td>
+        <td class="ch-title">口腔溃疡</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">629</td>
+        <td class="ch-title">红色招邪还是辟邪</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">630</td>
+        <td class="ch-title">财库漏了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">631</td>
+        <td class="ch-title">相貌与风水的关系</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">632</td>
+        <td class="ch-title">卧蚕网罗纹</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">633</td>
+        <td class="ch-title">搞垮阴间的经济体系</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">634</td>
+        <td class="ch-title">绿卡包过的&quot;大神&quot;</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">635</td>
+        <td class="ch-title">转型尝试</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">636</td>
+        <td class="ch-title">占卜赌球</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">637</td>
+        <td class="ch-title">催财影响下辈子吗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">638</td>
+        <td class="ch-title">意念治病</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">639</td>
+        <td class="ch-title">&quot;得偿所愿&quot;</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">640</td>
+        <td class="ch-title">内求与外求</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">641</td>
+        <td class="ch-title">番外【个人改运与三元九运】</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">642</td>
+        <td class="ch-title">番外【福利篇】</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">643</td>
+        <td class="ch-title">被抓的小婴灵</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">644</td>
+        <td class="ch-title">大部分的梦是正的</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">645</td>
+        <td class="ch-title">怀疑耗费正气</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">646</td>
+        <td class="ch-title">手机号解读</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">647</td>
+        <td class="ch-title">讲几个笑话</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">648</td>
+        <td class="ch-title">五个亿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">649</td>
+        <td class="ch-title">笑话中的商机</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">650</td>
+        <td class="ch-title">篇外：邪教的温暖</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">651</td>
+        <td class="ch-title">再也没有不好的事儿了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">652</td>
+        <td class="ch-title">好看的人穿什么都好看</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">653</td>
+        <td class="ch-title">一地鸡毛</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">654</td>
+        <td class="ch-title">故宫</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">655</td>
+        <td class="ch-title">站着摘草莓</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">656</td>
+        <td class="ch-title">甩锅</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">657</td>
+        <td class="ch-title">不动的气功</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">658</td>
+        <td class="ch-title">给科学留点儿成长的时间</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">659</td>
+        <td class="ch-title">心念的磁场</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">660</td>
+        <td class="ch-title">象数的部位</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">661</td>
+        <td class="ch-title">篇外【矫枉必须过正】</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">662</td>
+        <td class="ch-title">象义</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">663</td>
+        <td class="ch-title">象数配方</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">664</td>
+        <td class="ch-title">巨大的变化</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">665</td>
+        <td class="ch-title">掉进了宿命论里</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">666</td>
+        <td class="ch-title">什么是正念</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">667</td>
+        <td class="ch-title">心理阴影</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">668</td>
+        <td class="ch-title">白头发的好处</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">669</td>
+        <td class="ch-title">白头发长脸</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">670</td>
+        <td class="ch-title">百折不挠的贱人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">671</td>
+        <td class="ch-title">不要往家里捡东西</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">672</td>
+        <td class="ch-title">神仙的能力也有限</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">673</td>
+        <td class="ch-title">外力是感冒药，能不吃就不吃</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">674</td>
+        <td class="ch-title">姜</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">675</td>
+        <td class="ch-title">法事就像洗澡</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">676</td>
+        <td class="ch-title">八字看性格</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">677</td>
+        <td class="ch-title">最泼皮的无赖</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">678</td>
+        <td class="ch-title">踩不到的底线</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">679</td>
+        <td class="ch-title">八字看运势</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">680</td>
+        <td class="ch-title">五行喜忌</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">681</td>
+        <td class="ch-title">水果少吃</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">682</td>
+        <td class="ch-title">万事不要执着</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">683</td>
+        <td class="ch-title">篇外【五行和互动】</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">684</td>
+        <td class="ch-title">注意力就是生命力</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">685</td>
+        <td class="ch-title">刚洒下种子就想收获是贪念</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">686</td>
+        <td class="ch-title">认真做事就没有时间内耗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">687</td>
+        <td class="ch-title">股票大神</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">688</td>
+        <td class="ch-title">决心和愿力</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">689</td>
+        <td class="ch-title">可能会瘫痪</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">690</td>
+        <td class="ch-title">护身符</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">691</td>
+        <td class="ch-title">一步一个槛</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">692</td>
+        <td class="ch-title">韬韬</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">693</td>
+        <td class="ch-title">新的合伙人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">694</td>
+        <td class="ch-title">背刺</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">695</td>
+        <td class="ch-title">提前退休</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">696</td>
+        <td class="ch-title">嘴角上火</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">697</td>
+        <td class="ch-title">唯有真诚动人心</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">698</td>
+        <td class="ch-title">东食西宿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">699</td>
+        <td class="ch-title">魔咒</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">700</td>
+        <td class="ch-title">牵挂</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">701</td>
+        <td class="ch-title">美好</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">702</td>
+        <td class="ch-title">心愿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">703</td>
+        <td class="ch-title">魔咒又捡回来了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">704</td>
+        <td class="ch-title">感动自己的烂好人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">705</td>
+        <td class="ch-title">怀孕能不能吃螃蟹</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">706</td>
+        <td class="ch-title">能提升自己的事都是好事儿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">707</td>
+        <td class="ch-title">井喷式爆发的爱情</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">708</td>
+        <td class="ch-title">坦诚相待才会长久</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">709</td>
+        <td class="ch-title">他到底是谁</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">710</td>
+        <td class="ch-title">赚了大便宜</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">711</td>
+        <td class="ch-title">我的眼光好，我的人也好</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">712</td>
+        <td class="ch-title">分手</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">713</td>
+        <td class="ch-title">不能分手</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">714</td>
+        <td class="ch-title">闭关</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">715</td>
+        <td class="ch-title">心如明镜</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">716</td>
+        <td class="ch-title">世界在我心里</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">717</td>
+        <td class="ch-title">好名声留给了我</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">718</td>
+        <td class="ch-title">卡气</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">719</td>
+        <td class="ch-title">再次见面</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">720</td>
+        <td class="ch-title">成为更好的自己</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">721</td>
+        <td class="ch-title">精神分裂症</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">722</td>
+        <td class="ch-title">交代后事</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">723</td>
+        <td class="ch-title">暗杀</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">724</td>
+        <td class="ch-title">做自由的人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">725</td>
+        <td class="ch-title">他们的老婆也都出轨了吗</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">726</td>
+        <td class="ch-title">思想自由是前提</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">727</td>
+        <td class="ch-title">我竟然还是个海王</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">728</td>
+        <td class="ch-title">控梦</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">729</td>
+        <td class="ch-title">王侯将相宁有种乎</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">730</td>
+        <td class="ch-title">纸条</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">731</td>
+        <td class="ch-title">区间测速</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">732</td>
+        <td class="ch-title">硬刚</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">733</td>
+        <td class="ch-title">吵架的阴阳之道</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">734</td>
+        <td class="ch-title">你有病吧</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">735</td>
+        <td class="ch-title">不讲武德</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">736</td>
+        <td class="ch-title">没有意义的胜利，毫无意义</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">737</td>
+        <td class="ch-title">篇外：爱是所有问题的答案</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">738</td>
+        <td class="ch-title">篇外：辟谷</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">739</td>
+        <td class="ch-title">篇外：篆书的灵力加持</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">740</td>
+        <td class="ch-title">布达拉宫的灵魂</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">741</td>
+        <td class="ch-title">篇外：莲花生大士的预言</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">742</td>
+        <td class="ch-title">腰痛</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">743</td>
+        <td class="ch-title">等我学好了再去渡人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">744</td>
+        <td class="ch-title">篇外：什么是正心正念</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">745</td>
+        <td class="ch-title">颈椎问题</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">746</td>
+        <td class="ch-title">睡觉问题</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">747</td>
+        <td class="ch-title">命宫的性格</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">748</td>
+        <td class="ch-title">地产运</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">749</td>
+        <td class="ch-title">篇外：打破禁锢</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">750</td>
+        <td class="ch-title">篇外：自由的心</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">751</td>
+        <td class="ch-title">头、心、胃等问题的根源</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">752</td>
+        <td class="ch-title">只分享案例，不接个案</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">753</td>
+        <td class="ch-title">怨伤脾胃</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">754</td>
+        <td class="ch-title">排毒反应</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">755</td>
+        <td class="ch-title">个人的业力得自己修</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">756</td>
+        <td class="ch-title">寸</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">757</td>
+        <td class="ch-title">骗子的祖师爷</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">758</td>
+        <td class="ch-title">实践是不是检验真理的唯一标准</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">759</td>
+        <td class="ch-title">获取无穷的宇宙能量</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">760</td>
+        <td class="ch-title">提醒</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">761</td>
+        <td class="ch-title">免费还要交钱</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">762</td>
+        <td class="ch-title">帮助众生才是最大的善</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">763</td>
+        <td class="ch-title">交钱的速度，就是改变的决心</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">764</td>
+        <td class="ch-title">连笔字</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">765</td>
+        <td class="ch-title">大量的案例验证</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">766</td>
+        <td class="ch-title">尽人事听天命</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">767</td>
+        <td class="ch-title">阴阳之道</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">768</td>
+        <td class="ch-title">这里有个卦象</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">769</td>
+        <td class="ch-title">大义</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">770</td>
+        <td class="ch-title">风水脸</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">771</td>
+        <td class="ch-title">破格录取</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">772</td>
+        <td class="ch-title">又遭天谴？</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">773</td>
+        <td class="ch-title">福利</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">774</td>
+        <td class="ch-title">不至于灭口</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">775</td>
+        <td class="ch-title">人性</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">776</td>
+        <td class="ch-title">免费看八字的套儿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">777</td>
+        <td class="ch-title">被骗的最惨的人</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">778</td>
+        <td class="ch-title">善过了就是恶</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">779</td>
+        <td class="ch-title">大师的发明创造</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">780</td>
+        <td class="ch-title">没有断不准的卦</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">781</td>
+        <td class="ch-title">压男人运势</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">782</td>
+        <td class="ch-title">病好了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">783</td>
+        <td class="ch-title">粉丝反馈</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">784</td>
+        <td class="ch-title">套里面有套儿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">785</td>
+        <td class="ch-title">算账</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">786</td>
+        <td class="ch-title">暴富项目</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">787</td>
+        <td class="ch-title">神话故事</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">788</td>
+        <td class="ch-title">番外：常见的风水问题</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">789</td>
+        <td class="ch-title">免费赠送</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">790</td>
+        <td class="ch-title">花钱免费领取</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">791</td>
+        <td class="ch-title">谁生气谁修行没到位</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">792</td>
+        <td class="ch-title">八卦的对错</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">793</td>
+        <td class="ch-title">卡点的共性</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">794</td>
+        <td class="ch-title">番外【称骨算命歌诀】</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">795</td>
+        <td class="ch-title">卡点</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">796</td>
+        <td class="ch-title">君子有成人之美</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">797</td>
+        <td class="ch-title">动气便是恶</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">798</td>
+        <td class="ch-title">篇外：聊聊天</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">799</td>
+        <td class="ch-title">番外：性情疗法（讲病1）</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">800</td>
+        <td class="ch-title">番外：性情疗法（讲病2）</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">801</td>
+        <td class="ch-title">番外：性情疗法（讲病3）</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">802</td>
+        <td class="ch-title">番外：性情疗法（讲病4）</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">803</td>
+        <td class="ch-title">回答友友们的提问</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">804</td>
+        <td class="ch-title">聊天</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">805</td>
+        <td class="ch-title">护法神</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">806</td>
+        <td class="ch-title">心正不正</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">807</td>
+        <td class="ch-title">调整的几个层面</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">808</td>
+        <td class="ch-title">锁屏密码</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">809</td>
+        <td class="ch-title">割双眼皮</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">810</td>
+        <td class="ch-title">贵人不可贱用</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">811</td>
+        <td class="ch-title">卡通头像</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">812</td>
+        <td class="ch-title">扁桃体问题</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">813</td>
+        <td class="ch-title">护法神丢没丢</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">814</td>
+        <td class="ch-title">提升灵魂的实力</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">815</td>
+        <td class="ch-title">长在表面是好事儿</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">816</td>
+        <td class="ch-title">气沉丹田</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">817</td>
+        <td class="ch-title">香蕉偏方</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">818</td>
+        <td class="ch-title">美人在骨不在皮</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">819</td>
+        <td class="ch-title">唯有套路得人心</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">820</td>
+        <td class="ch-title">躺平和接纳</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">821</td>
+        <td class="ch-title">让自己变得更好</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">822</td>
+        <td class="ch-title">不求而求</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">823</td>
+        <td class="ch-title">几个偏方</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">824</td>
+        <td class="ch-title">好的不灵坏的灵</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">825</td>
+        <td class="ch-title">向内求</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">826</td>
+        <td class="ch-title">加一句小诗有多难</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">827</td>
+        <td class="ch-title">本书正确的打开方式</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">828</td>
+        <td class="ch-title">每个起心动念都是种子</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">829</td>
+        <td class="ch-title">阴阳</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">830</td>
+        <td class="ch-title">何为正道</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">831</td>
+        <td class="ch-title">五鬼磁场</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">832</td>
+        <td class="ch-title">孩子的问题</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">833</td>
+        <td class="ch-title">我可以做什么让事情变得更好</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">834</td>
+        <td class="ch-title">六煞磁场</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">835</td>
+        <td class="ch-title">六字诀功法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">836</td>
+        <td class="ch-title">随缘是修行者的大忌</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">837</td>
+        <td class="ch-title">番外：姓名学1</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">838</td>
+        <td class="ch-title">番外：姓名学2</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">839</td>
+        <td class="ch-title">番外：姓名学3</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">840</td>
+        <td class="ch-title">番外：姓名学4</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">841</td>
+        <td class="ch-title">番外：吉日计算</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">842</td>
+        <td class="ch-title">人活一口气</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">843</td>
+        <td class="ch-title">正念是2025年最重要的护身符</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">844</td>
+        <td class="ch-title">何为贪</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">845</td>
+        <td class="ch-title">自我实现的预言</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">846</td>
+        <td class="ch-title">利他即是利己</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">847</td>
+        <td class="ch-title">捡了个大元宝</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">848</td>
+        <td class="ch-title">放屁容易破产吗？</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">849</td>
+        <td class="ch-title">戒贪，是每个人的终身功课</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">850</td>
+        <td class="ch-title">积极心理学</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">851</td>
+        <td class="ch-title">修心大于吃药</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">852</td>
+        <td class="ch-title">越学习，离道越远</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">853</td>
+        <td class="ch-title">理论与实践</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">854</td>
+        <td class="ch-title">自我疗愈</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">855</td>
+        <td class="ch-title">出版</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">856</td>
+        <td class="ch-title">贪心是大忌</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">857</td>
+        <td class="ch-title">敬畏</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">858</td>
+        <td class="ch-title">胜境</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">859</td>
+        <td class="ch-title">根</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">860</td>
+        <td class="ch-title">思维方式</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">861</td>
+        <td class="ch-title">聊聊运气</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">862</td>
+        <td class="ch-title">人心才是最大的风水</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">863</td>
+        <td class="ch-title">象数的用法</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">864</td>
+        <td class="ch-title">进错门了</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">865</td>
+        <td class="ch-title">从术数到修行（一）</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">866</td>
+        <td class="ch-title">从术数到修行（二）</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">867</td>
+        <td class="ch-title">从术数到修行（三）</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">868</td>
+        <td class="ch-title">洗发水</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">869</td>
+        <td class="ch-title">风水和福报的关系</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">870</td>
+        <td class="ch-title">贪念</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">871</td>
+        <td class="ch-title">别欺负孩子</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">872</td>
+        <td class="ch-title">心的力量</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">873</td>
+        <td class="ch-title">相信相信的力量</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">874</td>
+        <td class="ch-title">钱和情要分清楚</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">875</td>
+        <td class="ch-title">择吉的补充</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">876</td>
+        <td class="ch-title">修好自己这尊佛</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">877</td>
+        <td class="ch-title">八字大神</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">878</td>
+        <td class="ch-title">迷</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">879</td>
+        <td class="ch-title">八星与健康</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">880</td>
+        <td class="ch-title">修心的案例</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">881</td>
+        <td class="ch-title">八星的化解</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">882</td>
+        <td class="ch-title">把万物都看做&quot;人&quot;</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">883</td>
+        <td class="ch-title">利他是有前提的</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">884</td>
+        <td class="ch-title">出偏</td>
+        <td class="ch-tags"></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">895</td>
+        <td class="ch-title">【篇外：出偏】</td>
+        <td class="ch-tags"><span class="tag tag-pianwai">篇外</span></td>
+    </tr>
+
+    <tr>
+        <td class="ch-num">919</td>
+        <td class="ch-title">【完结：为了心中的美好】</td>
+        <td class="ch-tags"><span class="tag tag-end">完结</span></td>
+    </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Key Concepts -->
+<div id="tab-concepts" class="concepts" style="display:none">
+    <h2>🧭 核心概念索引</h2>
+    <div class="concept-grid">
+        <div class="concept-card">
+            <h3>风水 · 阴阳五行</h3>
+            <p>九宫八卦、二十四山、青龙白虎朱雀玄武、煞气化解、居家风水布局。见第1-25章、174-201章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>八字命理</h3>
+            <p>五行喜忌、三元命、称骨算命、八字看性格运势、流年大运。见第264-273章、348-361章、676-680章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>面相术</h3>
+            <p>五官终身生长、悬针纹、朝天鼻、美人痣、九宫面相、卧蚕。见第13、59、172、497-506章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>象数疗法</h3>
+            <p>八卦象数治病、止痛象数、晕车象数、小儿退烧符。见第99-101、115、127、305章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>预测术</h3>
+            <p>掐指神通、梅花易数、六爻、头像预测、手机号解读。见第6、151-152、227-242、350-352章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>道家养生</h3>
+            <p>采日光功、剑指站桩、洗心养神功、回春功、百日筑基、辟谷。见第23、28、47、169、194章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>修行心法</h3>
+            <p>修行的本质、开天眼、慧观、能量引导、心的维度。见第8、11、55-57、61-62、122章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>改命实践</h3>
+            <p>改命的四条路径、改面相、打破业力、财布施、法布施。见第111、176-177、264章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>心理学交叉</h3>
+            <p>光环效应、瞄定效应、投射效应、费曼学习法、理性情绪疗法。见第109-118、135、146、167、185章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>姓名学</h3>
+            <p>姓名禁忌、灌顶vs姓名学、姓名改运。见第128、147-148、837-840章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>择吉</h3>
+            <p>何为吉日、金符经九星择日法、红煞日、择吉公式。见第319、367-372、841章。</p>
+        </div>
+        <div class="concept-card">
+            <h3>祝由术 · 偏方</h3>
+            <p>便秘符、小儿退烧、牙痛偏方、降血糖偏方、失眠偏方。见第81、102、107、127、546、625章。</p>
+        </div>
+    </div>
+</div>
+
+<!-- Teachings -->
+<div id="tab-teachings" class="teachings" style="display:none">
+    <h2>💡 精华语录摘选</h2>
+    
+    <div class="teaching-item">
+        <div class="quote">"大道至简，无非阴阳。"</div>
+        <div class="source">—— 第1章 · 风水比医学更科学</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"注意力就是生命力。"</div>
+        <div class="source">—— 第48章 · 注意力就是生命力（道）</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"人心即风水，心念的磁场决定了你遇到的人和事。"</div>
+        <div class="source">—— 第143章 · 人心即风水</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"改命的两个主要渠道：一是内在修行，二是外在风水调整。内外兼修，方为大道。"</div>
+        <div class="source">—— 第176章 · 改命的两个主要渠道</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"决定我们命运的不是卦，而是我们面对卦的态度和行动。"</div>
+        <div class="source">—— 第240章 · 决定我们命运的不是卦</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"无所求必满载而归。索求越少，得到越多。"</div>
+        <div class="source">—— 第514章 · 无所求必满载而归</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"一切发生的必有利于我。"</div>
+        <div class="source">—— 第587章 · 一切发生的必有利于我</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"情绪是修行的重要指标。谁生气，谁修行没到位。"</div>
+        <div class="source">—— 第589章 · 情绪是修行的重要指标</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"除了自我成长，其他都不真实。外力是感冒药，能不吃就不吃。"</div>
+        <div class="source">—— 第603章、第673章</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"人心才是最大的风水。"</div>
+        <div class="source">—— 第862章 · 人心才是最大的风水</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"正心正念是最好的护身符。"</div>
+        <div class="source">—— 第843章 · 正念是2025年最重要的护身符</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"爱笑的人运气好。爱发脾气的人最脆弱。"</div>
+        <div class="source">—— 第95章、第211章</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"法不轻施，道不轻传。介入他人因果有后果。"</div>
+        <div class="source">—— 第10章、第158章</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"打破业力才能改命。业力是内因，风水是外因。"</div>
+        <div class="source">—— 第527章、第627章</div>
+    </div>
+    <div class="teaching-item">
+        <div class="quote">"戒贪，是每个人的终身功课。厄运专找贪心人。"</div>
+        <div class="source">—— 第535章、第849章</div>
+    </div>
+</div>
+
+<!-- Characters -->
+<div id="tab-characters" class="characters" style="display:none">
+    <h2>👥 主要人物</h2>
+    
+    <div class="char-card">
+        <h3>王三合（主角/我）</h3>
+        <p>道号"三合"——阳气、阴气、天气三合成局。理工科大学毕业生，被师父匆匆传授预测术、开天眼后下山渡世。从新加坡起步，通过风水和预测术帮助无数人，自己也在红尘中修行成长。</p>
+    </div>
+    <div class="char-card">
+        <h3>师父（蓝袍老爷爷）</h3>
+        <p>神秘的道家高人。在主角迷茫时出现，传道授业。教了预测术、开了天眼、传了几本书，还没来得及正式上山就让主角下山渡世。偶尔在关键节点出现指点。</p>
+    </div>
+    <div class="char-card">
+        <h3>何香</h3>
+        <p>主角在新加坡时期的重要人物。出现在第140章（何香生病），第282章离开（何香走了），贯穿早期故事线的重要角色。</p>
+    </div>
+    <div class="char-card">
+        <h3>白志高</h3>
+        <p>第145章出场（白志高回国），与主角有重要交集。</p>
+    </div>
+    <div class="char-card">
+        <h3>丘书妍</h3>
+        <p>第453章出现（丘书妍的家世），第454章见父母，与主角有感情线发展。</p>
+    </div>
+    <div class="char-card">
+        <h3>Jaya</h3>
+        <p>第316章离世（Jaya走了），触发了主角对生命觉醒的思考。</p>
+    </div>
+    <div class="char-card">
+        <h3>琪儿</h3>
+        <p>第244章（琪儿的"破圈"之路），徒弟/追随者角色。</p>
+    </div>
+    <div class="char-card">
+        <h3>韬韬</h3>
+        <p>第692章出场，新的合伙人之一。</p>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>《改命记实录》· 道之光 著 · 已完结（919章/141万字）</p>
+    <p>随身口袋书 — 仅供个人学习参考，版权归原作者所有</p>
+    <p>在线阅读：touwz.org/dushi/gaimingjishilu</p>
+</footer>
+
+<script>
+// Tab switching
+function switchTab(tabName, btn) {
+    // Hide all tabs
+    document.getElementById('tab-chapters').style.display = 'none';
+    document.getElementById('tab-concepts').style.display = 'none';
+    document.getElementById('tab-teachings').style.display = 'none';
+    document.getElementById('tab-characters').style.display = 'none';
+    
+    // Show selected
+    if (tabName === 'all') {
+        document.getElementById('tab-chapters').style.display = '';
+        filterChapters('all');
+    } else if (tabName === 'dao') {
+        document.getElementById('tab-chapters').style.display = '';
+        filterChapters('dao');
+    } else if (tabName === 'shu') {
+        document.getElementById('tab-chapters').style.display = '';
+        filterChapters('shu');
+    } else if (tabName === 'pianwai') {
+        document.getElementById('tab-chapters').style.display = '';
+        filterChapters('pianwai');
+    } else if (tabName === 'concepts') {
+        document.getElementById('tab-concepts').style.display = '';
+    } else if (tabName === 'teachings') {
+        document.getElementById('tab-teachings').style.display = '';
+    } else if (tabName === 'characters') {
+        document.getElementById('tab-characters').style.display = '';
+    }
+    
+    // Update active tab button
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+}
+
+function filterChapters(cat) {
+    const rows = document.querySelectorAll('#tab-chapters tbody tr');
+    rows.forEach(row => {
+        const tags = row.querySelector('.ch-tags');
+        if (!tags) return;
+        const tagText = tags.textContent;
+        if (cat === 'all') {
+            row.classList.remove('hidden');
+        } else if (cat === 'dao') {
+            row.classList.toggle('hidden', !tagText.includes('道'));
+        } else if (cat === 'shu') {
+            row.classList.toggle('hidden', !tagText.includes('术'));
+        } else if (cat === 'pianwai') {
+            row.classList.toggle('hidden', !tagText.includes('篇外'));
+        }
+    });
+}
+
+// Search
+function doSearch() {
+    const query = document.getElementById('search').value.toLowerCase().trim();
+    if (!query) {
+        // Reset all
+        document.querySelectorAll('tr.hidden').forEach(r => r.classList.remove('hidden'));
+        document.querySelectorAll('mark').forEach(m => {
+            m.parentNode.replaceChild(document.createTextNode(m.textContent), m);
+        });
+        return;
+    }
+    
+    // Search chapter list
+    const rows = document.querySelectorAll('#tab-chapters tbody tr');
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        if (text.includes(query)) {
+            row.classList.remove('hidden');
+            // Highlight
+            const titleCell = row.querySelector('.ch-title');
+            if (titleCell) {
+                const original = titleCell.textContent;
+                const regex = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+                titleCell.innerHTML = original.replace(regex, '<mark>$1</mark>');
+            }
+        } else {
+            row.classList.add('hidden');
+        }
+    });
+    
+    // Search concepts
+    const conceptCards = document.querySelectorAll('.concept-card');
+    conceptCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? '' : 'none';
+    });
+    
+    // Search teachings
+    const teachings = document.querySelectorAll('.teaching-item');
+    teachings.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? '' : 'none';
+    });
+    
+    // Search characters
+    const chars = document.querySelectorAll('.char-card');
+    chars.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? '' : 'none';
+    });
+    
+    // Show all sections when searching
+    document.getElementById('tab-chapters').style.display = '';
+    document.getElementById('tab-concepts').style.display = '';
+    document.getElementById('tab-teachings').style.display = '';
+    document.getElementById('tab-characters').style.display = '';
+    
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+}
+</script>
+
+</body>
+</html>
