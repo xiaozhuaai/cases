@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>测试页面</title>
+<style>
+body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
+button { padding: 16px 32px; margin: 8px; font-size: 18px; border-radius: 8px; border: 2px solid #b8860b; background: #f5e6c8; cursor: pointer; }
+#msg { margin-top: 20px; padding: 16px; background: #e8f5e9; border-radius: 8px; font-size: 18px; }
+</style>
+</head>
+<body>
+<h1>测试：点击下面按钮</h1>
+<button onclick="document.getElementById('msg').textContent='✓ 按钮正常！JavaScript 可以运行。'">点我测试</button>
+<button onclick="document.body.style.background='#ffe082'">换背景色</button>
+<div id="msg" style="display:none"></div>
+</body>
+</html>
