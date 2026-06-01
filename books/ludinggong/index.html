@@ -5,283 +5,389 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>超级鹿鼎公 · 投资文集</title>
 <style>
-:root{--bg:#f5f0e8;--card:#fffbf5;--border:#d5c9b0;--text:#2c2416;--text2:#6b5e4a;--accent:#8b4513;--gold:#c4a64a;--red:#a03a2a;--nav-bg:#3d2b1f}
+:root{--bg:#3a2f28;--paper:#faf5ed;--text:#3d2b1f;--gold:#c4a64a;--accent:#8b4513}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:15px;line-height:1.6;overflow:hidden;height:100vh;display:flex;flex-direction:column}
+body{background:var(--bg);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;user-select:none;-webkit-user-select:none}
 
-/* Header */
-.header{background:linear-gradient(135deg,#2c1810,#5c3a28,#8b4513);color:#e8d5b7;padding:14px 24px;display:flex;align-items:center;gap:16px;border-bottom:2px solid var(--gold);flex-shrink:0;z-index:100}
-.header h1{font-size:20px;letter-spacing:3px;font-weight:500}
-.header .sub{font-size:11px;opacity:0.6;letter-spacing:1px;margin-left:auto}
-.header .page-indicator{font-size:13px;color:var(--gold);min-width:60px;text-align:right}
+/* ═══════════ BOOK CONTAINER ═══════════ */
+.scene{perspective:2000px;perspective-origin:50% 50%}
+.book{position:relative;width:1100px;height:780px;transform-style:preserve-3d}
+.book.closed .cover-front{transform:rotateY(0deg)}
+.book.closed .cover-front .cover-img{opacity:1}
+.book.closed .spread{opacity:0}
 
-/* Layout */
-.main-layout{display:flex;flex:1;overflow:hidden}
-.sidebar{width:200px;background:var(--nav-bg);color:#c4b89a;overflow-y:auto;flex-shrink:0;padding:8px 0;font-size:13px}
-.sidebar h3{font-size:11px;text-transform:uppercase;color:#8b7a60;padding:12px 16px 6px;letter-spacing:2px}
-.sidebar .chap{padding:8px 16px;cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;display:block;text-decoration:none;color:#c4b89a}
-.sidebar .chap:hover{background:rgba(255,255,255,0.05);color:#e8d5b7}
-.sidebar .chap.active{background:rgba(196,166,74,0.15);border-left-color:var(--gold);color:var(--gold)}
-.sidebar .chap .range{font-size:10px;opacity:0.5;margin-left:4px}
+/* ═══════════ COVER ═══════════ */
+.cover-front{position:absolute;width:550px;height:780px;left:550px;top:0;transform-origin:left center;transition:transform 0.8s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;z-index:100;cursor:pointer}
+.cover-front.open{transform:rotateY(-170deg)}
+.cover-front .face{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:3px 8px 8px 3px;overflow:hidden}
+.cover-front .front{background:linear-gradient(135deg,#2c1810,#4a2c1a,#6b3a20);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 40px;color:#e0c9a0;box-shadow:inset 0 0 60px rgba(0,0,0,0.3)}
+.cover-front .front h1{font-size:36px;letter-spacing:6px;font-weight:500;margin-bottom:20px;text-align:center;line-height:1.4;text-shadow:2px 2px 4px rgba(0,0,0,0.5)}
+.cover-front .front .sub{font-size:15px;letter-spacing:4px;opacity:0.7;margin-bottom:30px}
+.cover-front .front .decor{width:80px;height:1px;background:var(--gold);margin:20px 0}
+.cover-front .front .hint{font-size:12px;opacity:0.4;margin-top:40px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:0.6}}
+.cover-front .back{background:linear-gradient(to right,#3d2b1f,#5c3a28);transform:rotateY(180deg);box-shadow:inset -10px 0 30px rgba(0,0,0,0.3)}
 
-/* Viewer */
-.viewer{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#e8e0d0;position:relative;overflow:hidden}
-.page-container{position:relative;box-shadow:0 4px 30px rgba(0,0,0,0.3),0 1px 4px rgba(0,0,0,0.1);background:#fff;transition:transform 0.3s}
-.page-container img{display:block;max-width:100%;max-height:calc(100vh - 180px);width:auto;height:auto}
-.page-num-overlay{position:absolute;bottom:8px;right:12px;color:#999;font-size:11px;background:rgba(255,255,255,0.8);padding:2px 8px;border-radius:3px}
-.loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--text2);font-size:14px}
+/* ═══════════ BOOK SPINE ═══════════ */
+.spine{position:absolute;width:16px;height:780px;left:542px;top:0;background:linear-gradient(to right,#2c1810,#4a2c1a 30%,#6b3a20 70%,#2c1810);border-radius:2px;z-index:90;box-shadow:inset -2px 0 4px rgba(0,0,0,0.4),inset 2px 0 4px rgba(255,255,255,0.05)}
 
-/* Controls */
-.controls{display:flex;align-items:center;gap:12px;padding:10px 24px;background:var(--card);border-top:1px solid var(--border);flex-shrink:0;justify-content:center}
-.ctrl-btn{padding:8px 20px;border:1px solid var(--border);border-radius:20px;background:#fff;color:var(--text2);font-size:13px;cursor:pointer;transition:all 0.2s}
-.ctrl-btn:hover{border-color:var(--accent);color:var(--accent);background:#fdf9f4}
-.ctrl-btn:disabled{opacity:0.3;cursor:default}
-.ctrl-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-.ctrl-btn.primary:hover{background:#6b3410}
-.page-input{width:50px;text-align:center;border:1px solid var(--border);border-radius:4px;padding:6px;font-size:13px;background:#fff}
-.page-input:focus{outline:none;border-color:var(--accent)}
+/* ═══════════ PAGE SPREAD ═══════════ */
+.spread{position:absolute;width:1100px;height:780px;top:0;left:0;display:flex;z-index:1}
+.page{width:550px;height:780px;position:relative;overflow:hidden}
+.page-left{border-radius:8px 0 0 8px;box-shadow:inset -8px 0 20px rgba(0,0,0,0.08)}
+.page-right{border-radius:0 8px 8px 0;box-shadow:inset 8px 0 20px rgba(0,0,0,0.08);cursor:pointer}
+.page img{width:100%;height:100%;object-fit:contain;background:#faf5ed}
+.page-num{position:absolute;bottom:12px;font-size:11px;color:#b5a590}
+.page-left .page-num{left:16px}
+.page-right .page-num{right:16px}
 
-/* Thumbnails strip */
-.thumb-strip{display:flex;gap:4px;padding:6px 12px;overflow-x:auto;background:var(--card);border-top:1px solid var(--border);flex-shrink:0;scroll-behavior:smooth}
-.thumb-strip::-webkit-scrollbar{height:4px}
-.thumb-strip::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.thumb{flex-shrink:0;width:60px;height:84px;border:2px solid transparent;cursor:pointer;border-radius:2px;overflow:hidden;transition:all 0.2s}
-.thumb:hover{border-color:var(--gold)}
-.thumb.active{border-color:var(--accent);box-shadow:0 2px 8px rgba(139,69,19,0.3)}
-.thumb img{width:100%;height:100%;object-fit:cover}
-.thumb .tnum{font-size:9px;text-align:center;color:var(--text2);margin-top:1px}
+/* Paper texture overlay */
+.page::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,transparent 60%,rgba(180,160,130,0.08) 100%);pointer-events:none}
 
-/* Search */
-.search-bar{display:flex;align-items:center;gap:8px;padding:6px 16px;background:var(--card);border-bottom:1px solid var(--border)}
-.search-bar input{flex:1;padding:6px 12px;border:1px solid var(--border);border-radius:16px;font-size:13px;background:#fff;outline:none}
-.search-bar input:focus{border-color:var(--accent)}
-.search-hint{font-size:10px;color:var(--text2)}
+/* Center fold shadow */
+.spread::before{content:'';position:absolute;left:540px;top:0;width:20px;height:100%;background:linear-gradient(to right,rgba(0,0,0,0.06),transparent 40%,transparent 60%,rgba(0,0,0,0.06));z-index:2;pointer-events:none}
+
+/* ═══════════ FLIPPING PAGE ═══════════ */
+.flipper{position:absolute;width:550px;height:780px;left:550px;top:0;transform-origin:left center;transition:transform 0.7s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;z-index:50}
+.flipper.flipping{transform:rotateY(-180deg)}
+.flipper .face{position:absolute;width:100%;height:100%;backface-visibility:hidden;overflow:hidden;border-radius:0 8px 8px 0}
+.flipper .front{background:#faf5ed}
+.flipper .back{transform:rotateY(180deg);background:#faf5ed}
+.flipper .face img{width:100%;height:100%;object-fit:contain}
+.flipper .face .page-num{position:absolute;bottom:12px;font-size:11px;color:#b5a590;right:16px}
+
+/* Page stack edges */
+.page-stack-left{position:absolute;left:525px;top:4px;width:8px;height:772px;background:linear-gradient(to right,#f0e8d8,#f5efe0,#faf5ed);border-radius:0 1px 1px 0;z-index:5;box-shadow:2px 0 4px rgba(0,0,0,0.05)}
+.page-stack-right{position:absolute;left:1116px;top:4px;width:8px;height:772px;background:linear-gradient(to left,#e8dcc8,#f0e8d8,#f5efe0);border-radius:1px 0 0 1px;z-index:5;box-shadow:-2px 0 4px rgba(0,0,0,0.05)}
+
+/* ═══════════ BOOK SHADOW ═══════════ */
+.book-shadow{position:absolute;bottom:-30px;left:10%;width:80%;height:30px;background:radial-gradient(ellipse at center,rgba(0,0,0,0.4) 0%,transparent 70%);filter:blur(8px);z-index:-1}
+
+/* ═══════════ CONTROLS ═══════════ */
+.controls{display:flex;align-items:center;gap:16px;margin-top:30px;z-index:200}
+.ctrl-btn{padding:10px 24px;border:1px solid rgba(200,170,100,0.4);border-radius:24px;background:rgba(255,255,255,0.05);color:#d5c4a0;font-size:13px;cursor:pointer;transition:all 0.2s;letter-spacing:1px}
+.ctrl-btn:hover{background:rgba(200,170,100,0.15);border-color:rgba(200,170,100,0.6);color:#e0c9a0}
+.ctrl-btn:active{transform:scale(0.96)}
+.page-input{width:50px;text-align:center;padding:8px;border:1px solid rgba(200,170,100,0.4);border-radius:6px;background:rgba(0,0,0,0.2);color:#d5c4a0;font-size:13px}
+.page-input:focus{outline:none;border-color:var(--gold)}
+.spread-info{font-size:12px;color:rgba(200,170,100,0.5);min-width:100px;text-align:center}
+.chapter-nav{position:fixed;left:24px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:200;max-height:70vh;overflow-y:auto}
+.chapter-nav a{font-size:11px;color:rgba(200,170,100,0.5);text-decoration:none;padding:4px 8px;border-left:2px solid transparent;white-space:nowrap;transition:all 0.2s}
+.chapter-nav a:hover{color:#e0c9a0}
+.chapter-nav a.active{color:var(--gold);border-left-color:var(--gold)}
 
 /* Mobile */
-@media(max-width:768px){
-  .sidebar{display:none}
-  .header h1{font-size:16px}
-  .thumb{width:44px;height:62px}
+@media(max-width:1200px){
+  .book{transform:scale(0.65)}
+  .controls{margin-top:10px}
+  .chapter-nav{display:none}
 }
-
-/* Zoom */
-.zoom-controls{display:flex;gap:4px}
+@media(max-width:768px){
+  .book{transform:scale(0.4)}
+  .cover-front .front h1{font-size:20px;letter-spacing:3px}
+}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>超级鹿鼎公 · 投资文集</h1>
-  <span class="sub">价值选股 · 趋势选时 · 估值定仓 · 波动降本</span>
-  <span class="page-indicator" id="pageIndicator">1 / 414</span>
-</div>
-
-<div class="main-layout">
-  <nav class="sidebar" id="sidebar"></nav>
-  
-  <div class="viewer" id="viewer">
-    <div class="page-container" id="pageContainer">
-      <div class="loading" id="loading">加载中...</div>
-      <img id="pageImg" src="" alt="" style="display:none" onload="onImgLoad()" onerror="onImgError()">
-      <div class="page-num-overlay" id="pageOverlay"></div>
+<div class="scene">
+  <div class="book" id="book">
+    <!-- Spine -->
+    <div class="spine"></div>
+    
+    <!-- Page stack edges -->
+    <div class="page-stack-left" id="stackLeft"></div>
+    <div class="page-stack-right" id="stackRight"></div>
+    
+    <!-- Cover -->
+    <div class="cover-front" id="cover" onclick="openBook()">
+      <div class="face front">
+        <div class="decor"></div>
+        <h1>超级鹿鼎公<br>投资文集</h1>
+        <div class="decor"></div>
+        <div class="sub">价值选股 · 趋势选时 · 估值定仓 · 波动降本</div>
+        <div class="hint">点击翻开 →</div>
+      </div>
+      <div class="face back"></div>
     </div>
+    
+    <!-- Static spread (left + right pages) -->
+    <div class="spread" id="spread">
+      <div class="page page-left" id="pageLeft">
+        <img id="imgLeft" src="" alt="">
+        <div class="page-num" id="numLeft"></div>
+      </div>
+      <div class="page page-right" id="pageRight" onclick="nextSpread()">
+        <img id="imgRight" src="" alt="">
+        <div class="page-num" id="numRight"></div>
+      </div>
+    </div>
+    
+    <!-- Flipping overlay -->
+    <div class="flipper" id="flipper">
+      <div class="face front">
+        <img id="flipFront" src="" alt="">
+        <div class="page-num" id="flipFrontNum"></div>
+      </div>
+      <div class="face back">
+        <img id="flipBack" src="" alt="">
+        <div class="page-num" id="flipBackNum"></div>
+      </div>
+    </div>
+    
+    <!-- Book shadow -->
+    <div class="book-shadow"></div>
   </div>
 </div>
-
-<div class="thumb-strip" id="thumbStrip"></div>
 
 <div class="controls">
-  <button class="ctrl-btn" onclick="jumpChapter('prev')" title="上一章">◀◀ 章</button>
-  <button class="ctrl-btn" onclick="prevPage()" title="上一页">◀ 页</button>
-  <input type="number" class="page-input" id="pageInput" min="1" max="414" value="1" onchange="goToPage(parseInt(this.value))" onkeydown="if(event.key==='Enter')goToPage(parseInt(this.value))">
-  <span style="font-size:12px;color:var(--text2)">/ 414</span>
-  <button class="ctrl-btn" onclick="nextPage()" title="下一页">页 ▶</button>
-  <button class="ctrl-btn" onclick="jumpChapter('next')" title="下一章">章 ▶▶</button>
-  <span style="flex:1"></span>
-  <div class="zoom-controls">
-    <button class="ctrl-btn" onclick="zoom(-0.1)">🔍−</button>
-    <button class="ctrl-btn" onclick="zoom(0.1)">🔍+</button>
-    <button class="ctrl-btn" onclick="zoom(0)" title="重置">1:1</button>
-  </div>
+  <button class="ctrl-btn" onclick="prevSpread()">◀ 上一页</button>
+  <span class="spread-info" id="spreadInfo">封面</span>
+  <button class="ctrl-btn" onclick="nextSpread()">下一页 ▶</button>
+  <span style="color:rgba(200,170,100,0.3)">|</span>
+  <span style="font-size:12px;color:rgba(200,170,100,0.5)">跳转</span>
+  <input type="number" class="page-input" id="pageInput" min="1" max="414" placeholder="页" onkeydown="if(event.key==='Enter')jumpToPage(parseInt(this.value))">
+  <button class="ctrl-btn" onclick="toggleCover()">📖 封面</button>
 </div>
 
+<nav class="chapter-nav" id="chapterNav"></nav>
+
 <script>
-// ═══════════ Config ═══════════
 const TOTAL = 414;
 const IMG_BASE = 'pages/';
 const chapters = [
-  {name:"封面",start:1,end:2},
-  {name:"目录",start:4,end:5},
-  {name:"一、投资的理念",start:10,end:63},
-  {name:"二、技术分析及交易",start:64,end:84},
-  {name:"三、大盘和个股",start:85,end:90},
+  {name:"一、投资理念",start:10,end:63},
+  {name:"二、技术分析",start:64,end:84},
+  {name:"三、大盘个股",start:85,end:90},
   {name:"四、关于风险",start:91,end:103},
-  {name:"五、产业与周期",start:104,end:186},
-  {name:"六、煤炭和电力能源",start:187,end:240},
-  {name:"七、人口与趋势",start:241,end:333},
-  {name:"八、局势及竞争",start:334,end:351},
+  {name:"五、产业周期",start:104,end:186},
+  {name:"六、煤炭电力",start:187,end:240},
+  {name:"七、人口趋势",start:241,end:333},
+  {name:"八、局势竞争",start:334,end:351},
   {name:"九、闲言碎语",start:352,end:414}
 ];
 
-let currentPage = 0;
-let currentZoom = 1;
-let preloaded = new Set();
-
-// ═══════════ Init ═══════════
-function init(){
-  buildSidebar();
-  buildThumbnails();
-  goToPage(1);
-  document.addEventListener('keydown', onKeyDown);
-}
+let currentSpread = 2; // Start at pages 2-3 (after cover/toc)
+let isCoverOpen = false;
+let isFlipping = false;
+let totalSpreads = Math.ceil(TOTAL / 2);
 
 function pad(n){return String(n).padStart(3,'0');}
+function imgUrl(n){return IMG_BASE + 'p_' + pad(n) + '.webp';}
 
-// ═══════════ Sidebar ═══════════
-function buildSidebar(){
-  const sb = document.getElementById('sidebar');
-  sb.innerHTML = '<h3>📖 目录导航</h3>';
+// ═══════════ INIT ═══════════
+function init(){
+  buildChapterNav();
+  updateSpread();
+  document.addEventListener('keydown', onKeyDown);
+  
+  // Preload first few pages
+  for(let i=1; i<=10; i++) preloadImg(i);
+}
+
+function preloadImg(n){
+  if(n<1 || n>TOTAL) return;
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'image';
+  link.href = imgUrl(n);
+  document.head.appendChild(link);
+}
+
+// ═══════════ CHAPTER NAV ═══════════
+function buildChapterNav(){
+  const nav = document.getElementById('chapterNav');
   chapters.forEach((ch,i) => {
     const a = document.createElement('a');
-    a.className = 'chap';
     a.href = '#';
-    a.innerHTML = ch.name + '<span class="range">p.'+ch.start+'-'+ch.end+'</span>';
-    a.onclick = function(e){e.preventDefault();goToPage(ch.start);};
+    a.textContent = ch.name;
+    a.onclick = function(e){e.preventDefault(); jumpToPage(ch.start);};
     a.setAttribute('data-chap', i);
-    sb.appendChild(a);
+    nav.appendChild(a);
   });
 }
 
-function updateSidebar(){
-  const items = document.querySelectorAll('.chap');
-  items.forEach((el,i) => {
+function updateChapterNav(){
+  document.querySelectorAll('.chapter-nav a').forEach(a => {
+    const i = parseInt(a.getAttribute('data-chap'));
     const ch = chapters[i];
-    if(currentPage >= ch.start && currentPage <= ch.end){
-      el.classList.add('active');
+    const leftPage = currentSpread;
+    const rightPage = currentSpread + 1;
+    if((leftPage >= ch.start && leftPage <= ch.end) || 
+       (rightPage >= ch.start && rightPage <= ch.end)){
+      a.classList.add('active');
     } else {
-      el.classList.remove('active');
+      a.classList.remove('active');
     }
   });
 }
 
-// ═══════════ Thumbnails ═══════════
-function buildThumbnails(){
-  const strip = document.getElementById('thumbStrip');
-  strip.innerHTML = '';
-  for(let i=1; i<=TOTAL; i++){
-    const div = document.createElement('div');
-    div.className = 'thumb';
-    div.setAttribute('data-pg', i);
-    div.onclick = function(){goToPage(i);};
-    
-    const img = document.createElement('img');
-    img.src = IMG_BASE + 'p_' + pad(i) + '.webp';
-    img.loading = 'lazy';
-    img.alt = 'p.'+i;
-    div.appendChild(img);
-    
-    const num = document.createElement('div');
-    num.className = 'tnum';
-    num.textContent = i;
-    div.appendChild(num);
-    
-    strip.appendChild(div);
-  }
+// ═══════════ SPREAD MANAGEMENT ═══════════
+function updateSpread(){
+  const left = currentSpread;
+  const right = currentSpread + 1;
+  
+  document.getElementById('imgLeft').src = left <= TOTAL ? imgUrl(left) : '';
+  document.getElementById('numLeft').textContent = left <= TOTAL ? 'p.' + left : '';
+  
+  document.getElementById('imgRight').src = right <= TOTAL ? imgUrl(right) : '';
+  document.getElementById('numRight').textContent = right <= TOTAL ? 'p.' + right : '';
+  
+  document.getElementById('spreadInfo').textContent = 'p.' + left + ' — p.' + right;
+  
+  // Preload neighbors
+  for(let i=left-4; i<=right+4; i++) preloadImg(i);
+  
+  updateChapterNav();
+  updateStackEdges();
 }
 
-function updateThumbnails(){
-  document.querySelectorAll('.thumb').forEach(el => {
-    el.classList.toggle('active', parseInt(el.getAttribute('data-pg')) === currentPage);
+function updateStackEdges(){
+  const left = currentSpread;
+  const pagesBefore = left - 1;
+  const pagesAfter = TOTAL - (left + 1);
+  const maxStack = 30; // Max visible stack width in px
+  
+  const leftWidth = Math.min(maxStack, Math.max(2, pagesBefore * 0.08));
+  const rightWidth = Math.min(maxStack, Math.max(2, pagesAfter * 0.08));
+  
+  document.getElementById('stackLeft').style.left = (542 - leftWidth) + 'px';
+  document.getElementById('stackLeft').style.width = leftWidth + 'px';
+  document.getElementById('stackRight').style.width = rightWidth + 'px';
+}
+
+// ═══════════ FLIP ANIMATION ═══════════
+function nextSpread(){
+  if(isFlipping || !isCoverOpen) return;
+  if(currentSpread + 2 > TOTAL) return;
+  
+  isFlipping = true;
+  const flipper = document.getElementById('flipper');
+  const rightPage = currentSpread + 1;
+  const nextRight = currentSpread + 3;
+  
+  // Set up flipper: front = current right page, back = next right page (or blank)
+  document.getElementById('flipFront').src = imgUrl(rightPage);
+  document.getElementById('flipFrontNum').textContent = 'p.' + rightPage;
+  
+  document.getElementById('flipBack').src = nextRight <= TOTAL ? imgUrl(nextRight) : '';
+  document.getElementById('flipBackNum').textContent = nextRight <= TOTAL ? 'p.' + nextRight : '';
+  
+  // Hide the static right page during flip
+  document.getElementById('pageRight').style.opacity = '0';
+  flipper.style.display = 'block';
+  
+  // Trigger flip
+  requestAnimationFrame(() => {
+    flipper.classList.add('flipping');
   });
-  // Scroll thumb into view
-  const active = document.querySelector('.thumb.active');
-  if(active) active.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  
+  // On flip complete
+  flipper.addEventListener('transitionend', function handler(){
+    flipper.removeEventListener('transitionend', handler);
+    
+    // Advance spread
+    currentSpread += 2;
+    updateSpread();
+    
+    // Reset flipper
+    flipper.classList.remove('flipping');
+    flipper.style.display = 'none';
+    document.getElementById('pageRight').style.opacity = '1';
+    
+    isFlipping = false;
+  }, {once: true});
 }
 
-// ═══════════ Page Navigation ═══════════
-function goToPage(n){
+function prevSpread(){
+  if(isFlipping || !isCoverOpen) return;
+  if(currentSpread <= 2) return;
+  
+  isFlipping = true;
+  const flipper = document.getElementById('flipper');
+  const leftPage = currentSpread;      // This will become the "back" after flip
+  const prevLeft = currentSpread - 2;  // This will become the new left
+  
+  // We're flipping BACKWARDS: the flipper shows the NEW right page coming in
+  // Actually for backward flip, we animate differently
+  // Set up: front = new right page (current left), back = new left page
+  
+  document.getElementById('flipFront').src = imgUrl(currentSpread + 1);
+  document.getElementById('flipFrontNum').textContent = 'p.' + (currentSpread + 1);
+  
+  document.getElementById('flipBack').src = imgUrl(leftPage);
+  document.getElementById('flipBackNum').textContent = 'p.' + leftPage;
+  
+  document.getElementById('pageLeft').style.opacity = '0';
+  flipper.style.display = 'block';
+  
+  // Start already flipped, then un-flip
+  flipper.classList.add('flipping');
+  
+  flipper.addEventListener('transitionend', function handler(){
+    flipper.removeEventListener('transitionend', handler);
+    currentSpread -= 2;
+    updateSpread();
+    flipper.classList.remove('flipping');
+    flipper.style.display = 'none';
+    document.getElementById('pageLeft').style.opacity = '1';
+    isFlipping = false;
+  }, {once: true});
+}
+
+// ═══════════ COVER ═══════════  
+function openBook(){
+  if(isCoverOpen) return;
+  const cover = document.getElementById('cover');
+  cover.classList.add('open');
+  isCoverOpen = true;
+  document.getElementById('spreadInfo').textContent = 'p.2 — p.3';
+  document.getElementById('spread').style.opacity = '1';
+  document.getElementById('flipper').style.display = 'none';
+  document.getElementById('pageLeft').style.opacity = '1';
+  document.getElementById('pageRight').style.opacity = '1';
+}
+
+function closeBook(){
+  if(!isCoverOpen) return;
+  const cover = document.getElementById('cover');
+  cover.classList.remove('open');
+  isCoverOpen = false;
+  document.getElementById('spreadInfo').textContent = '封面';
+  document.getElementById('spread').style.opacity = '0';
+}
+
+function toggleCover(){
+  if(isCoverOpen) closeBook();
+  else openBook();
+}
+
+// ═══════════ NAVIGATION ═══════════
+function jumpToPage(n){
   if(n < 1) n = 1;
   if(n > TOTAL) n = TOTAL;
-  if(n === currentPage) return;
+  if(!isCoverOpen) openBook();
   
-  currentPage = n;
-  const img = document.getElementById('pageImg');
-  const loading = document.getElementById('loading');
-  const overlay = document.getElementById('pageOverlay');
+  // Snap to even number for left page
+  if(n % 2 !== 0) n = n - 1; // Make even (left page)
+  if(n < 2) n = 2;
   
-  img.style.display = 'none';
-  loading.style.display = 'block';
-  overlay.textContent = 'p.' + n;
-  
-  img.src = IMG_BASE + 'p_' + pad(n) + '.webp';
-  
-  document.getElementById('pageIndicator').textContent = n + ' / ' + TOTAL;
-  document.getElementById('pageInput').value = n;
-  
-  updateSidebar();
-  updateThumbnails();
-  preloadNeighbors(n);
+  currentSpread = n;
+  updateSpread();
+  document.getElementById('pageInput').value = '';
 }
 
-function onImgLoad(){
-  document.getElementById('loading').style.display = 'none';
-  document.getElementById('pageImg').style.display = 'block';
-  document.getElementById('pageImg').style.transform = 'scale('+currentZoom+')';
-}
-
-function onImgError(){
-  document.getElementById('loading').textContent = '图片加载失败';
-}
-
-function prevPage(){goToPage(currentPage - 1);}
-function nextPage(){goToPage(currentPage + 1);}
-
-function jumpChapter(dir){
-  // Find current chapter
-  let ci = -1;
-  for(let i=0; i<chapters.length; i++){
-    if(currentPage >= chapters[i].start && currentPage <= chapters[i].end){
-      ci = i; break;
-    }
-  }
-  if(dir === 'prev' && ci > 0) goToPage(chapters[ci-1].start);
-  if(dir === 'next' && ci < chapters.length-1) goToPage(chapters[ci+1].start);
-}
-
-// ═══════════ Preload ═══════════
-function preloadNeighbors(n){
-  for(let i=n-3; i<=n+3; i++){
-    if(i<1 || i>TOTAL) continue;
-    if(preloaded.has(i)) continue;
-    preloaded.add(i);
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = IMG_BASE + 'p_' + pad(i) + '.webp';
-    document.head.appendChild(link);
-  }
-}
-
-// ═══════════ Zoom ═══════════
-function zoom(delta){
-  if(delta === 0){currentZoom = 1;}
-  else {currentZoom = Math.max(0.3, Math.min(3, currentZoom + delta));}
-  document.getElementById('pageImg').style.transform = 'scale('+currentZoom+')';
-}
-
-// ═══════════ Keyboard ═══════════
 function onKeyDown(e){
+  if(e.target.tagName === 'INPUT') return;
   switch(e.key){
-    case 'ArrowLeft': case 'ArrowUp': prevPage(); break;
-    case 'ArrowRight': case 'ArrowDown': case ' ': nextPage(); e.preventDefault(); break;
-    case 'Home': goToPage(1); break;
-    case 'End': goToPage(TOTAL); break;
-    case 'PageUp': goToPage(Math.max(1, currentPage-10)); break;
-    case 'PageDown': goToPage(Math.min(TOTAL, currentPage+10)); break;
+    case 'ArrowRight': case ' ': nextSpread(); e.preventDefault(); break;
+    case 'ArrowLeft': prevSpread(); e.preventDefault(); break;
+    case 'Home': jumpToPage(2); break;
+    case 'End': jumpToPage(TOTAL % 2 === 0 ? TOTAL : TOTAL - 1); break;
+    case 'c': toggleCover(); break;
   }
 }
 
-// ═══════════ Start ═══════════
 window.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
