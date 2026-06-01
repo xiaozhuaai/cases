@@ -5,16 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>超级鹿鼎公 · 投资体系</title>
 <style>
-:root{--bg:#f8f5f0;--card:#fff;--border:#e5dccf;--text:#2c2416;--text2:#6b5e4a;--accent:#8b4513;--gold:#c4a64a;--red:#a03a2a;--blue:#3a6b8c;--green:#5a8a4a}
+:root{--bg:#f8f5f0;--card:#fff;--border:#e5dccf;--text:#2c2416;--text2:#6b5e4a;--accent:#8b4513;--gold:#c4a64a}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino Sans GB","Songti SC","STSong",serif;font-size:15px;line-height:1.8}
-
 .top-bar{background:linear-gradient(135deg,#2c1810,#4a3020);color:#e8d5b7;padding:14px 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
 .top-bar h1{font-size:16px;letter-spacing:3px;font-weight:500}
 .top-bar .nav-tags{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
 .top-bar .nav-tag{padding:3px 12px;border-radius:12px;font-size:10px;cursor:pointer;border:1px solid rgba(200,170,100,0.3);color:#c4b89a;transition:all 0.2s}
 .top-bar .nav-tag:hover,.top-bar .nav-tag.active{background:var(--gold);color:#2c1810;border-color:var(--gold)}
-
 .hero{max-width:1000px;margin:0 auto;padding:32px 24px 24px;display:grid;grid-template-columns:1fr 2fr;gap:20px}
 .author-card{background:var(--card);border-radius:12px;padding:24px;border:1px solid var(--border);text-align:center}
 .author-card .avatar{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#6b3a20);color:#e8d5b7;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 12px}
@@ -24,19 +22,15 @@ body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino 
 .author-card .stat{text-align:center}
 .author-card .stat .val{font-size:20px;color:var(--accent);font-weight:700}
 .author-card .stat .lbl{font-size:10px;color:var(--text2)}
-
 .philosophy-card{background:var(--card);border-radius:12px;padding:24px;border:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
 .philosophy-card .quote{font-size:18px;color:var(--accent);letter-spacing:1px;margin-bottom:6px}
-.philosophy-card .quote::before{content:'"';font-size:32px;color:var(--gold);margin-right:4px}
-.philosophy-card .quote::after{content:'"';font-size:32px;color:var(--gold);margin-left:4px}
+.philosophy-card .quote::before{content:'\201C';font-size:32px;color:var(--gold);margin-right:4px}
+.philosophy-card .quote::after{content:'\201D';font-size:32px;color:var(--gold);margin-left:4px}
 .philosophy-card .attribution{font-size:11px;color:var(--text2);text-align:right}
 .philosophy-card .principles{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .philosophy-card .principle{padding:4px 12px;background:rgba(196,166,74,0.1);border-radius:12px;font-size:11px;color:var(--accent);border:1px solid rgba(196,166,74,0.2)}
-
 .main{max-width:1000px;margin:0 auto;padding:0 24px 80px}
-
-/* Chapter cards */
-.section-title{font-size:13px;color:var(--text2);letter-spacing:2px;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border);text-transform:uppercase}
+.section-title{font-size:13px;color:var(--text2);letter-spacing:2px;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 .chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:24px}
 .chapter-card{background:var(--card);border-radius:10px;padding:20px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden}
 .chapter-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.06);border-color:var(--gold)}
@@ -46,20 +40,16 @@ body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino 
 .chapter-card .ch-preview{font-size:12px;color:var(--text2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .chapter-card .ch-topics{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
 .chapter-card .ch-topic{font-size:9px;padding:2px 8px;background:var(--bg);border-radius:8px;color:var(--text2)}
-
-/* Expanded chapter */
 .chapter-detail{display:none;background:var(--card);border-radius:10px;padding:28px;border:1px solid var(--border);margin-bottom:20px}
 .chapter-detail.open{display:block}
 .chapter-detail h3{font-size:17px;color:var(--accent);margin-bottom:16px}
+.chapter-detail .close-btn{float:right;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text2);padding:4px 8px}
 .chapter-detail .post{margin-bottom:18px;padding-bottom:18px;border-bottom:1px dashed var(--border)}
 .chapter-detail .post:last-child{border-bottom:none}
 .chapter-detail .post .date{font-size:10px;color:var(--gold);margin-bottom:6px}
 .chapter-detail .post p{text-indent:2em;margin-bottom:6px;font-size:14px}
 .chapter-detail .post .reply{font-size:13px;color:var(--text2);margin:4px 0 4px 16px;text-indent:0;padding-left:10px;border-left:2px solid var(--border)}
 .chapter-detail .post .reply .who{color:var(--accent);font-weight:600}
-.chapter-detail .close-btn{float:right;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text2);padding:4px 8px}
-
-/* Timeline */
 .timeline{position:relative;padding-left:24px}
 .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
 .timeline-item{margin-bottom:16px;position:relative}
@@ -67,20 +57,12 @@ body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino 
 .timeline-item .tl-date{font-size:10px;color:var(--gold);margin-bottom:2px}
 .timeline-item .tl-text{font-size:13px;color:var(--text);line-height:1.7}
 .timeline-item .tl-text .highlight{color:var(--accent);font-weight:600}
-
-/* Tags */
 .tag-cloud{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
 .tag-cloud .tag{padding:5px 14px;border:1px solid var(--border);border-radius:16px;font-size:11px;color:var(--text2);cursor:pointer;transition:all 0.15s}
 .tag-cloud .tag:hover,.tag-cloud .tag.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-
 .hidden{display:none}
 .filtered-out{display:none!important}
-
-@media(max-width:768px){
-  .hero{grid-template-columns:1fr}
-  .chapter-grid{grid-template-columns:1fr}
-  .top-bar .nav-tags{display:none}
-}
+@media(max-width:768px){.hero{grid-template-columns:1fr}.chapter-grid{grid-template-columns:1fr}.top-bar .nav-tags{display:none}}
 </style>
 </head>
 <body>
@@ -125,203 +107,11 @@ body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino 
   <div class="section-title">🏷️ 话题标签</div>
   <div class="tag-cloud" id="tagCloud"></div>
   
-  <div class="section-title" style="margin-top:32px">📖 全文阅读</div>
-  <p style="font-size:12px;color:var(--text2);margin-bottom:16px">以下为全书414页连续全文。OCR文字逐步补全中，当前 <span id="ocrProgress">47</span>/414 页为文字版。</p>
+  <div class="section-title">📖 全文阅读</div>
+  <p style="font-size:12px;color:var(--text2);margin-bottom:16px">414页连续全文。OCR文字逐步补全：<span id="ocrProgress">-</span>/414。</p>
   <div id="fullText"></div>
 </div>
 
-<script>
-var ocrData={};
-var TOTAL=414,IMG_BASE='pages/';
-
-console.log("DASHBOARD: loading...");
-fetch('ocr.json').then(function(r){return r.json()}).then(function(d){
-  ocrData=d;console.log("OCR:",Object.keys(d).length,"pages");
-  buildAll();
-}).catch(function(e){console.log("OCR fetch err:",e);buildAll()});
-
-var chapters=[
-  {name:"一、投资的理念",start:10,end:63,icon:"💡",desc:"价值之锚、现金流、复利、合理估值——鹿鼎公投资哲学的核心支柱",topics:["价值投资","分红","复利","估值","垄断"]},
-  {name:"二、技术分析及交易",start:64,end:84,icon:"📊",desc:"搬砖、做T、网格交易、四大流派——实战交易的底层逻辑",topics:["搬砖","做T","网格","K线"]},
-  {name:"三、大盘和个股",start:85,end:90,icon:"📈",desc:"A股生态环境、个股深度分析、30年长期组合",topics:["A股","美的","格力","陕煤","茅台"]},
-  {name:"四、关于风险",start:91,end:103,icon:"⚠️",desc:"高风险与低风险的相对性、风险敞口、未雨绸缪",topics:["风险","杠杆","回撤"]},
-  {name:"五、产业与周期",start:104,end:186,icon:"🏭",desc:"地产、银行、互联网、钢铁——跨行业周期洞察",topics:["地产","银行","互联网","钢铁","周期"]},
-  {name:"六、煤炭和电力能源",start:187,end:240,icon:"⚡",desc:"鹿鼎公最擅长的领域——煤电博弈、神华淮北深度拆解",topics:["煤炭","电力","神华","淮北","焦煤"]},
-  {name:"七、人口与趋势",start:241,end:333,icon:"👥",desc:"人口结构变化如何影响消费、房产与长期投资",topics:["人口","老龄化","消费","日本"]},
-  {name:"八、局势及竞争",start:334,end:351,icon:"🌏",desc:"通缩、债务、国际竞争——宏观格局下的投资视角",topics:["通缩","债务","美国","越南","印度"]},
-  {name:"九、闲言碎语",start:352,end:414,icon:"💬",desc:"抄作业、推翻常识、识人辨术——投资之外的智慧",topics:["抄作业","识人","常识","方法论"]}
-];
-
-var allTags=["价值投资","分红","复利","估值","垄断","煤炭","电力","神华","淮北","银行","地产","周期","人口","风险","搬砖","做T","A股","焦煤","杠杆","日本","通缩"];
-
-var activeTag=null;
-
-function buildAll(){
-  buildTopTags();
-  buildChapterCards();
-  buildTimeline();
-  buildTagCloud();
-  buildFullText();
-  updateProgress();
-}
-
-function pad(n){return String(n).padStart(3,'0')}
-
-function buildTopTags(){
-  var h='<span class="nav-tag active" onclick="filterByTag(null,this)">全部</span>';
-  allTags.forEach(function(t){h+='<span class="nav-tag" onclick="filterByTag(\"'+t+'\",this)">'+t+'</span>'});
-  document.getElementById('topTags').innerHTML=h;
-}
-
-function filterByTag(tag,el){
-  activeTag=tag;
-  document.querySelectorAll('.nav-tag').forEach(function(t){t.classList.remove('active')});
-  if(el)el.classList.add('active');
-  document.querySelectorAll('.tag-cloud .tag').forEach(function(t){t.classList.toggle('active',t.textContent===tag)});
-  // Filter chapter cards
-  document.querySelectorAll('.chapter-card').forEach(function(card){
-    if(!tag){card.classList.remove('filtered-out');return}
-    var topics=card.getAttribute('data-topics')||'';
-    card.classList.toggle('filtered-out',topics.indexOf(tag)===-1);
-  });
-}
-
-function buildChapterCards(){
-  var grid=document.getElementById('chapterGrid'),h='';
-  chapters.forEach(function(ch,i){
-    var preview=getChapterPreview(ch);
-    h+='<div class="chapter-card" data-topics="'+ch.topics.join(',')+'" onclick="toggleChapter('+i+')">';
-    h+='<div class="ch-num">'+(i+1)+'</div>';
-    h+='<h3>'+ch.icon+' '+ch.name+'</h3>';
-    h+='<div class="ch-range">p.'+ch.start+' — p.'+ch.end+' · '+(ch.end-ch.start+1)+'页</div>';
-    h+='<div class="ch-preview">'+ch.desc+'</div>';
-    h+='<div class="ch-topics">';
-    ch.topics.forEach(function(t){h+='<span class="ch-topic">'+t+'</span>'});
-    h+='</div></div>';
-    // Detail (hidden)
-    h+='<div class="chapter-detail" id="chDetail'+i+'">';
-    h+='<button class="close-btn" onclick="event.stopPropagation();toggleChapter('+i+')">✕</button>';
-    h+='<h3>'+ch.icon+' '+ch.name+'</h3>';
-    h+=buildChapterContent(ch);
-    h+='</div>';
-  });
-  grid.innerHTML=h;
-}
-
-function toggleChapter(i){
-  var d=document.getElementById('chDetail'+i);
-  d.classList.toggle('open');
-  if(d.classList.contains('open'))d.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-
-function getChapterPreview(ch){
-  // Return first OCR text from this chapter
-  for(var pg=ch.start;pg<=ch.end;pg++){
-    var t=ocrData[String(pg)];
-    if(t){return t.substring(0,120).replace(/\n/g,' ')+'...'}
-  }
-  return ch.desc;
-}
-
-function buildChapterContent(ch){
-  var h='';
-  for(var pg=ch.start;pg<=Math.min(ch.end,ch.start+15);pg++){
-    var t=ocrData[String(pg)];
-    if(!t)continue;
-    h+='<div class="post"><div class="date">📄 第 '+pg+' 页</div>';
-    var lines=t.split('\n').filter(function(l){return l.trim()});
-    var posts=t.split(/(?=20\d{2}[-—]\d{2}[-—]\d{2})/);
-    for(var i=0;i<Math.min(posts.length,3);i++){
-      var p=posts[i];if(!p.trim())continue;
-      var pl=p.trim().split('\n'),dm=pl[0].match(/(20\d{2}[-—]\d{2}[-—]\d{2}.*)/);
-      if(dm){h+='<div class="date">📅 '+dm[1].replace(/[—]/g,'-')+'</div>';pl.shift()}
-      for(var j=0;j<Math.min(pl.length,5);j++){
-        var cl=pl[j].trim();if(!cl)continue;
-        if(cl.indexOf('网友')===0||cl.indexOf('鹿鼎公')===0){
-          var who=cl.indexOf('网友')===0?'网友':'鹿鼎公';
-          h+='<div class="reply"><span class="who">'+who+'：</span>'+cl.replace(/^(网友|鹿鼎公)[：:]\s*/,'')+'</div>';
-        }else{h+='<p>'+cl+'</p>'}
-      }
-    }
-    h+='</div>';
-    break; // Show first page's content only
-  }
-  if(!h)h='<p style="color:var(--text2);font-size:13px">文字提取进行中，完整内容即将上线。</p>';
-  return h;
-}
-
-function buildTimeline(){
-  var tl=document.getElementById('timeline'),h='';
-  var highlights=[
-    {date:"2014-05","text:"提出<span class='highlight'>沙漠之花</span>概念——海螺水泥、中国神华"},
-    {date:"2014-12","text:"定义投资方法论：<span class='highlight'>以产业投资眼光买股票</span>，靠业绩增长和分红获利"},
-    {date:"2015-02","text:"守株待兔——投资就是<span class='highlight'>在交通要道上找根大树静静守着</span>"},
-    {date:"2015-03","text:"孙子兵法翻译：<span class='highlight'>想赚钱，先做到不亏钱</span>"},
-    {date:"2015-07","text:"深读：<span class='highlight'>价值之锚</span>——8-9%现金分红价就是股价的底锚"},
-    {date:"2015-09","text:"十六字诀成形：<span class='highlight'>价值选股，趋势选时，估值定仓，波动降本</span>"},
-  ];
-  highlights.forEach(function(item){
-    h+='<div class="timeline-item"><div class="tl-date">'+item.date+'</div><div class="tl-text">'+item.text+'</div></div>';
-  });
-  tl.innerHTML=h;
-}
-
-function buildTagCloud(){
-  var tc=document.getElementById('tagCloud'),h='';
-  allTags.forEach(function(t){
-    h+='<span class="tag" onclick="filterByTag(\''+t+'\',this);document.querySelector(\'.nav-tags .nav-tag.active\')?.classList.remove(\'active\')">'+t+'</span>';
-  });
-  tc.innerHTML=h;
-}
-
-function buildFullText(){
-  var ft=document.getElementById('fullText'),h='';
-  var lastChap='';
-  for(var pg=1;pg<=TOTAL;pg++){
-    var chap=chapters.find(function(c){return pg===c.start});
-    if(chap&&chap.name!==lastChap){
-      h+='<div style="text-align:center;margin:32px 0 20px;padding-top:20px;border-top:1px solid var(--border)"><span style="font-size:14px;color:var(--accent);font-weight:600;letter-spacing:2px">'+chap.icon+' '+chap.name+'</span></div>';
-      lastChap=chap.name;
-    }
-    var t=ocrData[String(pg)];
-    h+='<div style="margin-bottom:24px;padding:16px 20px;background:var(--card);border-radius:8px;border:1px solid var(--border)">';
-    h+='<div style="font-size:9px;color:var(--text2);opacity:0.3;margin-bottom:8px">p.'+pg+'</div>';
-    if(t){
-      var lines=t.split('\n').filter(function(l){return l.trim()});
-      var posts=t.split(/(?=20\d{2}[-—]\d{2}[-—]\d{2})/);
-      for(var i=0;i<posts.length;i++){
-        var p=posts[i];if(!p.trim())continue;
-        var pl=p.trim().split('\n'),dm=pl[0].match(/(20\d{2}[-—]\d{2}[-—]\d{2}.*)/);
-        if(dm){h+='<div style="font-size:10px;color:var(--gold);margin-bottom:6px">'+dm[1].replace(/[—]/g,'-')+'</div>';pl.shift()}
-        for(var j=0;j<pl.length;j++){
-          var cl=pl[j].trim();if(!cl)continue;
-          if(cl.indexOf('网友')===0||cl.indexOf('鹿鼎公')===0){
-            var who=cl.indexOf('网友')===0?'网友':'鹿鼎公';
-            h+='<div style="font-size:13px;color:var(--text2);margin:3px 0 3px 12px;padding-left:8px;border-left:2px solid var(--border)"><b style="color:var(--accent)">'+who+'：</b>'+cl.replace(/^(网友|鹿鼎公)[：:]\s*/,'')+'</div>';
-          }else{h+='<p style="text-indent:2em;margin-bottom:4px;font-size:14px">'+cl+'</p>'}
-        }
-      }
-    }else{
-      h+='<div style="text-align:center"><img data-src="'+IMG_BASE+'p_'+pad(pg)+'.webp" alt="" src="" style="max-width:100%;min-height:200px;background:#f5f0e8;border-radius:4px;border:1px solid var(--border)"></div>';
-    }
-    h+='</div>';
-  }
-  ft.innerHTML=h;
-  // Lazy load
-  setTimeout(function(){
-    var obs=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){if(e.isIntersecting){var img=e.target;if(img.dataset.src){img.src=img.dataset.src;obs.unobserve(img)}}})
-    },{rootMargin:'200px'});
-    document.querySelectorAll('img[data-src]').forEach(function(img){obs.observe(img)});
-  },200);
-}
-
-function updateProgress(){
-  var p=Object.keys(ocrData).length;
-  document.getElementById('ocrProgress').textContent=p;
-}
-
-window.addEventListener('DOMContentLoaded',function(){console.log("DOM ready")});
-</script>
+<script src="app.js"></script>
 </body>
 </html>
