@@ -191,7 +191,7 @@ function renderTextBlock(n,text){
 }
 
 function renderImgBlock(n){
-  return '<div class="img-block"><img data-src="'+IMG_BASE+'p_'+pad(n)+'.webp" alt="p.'+n+'" src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22><rect fill=%22%23f5f0e8%22 width=%22600%22 height=%22800%22/></svg>" onerror="this.style.display='none'"></div>';
+  return '<div class="img-block"><img data-src="'+IMG_BASE+'p_'+pad(n)+'.webp" alt="p.'+n+'" src="" style="min-height:400px;background:#f5f0e8;border-radius:4px" onerror="this.style.display='none'"></div>';
 }
 
 window.addEventListener('DOMContentLoaded',init);
