@@ -5,313 +5,524 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>超级鹿鼎公 · 投资体系</title>
 <style>
-:root{--bg:#f8f5f0;--card:#fff;--border:#e5dccf;--text:#2c2416;--text2:#6b5e4a;--accent:#8b4513;--gold:#c4a64a}
+:root{--bg:#faf8f4;--card:#fff;--border:#e8e0d0;--text:#2c2416;--t2:#6b5e4a;--accent:#8b4513;--gold:#c4a64a;--red:#c0392b;--blue:#2c5f8a;--green:#4a7c3f;--dark:#2c1810}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino Sans GB","Songti SC","STSong",serif;font-size:15px;line-height:1.8}
-.top-bar{background:linear-gradient(135deg,#2c1810,#4a3020);color:#e8d5b7;padding:14px 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
-.top-bar h1{font-size:16px;letter-spacing:3px;font-weight:500}
-.top-bar .nav-tags{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
-.top-bar .nav-tag{padding:3px 12px;border-radius:12px;font-size:10px;cursor:pointer;border:1px solid rgba(200,170,100,0.3);color:#c4b89a;transition:all 0.2s}
-.top-bar .nav-tag:hover,.top-bar .nav-tag.active{background:var(--gold);color:#2c1810;border-color:var(--gold)}
-.hero{max-width:1000px;margin:0 auto;padding:32px 24px 24px;display:grid;grid-template-columns:1fr 2fr;gap:20px}
-.author-card{background:var(--card);border-radius:12px;padding:24px;border:1px solid var(--border);text-align:center}
-.author-card .avatar{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#6b3a20);color:#e8d5b7;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 12px}
-.author-card h2{font-size:18px;letter-spacing:2px;margin-bottom:4px}
-.author-card .sub{font-size:11px;color:var(--text2);margin-bottom:12px}
-.author-card .stat-row{display:flex;justify-content:center;gap:20px;margin-top:12px}
-.author-card .stat{text-align:center}
-.author-card .stat .val{font-size:20px;color:var(--accent);font-weight:700}
-.author-card .stat .lbl{font-size:10px;color:var(--text2)}
-.philosophy-card{background:var(--card);border-radius:12px;padding:24px;border:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
-.philosophy-card .quote{font-size:18px;color:var(--accent);letter-spacing:1px;margin-bottom:6px}
-.philosophy-card .quote::before{content:'\201C';font-size:32px;color:var(--gold);margin-right:4px}
-.philosophy-card .quote::after{content:'\201D';font-size:32px;color:var(--gold);margin-left:4px}
-.philosophy-card .attribution{font-size:11px;color:var(--text2);text-align:right}
-.philosophy-card .principles{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.philosophy-card .principle{padding:4px 12px;background:rgba(196,166,74,0.1);border-radius:12px;font-size:11px;color:var(--accent);border:1px solid rgba(196,166,74,0.2)}
-.main{max-width:1000px;margin:0 auto;padding:0 24px 80px}
-.section-title{font-size:13px;color:var(--text2);letter-spacing:2px;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:24px}
-.chapter-card{background:var(--card);border-radius:10px;padding:20px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden}
-.chapter-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.06);border-color:var(--gold)}
-.chapter-card .ch-num{font-size:32px;font-weight:700;color:rgba(139,69,19,0.08);position:absolute;right:16px;top:8px}
-.chapter-card h3{font-size:15px;color:var(--accent);margin-bottom:6px}
-.chapter-card .ch-range{font-size:10px;color:var(--text2);opacity:0.5;margin-bottom:8px}
-.chapter-card .ch-preview{font-size:12px;color:var(--text2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.chapter-card .ch-topics{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
-.chapter-card .ch-topic{font-size:9px;padding:2px 8px;background:var(--bg);border-radius:8px;color:var(--text2)}
-.chapter-detail{display:none;background:var(--card);border-radius:10px;padding:28px;border:1px solid var(--border);margin-bottom:20px}
-.chapter-detail.open{display:block}
-.chapter-detail h3{font-size:17px;color:var(--accent);margin-bottom:16px}
-.chapter-detail .close-btn{float:right;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text2);padding:4px 8px}
-.chapter-detail .post{margin-bottom:18px;padding-bottom:18px;border-bottom:1px dashed var(--border)}
-.chapter-detail .post:last-child{border-bottom:none}
-.chapter-detail .post .date{font-size:10px;color:var(--gold);margin-bottom:6px}
-.chapter-detail .post p{text-indent:2em;margin-bottom:6px;font-size:14px}
-.chapter-detail .post .reply{font-size:13px;color:var(--text2);margin:4px 0 4px 16px;text-indent:0;padding-left:10px;border-left:2px solid var(--border)}
-.chapter-detail .post .reply .who{color:var(--accent);font-weight:600}
-.timeline{position:relative;padding-left:24px}
-.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
-.timeline-item{margin-bottom:16px;position:relative}
-.timeline-item::before{content:'';position:absolute;left:-20px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
-.timeline-item .tl-date{font-size:10px;color:var(--gold);margin-bottom:2px}
-.timeline-item .tl-text{font-size:13px;color:var(--text);line-height:1.7}
-.timeline-item .tl-text .highlight{color:var(--accent);font-weight:600}
-.tag-cloud{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
-.tag-cloud .tag{padding:5px 14px;border:1px solid var(--border);border-radius:16px;font-size:11px;color:var(--text2);cursor:pointer;transition:all 0.15s}
-.tag-cloud .tag:hover,.tag-cloud .tag.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.hidden{display:none}
-.filtered-out{display:none!important}
-@media(max-width:768px){.hero{grid-template-columns:1fr}.chapter-grid{grid-template-columns:1fr}.top-bar .nav-tags{display:none}}
+
+/* NAV */
+nav{background:linear-gradient(135deg,var(--dark),#4a3020);color:#c4b89a;padding:0 32px;display:flex;align-items:center;position:sticky;top:0;z-index:1000;height:52px}
+nav h1{font-size:15px;letter-spacing:3px;color:#e8d5b7;font-weight:500}
+nav .nav-links{display:flex;gap:2px;margin-left:auto;overflow-x:auto}
+nav .nav-links a{color:#b5a080;text-decoration:none;font-size:11px;padding:6px 12px;border-radius:4px;white-space:nowrap;transition:all 0.2s}
+nav .nav-links a:hover,nav .nav-links a.active{color:#e8d5b7;background:rgba(255,255,255,0.06)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--dark) 0%,#4a3020 50%,#6b3a20 100%);color:#e8d5b7;padding:48px 32px;text-align:center}
+.hero h2{font-size:30px;letter-spacing:6px;font-weight:500;margin-bottom:8px}
+.hero .sub{font-size:13px;opacity:0.6;letter-spacing:2px;margin-bottom:24px}
+.hero .kpi{display:flex;justify-content:center;gap:40px;margin-bottom:24px}
+.hero .kpi-item{text-align:center}
+.hero .kpi-val{font-size:36px;font-weight:700;color:var(--gold)}
+.hero .kpi-lbl{font-size:11px;opacity:0.5;letter-spacing:1px}
+.hero .motto{font-size:17px;letter-spacing:3px;color:var(--gold);opacity:0.8}
+
+/* SECTIONS */
+.container{max-width:1000px;margin:0 auto;padding:0 24px 80px}
+.section{margin-top:48px}
+.section-title{font-size:20px;color:var(--accent);letter-spacing:2px;padding-bottom:12px;border-bottom:2px solid var(--border);margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.section-title .num{font-size:12px;color:var(--t2);opacity:0.4;font-weight:400;letter-spacing:0}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:24px}
+.card{background:var(--card);border-radius:10px;padding:24px;border:1px solid var(--border);transition:all 0.2s}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.05)}
+.card .card-icon{font-size:28px;margin-bottom:8px}
+.card h4{font-size:15px;color:var(--accent);margin-bottom:8px}
+.card p,.card li{font-size:13px;color:var(--t2);line-height:1.7}
+.card ul{padding-left:16px}
+.card ul li{margin-bottom:4px}
+
+/* PRINCIPLE ROW */
+.principle{display:flex;gap:20px;align-items:flex-start;padding:20px 24px;background:var(--card);border-radius:10px;border:1px solid var(--border);margin-bottom:16px}
+.principle .p-num{font-size:28px;font-weight:700;color:rgba(139,69,19,0.12);min-width:40px;line-height:1}
+.principle .p-body h4{font-size:15px;color:var(--accent);margin-bottom:6px}
+.principle .p-body p,.principle .p-body li{font-size:13px;color:var(--t2);line-height:1.7}
+.principle .p-body ul{padding-left:16px;margin-top:6px}
+.principle .p-body ul li{margin-bottom:3px}
+
+/* TABLE */
+.info-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px;background:var(--card);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.info-table th{background:rgba(139,69,19,0.06);color:var(--accent);font-weight:600;padding:12px 16px;text-align:left;font-size:12px;letter-spacing:1px}
+.info-table td{padding:12px 16px;border-top:1px solid var(--border);color:var(--t2)}
+.info-table tr:hover td{background:rgba(139,69,19,0.02)}
+
+/* QUOTE */
+.quote{background:linear-gradient(135deg,rgba(196,166,74,0.06),rgba(196,166,74,0.02));border-left:3px solid var(--gold);padding:16px 20px;margin:16px 0;border-radius:0 8px 8px 0;font-size:14px;color:var(--accent);font-style:italic}
+
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.tag{padding:3px 10px;background:rgba(196,166,74,0.1);border:1px solid rgba(196,166,74,0.2);border-radius:10px;font-size:10px;color:var(--accent)}
+
+/* STOCK CARDS */
+.stock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.stock-card{background:var(--card);border-radius:10px;padding:20px;border:1px solid var(--border);text-align:center}
+.stock-card .code{font-size:10px;color:var(--t2);opacity:0.4;letter-spacing:1px}
+.stock-card h4{font-size:15px;color:var(--accent);margin:4px 0}
+.stock-card .sector{font-size:10px;color:var(--t2);margin-bottom:8px}
+.stock-card .yield{font-size:20px;font-weight:700;color:var(--gold)}
+.stock-card .note{font-size:11px;color:var(--t2);margin-top:4px}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero .kpi{gap:20px}
+  .hero .kpi-val{font-size:24px}
+  .card-grid{grid-template-columns:1fr}
+  .principle{flex-direction:column;gap:8px}
+  nav .nav-links{display:none}
+}
 </style>
 </head>
 <body>
 
-<div class="top-bar">
-  <h1>🦌 超级鹿鼎公 · 投资体系</h1>
-  <div class="nav-tags" id="topTags"></div>
-</div>
+<nav>
+  <h1>🦌 超级鹿鼎公</h1>
+  <div class="nav-links">
+    <a href="#core" class="active">核心理念</a>
+    <a href="#method">方法体系</a>
+    <a href="#returns">收益结构</a>
+    <a href="#risk">风险控制</a>
+    <a href="#position">仓位管理</a>
+    <a href="#industry">行业深研</a>
+    <a href="#stocks">经典标的</a>
+    <a href="#macro">宏观视野</a>
+    <a href="#lessons">投资启示</a>
+  </div>
+</nav>
 
 <div class="hero">
-  <div class="author-card">
-    <div class="avatar">鹿</div>
-    <h2>超级鹿鼎公</h2>
-    <div class="sub">雪球知名投资者 · 长期无年度亏损</div>
-    <div class="stat-row">
-      <div class="stat"><div class="val">414</div><div class="lbl">篇投资帖</div></div>
-      <div class="stat"><div class="val">9</div><div class="lbl">大体系</div></div>
-      <div class="stat"><div class="val">10年</div><div class="lbl">跨越</div></div>
+  <h2>超级鹿鼎公 · 投资体系</h2>
+  <div class="sub">防御型价值投资的实战典范 —— 十年无年度亏损</div>
+  <div class="kpi">
+    <div class="kpi-item"><div class="kpi-val">~23%</div><div class="kpi-lbl">年化收益率</div></div>
+    <div class="kpi-item"><div class="kpi-val">0</div><div class="kpi-lbl">年度亏损次数</div></div>
+    <div class="kpi-item"><div class="kpi-val">414</div><div class="kpi-lbl">篇投资帖</div></div>
+    <div class="kpi-item"><div class="kpi-val">2014-24</div><div class="kpi-lbl">跨越周期</div></div>
+  </div>
+  <div class="motto">价值选股 · 趋势选时 · 估值定仓 · 波动降本</div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════ 一、核心投资理念 ═══════════ -->
+<div class="section" id="core">
+  <div class="section-title"><span class="num">01</span> 核心投资理念</div>
+  
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h4>防御优先 · 不输为赢</h4>
+      <p>以"不亏损"为第一原则。十年无年度亏损，靠的不是高超的进攻，而是极致的风险防御。孙子兵法："欲胜敌，先为不可胜"——想赚钱，先做到不亏钱。</p>
+      <ul><li>涨时不如纯价投，跌时能少亏很多</li><li>最重要的事：清晰地知道自己能力的边界</li></ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <h4>三重收益闭环</h4>
+      <p>无论市场处于何种状态，都有收益来源：</p>
+      <ul>
+        <li><b>📉 下跌</b> → 赚股权（分红复投买更多）</li>
+        <li><b>📈 上涨</b> → 赚市值（估值修复+业绩增长）</li>
+        <li><b>📊 横盘</b> → 赚分红（高股息提供现金流）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🐢</div>
+      <h4>乌龟流策略</h4>
+      <p>"龟速赚钱，只要赚钱就行。"安全永远是第一考量。不想跑赢别人多少，只想跑赢自己内心的贪婪。遇上大风时等待高估，其他时间永远是安全第一、低估、确定性。</p>
     </div>
   </div>
-  <div class="philosophy-card">
-    <div class="quote">价值选股，趋势选时，估值定仓，波动降本</div>
-    <div class="attribution">—— 超级鹿鼎公投资十六字诀</div>
-    <div class="principles">
-      <span class="principle">低PE低PB</span>
-      <span class="principle">行业垄断</span>
-      <span class="principle">高ROE</span>
-      <span class="principle">高分红</span>
-      <span class="principle">乌龟流</span>
-      <span class="principle">复利为王</span>
+
+  <div class="quote">"大多数股神都死在融资上。"<br>"不追求完美操作，追求长期复利。"</div>
+</div>
+
+<!-- ═══════════ 二、完整方法体系 ═══════════ -->
+<div class="section" id="method">
+  <div class="section-title"><span class="num">02</span> 完整方法体系 · 十六字方针</div>
+
+  <div class="principle">
+    <div class="p-num">🔍</div>
+    <div class="p-body">
+      <h4>价值选股 —— 六大硬标准</h4>
+      <ul>
+        <li><b>行业垄断壁垒</b> — 水电、煤炭、公用事业、铁路。所有高毛利全部来自垄断</li>
+        <li><b>低估值</b> — PE/PB历史低位，买入价约7-8折。低PE、低PB是铁律</li>
+        <li><b>现金流充沛</b> — 持续高分红的物质基础。水电现金流可达盈利的130%</li>
+        <li><b>股息率高且稳定</b> — 神华5-8%、长电3-5%。分红是0.9-0.95PB套现的机会</li>
+        <li><b>基本面确定性高</b> — 拒绝科技、创新药等高门槛行业。上市满5年是底线</li>
+        <li><b>抗风险能力强</b> — 公司必须"难倒闭"。银行会倒闭但不会全部倒闭，选最安全的</li>
+      </ul>
+      <div class="tags"><span class="tag">低PE</span><span class="tag">低PB</span><span class="tag">高ROE</span><span class="tag">行业垄断</span><span class="tag">上市满5年</span><span class="tag">确定性增长</span></div>
+    </div>
+  </div>
+
+  <div class="principle">
+    <div class="p-num">⏰</div>
+    <div class="p-body">
+      <h4>趋势选时 —— 等待五个积极信号</h4>
+      <p>在股价和估值双低的背景下，等待：</p>
+      <ul>
+        <li>宏观经济转好或预期改善</li>
+        <li>货币政策宽松，流动性充裕</li>
+        <li>企业经营基本面实质好转</li>
+        <li>市场极度低迷、公司积极回购</li>
+        <li>高分红信号确认（分红率>40%，或按盈利40%折算）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="principle">
+    <div class="p-num">⚖️</div>
+    <div class="p-body">
+      <h4>估值定仓 —— 动态调整仓位</h4>
+      <ul>
+        <li><b>低估值 → 高仓位</b>：底部敢于重仓</li>
+        <li><b>高估值 → 低仓位</b>：高位果断减仓</li>
+        <li><b>绝不轻易满仓</b>，永远留有余地</li>
+        <li>5PE涨到10PE是100%利润，10PE到15PE是50%，15PE到20PE只有33%——吃掉大头就好</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="principle">
+    <div class="p-num">📉</div>
+    <div class="p-body">
+      <h4>波动降本 —— 做T增厚收益</h4>
+      <p>主仓位不变，利用技术分析判断高低点做T降低持仓成本，<b>增厚年收益5%-15%</b>。不追求完美——不苛求最低买、最高卖。</p>
+      
+      <table class="info-table">
+        <tr><th>股价阶段</th><th>操作策略</th><th>买卖顺序</th><th>价差要求</th></tr>
+        <tr><td>底部震荡</td><td><b>先买后卖</b></td><td>先买入底仓，后卖出</td><td>价差较小，灵活操作</td></tr>
+        <tr><td>趋势向上，波动加大</td><td><b>先卖后买</b></td><td>先卖出，后买回</td><td>价差拉大，确保利润</td></tr>
+        <tr><td>大幅上涨，估值偏高</td><td><b>先卖后买</b></td><td>先卖出，后买回</td><td>价差扩大，频率降低</td></tr>
+        <tr><td>严重高估</td><td><b>分批卖出，不买回</b></td><td>只卖不买</td><td>完成清仓，兑现全部利润</td></tr>
+      </table>
     </div>
   </div>
 </div>
 
-<div class="main">
-  <div class="section-title">📚 九大投资体系</div>
-  <div class="chapter-grid" id="chapterGrid"></div>
+<!-- ═══════════ 三、三重收益结构 ═══════════ -->
+<div class="section" id="returns">
+  <div class="section-title"><span class="num">03</span> 三重收益结构</div>
 
-  <div class="section-title">📅 精选时间线</div>
-  <div class="timeline" id="timeline"></div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">💎</div>
+      <h4>第一层：分红复投</h4>
+      <p style="font-size:24px;color:var(--gold);font-weight:700;margin:8px 0">30~40%</p>
+      <p>长期持有高股息垄断资产，分红持续买入同类标的。熊市中分红提供安全垫，是"价值之锚"。8-9%现金分红价就是股价的底锚。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📈</div>
+      <h4>第二层：估值修复</h4>
+      <p style="font-size:24px;color:var(--gold);font-weight:700;margin:8px 0">40~50%</p>
+      <p>PE/PB历史低位买入优质公司，等待价值回归。经典案例：国投电力5倍。"只有以产业投资的眼光买股票，靠穿越经济周期的业绩增长。"</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <h4>第三层：波段降本</h4>
+      <p style="font-size:24px;color:var(--gold);font-weight:700;margin:8px 0">+5~15%</p>
+      <p>利用市场波动反复做T降低成本，增厚年度收益。主仓位不动，技术分析辅助判断。三重收益构成完整的复利闭环，缺一不可。</p>
+    </div>
+  </div>
+</div>
 
-  <div class="section-title">🏷️ 话题标签</div>
-  <div class="tag-cloud" id="tagCloud"></div>
-  
-  <div class="section-title">📖 全文阅读</div>
-  <p style="font-size:12px;color:var(--text2);margin-bottom:16px">414页连续全文。OCR文字逐步补全：<span id="ocrProgress">-</span>/414。</p>
-  <div id="fullText"></div>
+<!-- ═══════════ 四、风险控制 ═══════════ -->
+<div class="section" id="risk">
+  <div class="section-title"><span class="num">04</span> 风险控制体系 · 十年不亏的核心保障</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🔒</div>
+      <h4>无杠杆铁律</h4>
+      <p>所有账户禁止使用融资或任何形式的杠杆。从根本上杜绝强制平仓和放大亏损的风险。大额度融资上杠杆的条件：1）业绩无大幅下降风险；2）分红覆盖融资利率——且即便如此仍要极度谨慎。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📉</div>
+      <h4>低估值安全边际</h4>
+      <p>以极低价格买入优质资产。即使股价短期下跌，盈利能力和资产价值也提供强有力支撑。买在最坏情况也不会亏的位置——"没有利润下跌空间的低估"。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏢</div>
+      <h4>高确定性标的</h4>
+      <p>只投资"难倒闭"的公司。行业低谷或市场危机中仍能生存并产生现金流。银行选风控最好的（建行工行北京银行），回避风控差的（平安光大不买）。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h4>分散但集中</h4>
+      <p>主仓重仓少数核心行业（煤炭、水电），核心主仓位长期不动。小仓位波段调节。既不是过度分散（撒胡椒面），也不是All-in单票。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 五、仓位管理 ═══════════ -->
+<div class="section" id="position">
+  <div class="section-title"><span class="num">05</span> 仓位管理要诀</div>
+
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📦</div><h4>集中持仓</h4><p>深度研究后重仓核心行业和标的，不搞分散撒网。4个账户基本配置相同股票。</p></div>
+    <div class="card"><div class="card-icon">🏗️</div><h4>主仓位不动</h4><p>大部分资金配置在核心标的作为长期底仓，不受短期波动影响。</p></div>
+    <div class="card"><div class="card-icon">🔄</div><h4>小仓位波段</h4><p>少量资金用于波段做T降低整体成本，不改变主仓位布局。</p></div>
+    <div class="card"><div class="card-icon">🚫</div><h4>无杠杆</h4><p>宁可不赚也不借钱。无融资、无配资、无任何杠杆工具。</p></div>
+    <div class="card"><div class="card-icon">📊</div><h4>动态调整</h4><p>根据市场整体环境和个人风险承受能力灵活调整总仓位。</p></div>
+    <div class="card"><div class="card-icon">🧠</div><h4>清晰自知</h4><p>知道自身能力边界，不因贪婪突破纪律，不因恐惧放弃原则。</p></div>
+  </div>
+</div>
+
+<!-- ═══════════ 六、行业深研 ═══════════ -->
+<div class="section" id="industry">
+  <div class="section-title"><span class="num">06</span> 行业深度研究</div>
+
+  <div class="principle">
+    <div class="p-num">⚡</div>
+    <div class="p-body">
+      <h4>煤炭行业 —— 鹿鼎公最核心能力圈</h4>
+      <ul>
+        <li><b>供应端</b>：2020后增加供应主要靠老矿上调产能，新矿审批极严。2023年煤炭供应量大概率是历史大顶</li>
+        <li><b>需求端</b>：需求预计还要2-3年见顶。风光新能源让谁来调峰？风光占比多少以下才不会影响电力安全？</li>
+        <li><b>煤电博弈是虚幻</b>——没有燃气机组调峰的中国电力，还得靠煤电</li>
+        <li><b>焦煤优于动力煤</b>：风光能干趴动力煤但干不了焦煤</li>
+        <li><b>电煤消耗四大变数</b>：气候因素、水电变数、风光新增发电量、经济冷热</li>
+        <li><b>煤炭整体看供需双弱，供应更弱</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="principle">
+    <div class="p-num">🏦</div>
+    <div class="p-body">
+      <h4>银行金融 —— 剩着为王</h4>
+      <ul>
+        <li>银行会倒闭但不会全部倒闭——选择最安全的3家（建行、工行、北京银行）</li>
+        <li>风控是一切——建行最保守，最爱保守的银行</li>
+        <li>分红就是0.9-0.95PB套现机会，股价没填权就是极低PB买入机会</li>
+        <li>个人房屋贷款三大好处：省资本、稳定现金流、锁定账户</li>
+        <li>大热基金被赎成带鱼了基本上见底了——顶是基民买出来的，底是基民割出来的</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="principle">
+    <div class="p-num">🏠</div>
+    <div class="p-body">
+      <h4>地产行业 —— 周期已至</h4>
+      <ul>
+        <li>房价不是开跌而是已跌——三次房价崩盘的历史教训</li>
+        <li>房价不能让年轻人丧失希望</li>
+        <li>经营成本是地产的核心——万科的问题在于除了资金没有特别出众的垄断优势</li>
+        <li>关于房产税：需要关注其对估值的长期压制</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="principle">
+    <div class="p-num">🏭</div>
+    <div class="p-body">
+      <h4>钢铁、互联网及其他</h4>
+      <ul>
+        <li><b>钢铁</b>：周期行业，需关注供需缺口。对明年钢铁行业要看供需两端变化</li>
+        <li><b>互联网</b>：互联网速度形成一致性预期就是暴涨暴跌</li>
+        <li><b>医疗险</b>：靠什么赚钱是核心问题</li>
+        <li><b>高工资来自高毛利行业</b>——这是产业选择的基本原理</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 七、经典标的 ═══════════ -->
+<div class="section" id="stocks">
+  <div class="section-title"><span class="num">07</span> 经典持仓标的</div>
+
+  <div class="stock-grid">
+    <div class="stock-card">
+      <div class="code">601088</div>
+      <h4>中国神华</h4>
+      <div class="sector">煤炭 · 垄断龙头</div>
+      <div class="yield">5%~8%</div>
+      <div class="note">高股息、垄断性煤炭龙头。资源、铁路、码头、上下游一体化优势</div>
+    </div>
+    <div class="stock-card">
+      <div class="code">600900</div>
+      <h4>长江电力</h4>
+      <div class="sector">水电 · 永续经营</div>
+      <div class="yield">3%~5%</div>
+      <div class="note">稳定现金流、永续经营。水电的巨大现金流是其他行业无法比拟的</div>
+    </div>
+    <div class="stock-card">
+      <div class="code">601006</div>
+      <h4>大秦铁路</h4>
+      <div class="sector">铁路 · 垄断运输</div>
+      <div class="yield">4%~6%</div>
+      <div class="note">垄断性运输通道、高分红。通胀跟随股</div>
+    </div>
+    <div class="stock-card">
+      <div class="code">600886</div>
+      <h4>国投电力</h4>
+      <div class="sector">电力 · 经典案例</div>
+      <div class="yield" style="color:var(--red)">+5倍</div>
+      <div class="note">2014年重仓案例。国投垄断雅砻江，低速增长30年可期</div>
+    </div>
+    <div class="stock-card">
+      <div class="code">600585</div>
+      <h4>海螺水泥</h4>
+      <div class="sector">建材 · 沙漠之花</div>
+      <div class="yield">周期</div>
+      <div class="note">夕阳行业中的强企。垄断来自资源、资金、布局的优势</div>
+    </div>
+    <div class="stock-card">
+      <div class="code">601939</div>
+      <h4>建设银行</h4>
+      <div class="sector">银行 · 风控标杆</div>
+      <div class="yield">5%~7%</div>
+      <div class="note">最保守的银行，最爱保守的银行。风控高过一切</div>
+    </div>
+  </div>
+
+  <div class="quote" style="margin-top:16px">"不符合低PE、低PB、行业垄断、高ROE、长远有确定性增长、上市满5年这个标准的，我一律不买，包括新股。"</div>
+</div>
+
+<!-- ═══════════ 八、宏观视野 ═══════════ -->
+<div class="section" id="macro">
+  <div class="section-title"><span class="num">08</span> 宏观视野 · 人口与趋势</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">👥</div>
+      <h4>人口结构 —— 最重要的宏观变量</h4>
+      <ul>
+        <li>主力育龄妇女数据 + 平均生育意愿 → 总和生育率趋势</li>
+        <li>食品消费股与人口结构高度相关</li>
+        <li>中日韩三国人口下降其实才刚刚开始</li>
+        <li>2023年后出生的中国孩子有多幸运（竞争压力大幅减轻）</li>
+        <li>60年后的7亿人口与200年后的7亿人口的差异——断崖式vs渐进式</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🇯🇵</div>
+      <h4>日本经验 —— 摸着鬼子走</h4>
+      <ul>
+        <li>日本低欲望社会：消费不振的长期化</li>
+        <li>东京房价大致情况——从日本人口变化与经济谈起</li>
+        <li>日本股市和消费的经验——人口老龄化后的经济（台湾也可参照）</li>
+        <li>日韩以及台湾省的收入水平参照</li>
+        <li>关于日本房产几个事实——2010年上海人口结构图的警示</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌏</div>
+      <h4>国际竞争格局</h4>
+      <ul>
+        <li><b>美国</b>：通胀是个无解的局。不能收割就很痛</li>
+        <li><b>越南</b>：注定是韭菜的命——产业转移的局限</li>
+        <li><b>印度</b>：需要深入研究的竞争对手</li>
+        <li><b>通缩</b>：通缩期的库存挤出效应需要高度警惕</li>
+        <li><b>债务</b>：债务问题不可回避</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h4>周期规律</h4>
+      <ul>
+        <li>行业周期性是逃不掉的规律</li>
+        <li>全球粮食生产成本大涨——通胀传导</li>
+        <li>未来10年每年4%增速应该是一件非常高兴的事</li>
+        <li>高善文4%增速预判的参考价值</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 九、投资启示 ═══════════ -->
+<div class="section" id="lessons">
+  <div class="section-title"><span class="num">09</span> 对投资者的启示</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🏗️</div>
+      <h4>建立自己的操作体系</h4>
+      <p>所有想在股市有所收获的投资者，首先要解决的就是形成自己的操作体系。这个体系必须：<b>是你喜欢的风格、能够长期盈利、有风控保证回撤有限度</b>。如果做不到，说明体系有缺陷。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h4>坚守能力圈</h4>
+      <p>只投看得懂的行业和公司。不懂的行业不做。鹿鼎公专注煤炭水电公用事业十余年，从不碰科技医药。"知道自己能力的边界"比聪明更重要。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚠️</div>
+      <h4>风险永远第一位</h4>
+      <p>心态比策略重要，策略比技术重要，技术比运气重要——但"消息"绝不重要。盈利有逻辑的和没逻辑的，短期相似，长期是生死之别。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⏳</div>
+      <h4>耐心是核心竞争力</h4>
+      <p>"守株待兔"——不成熟的投资者举着小树追兔子，成熟的在交通要道上找棵大树静静守着。复利的伟大需要时间。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <h4>抄作业四关键</h4>
+      <p>1）理解对方的投资逻辑；2）匹配自己的风险承受力；3）纳入自己的操作体系验证；4）不符合自己体系的不买。所有无脑跟风都是愚蠢的。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <h4>怎么样看别人水平</h4>
+      <p>真正赚大钱的三类人：1）顶尖技术高手（极少）；2）行业估值研究透彻（极少）；3）在蓝筹里滚床单的技术高手。收益是投资思维的产物。</p>
+    </div>
+  </div>
+
+  <div class="quote" style="margin-top:24px">
+    "投资标的如同来来往往飞奔的兔子，只有撞到大树的那只才属于你的。因此，投资就是守株待兔。"<br>
+    <span style="font-size:12px;opacity:0.6">—— 超级鹿鼎公，2015年2月</span>
+  </div>
+</div>
+
+<!-- ═══════════ 局限性 ═══════════ -->
+<div class="section">
+  <div class="section-title">⚠️ 体系局限性</div>
+  <div class="card" style="max-width:100%">
+    <ul>
+      <li><b>行业集中风险</b>：高度集中于煤炭、水电、公用事业，若行业发生结构性变化（如能源革命加速），组合将受重大冲击</li>
+      <li><b>成长性不足</b>：重仓标的以成熟期企业为主，缺乏高成长性。在经济高速增长期可能跑输大盘</li>
+      <li><b>能力圈外机会错失</b>：对科技、消费、医药等行业的回避，可能错失大级别投资机会</li>
+      <li><b>做T的隐性成本</b>：频繁做T增加交易成本和税务负担，若判断失误可能导致"卖飞"或成本越做越高</li>
+      <li><b>个人化难复制</b>：鹿鼎公十余年深耕煤炭电力，行业认知深度极难复制。普通人缺乏同等研究深度时，"搬砖"可能搬成亏损</li>
+      <li><b>时代背景依赖</b>：策略在2014-2024年煤炭周期中获得验证，未来宏观环境变化（碳中和、能源转型）的有效性仍需观察</li>
+    </ul>
+  </div>
+</div>
+
 </div>
 
 <script>
-console.log("APP START");
-var ocrData={};
-var TOTAL=414,IMG_BASE='pages/';
-var chapters=[
-  {name:"一、投资的理念",start:10,end:63,icon:"💡",desc:"价值之锚、现金流、复利、合理估值",topics:["价值投资","分红","复利","估值","垄断"]},
-  {name:"二、技术分析及交易",start:64,end:84,icon:"📊",desc:"搬砖、做T、网格交易、四大流派",topics:["搬砖","做T","网格","K线"]},
-  {name:"三、大盘和个股",start:85,end:90,icon:"📈",desc:"A股生态环境、个股深度分析",topics:["A股","美的","格力","陕煤"]},
-  {name:"四、关于风险",start:91,end:103,icon:"⚠️",desc:"风险敞口、杠杆、回撤控制",topics:["风险","杠杆","回撤"]},
-  {name:"五、产业与周期",start:104,end:186,icon:"🏭",desc:"地产、银行、互联网、钢铁周期洞察",topics:["地产","银行","互联网","周期"]},
-  {name:"六、煤炭和电力能源",start:187,end:240,icon:"⚡",desc:"煤电博弈、神华淮北深度拆解",topics:["煤炭","电力","神华","淮北"]},
-  {name:"七、人口与趋势",start:241,end:333,icon:"👥",desc:"人口结构对消费、房产的长期影响",topics:["人口","老龄化","消费","日本"]},
-  {name:"八、局势及竞争",start:334,end:351,icon:"🌏",desc:"通缩、债务、国际竞争格局",topics:["通缩","债务","美国","越南"]},
-  {name:"九、闲言碎语",start:352,end:414,icon:"💬",desc:"抄作业、识人辨术、投资之外的智慧",topics:["抄作业","识人","常识"]}
-];
-var allTags=["价值投资","分红","复利","估值","垄断","煤炭","电力","神华","淮北","银行","地产","周期","人口","风险","搬砖","做T","A股","焦煤","杠杆","日本","通缩"];
-var activeTag=null;
-function pad(n){return String(n).padStart(3,'0')}
-
-function buildAll(){
-  buildTopTags();
-  buildChapterCards();
-  buildTimeline();
-  buildTagCloud();
-  buildFullText();
-  updateProgress();
-}
-
-function buildTopTags(){
-  var el=document.getElementById('topTags');if(!el)return;
-  var h='<span class="nav-tag active" onclick="filterByTag(null,this)">全部</span>';
-  for(var i=0;i<allTags.length;i++){
-    var t=allTags[i];
-    h+='<span class="nav-tag" onclick="filterByTag(\''+t+'\',this)">'+t+'</span>';
-  }
-  el.innerHTML=h;
-}
-
-function filterByTag(tag,el){
-  activeTag=tag;
-  var nts=document.querySelectorAll('.nav-tag');
-  for(var i=0;i<nts.length;i++)nts[i].classList.remove('active');
-  if(el)el.classList.add('active');
-  var tcts=document.querySelectorAll('.tag-cloud .tag');
-  for(var i=0;i<tcts.length;i++)tcts[i].classList.toggle('active',tcts[i].textContent===tag);
-  var cards=document.querySelectorAll('.chapter-card');
-  for(var i=0;i<cards.length;i++){
-    if(!tag){cards[i].classList.remove('filtered-out');continue}
-    var topics=cards[i].getAttribute('data-topics')||'';
-    cards[i].classList.toggle('filtered-out',topics.indexOf(tag)===-1);
-  }
-}
-
-function buildChapterCards(){
-  var grid=document.getElementById('chapterGrid');if(!grid)return;
-  var h='';
-  for(var i=0;i<chapters.length;i++){
-    var ch=chapters[i];
-    var preview=ch.desc;
-    for(var pg=ch.start;pg<=ch.end;pg++){
-      var t=ocrData[String(pg)];
-      if(t){preview=t.substring(0,120).replace(/\n/g,' ')+'...';break}
-    }
-    h+='<div class="chapter-card" data-topics="'+ch.topics.join(',')+'" onclick="toggleChapter('+i+')">';
-    h+='<div class="ch-num">'+(i+1)+'</div>';
-    h+='<h3>'+ch.icon+' '+ch.name+'</h3>';
-    h+='<div class="ch-range">p.'+ch.start+'-'+ch.end+' · '+(ch.end-ch.start+1)+'页</div>';
-    h+='<div class="ch-preview">'+preview+'</div>';
-    h+='<div class="ch-topics">';
-    for(var j=0;j<ch.topics.length;j++)h+='<span class="ch-topic">'+ch.topics[j]+'</span>';
-    h+='</div></div>';
-    h+='<div class="chapter-detail" id="chDetail'+i+'">';
-    h+='<button class="close-btn" onclick="event.stopPropagation();toggleChapter('+i+')">✕</button>';
-    h+='<h3>'+ch.icon+' '+ch.name+'</h3>';
-    h+=buildChapterContent(ch);
-    h+='</div>';
-  }
-  grid.innerHTML=h;
-}
-
-function toggleChapter(i){
-  var d=document.getElementById('chDetail'+i);if(!d)return;
-  d.classList.toggle('open');
-  if(d.classList.contains('open'))d.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-
-function buildChapterContent(ch){
-  var h='';
-  for(var pg=ch.start;pg<=Math.min(ch.end,ch.start+5);pg++){
-    var t=ocrData[String(pg)];if(!t)continue;
-    h+='<div class="post"><div class="date">📄 第 '+pg+' 页</div>';
-    var posts=t.split(/(?=20\d{2}[-—]\d{2}[-—]\d{2})/);
-    for(var i=0;i<Math.min(posts.length,2);i++){
-      var p=posts[i];if(!p.trim())continue;
-      var pl=p.trim().split('\n'),dm=pl[0].match(/(20\d{2}[-—]\d{2}[-—]\d{2}.*)/);
-      if(dm){h+='<div class="date">📅 '+dm[1].replace(/[—]/g,'-')+'</div>';pl.shift()}
-      for(var j=0;j<Math.min(pl.length,5);j++){
-        var cl=pl[j].trim();if(!cl)continue;
-        if(cl.indexOf('网友')===0||cl.indexOf('鹿鼎公')===0){
-          var who=cl.indexOf('网友')===0?'网友':'鹿鼎公';
-          h+='<div class="reply"><span class="who">'+who+'：</span>'+cl.replace(/^(网友|鹿鼎公)[：:]\s*/,'')+'</div>';
-        }else{h+='<p>'+cl+'</p>'}
-      }
-    }
-    h+='</div>';break;
-  }
-  if(!h)h='<p style="color:var(--text2);font-size:13px">文字提取中，即将上线。</p>';
-  return h;
-}
-
-function buildTimeline(){
-  var tl=document.getElementById('timeline');if(!tl)return;
-  var items=[
-    {date:"2014-05",text:'提出<span class="highlight">沙漠之花</span>概念——海螺水泥、中国神华'},
-    {date:"2014-12",text:'定义投资方法论：<span class="highlight">以产业投资眼光买股票</span>'},
-    {date:"2015-02",text:'守株待兔——投资就是<span class="highlight">在交通要道上找棵大树静静守着</span>'},
-    {date:"2015-03",text:'孙子兵法：<span class="highlight">想赚钱，先做到不亏钱</span>'},
-    {date:"2015-07",text:'深读<span class="highlight">价值之锚</span>——8-9%分红价即股价底锚'},
-    {date:"2015-09",text:'十六字诀成形：<span class="highlight">价值选股，趋势选时，估值定仓，波动降本</span>'}
-  ];
-  var h='';
-  for(var i=0;i<items.length;i++){
-    h+='<div class="timeline-item"><div class="tl-date">'+items[i].date+'</div><div class="tl-text">'+items[i].text+'</div></div>';
-  }
-  tl.innerHTML=h;
-}
-
-function buildTagCloud(){
-  var tc=document.getElementById('tagCloud');if(!tc)return;
-  var h='';
-  for(var i=0;i<allTags.length;i++){
-    var t=allTags[i];
-    h+='<span class="tag" onclick="filterByTag(\''+t+'\',this)">'+t+'</span>';
-  }
-  tc.innerHTML=h;
-}
-
-function buildFullText(){
-  var ft=document.getElementById('fullText');if(!ft)return;
-  var h='',lastChap='';
-  for(var pg=1;pg<=TOTAL;pg++){
-    var chap=null;
-    for(var c=0;c<chapters.length;c++){if(pg===chapters[c].start){chap=chapters[c];break}}
-    if(chap&&chap.name!==lastChap){
-      h+='<div style="text-align:center;margin:32px 0 20px;padding-top:20px;border-top:1px solid var(--border)"><span style="font-size:14px;color:var(--accent);font-weight:600">'+chap.icon+' '+chap.name+'</span></div>';
-      lastChap=chap.name;
-    }
-    var t=ocrData[String(pg)];
-    h+='<div style="margin-bottom:24px;padding:16px 20px;background:var(--card);border-radius:8px;border:1px solid var(--border)">';
-    h+='<div style="font-size:9px;color:var(--text2);opacity:0.3;margin-bottom:8px">p.'+pg+'</div>';
-    if(t){
-      var posts=t.split(/(?=20\d{2}[-—]\d{2}[-—]\d{2})/);
-      for(var i=0;i<posts.length;i++){
-        var p=posts[i];if(!p.trim())continue;
-        var pl=p.trim().split('\n'),dm=pl[0].match(/(20\d{2}[-—]\d{2}[-—]\d{2}.*)/);
-        if(dm){h+='<div style="font-size:10px;color:var(--gold);margin-bottom:6px">'+dm[1].replace(/[—]/g,'-')+'</div>';pl.shift()}
-        for(var j=0;j<pl.length;j++){
-          var cl=pl[j].trim();if(!cl)continue;
-          if(cl.indexOf('网友')===0||cl.indexOf('鹿鼎公')===0){
-            var who=cl.indexOf('网友')===0?'网友':'鹿鼎公';
-            h+='<div style="font-size:13px;color:var(--text2);margin:3px 0 3px 12px;padding-left:8px;border-left:2px solid var(--border)"><b style="color:var(--accent)">'+who+'：</b>'+cl.replace(/^(网友|鹿鼎公)[：:]\s*/,'')+'</div>';
-          }else{h+='<p style="text-indent:2em;margin-bottom:4px;font-size:14px">'+cl+'</p>'}
-        }
-      }
-    }else{
-      h+='<div style="text-align:center"><img data-src="'+IMG_BASE+'p_'+pad(pg)+'.webp" alt="" src="" style="max-width:100%;min-height:200px;background:#f5f0e8;border-radius:4px;border:1px solid var(--border)"></div>';
-    }
-    h+='</div>';
-  }
-  ft.innerHTML=h;
-  setTimeout(function(){
-    var obs=new IntersectionObserver(function(entries){
-      for(var i=0;i<entries.length;i++){
-        if(entries[i].isIntersecting){
-          var img=entries[i].target;
-          if(img.dataset.src){img.src=img.dataset.src;obs.unobserve(img)}
-        }
-      }
-    },{rootMargin:'200px'});
-    var imgs=document.querySelectorAll('img[data-src]');
-    for(var i=0;i<imgs.length;i++)obs.observe(imgs[i]);
-  },200);
-}
-
-function updateProgress(){
-  var el=document.getElementById('ocrProgress');
-  if(el)el.textContent=Object.keys(ocrData).length;
-}
-
-// Load OCR data then build
-console.log("Fetching ocr.json...");
-fetch('ocr.json').then(function(r){return r.json()}).then(function(d){
-  ocrData=d;
-  console.log("Loaded "+Object.keys(d).length+" OCR pages");
-  buildAll();
-}).catch(function(e){
-  console.log("OCR fetch failed: "+e.message);
-  buildAll();
+// Smooth scroll for nav links
+document.querySelectorAll('nav a').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var target=document.querySelector(this.getAttribute('href'));
+    if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
 });
 
+// Active nav on scroll
+var sections=document.querySelectorAll('.section');
+var navLinks=document.querySelectorAll('nav a');
+window.addEventListener('scroll',function(){
+  var current='';
+  sections.forEach(function(s){
+    if(s.getBoundingClientRect().top<120)current=s.id;
+  });
+  navLinks.forEach(function(a){
+    a.classList.toggle('active',a.getAttribute('href')==='#'+current);
+  });
+});
 </script>
+
 </body>
 </html>
