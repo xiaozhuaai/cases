@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>超级鹿鼎公 · 投资文集</title>
+<style>
+:root{--bg:#f5f0e8;--card:#fffbf5;--border:#d5c9b0;--text:#2c2416;--text2:#6b5e4a;--accent:#8b4513;--gold:#c4a64a;--red:#a03a2a;--nav-bg:#3d2b1f}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:15px;line-height:1.6;overflow:hidden;height:100vh;display:flex;flex-direction:column}
+
+/* Header */
+.header{background:linear-gradient(135deg,#2c1810,#5c3a28,#8b4513);color:#e8d5b7;padding:14px 24px;display:flex;align-items:center;gap:16px;border-bottom:2px solid var(--gold);flex-shrink:0;z-index:100}
+.header h1{font-size:20px;letter-spacing:3px;font-weight:500}
+.header .sub{font-size:11px;opacity:0.6;letter-spacing:1px;margin-left:auto}
+.header .page-indicator{font-size:13px;color:var(--gold);min-width:60px;text-align:right}
+
+/* Layout */
+.main-layout{display:flex;flex:1;overflow:hidden}
+.sidebar{width:200px;background:var(--nav-bg);color:#c4b89a;overflow-y:auto;flex-shrink:0;padding:8px 0;font-size:13px}
+.sidebar h3{font-size:11px;text-transform:uppercase;color:#8b7a60;padding:12px 16px 6px;letter-spacing:2px}
+.sidebar .chap{padding:8px 16px;cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;display:block;text-decoration:none;color:#c4b89a}
+.sidebar .chap:hover{background:rgba(255,255,255,0.05);color:#e8d5b7}
+.sidebar .chap.active{background:rgba(196,166,74,0.15);border-left-color:var(--gold);color:var(--gold)}
+.sidebar .chap .range{font-size:10px;opacity:0.5;margin-left:4px}
+
+/* Viewer */
+.viewer{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#e8e0d0;position:relative;overflow:hidden}
+.page-container{position:relative;box-shadow:0 4px 30px rgba(0,0,0,0.3),0 1px 4px rgba(0,0,0,0.1);background:#fff;transition:transform 0.3s}
+.page-container img{display:block;max-width:100%;max-height:calc(100vh - 180px);width:auto;height:auto}
+.page-num-overlay{position:absolute;bottom:8px;right:12px;color:#999;font-size:11px;background:rgba(255,255,255,0.8);padding:2px 8px;border-radius:3px}
+.loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--text2);font-size:14px}
+
+/* Controls */
+.controls{display:flex;align-items:center;gap:12px;padding:10px 24px;background:var(--card);border-top:1px solid var(--border);flex-shrink:0;justify-content:center}
+.ctrl-btn{padding:8px 20px;border:1px solid var(--border);border-radius:20px;background:#fff;color:var(--text2);font-size:13px;cursor:pointer;transition:all 0.2s}
+.ctrl-btn:hover{border-color:var(--accent);color:var(--accent);background:#fdf9f4}
+.ctrl-btn:disabled{opacity:0.3;cursor:default}
+.ctrl-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ctrl-btn.primary:hover{background:#6b3410}
+.page-input{width:50px;text-align:center;border:1px solid var(--border);border-radius:4px;padding:6px;font-size:13px;background:#fff}
+.page-input:focus{outline:none;border-color:var(--accent)}
+
+/* Thumbnails strip */
+.thumb-strip{display:flex;gap:4px;padding:6px 12px;overflow-x:auto;background:var(--card);border-top:1px solid var(--border);flex-shrink:0;scroll-behavior:smooth}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.thumb{flex-shrink:0;width:60px;height:84px;border:2px solid transparent;cursor:pointer;border-radius:2px;overflow:hidden;transition:all 0.2s}
+.thumb:hover{border-color:var(--gold)}
+.thumb.active{border-color:var(--accent);box-shadow:0 2px 8px rgba(139,69,19,0.3)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb .tnum{font-size:9px;text-align:center;color:var(--text2);margin-top:1px}
+
+/* Search */
+.search-bar{display:flex;align-items:center;gap:8px;padding:6px 16px;background:var(--card);border-bottom:1px solid var(--border)}
+.search-bar input{flex:1;padding:6px 12px;border:1px solid var(--border);border-radius:16px;font-size:13px;background:#fff;outline:none}
+.search-bar input:focus{border-color:var(--accent)}
+.search-hint{font-size:10px;color:var(--text2)}
+
+/* Mobile */
+@media(max-width:768px){
+  .sidebar{display:none}
+  .header h1{font-size:16px}
+  .thumb{width:44px;height:62px}
+}
+
+/* Zoom */
+.zoom-controls{display:flex;gap:4px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>超级鹿鼎公 · 投资文集</h1>
+  <span class="sub">价值选股 · 趋势选时 · 估值定仓 · 波动降本</span>
+  <span class="page-indicator" id="pageIndicator">1 / 414</span>
+</div>
+
+<div class="main-layout">
+  <nav class="sidebar" id="sidebar"></nav>
+  
+  <div class="viewer" id="viewer">
+    <div class="page-container" id="pageContainer">
+      <div class="loading" id="loading">加载中...</div>
+      <img id="pageImg" src="" alt="" style="display:none" onload="onImgLoad()" onerror="onImgError()">
+      <div class="page-num-overlay" id="pageOverlay"></div>
+    </div>
+  </div>
+</div>
+
+<div class="thumb-strip" id="thumbStrip"></div>
+
+<div class="controls">
+  <button class="ctrl-btn" onclick="jumpChapter('prev')" title="上一章">◀◀ 章</button>
+  <button class="ctrl-btn" onclick="prevPage()" title="上一页">◀ 页</button>
+  <input type="number" class="page-input" id="pageInput" min="1" max="414" value="1" onchange="goToPage(parseInt(this.value))" onkeydown="if(event.key==='Enter')goToPage(parseInt(this.value))">
+  <span style="font-size:12px;color:var(--text2)">/ 414</span>
+  <button class="ctrl-btn" onclick="nextPage()" title="下一页">页 ▶</button>
+  <button class="ctrl-btn" onclick="jumpChapter('next')" title="下一章">章 ▶▶</button>
+  <span style="flex:1"></span>
+  <div class="zoom-controls">
+    <button class="ctrl-btn" onclick="zoom(-0.1)">🔍−</button>
+    <button class="ctrl-btn" onclick="zoom(0.1)">🔍+</button>
+    <button class="ctrl-btn" onclick="zoom(0)" title="重置">1:1</button>
+  </div>
+</div>
+
+<script>
+// ═══════════ Config ═══════════
+const TOTAL = 414;
+const IMG_BASE = 'pages/';
+const chapters = [
+  {name:"封面",start:1,end:2},
+  {name:"目录",start:4,end:5},
+  {name:"一、投资的理念",start:10,end:63},
+  {name:"二、技术分析及交易",start:64,end:84},
+  {name:"三、大盘和个股",start:85,end:90},
+  {name:"四、关于风险",start:91,end:103},
+  {name:"五、产业与周期",start:104,end:186},
+  {name:"六、煤炭和电力能源",start:187,end:240},
+  {name:"七、人口与趋势",start:241,end:333},
+  {name:"八、局势及竞争",start:334,end:351},
+  {name:"九、闲言碎语",start:352,end:414}
+];
+
+let currentPage = 1;
+let currentZoom = 1;
+let preloaded = new Set();
+
+// ═══════════ Init ═══════════
+function init(){
+  buildSidebar();
+  buildThumbnails();
+  goToPage(1);
+  document.addEventListener('keydown', onKeyDown);
+}
+
+function pad(n){return String(n).padStart(3,'0');}
+
+// ═══════════ Sidebar ═══════════
+function buildSidebar(){
+  const sb = document.getElementById('sidebar');
+  sb.innerHTML = '<h3>📖 目录导航</h3>';
+  chapters.forEach((ch,i) => {
+    const a = document.createElement('a');
+    a.className = 'chap';
+    a.href = '#';
+    a.innerHTML = ch.name + '<span class="range">p.'+ch.start+'-'+ch.end+'</span>';
+    a.onclick = function(e){e.preventDefault();goToPage(ch.start);};
+    a.setAttribute('data-chap', i);
+    sb.appendChild(a);
+  });
+}
+
+function updateSidebar(){
+  const items = document.querySelectorAll('.chap');
+  items.forEach((el,i) => {
+    const ch = chapters[i];
+    if(currentPage >= ch.start && currentPage <= ch.end){
+      el.classList.add('active');
+    } else {
+      el.classList.remove('active');
+    }
+  });
+}
+
+// ═══════════ Thumbnails ═══════════
+function buildThumbnails(){
+  const strip = document.getElementById('thumbStrip');
+  strip.innerHTML = '';
+  for(let i=1; i<=TOTAL; i++){
+    const div = document.createElement('div');
+    div.className = 'thumb';
+    div.setAttribute('data-pg', i);
+    div.onclick = function(){goToPage(i);};
+    
+    const img = document.createElement('img');
+    img.src = IMG_BASE + 'p_' + pad(i) + '.webp';
+    img.loading = 'lazy';
+    img.alt = 'p.'+i;
+    div.appendChild(img);
+    
+    const num = document.createElement('div');
+    num.className = 'tnum';
+    num.textContent = i;
+    div.appendChild(num);
+    
+    strip.appendChild(div);
+  }
+}
+
+function updateThumbnails(){
+  document.querySelectorAll('.thumb').forEach(el => {
+    el.classList.toggle('active', parseInt(el.getAttribute('data-pg')) === currentPage);
+  });
+  // Scroll thumb into view
+  const active = document.querySelector('.thumb.active');
+  if(active) active.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+// ═══════════ Page Navigation ═══════════
+function goToPage(n){
+  if(n < 1) n = 1;
+  if(n > TOTAL) n = TOTAL;
+  if(n === currentPage) return;
+  
+  currentPage = n;
+  const img = document.getElementById('pageImg');
+  const loading = document.getElementById('loading');
+  const overlay = document.getElementById('pageOverlay');
+  
+  img.style.display = 'none';
+  loading.style.display = 'block';
+  overlay.textContent = 'p.' + n;
+  
+  img.src = IMG_BASE + 'p_' + pad(n) + '.webp';
+  
+  document.getElementById('pageIndicator').textContent = n + ' / ' + TOTAL;
+  document.getElementById('pageInput').value = n;
+  
+  updateSidebar();
+  updateThumbnails();
+  preloadNeighbors(n);
+}
+
+function onImgLoad(){
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('pageImg').style.display = 'block';
+  document.getElementById('pageImg').style.transform = 'scale('+currentZoom+')';
+}
+
+function onImgError(){
+  document.getElementById('loading').textContent = '图片加载失败';
+}
+
+function prevPage(){goToPage(currentPage - 1);}
+function nextPage(){goToPage(currentPage + 1);}
+
+function jumpChapter(dir){
+  // Find current chapter
+  let ci = -1;
+  for(let i=0; i<chapters.length; i++){
+    if(currentPage >= chapters[i].start && currentPage <= chapters[i].end){
+      ci = i; break;
+    }
+  }
+  if(dir === 'prev' && ci > 0) goToPage(chapters[ci-1].start);
+  if(dir === 'next' && ci < chapters.length-1) goToPage(chapters[ci+1].start);
+}
+
+// ═══════════ Preload ═══════════
+function preloadNeighbors(n){
+  for(let i=n-3; i<=n+3; i++){
+    if(i<1 || i>TOTAL) continue;
+    if(preloaded.has(i)) continue;
+    preloaded.add(i);
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = IMG_BASE + 'p_' + pad(i) + '.webp';
+    document.head.appendChild(link);
+  }
+}
+
+// ═══════════ Zoom ═══════════
+function zoom(delta){
+  if(delta === 0){currentZoom = 1;}
+  else {currentZoom = Math.max(0.3, Math.min(3, currentZoom + delta));}
+  document.getElementById('pageImg').style.transform = 'scale('+currentZoom+')';
+}
+
+// ═══════════ Keyboard ═══════════
+function onKeyDown(e){
+  switch(e.key){
+    case 'ArrowLeft': case 'ArrowUp': prevPage(); break;
+    case 'ArrowRight': case 'ArrowDown': case ' ': nextPage(); e.preventDefault(); break;
+    case 'Home': goToPage(1); break;
+    case 'End': goToPage(TOTAL); break;
+    case 'PageUp': goToPage(Math.max(1, currentPage-10)); break;
+    case 'PageDown': goToPage(Math.min(TOTAL, currentPage+10)); break;
+  }
+}
+
+// ═══════════ Start ═══════════
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
