@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermes 信息看板</title>
+<style>
+:root{--bg:#f5f5f5;--card:#fff;--border:#e0e0e0;--text:#1a1a1a;--text2:#666;--text3:#999;--accent:#e8782a;--accent2:#d06820;--green:#2ea043;--red:#cf222e;--blue:#0969da;--yellow:#9a6700;--purple:#8250df;--tag-bg:#f0f0f0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+.header{background:var(--card);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:16px;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:8px}
+.header .dot{width:8px;height:8px;background:var(--green);border-radius:50%}
+.header .date{font-size:12px;color:var(--text2)}
+.nav{display:flex;gap:2px;padding:0 24px;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto}
+.nav-btn{padding:10px 18px;border:none;background:none;color:var(--text2);font-size:13px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.2s}
+.nav-btn:hover{color:var(--text)}
+.nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.stats{display:flex;gap:12px;padding:14px 24px;flex-wrap:wrap}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 18px;min-width:100px}
+.stat-card .num{font-size:24px;font-weight:700}
+.stat-card .label{font-size:11px;color:var(--text2);margin-top:2px}
+.container{max-width:1300px;margin:0 auto;padding:0 24px 40px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.categories{display:flex;gap:6px;padding:12px 0;flex-wrap:wrap}
+.cat-btn{padding:5px 14px;border:1px solid var(--border);border-radius:16px;background:var(--card);color:var(--text2);font-size:12px;cursor:pointer;transition:all 0.2s}
+.cat-btn:hover{border-color:var(--accent);color:var(--text)}
+.cat-btn.active{background:rgba(240,136,62,0.15);border-color:var(--accent);color:var(--accent)}
+.section-title{font-size:14px;font-weight:700;color:var(--accent);padding:12px 0 8px;display:flex;align-items:center;gap:8px}
+.section-title .bar{width:4px;height:16px;background:var(--accent);border-radius:2px}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px;margin-bottom:16px}
+.news-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;transition:border-color 0.15s}
+.news-card:hover{border-color:#bbb}
+.news-card .title{font-size:13px;font-weight:600;margin-bottom:6px;line-height:1.5}
+.news-card .body{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:8px}
+.news-card .comment{font-size:11px;color:var(--text3);border-left:2px solid var(--accent);padding-left:8px;margin-top:8px;line-height:1.6}
+.news-card .tags{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.tag{font-size:10px;padding:2px 7px;border-radius:3px;background:var(--tag-bg);color:var(--text3)}
+.risk-high{color:var(--red);font-weight:700}
+.risk-mid{color:var(--yellow);font-weight:700}
+.risk-low{color:var(--green);font-weight:700}
+.comp-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:8px}
+.comp-card .cname{font-size:13px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.comp-card .cinfo{font-size:12px;color:var(--text2);margin-top:4px;line-height:1.6}
+.comp-card .cimpact{font-size:11px;color:var(--text3);margin-top:6px;padding:6px 8px;background:rgba(240,136,62,0.08);border-radius:4px;border-left:2px solid var(--accent)}
+.calendar-table{width:100%;border-collapse:collapse;margin-top:8px}
+.calendar-table th{text-align:left;font-size:11px;color:var(--text3);padding:8px 10px;border-bottom:1px solid var(--border);background:var(--card)}
+.calendar-table td{font-size:12px;padding:10px;border-bottom:1px solid var(--border)}
+.calendar-table .date-col{color:var(--text);font-weight:600;white-space:nowrap;width:90px}
+.calendar-table .event-col{color:var(--text)}
+.calendar-table .tag-col{white-space:nowrap}
+.calendar-table .row:hover{background:rgba(240,136,62,0.04)}
+.policy-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start}
+.policy-card .dept{font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap}
+.policy-card .dept.csrc{background:rgba(88,166,255,0.15);color:var(--blue)}
+.policy-card .dept.mof{background:rgba(188,140,255,0.15);color:var(--purple)}
+.policy-card .dept.sat{background:rgba(210,153,29,0.15);color:var(--yellow)}
+.policy-card .pinfo{flex:1}
+.policy-card .ptitle{font-size:13px;font-weight:600}
+.policy-card .pbody{font-size:11px;color:var(--text2);margin-top:3px;line-height:1.6}
+.policy-card .pdate{font-size:10px;color:var(--text3)}
+.hidden{display:none}
+.market{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;margin-top:16px}
+.market h2{font-size:14px;color:var(--accent);margin-bottom:12px}
+.market-table{width:100%;border-collapse:collapse}
+.market-table th{text-align:left;font-size:11px;color:var(--text3);padding:7px 10px;border-bottom:1px solid var(--border)}
+.market-table td{font-size:13px;padding:9px 10px;border-bottom:1px solid var(--border)}
+.market-table .up{color:var(--green)}
+.market-table .down{color:var(--red)}
+.matrix-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}
+.matrix-table th{text-align:left;font-size:11px;color:var(--text3);padding:7px 10px;border-bottom:1px solid var(--border);background:var(--card)}
+.matrix-table td{padding:8px 10px;border-bottom:1px solid var(--border)}
+.kv{font-size:11px;color:var(--text3);margin-top:16px;line-height:1.8}
+.kv b{color:var(--text);font-weight:600}
+.footer{text-align:center;color:var(--text3);font-size:11px;padding:20px}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1><span class="dot"></span>Hermes 信息看板</h1>
+  <span class="date">2026年6月1日 · 数据自动更新</span>
+</div>
+<div class="nav">
+  <span class="nav-btn active" onclick="switchTab('tab-news',this)">每日新闻</span>
+  <span class="nav-btn" onclick="switchTab('tab-ds',this)">DeepSeek日报</span>
+  <span class="nav-btn" onclick="switchTab('tab-reg',this)">监管政策</span>
+  <span class="nav-btn" onclick="switchTab('tab-cal',this)">财务日历</span>
+</div>
+
+<!-- ══════ TAB 1: 每日新闻 ══════ -->
+<div class="tab-panel active" id="tab-news">
+<div class="stats">
+  <div class="stat-card"><div class="num" style="color:var(--blue)">6</div><div class="label">覆盖领域</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--accent)">18</div><div class="label">精选新闻</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--green)">3</div><div class="label">重大利好</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--red)">2</div><div class="label">风险预警</div></div>
+</div>
+<div class="container">
+<div class="categories" id="categories">
+  <span class="cat-btn active" onclick="filterNews('all',this)">全部</span>
+  <span class="cat-btn" onclick="filterNews('cat-tech',this)">科技/AI</span>
+  <span class="cat-btn" onclick="filterNews('cat-fin',this)">财经</span>
+  <span class="cat-btn" onclick="filterNews('cat-pol',this)">时政</span>
+  <span class="cat-btn" onclick="filterNews('cat-intl',this)">国际</span>
+  <span class="cat-btn" onclick="filterNews('cat-soc',this)">社会民生</span>
+  <span class="cat-btn" onclick="filterNews('cat-ind',this)">产业/商业</span>
+</div>
+<div id="news-sections">
+  <div class="section" data-cat="cat-tech">
+    <div class="section-title"><span class="bar"></span>科技 / AI</div>
+    <div class="news-grid">
+      <div class="news-card"><div class="title">英伟达 Computex 2026：RTX Spark、DGX Station、Vera AI 芯片悉数登场</div><div class="body">黄仁勋以"AI 工厂"为主题发布多项里程碑产品：与联发科合作的RTX Spark PC处理器（20核CPU+RTX GPU），DGX Station桌面AI超算，Vera专为AI智能体打造。模型层推出Nemotron 3 Ultra（5500亿参数开源，推理速度提升5倍）。</div><div class="comment">📝 从芯片到模型到机器人参考设计，英伟达正构建完整AI帝国生态。</div><div class="tags"><span class="tag">英伟达</span><span class="tag">Computex</span><span class="tag">芯片</span></div></div>
+      <div class="news-card"><div class="title">英伟达发布Isaac GR00T人形机器人参考设计，基于宇树H2平台</div><div class="body">首款基于Jetson Thor和Isaac GR00T开放平台的人形机器人参考设计，硬件采用宇树H2平台，年底面向开发者推出。</div><div class="comment">📝 宇树进入英伟达官方参考设计，中国机器人硬件全球地位再获认可。</div><div class="tags"><span class="tag">机器人</span><span class="tag">宇树</span><span class="tag">英伟达</span></div></div>
+      <div class="news-card"><div class="title">SK海力士韩国清州工厂突发火灾，7人受伤、有毒气体泄漏</div><div class="body">清州科技城产业园区突发火灾，7人受伤，有毒气体泄漏超标。该工厂主产NAND闪存，若产能受损可能推高SSD和内存价格。</div><div class="comment">📝 全球存储芯片供应紧张，火灾若影响产能将进一步推高下游成本。</div><div class="tags"><span class="tag">SK海力士</span><span class="tag">存储芯片</span><span class="tag">火灾</span></div></div>
+    </div>
+  </div>
+  <div class="section" data-cat="cat-fin">
+    <div class="section-title"><span class="bar"></span>财经（含股市动态）</div>
+    <div class="news-grid">
+      <div class="news-card"><div class="title">蔚来5月交付37,705辆同比+62.3%，小鹏32,158辆环比+4%</div><div class="body">蔚来创品牌历史新高（+62.3%YoY），多款新车密集上市。小鹏MONA系列持续放量。两家头部新势力表现强劲。</div><div class="comment">📝 月交付3万+已成头部新势力"及格线"，淘汰赛进入强者恒强阶段。</div><div class="tags"><span class="tag">蔚来</span><span class="tag">小鹏</span><span class="tag">新能源</span></div></div>
+      <div class="news-card"><div class="title">A股窄幅震荡：上证微跌0.04%报4,066点，创业板跌逾1%</div><div class="body">上证盘中冲高4093点后回落。深证成指报15,601点。AI算力方向在英伟达发布会利好兑现后短线获利回吐。</div><div class="comment">📝 上证4000点上方反复拉锯，短期分歧加大但中长期AI产业趋势明确。</div><div class="tags"><span class="tag">A股</span><span class="tag">上证</span><span class="tag">创业板</span></div></div>
+      <div class="news-card"><div class="title">恒指涨0.85%报25,395点；纳指上周五收于26,973点</div><div class="body">港股受益天猫超市进驻香港+618预期表现强势。纳指微涨0.20%高位震荡，市场静待美联储会议纪要。</div><div class="comment">📝 港股南向资金持续流入；美股高位运行泡沫争议反映AI估值焦虑。</div><div class="tags"><span class="tag">港股</span><span class="tag">美股</span><span class="tag">纳斯达克</span></div></div>
+    </div>
+  </div>
+  <div class="section" data-cat="cat-pol">
+    <div class="section-title"><span class="bar"></span>时政</div>
+    <div class="news-grid">
+      <div class="news-card"><div class="title">中科院院士周成虎被查，反腐触及学术最高殿堂</div><div class="body">著名GIS专家周成虎涉嫌严重违纪违法接受审查调查。2026年以来又一位落马两院院士。</div><div class="comment">📝 近年多位院士被查，科研经费管理与学术权力监督的制度漏洞亟待修补。</div><div class="tags"><span class="tag">反腐</span><span class="tag">中科院</span></div></div>
+      <div class="news-card"><div class="title">郑丽文启程访美，两岸关系再添变量</div><div class="body">台湾前民代郑丽文启程访美，预计与美方政界、智库会面。大陆多次强调反对任何形式"美台官方往来"。</div><div class="comment">📝 台湾政治人物访美已成常态，但在敏感时期每次互动都可能牵动台海神经。</div><div class="tags"><span class="tag">两岸</span><span class="tag">台湾</span></div></div>
+      <div class="news-card"><div class="title">人民日报："在新征程上跑好历史接力赛"</div><div class="body">《人民日报》头版刊发评论文章，六一儿童节之际寄语青少年"立大志、明大德、成大才、担大任"。</div><div class="comment">📝 儿童节发布青年主题，体现官方对下一代成长与国家前途的叙事逻辑。</div><div class="tags"><span class="tag">人民日报</span></div></div>
+    </div>
+  </div>
+  <div class="section" data-cat="cat-intl">
+    <div class="section-title"><span class="bar"></span>国际</div>
+    <div class="news-grid">
+      <div class="news-card"><div class="title">立陶宛外长呼吁"攻击俄罗斯飞地"，言论引发国际批评</div><div class="body">立陶宛外长公开呼吁对加里宁格勒采取军事行动。俄外交部回应"极端危险的挑衅性言论"，欧盟多国私下不安。</div><div class="comment">📝 公开鼓吹攻击俄领土极其危险，可能给北约带来不可控的升级风险。</div><div class="tags"><span class="tag">立陶宛</span><span class="tag">俄罗斯</span></div></div>
+      <div class="news-card"><div class="title">美国博主来华体验电动车后"破防"：中国新能源车普及远超想象</div><div class="body">美国科技博主在上海深圳体验电动车后感叹渗透率"超乎想象"，视频获数百万播放，外国网友纷纷表示"这才是未来"。</div><div class="comment">📝 新能源车保有量超3000万辆，街头所见即所得——最好的国家名片。</div><div class="tags"><span class="tag">电动车</span><span class="tag">中国制造</span></div></div>
+      <div class="news-card"><div class="title">韩美联合空中演习今日启动，F-35A/B-1B出动</div><div class="body">2026年第三次大规模空中联演，朝鲜此前警告强力反制。分析担忧朝鲜可能以导弹发射或核试验回应。</div><div class="comment">📝 "以强硬对强硬"螺旋仍在加速，半岛安全局势难言乐观。</div><div class="tags"><span class="tag">韩美联演</span><span class="tag">朝鲜半岛</span></div></div>
+    </div>
+  </div>
+  <div class="section" data-cat="cat-soc">
+    <div class="section-title"><span class="bar"></span>社会民生</div>
+    <div class="news-grid">
+      <div class="news-card"><div class="title">六一儿童节："宝贝经济"高峰，STEAM玩具/智能手表热销</div><div class="body">儿童节商品销售额同比+18%，STEAM教育玩具、儿童智能手表、亲子露营装备位列热销前三。多地商圈人流+40%。</div><div class="comment">📝 儿童节已从节日演变为含金量极高的"宝贝经济"IP。</div><div class="tags"><span class="tag">六一</span><span class="tag">消费</span></div></div>
+      <div class="news-card"><div class="title">"老破小被疯抢"：多城老旧小区成交量逆势攀升</div><div class="body">北上广等城市老旧小区Q1成交量同比+15%-25%，核心原因：房价回调后性价比凸显+城市更新预期+核心地段确定性溢价。</div><div class="comment">📝 当投资属性退潮，自住刚需回归地段和配套，房子"居住本质"被重新定义。</div><div class="tags"><span class="tag">楼市</span><span class="tag">二手房</span></div></div>
+      <div class="news-card"><div class="title">江西"智驾"追尾致3死：司机脱离方向盘仅40秒</div><div class="body">赣州高速辅助驾驶追尾事故调查报告公布，驾驶员脱离方向盘仅40秒即碰撞。再次强调L2≠自动驾驶。</div><div class="comment">📝 血的教训。车企宣传应更克制，监管应尽快出台更严格安全标准。</div><div class="tags"><span class="tag">交通安全</span><span class="tag">智驾</span></div></div>
+    </div>
+  </div>
+  <div class="section" data-cat="cat-ind">
+    <div class="section-title"><span class="bar"></span>产业 / 商业</div>
+    <div class="news-grid">
+      <div class="news-card"><div class="title">天猫超市正式进驻香港，"明日达"跨境配送开启</div><div class="body">首批上架超8万件商品覆盖食品/百货/母婴，当日16点前下单次日送达。阿里加速跨境电商出海步伐。</div><div class="comment">📝 将直接冲击惠康、百佳等本地零售，也为阿里东南亚扩张提供范本。</div><div class="tags"><span class="tag">阿里</span><span class="tag">天猫</span><span class="tag">跨境</span></div></div>
+      <div class="news-card"><div class="title">蔚来/小鹏交付创佳绩，新能源"淘汰赛"格局明朗</div><div class="body">理想预计交付超4.5万辆，零跑/极氪保持高增速。尾部品牌月交付不足千台，行业"马太效应"显著。</div><div class="comment">📝 2026下半年是真正分水岭——跑不赢的将永远掉队。</div><div class="tags"><span class="tag">新能源车</span><span class="tag">交付</span></div></div>
+      <div class="news-card"><div class="title">新能源车维修"卡脖子"：配件垄断、技师短缺</div><div class="body">三大瓶颈：电池包/电控模块被主机厂垄断、全国持证高压电技师不足5万人、保险理赔标准缺失。</div><div class="comment">📝 售后服务体系是新能源车可持续发展的"最后一公里"。</div><div class="tags"><span class="tag">售后</span><span class="tag">维修</span><span class="tag">行业痛点</span></div></div>
+    </div>
+  </div>
+</div>
+<div class="market"><h2>📊 今日市场速览</h2>
+<table class="market-table"><thead><tr><th>指数</th><th>最新价</th><th>涨跌幅</th><th>备注</th></tr></thead><tbody>
+<tr class="row"><td><b>上证指数</b></td><td>4,066.96</td><td class="down">-0.04%</td><td>盘中冲高4093后回落</td></tr>
+<tr class="row"><td><b>深证成指</b></td><td>15,601.03</td><td class="up">+0.95%</td><td>消费/地产链走强</td></tr>
+<tr class="row"><td><b>创业板指</b></td><td>3,996.57</td><td class="down">-1.02%</td><td>科技股获利回吐</td></tr>
+<tr class="row"><td><b>恒生指数</b></td><td>25,395.32</td><td class="up">+0.85%</td><td>科技+消费双轮驱动</td></tr>
+<tr class="row"><td><b>纳斯达克</b></td><td>26,972.62</td><td class="up">+0.20%</td><td>5/30收盘，静待FOMC</td></tr>
+</tbody></table></div>
+</div></div>
+
+<!-- ══════ TAB 2: DeepSeek日报 ══════ -->
+<div class="tab-panel" id="tab-ds">
+<div class="stats">
+  <div class="stat-card"><div class="num" style="color:var(--red)">4</div><div class="label">🔴 高风险</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--yellow)">7</div><div class="label">🟡 中风险</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--green)">4</div><div class="label">🟢 低风险/正面</div></div>
+  <div class="stat-card"><div class="num">10</div><div class="label">追踪竞品</div></div>
+</div>
+<div class="container">
+<div class="section-title"><span class="bar"></span>国内竞争对手</div>
+<div class="comp-card"><div class="cname">智谱 AI<span class="risk-mid">🟡 中风险</span></div><div class="cinfo">赴港冲刺"全球大模型第一股"，内部剧烈人事震荡。估值约200亿元，营收来自MaaS和政企部署，盈利能力受质疑。</div><div class="cimpact">🔍 若成功IPO将成为大模型估值锚定点，有助于抬升DeepSeek估值参照系。但若因内乱折戟，可能引发赛道整体质疑。</div></div>
+<div class="comp-card"><div class="cname">MiniMax<span class="risk-mid">🟡 中风险</span></div><div class="cinfo">已完成港股上市，C端产品"多巴胺"构成主要营收。股价平淡，DAU增速放缓，海外面临合规风险。</div><div class="cimpact">🔍 先上市后证明的路径可参考，但平淡股价说明资本市场对大模型公司耐心有限。</div></div>
+<div class="comp-card"><div class="cname">字节豆包 / 腾讯混元 / 阿里通义<span class="risk-high">🔴 高风险</span></div><div class="cinfo">三大厂合计占据国内大模型API调用市场超60%。混元日均调用量突破50亿次，通义推进"模型+云"捆绑销售。</div><div class="cimpact">🔍 大厂生态碾压是DeepSeek最大结构性压力——API业务空间被持续挤压。</div></div>
+<div class="comp-card"><div class="cname">科大讯飞星火<span class="risk-low">🟢 低风险</span></div><div class="cinfo">在智慧教育、医疗、政务领域保持渗透率，但营收增速放缓至个位数，股价年内跌超15%。年研发费超50亿。</div><div class="cimpact">🔍 教训：即使在垂直行业有先发优势，规模-盈利平衡极难实现。轻资产高效率或是更可持续路径。</div></div>
+<div class="comp-card"><div class="cname">华为 AgentArts<span class="risk-mid">🟡 中风险</span></div><div class="cinfo">5月30日正式开源企业级智能体开发平台，兼容多模型（含DeepSeek），支持低代码Agent编排。</div><div class="cimpact">🔍 中性偏正面：新增分发渠道，但华为同时推广盘古模型，长期可能挤压第三方份额。</div></div>
+
+<div class="section-title" style="margin-top:24px"><span class="bar"></span>国际竞争对手</div>
+<div class="comp-card"><div class="cname">OpenAI<span class="risk-high">🔴 高风险</span></div><div class="cinfo">Q1营收约57亿美元，年化收入近230亿（+300%）。ChatGPT周活5亿，企业客户超100万家。新一轮融资估值或冲击5000亿美元。</div><div class="cimpact">🔍 营收数据验证赛道天花板够高，正面信号。但天文估值进一步拉大中美资本鸿沟。</div></div>
+<div class="comp-card"><div class="cname">Meta Llama 4<span class="risk-high">🔴 高风险</span></div><div class="cinfo">Q3发布，预计多模态+Agent能力代际提升。Llama系列累计下载超10亿次，是开源社区事实标准。</div><div class="cimpact">🔍 DeepSeek下一版模型必须在多模态和Agent能力上与Llama 4对标，不能出现代差。</div></div>
+<div class="comp-card"><div class="cname">Anthropic Claude<span class="risk-mid">🟡 中风险</span></div><div class="cinfo">企业级安全合规场景持续扩大份额，获多家金融机构批量采购。Q3将发布Claude 4，ARR预计突破50亿美元。</div><div class="cimpact">🔍 "安全可靠"是独立模型公司重要差异化标签，DeepSeek可在国内复制此路径。</div></div>
+<div class="comp-card"><div class="cname">Google Gemini / xAI Grok / Mistral<span class="risk-low">🟢 低风险</span></div><div class="cinfo">二线梯队分化：Gemini付费用户突破3000万但面临反垄断；xAI估值逾750亿但企业级市场落后；Mistral估值60亿欧元但份额个位数。</div><div class="cimpact">🔍 赛道进入"赢家通吃"阶段，独立模型公司必须找到独特生态位才能生存。</div></div>
+
+<div class="market" style="margin-top:20px">
+<h2>📊 综合评估矩阵</h2>
+<table class="matrix-table"><thead><tr><th>事件</th><th>影响方向</th><th>风险等级</th><th>紧迫性</th></tr></thead><tbody>
+<tr><td>智谱IPO + 内部剧震</td><td>中性偏正面</td><td class="risk-mid">🟡</td><td>本周关注</td></tr>
+<tr><td>大厂生态（豆包/混元/通义）挤压</td><td>负面</td><td class="risk-high">🔴</td><td>持续</td></tr>
+<tr><td>Meta Llama 4即将发布</td><td>负面（技术压力）</td><td class="risk-high">🔴</td><td>Q3前应对</td></tr>
+<tr><td>OpenAI营收暴增</td><td>中性（验证赛道）</td><td class="risk-high">🔴</td><td>持续</td></tr>
+<tr><td>华为AgentArts开源</td><td>正面（新分发渠道）</td><td class="risk-low">🟢</td><td>主动适配</td></tr>
+<tr><td>大厂AI商业化变现加速</td><td>负面</td><td class="risk-high">🔴</td><td>紧迫</td></tr>
+<tr><td>51个AI+能源场景</td><td>正面（新市场机会）</td><td class="risk-low">🟢</td><td>主动布局</td></tr>
+</tbody></table>
+</div>
+
+<div class="kv">
+<b>🎯 关键结论：</b><br>
+1. 大模型赛道进入"战国时代"——智谱IPO、大厂收紧、Llama 4在即，窗口缩小<br>
+2. 开源是矛不是盾——积极融入AgentArts等生态，分发渠道做宽<br>
+3. 商业化必须加速——找2-3个不可替代垂直场景建立壁垒<br>
+4. 关注下周催化——6/1英伟达GTC、宇树IPO上会、美团Q1财报
+</div>
+</div></div>
+
+<!-- ══════ TAB 3: 监管政策 ══════ -->
+<div class="tab-panel" id="tab-reg">
+<div class="stats">
+  <div class="stat-card"><div class="num" style="color:var(--blue)">3</div><div class="label">证监会</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--purple)">3</div><div class="label">财政部</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--yellow)">3</div><div class="label">税务总局</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--green)">1</div><div class="label">本月生效</div></div>
+</div>
+<div class="container">
+
+<div class="section-title"><span class="bar"></span>证监会 / 交易所</div>
+
+<div class="policy-card">
+  <span class="dept csrc">证监会</span>
+  <div class="pinfo">
+    <div class="ptitle">上市公司可持续发展报告编制指南（2026年修订版）征求意见</div>
+    <div class="pbody">新增碳排放核算、生物多样性影响、供应链ESG尽职调查等披露要求。适用于沪深300成分股及"A+H"上市公司，预计2026年报季实施。</div>
+    <div class="pdate">2026-05-15 征求意见 · 7月截止</div>
+  </div>
+</div>
+
+<div class="policy-card">
+  <span class="dept csrc">证监会</span>
+  <div class="pinfo">
+    <div class="ptitle">上市公司股东减持新规执行细则出台</div>
+    <div class="pbody">进一步细化"破发/破净/分红不达标"不得减持的认定标准，新增大宗交易预披露要求。对迪信通等中小企业：大股东减持窗口收窄，流动性管理需提前规划。</div>
+    <div class="pdate">2026-04-28 发布 · 5月15日起施行</div>
+  </div>
+</div>
+
+<div class="policy-card">
+  <span class="dept csrc">上交所</span>
+  <div class="pinfo">
+    <div class="ptitle">科创板第五套标准修订——未盈利企业上市门槛调整</div>
+    <div class="pbody">提高未盈利企业上市市值门槛至40亿元（原15亿），并要求最近一年营收不低于3亿元。宇树科技IPO恰在修订窗口前上会。</div>
+    <div class="pdate">2026-04-10 发布 · 过渡期至2027年</div>
+  </div>
+</div>
+
+<div class="section-title"><span class="bar"></span>财政部 / 会计准则</div>
+
+<div class="policy-card">
+  <span class="dept mof">财政部</span>
+  <div class="pinfo">
+    <div class="ptitle">《企业会计准则解释第19号》正式发布</div>
+    <div class="pbody">涉及收入确认中"主要责任人vs代理人"判断（总额法vs净额法）、数据资源入表细则、碳排放权交易会计处理。对电商/平台型企业影响最大——你之前分析的平台使用费拆分问题与此直接相关。</div>
+    <div class="pdate">2026-03-20 发布 · 2026年1月1日起施行</div>
+  </div>
+</div>
+
+<div class="policy-card">
+  <span class="dept mof">财政部</span>
+  <div class="pinfo">
+    <div class="ptitle">《企业数据资源相关会计处理暂行规定》修订</div>
+    <div class="pbody">明确数据资源确认为无形资产或存货的具体标准，新增数据资产减值测试指引。对拥有大量用户数据、交易数据的商贸企业影响显著。</div>
+    <div class="pdate">2026-02-15 发布 · 2026年报适用</div>
+  </div>
+</div>
+
+<div class="policy-card">
+  <span class="dept mof">财政部</span>
+  <div class="pinfo">
+    <div class="ptitle">政府补助会计准则应用指南更新</div>
+    <div class="pbody">细化"与收益相关"vs"与资产相关"政府补助的区分标准，新增新能源补贴、研发补贴的会计处理案例。对享受政府补贴的企业——包括零售消费补贴——需重新审视确认时点和列报方式。</div>
+    <div class="pdate">2026-01-10 发布</div>
+  </div>
+</div>
+
+<div class="section-title"><span class="bar"></span>税务总局</div>
+
+<div class="policy-card">
+  <span class="dept sat">税务总局</span>
+  <div class="pinfo">
+    <div class="ptitle">增值税法实施细则落地——2026年7月1日施行</div>
+    <div class="pbody">增值税税率结构简并（13%→12%、9%→8%），小规模纳税人免税额度提高至月销售额15万元。电子烟、直播打赏等新业态明确纳入增值税征收范围。</div>
+    <div class="pdate">2026-05-01 公布 · ⏰ 7月1日施行</div>
+  </div>
+</div>
+
+<div class="policy-card">
+  <span class="dept sat">税务总局</span>
+  <div class="pinfo">
+    <div class="ptitle">企业所得税汇算清缴——2025年度申报截止提醒</div>
+    <div class="pbody">2025年度企业所得税汇算清缴截止日为2026年5月31日（已过）。逾期申报将按日加收万分之五滞纳金。研发费用加计扣除比例维持100%。</div>
+    <div class="pdate">⏰ 5月31日截止 · 已过期</div>
+  </div>
+</div>
+
+<div class="policy-card">
+  <span class="dept sat">税务总局</span>
+  <div class="pinfo">
+    <div class="ptitle">跨境电商零售出口"无票免税"政策扩围</div>
+    <div class="pbody">在原有杭州、广州等综试区基础上，新增50个城市适用跨境电商零售出口"无票免税"政策。对商贸企业拓展跨境业务利好。</div>
+    <div class="pdate">2026-04-15 发布 · 6月1日起施行</div>
+  </div>
+</div>
+
+</div></div>
+
+<!-- ══════ TAB 4: 财务日历 ══════ -->
+<div class="tab-panel" id="tab-cal">
+<div class="stats">
+  <div class="stat-card"><div class="num" style="color:var(--red)">4</div><div class="label">6月关键节点</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--yellow)">5</div><div class="label">7月预告</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--blue)">3</div><div class="label">税务节点</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--green)">3</div><div class="label">央行窗口</div></div>
+</div>
+<div class="container">
+
+<div class="section-title"><span class="bar"></span>2026年6月</div>
+<table class="calendar-table"><thead><tr><th>日期</th><th>事件</th><th>分类</th><th>影响/备注</th></tr></thead><tbody>
+<tr class="row"><td class="date-col">6月1日</td><td class="event-col">跨境电商"无票免税"扩围施行 · 英伟达GTC Taipei开幕 · 宇树科技科创板上会</td><td class="tag-col"><span class="tag">税务</span><span class="tag">科技</span></td><td>50城新增适用；黄仁勋主题演讲</td></tr>
+<tr class="row"><td class="date-col">6月5日</td><td class="event-col">美国5月非农就业数据发布</td><td class="tag-col"><span class="tag">宏观</span></td><td>影响美联储6月利率决策预期</td></tr>
+<tr class="row"><td class="date-col">6月9日</td><td class="event-col">恒生科技指数成分股调整生效</td><td class="tag-col"><span class="tag">港股</span></td><td>AI大模型企业纳入，被动资金调仓</td></tr>
+<tr class="row"><td class="date-col">6月10日</td><td class="event-col">中国5月CPI/PPI数据发布</td><td class="tag-col"><span class="tag">宏观</span></td><td>消费复苏力度关键指标</td></tr>
+<tr class="row"><td class="date-col">6月15日</td><td class="event-col">央行MLF操作窗口（每月15日）</td><td class="tag-col"><span class="tag">央行</span></td><td>利率是否调整——引导LPR走向</td></tr>
+<tr class="row"><td class="date-col">6月16-17日</td><td class="event-col">美联储FOMC议息会议</td><td class="tag-col"><span class="tag">宏观</span></td><td>利率决议+点阵图+经济预测</td></tr>
+<tr class="row"><td class="date-col">6月20日</td><td class="event-col">LPR报价日（每月20日）</td><td class="tag-col"><span class="tag">央行</span></td><td>1年期和5年期利率调整窗口</td></tr>
+<tr class="row"><td class="date-col">6月25日</td><td class="event-col">央行存款准备金率调整窗口</td><td class="tag-col"><span class="tag">央行</span></td><td>降准可能时点</td></tr>
+<tr class="row"><td class="date-col">6月30日</td><td class="event-col">半年末 · 银行MPA考核 · 个人所得税综合所得汇算清缴截止</td><td class="tag-col"><span class="tag">税务</span><span class="tag">银行</span></td><td>流动性收紧，跨季资金价格上行</td></tr>
+</tbody></table>
+
+<div class="section-title" style="margin-top:24px"><span class="bar"></span>2026年7月·预告</div>
+<table class="calendar-table"><thead><tr><th>日期</th><th>事件</th><th>分类</th><th>影响/备注</th></tr></thead><tbody>
+<tr class="row"><td class="date-col">7月1日</td><td class="event-col">增值税法实施细则正式施行</td><td class="tag-col"><span class="tag">税务</span></td><td>税率简并（13%→12%、9%→8%）</td></tr>
+<tr class="row"><td class="date-col">7月15日</td><td class="event-col">二季度GDP数据发布 · 央行MLF操作</td><td class="tag-col"><span class="tag">宏观</span><span class="tag">央行</span></td><td>上半年经济增长成绩单</td></tr>
+<tr class="row"><td class="date-col">7月中旬</td><td class="event-col">A股半年报预告密集披露</td><td class="tag-col"><span class="tag">A股</span></td><td>业绩预告窗口——重点关注持仓标的</td></tr>
+<tr class="row"><td class="date-col">7月20日</td><td class="event-col">LPR报价日</td><td class="tag-col"><span class="tag">央行</span></td><td>增值税改革后首次LPR调整窗口</td></tr>
+<tr class="row"><td class="date-col">7月下旬</td><td class="event-col">中共中央政治局会议（季度经济分析）</td><td class="tag-col"><span class="tag">政策</span></td><td>下半年经济政策定调</td></tr>
+</tbody></table>
+
+<div class="kv" style="margin-top:20px">
+<b>💡 提醒：</b> 6月30日个税汇算清缴截止，逾期将产生滞纳金。<br>
+<b>💡 提醒：</b> 7月1日新增值税法施行，请提前适配ERP/财务系统税率。
+</div>
+
+</div></div>
+
+<div class="footer">Hermes Agent 信息看板 · 数据自动更新 · 仅供参考不构成任何建议</div>
+
+<script>
+function switchTab(tabId, btn) {
+  var panels = document.querySelectorAll('.tab-panel');
+  for (var i = 0; i < panels.length; i++) { panels[i].classList.remove('active'); }
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.nav-btn');
+  for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
+  btn.classList.add('active');
+}
+function filterNews(cat, btn) {
+  var btns = document.querySelectorAll('.cat-btn');
+  for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
+  btn.classList.add('active');
+  var sections = document.querySelectorAll('#news-sections .section');
+  for (var i = 0; i < sections.length; i++) {
+    if (cat === 'all' || sections[i].getAttribute('data-cat') === cat) {
+      sections[i].classList.remove('hidden');
+    } else {
+      sections[i].classList.add('hidden');
+    }
+  }
+}
+</script>
+</body>
+</html>
