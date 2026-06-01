@@ -7,16 +7,12 @@
 <style>
 :root{--bg:#fdfaf6;--card:#fff;--border:#e5dccf;--text:#2c2416;--text2:#6b5e4a;--accent:#8b4513;--gold:#c4a64a;--red:#a03a2a;--tag-bg:#f5efe0}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino Sans GB","Songti SC","STSong","Noto Serif SC",serif;font-size:16px;line-height:1.9}
-
-/* ═══════════ HEADER ═══════════ */
+body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino Sans GB","Songti SC","STSong",serif;font-size:16px;line-height:1.9}
 .header{background:linear-gradient(135deg,#2c1810,#4a3020,#6b3a20);color:#e8d5b7;padding:40px 32px;text-align:center;border-bottom:3px solid var(--gold)}
 .header h1{font-size:28px;letter-spacing:6px;font-weight:500;margin-bottom:8px}
 .header .tagline{font-size:13px;opacity:0.65;letter-spacing:2px}
 .header .meta{margin-top:16px;display:flex;gap:24px;justify-content:center;font-size:11px;opacity:0.5}
 .header .meta span{padding:3px 12px;border:1px solid rgba(232,213,183,0.2);border-radius:12px}
-
-/* ═══════════ LAYOUT ═══════════ */
 .layout{display:flex;max-width:1200px;margin:0 auto;min-height:100vh}
 .sidebar{width:200px;background:#fff;border-right:1px solid var(--border);padding:24px 0;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
 .sidebar h3{font-size:10px;text-transform:uppercase;color:#b5a590;letter-spacing:2px;padding:0 20px 12px}
@@ -24,71 +20,39 @@ body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino 
 .sidebar .chap:hover{background:var(--tag-bg);color:var(--accent)}
 .sidebar .chap.active{background:rgba(139,69,19,0.06);color:var(--accent);border-left-color:var(--gold);font-weight:600}
 .sidebar .chap .pg{font-size:10px;opacity:0.4;margin-left:4px}
-
 .content{flex:1;padding:40px;max-width:800px}
-
-/* ═══════════ PAGE CONTENT ═══════════ */
 .page-section{margin-bottom:48px}
 .page-header{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 .page-header .num{font-size:13px;color:var(--text2);opacity:0.5;min-width:36px}
 .page-header .chap-name{font-size:11px;color:var(--accent);opacity:0.6;letter-spacing:1px}
-
-/* OCR Text styles */
 .ocr-text{font-size:16px;line-height:2;color:var(--text)}
 .ocr-text .post{margin-bottom:24px;padding:20px 24px;background:var(--card);border-radius:8px;border:1px solid var(--border)}
 .ocr-text .post .date{font-size:11px;color:var(--gold);margin-bottom:12px;letter-spacing:0.5px}
 .ocr-text .post p{margin-bottom:10px;text-indent:2em}
 .ocr-text .post .reply{font-size:14px;color:var(--text2);margin:6px 0 6px 16px;text-indent:0;padding-left:12px;border-left:2px solid var(--border)}
 .ocr-text .post .reply .who{color:var(--accent);font-weight:600}
-.ocr-text .post .highlight{background:linear-gradient(180deg,transparent 60%,rgba(196,166,74,0.2) 60%);padding:0 2px}
-
-/* Image fallback for non-OCR pages */
 .img-page{text-align:center;margin-bottom:32px}
 .img-page img{max-width:100%;border:1px solid var(--border);border-radius:4px;background:#fff}
 .img-page .cap{font-size:11px;color:var(--text2);opacity:0.5;margin-top:6px}
-
-/* ═══════════ NAVIGATION ═══════════ */
 .nav-bar{position:fixed;bottom:0;left:200px;right:0;background:#fff;border-top:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;gap:12px;z-index:100}
 .nav-bar .btn{padding:7px 18px;border:1px solid var(--border);border-radius:20px;background:#fff;color:var(--text2);font-size:12px;cursor:pointer;transition:all 0.15s}
 .nav-bar .btn:hover{background:var(--tag-bg);border-color:var(--accent);color:var(--accent)}
 .nav-bar input{width:50px;text-align:center;border:1px solid var(--border);border-radius:4px;padding:6px;font-size:12px}
 .nav-bar input:focus{outline:none;border-color:var(--accent)}
 .nav-bar .indicator{font-size:11px;color:var(--text2);opacity:0.5;min-width:80px;text-align:center}
-
-/* ═══════════ TOC ═══════════ */
-.toc-section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:32px;margin-bottom:40px}
-.toc-section h2{font-size:18px;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:2px}
-.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.toc-chapter{break-inside:avoid}
-.toc-chapter h4{font-size:14px;color:var(--accent);margin-bottom:8px;padding-bottom:4px;border-bottom:1px dashed var(--border)}
-.toc-chapter ul{list-style:none;font-size:12px;color:var(--text2);line-height:2}
-.toc-chapter li::before{content:'· ';color:var(--gold)}
-
-/* ═══════════ MOBILE ═══════════ */
-@media(max-width:900px){
-  .sidebar{display:none}
-  .content{padding:20px}
-  .nav-bar{left:0}
-  .toc-grid{grid-template-columns:1fr}
-}
+@media(max-width:900px){.sidebar{display:none}.content{padding:20px}.nav-bar{left:0}}
 </style>
 </head>
 <body>
-
 <div class="header">
   <h1>超级鹿鼎公 · 投资文集</h1>
   <div class="tagline">价值选股 · 趋势选时 · 估值定仓 · 波动降本</div>
-  <div class="meta">
-    <span>雪球投资帖汇编</span><span>414页</span><span>2014-2024</span>
-  </div>
+  <div class="meta"><span>雪球投资帖汇编</span><span>414页</span><span>2014-2024</span></div>
 </div>
-
 <div class="layout">
   <nav class="sidebar" id="sidebar"></nav>
-  
   <main class="content" id="content"></main>
 </div>
-
 <div class="nav-bar">
   <button class="btn" onclick="navPage('prev')">◀ 上页</button>
   <input type="number" id="pgInput" min="1" max="414" onkeydown="if(event.key==='Enter')goTo(parseInt(this.value))">
@@ -98,273 +62,23 @@ body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino 
   <span style="flex:1"></span>
   <button class="btn" onclick="scrollToToc()">📑 目录</button>
 </div>
-
 <script>
-const TOTAL = 414;
-const IMG_BASE = 'pages/';
-let currentPage = 1;
+const TOTAL=414,IMG_BASE='pages/';
+let currentPage=1;
+const chapters=[{name:"关于本书",start:1,end:3},{name:"目录",start:4,end:9},{name:"一、投资的理念",start:10,end:63},{name:"二、技术分析及交易",start:64,end:84},{name:"三、大盘和个股",start:85,end:90},{name:"四、关于风险",start:91,end:103},{name:"五、产业与周期",start:104,end:186},{name:"六、煤炭和电力能源",start:187,end:240},{name:"七、人口与趋势",start:241,end:333},{name:"八、局势及竞争",start:334,end:351},{name:"九、闲言碎语",start:352,end:414}];
+const ocrData={"1": "超级鹿鼎公\n资料集", "2": "关于本册资料\n超级鹿鼎公是一位长期保持无年度亏损的投资者。他的投资理念是：价值选股，趋势选时，估值定仓，波动降本。\n鹿鼎公注重价值投资，也对技术分析着迷。他既像一位朴素的格雷厄姆式价值投资者，又是一位擅长运用乌龟流策略（如搬砖、做T等）的交易员。\n鹿鼎公的文章具有宏观视角，具有时代性和穿透力。他擅长从国家历史经纬里，从他国的社会经济发展进程中，锚定及分析当前我国各行业所在的微妙处境。", "4": "目录\n一、投资的理念：价值之锚、现金与穿越牛熊、独孤九剑与易筋经、波动的数学题、深爱老熊、管财主对撞宁静、认清自己很难、形成自己的盈利模式、别人眼里的最坏无非这两种情况、现金流才是价值之锚、龟速赚钱只要赚钱就行、没有利润下跌空间的低估、关于长期年化12%收益是不是好的问题、总结下我现在的投资理念、IBM与新泽西石油、11%年化确定性收益的投资有多珍贵、股市能不能财富自由、合理估值", "5": "二、技术分析及交易：关于搬砖党、看的远但是不能做的远、技术玩法的弱点、4大流派的前世今生、关于做T的态度、完美的底部、成功的技术高手素描、网格交易、看K线少用复权\n三、大盘和个股：1.看大盘：都是老滑头的A股、从纯技术分析角度看大盘、从统计学派的角度看大盘；2.说个股：从营销角度看美的格力的王者之争、从陕煤回购说起、好股票、垄断才是长期高额利润的基础、永续组合、中煤能源2022年报、AH股30年长期投资组合、茅台数学题\n四、关于风险：高风险与低风险是相对的、常识与逻辑之一风险敞口、未雨绸缪很重要、紧急与重要\n五、产业与周期：1.地产行业 2.银行金融 3.互联网 4.钢铁业 5.其他产业 6.周期", "6": "六、煤炭和电力能源：1.煤炭行业：谈谈煤炭的淡季不淡旺季不旺、从历史气候开始的乱谈、国际煤炭大局势、煤炭企业的优势分类、煤电博弈是虚幻、未来煤炭的出路、关于中国神华长协价、为什么更看好焦煤、煤价变化与持股企业盈利的变化、煤炭板块低估值原因分析、业内专家对于煤炭供应衰退的看法、电煤的消耗会有几个变数；2.电力能源：未来的用电量顶峰区域、等不来的均值回归、没有燃气机组调峰的中国电力还得靠煤电、这12年以来的煤电恩怨；3.神华与淮北：月线看神华、淮北矿业之优劣", "7": "七、人口与趋势：食品消费股与人口结构、从日本人口变化与经济谈起、关于养老送终、人口老龄化后的经济（台湾）、60年后的7亿人口与200年后的7亿人口的差异、中日韩三国人口下降其实才刚刚开始、2023年后出生的中国孩子有多幸运\n八、局势及竞争：1.局势：通缩期的库存挤出效应、债务谭、美国的通胀是个无解的局、不能收割就很痛；2.竞争：日本的低欲望社会、越南注定是韭菜的命、关于印度、摸着鬼子走、日本股市和消费的经验\n九、闲言碎语：股市的好处与坏处、抄作业4个关键、推翻常识、想象的彼岸、怎么样看出别人的水平高低", "12": "2014-05-06 来自雪球\n海螺水泥和中国神华将是夕阳行业中的强企，俗称沙漠之花。万科还不能真正看出是不是沙漠之花。\n网友：万科管理还是远强于海螺，问题是万科无法垄断。海螺天生就在垄断行业，有级差地租。\n鹿鼎公：是的，所有高毛利全部来自垄断，不管是行政垄断，还是品牌垄断，或者资源垄断，又或是技术垄断。海螺的垄断来自资源、资金、布局的优势；神华来自资源、铁路、码头和上下游一体以及资金。", "14": "2014-05-28 来自雪球\n个人特别在意分红，原因其实很简单：在股价大幅度低于1PB的背景下，分红就是给你0.9-0.95PB套现的机会。股价没填权，就是给你极低PB买入的机会。这是我拿建设、工行、北京银行的逻辑。当然选择这三家，还有个主要原因是，都是风控最好的企业。", "15": "2014-06-05 来自雪球\n我的投资逻辑在最近1年又有一些变化。以前主要思路是低估值+安全+稳定成长，现在的思路+行业垄断。3家银行都是低估值，银行会倒闭，但是不会全部倒闭，所以选择最安全的3家。\n\n2014-11-06 来自雪球\n不符合低PE、低PB、行业垄断、高ROE、长远有确定性增长、上市满5年这个标准的，我一律不买，包括新股。\n\n2014-07-05 来自雪球\n能够长期保持超越95%普通投资者的有水平的人，基本上没人愿意帮人理财、帮人炒股票。自己的钱滚滚雪球收益足以养活自己。", "16": "2014-12-26 来自雪球\n只有以产业投资的眼光买股票，靠穿越经济周期的业绩增长，稳定提高的分红；以够低的合理价格买入，耐心持有，直到不再低估或发现了更好的才卖出。对商业模式定性是必要条件，对发展前景定量是充分条件，确定性则是王者之道，复利是最伟大的奇迹。\n\n2015-01-02 来自雪球\n俺在股市的风格完全是乌龟流，安全永远是俺的第一考量。不想跑赢别人多少，只想跑赢自己内心的贪婪。", "17": "2015-02-27 来自雪球\n投资标的如同来来往往飞奔的兔子，只有撞到大树的那只才属于你的。因此，投资就是守株待兔。不成熟的投资者往往会举着一棵小树疲于奔命追兔子，效果适得其反。成熟的，往往在交通要道上找根大树，静静守着。\n\n2015-03-31 来自雪球\n孙子曰：欲胜敌，先为不可胜。股票语言翻译：想赚钱，先做到不亏钱。所以俺的逻辑是赚钱事小，亏钱事大。", "18": "2015-05-06 来自雪球\n大额度融资上杠杆的线在哪里？1、股票业绩没有大幅度下降风险；2、分红覆盖融资利率。俺个人理解，这种情况下俺认为可以大比例融资。要知道大多数股神都是死在融资上的。\n\n2015-05-13 来自雪球\n交易的极致，无非是两种，一种是追最猛的强势，赚最快的钱；另外一种是买最深的底，赚最安全的钱。俺自认是后者。\n\n涨时看势，跌时看质。", "19": "2015-05-20 来自雪球\n一个优秀的交易高手的定义应该是：能够连续多年获得稳定持续的连续复利回报，经年累月地赚钱而不是一朝暴富，常赚而不是大赚。资本市场的高额利润应来源于长期累积低风险下的持续利润的结果。\n\n2015-05-30 来自雪球\n有人说：懂巴老的理念不太难，坚持巴老的投资理念难于上青天。段永平回答：坚持不了的人就是不懂！这里懂的意思是骨子里相信。其实价值投资是所谓投资的唯一一条路。", "20": "2015-07-10 来自雪球 · 深读：价值之锚\n所有想在股市有所收获的投资者，首先要解决的一个问题就是：形成自己的操作体系。这个操作体系必须是你自己喜欢的风格，必须是能够长期盈利，并且有风控的保证回撤有限度的。\n\n股市主要盈利方法有三种方式：1、追逐最强的风；2、抱紧最低估值的好票；3、抓住确定性的技术走法的波动。", "21": "2015-07-11 来自雪球\n盈利，虽然都体现为账户数字的增加，但有逻辑的盈利和没逻辑的盈利，短期看长相类似，长期看是生死之别。\n\n银行的底线在哪里？未来业绩没有大幅度下降预期的8-9%现金分红价，就是股价的底锚。不信你去看看历史，几乎所有的好股票，即使在最烂的大熊市，都在这个区域之前构筑成底部。", "22": "2015-08-29 来自雪球\n价值投资也好，趋势投资也好，做短差也好，其实本质上没区别，目的是一个：赚钱。关键在于你是否找到了适合自己的方法。吾之蜜糖，汝之毒药。", "23": "2015-09-18 来自雪球\n价值选股，趋势选时，估值定仓，波动降本——大部分高手都是把这四条中的全部或者部分做到极致。俺是四条都做，但每条都做不到极致，所以收益也就中上水平。"};
 
-const chapters = [
-  {name:"关于本书",start:1,end:3},
-  {name:"目录",start:4,end:5},
-  {name:"一、投资的理念",start:10,end:63},
-  {name:"二、技术分析及交易",start:64,end:84},
-  {name:"三、大盘和个股",start:85,end:90},
-  {name:"四、关于风险",start:91,end:103},
-  {name:"五、产业与周期",start:104,end:186},
-  {name:"六、煤炭和电力能源",start:187,end:240},
-  {name:"七、人口与趋势",start:241,end:333},
-  {name:"八、局势及竞争",start:334,end:351},
-  {name:"九、闲言碎语",start:352,end:414}
-];
-
-function pad(n){return String(n).padStart(3,'0');}
-
-// ═══════════ OCR TEXT DATA (23 pages) ═══════════
-const ocrData = {};
-
-// Load OCR data inline
-(function(){
-  const raw = {};
-  // Raw OCR text for each available page - embedded directly
-  raw[1] = "超级鹿鼎公\n资料集";
-  raw[2] = "关于本册资料\n超级鹿鼎公是一位长期保持无年度亏损的投资者。他的投资理念是：价值选股，趋势选时，估值定仓，波动降本。\n鹿鼎公注重价值投资，也对技术分析着迷。他既像一位朴素的格雷厄姆式价值投资者，又是一位擅长运用"乌龟流"策略（如搬砖、做T等）的交易员。\n鹿鼎公的文章具有宏观视角，具有时代性和穿透力。他擅长从国家历史经纬里，从他国的社会经济发展进程中，锚定及分析当前我国各行业所在的微妙处境。因此，他更懂得根据趋势行事，趋利避害，根据行业实际情况顺势而为，从而在市场上取得"遥遥领先"的收益。\n本册学习资料既收录有鹿鼎公的相关文章，也摘录了他与网友之间讨论的真知灼见。为方便阅读，本学习资料册大致分为九个章节，内又包括一些小章节，多数深度文章列入目录，它们和平时简要发言一起按时间先后排序。";
-
-  // TOC pages
-  raw[4] = "目录\n一、投资的理念：价值之锚、现金与穿越牛熊、独孤九剑与易筋经、波动的数学题、深爱老熊、管财主对撞宁静、认清自己很难、形成自己的盈利模式、别人眼里的最坏无非这两种情况、现金流才是价值之锚、龟速赚钱只要赚钱就行、没有利润下跌空间的低估、关于长期年化12%收益是不是好的问题、总结下我现在的投资理念、IBM与新泽西石油、11%年化确定性收益的投资有多珍贵、股市能不能财富自由、合理估值";
-  
-  raw[5] = "二、技术分析及交易：关于搬砖党、看的远但是不能做的远、技术玩法的弱点、4大流派的前世今生、关于做T的态度、完美的底部、成功的技术高手素描、网格交易、看K线少用复权\n三、大盘和个股：1.看大盘：都是老滑头的A股、从纯技术分析角度看大盘、从统计学派的角度看大盘、最近行情满仓不涨、机构基金你别来；2.说个股：从营销角度看美的格力的王者之争、从陕煤回购说起、好股票、垄断才是长期高额利润的基础、永续组合、中煤能源2022年报、AH股30年长期投资组合、如果再一次配置30年长期投资组合、反思一下涤去胸中数斗尘、茅台数学题\n四、关于风险：高风险与低风险是相对的、常识与逻辑之一风险敞口、未雨绸缪很重要、紧急与重要";
-  
-  raw[6] = "五、产业与周期\n1.地产行业：经营的成本、我所看到的三次房价崩盘、房价不能让年轻人丧失希望、再论房价的世纪大顶、房产数学题、关于谈到房产税的一些回帖、房价不是开跌而是已跌\n2.银行金融：到底哪家银行的风控最好、银行股分红、关于银行坏账和互联网金融、分析银行股银行业的几个角度、银行利率与估值\n3.互联网：谈谈互联网行业股票、互联网速度形成一致性预期就是暴涨暴跌\n4.钢铁业：钢铁漫谈、钢铁的周期、对于明年钢铁行业的一些看法、钢铁的逻辑\n5.其他产业：医疗险靠什么赚钱、全球粮食生产成本大涨、高工资来自高毛利行业\n6.周期：周期、行业周期性";
-  
-  raw[7] = "六、煤炭和电力能源\n1.煤炭行业：谈谈煤炭的淡季不淡旺季不旺、从历史气候开始的乱谈、国际煤炭大局势、斩什么留什么、煤炭企业的优势分类、煤电博弈是虚幻、未来煤炭的出路、关于中国神华长协价、为什么更看好焦煤、煤价变化与持股企业盈利的变化、假如煤炭港口市场价跌到长协价一样、煤炭板块低估值原因分析、业内专家对于煤炭供应衰退的看法、电煤的消耗会有几个变数\n2.电力能源：未来的用电量顶峰区域、等不来的均值回归、没有燃气机组调峰的中国电力还得靠煤电、这12年以来的煤电恩怨、火电成本上升计算、总结陈述一下我对于电力的观点\n3.神华与淮北：月线看神华、淮北矿业之优劣、淮北矿业说几个不重要的信息";
-  
-  raw[8] = "七、人口与趋势：食品消费股与人口结构、从日本人口变化与经济谈起、一张2010年的上海人口结构图、关于养老送终、人口老龄化后的经济（台湾）、60年后的7亿人口与200年后的7亿人口的差异、中日韩三国人口下降其实才刚刚开始、2023年后出生的中国孩子有多幸运\n八、局势及竞争：1.局势：通缩期的库存挤出效应、债务谭、美国的通胀是个无解的局、不能收割就很痛；2.竞争：日本的低欲望社会、日本东京房价大致情况、越南注定是韭菜的命、关于印度、摸着鬼子走、日本股市和消费的经验、日韩以及台湾省的收入、关于日本房产几个事实\n九、闲言碎语：股市的好处与坏处、抄作业4个关键、推翻常识、想象的彼岸、怎么样看出别人的水平高低";
-
-  // Chapter 1 content
-  raw[12] = `2014-05-06 来自雪球
-海螺水泥和中国神华将是夕阳行业中的强企，俗称"沙漠之花"。万科还不能真正看出是不是沙漠之花。
-@网友：万科管理还是远强于海螺，问题是万科无法垄断。海螺天生就在垄断行业，有级差地租。
-鹿鼎公：是的，所有高毛利全部来自垄断，不管是行政垄断，还是品牌垄断，或者资源垄断，又或是技术垄断。海螺的垄断来自资源、资金、布局的优势；神华来自资源、铁路、码头和上下游一体以及资金；万科除了资金外基本上没特别出众的垄断优势。`;
-
-  raw[13] = `2014-05-28 来自雪球
-个人特别在意分红，原因其实很简单——在股价大幅度低于1PB的背景下，分红就是给你0.9-0.95PB套现的机会。股价没填权，就是给你极低PB买入的机会。这是我拿建设、工行、北京银行的逻辑。当然选择这三家，还有个主要原因是，都是风控最好的企业。平安、光大，打死不买。民生估值太高。`;
-
-  raw[14] = `2014-06-05 来自雪球
-我的投资逻辑在最近1年又有一些变化。以前主要思路是低估值+安全+稳定成长，现在的思路+行业垄断。3家银行都是低估值，银行会倒闭，但是不会全部倒闭，所以选择最安全的3家。成长不成问题，即使银行业有企业倒闭，但是银行这种剩着为王的行业，安全第一。`;
-
-  raw[15] = `2014-07-05 来自雪球
-请所有股民投资者记住：能够长期保持超越95%普通投资者的有水平的人，基本上没人愿意帮人理财、帮人炒股票，那个太烦了。要吸收资金，要说服投资者，要解释投资理念——有病或者有"理想"的才会这么干。自己的钱滚滚雪球收益足以养活自己，让自己过上体面生活。
-
-2014-11-06 来自雪球
-不符合"低PE，低PB，行业垄断，高ROE，长远有确定性增长，上市满5年"这个标准的，我一律不买，包括新股。`;
-
-  raw[16] = `2014-12-26 来自雪球
-只有以产业投资的眼光买股票，靠穿越经济周期的业绩增长，稳定提高的分红；以够低的合理价格买入，耐心持有，直到不再低估或发现了更好的才卖出。对商业模式定性是必要条件，对发展前景定量是充分条件，确定性则是王者之道，复利是最伟大的奇迹。
-
-2015-01-02 来自雪球
-俺在股市的风格完全是乌龟流，安全永远是俺的第一考量。不想跑赢别人多少，只想跑赢自己内心的贪婪。`;
-
-  raw[17] = `2015-02-27 来自雪球
-投资标的如同来来往往飞奔的兔子，只有撞到大树的那只才属于你的。因此，投资就是守株待兔。不成熟的投资者往往会举着一棵小树疲于奔命追兔子，效果适得其反。成熟的，往往在交通要道上找根大树，静静守着。
-
-2015-03-31 来自雪球
-孙子曰：欲胜敌，先为不可胜。股票语言翻译：想赚钱，先做到不亏钱。所以俺的逻辑是赚钱事小，亏钱事大。赚钱前，先想明白这个买入会亏钱吗？`;
-
-  raw[18] = `2015-05-06 来自雪球
-大额度融资上杠杆的线在哪里？1、股票业绩没有大幅度下降风险；2、分红覆盖融资利率。俺个人理解，这种情况下俺认为可以大比例融资。要知道大多数股神（真的股神，不是民间股神）都是死在融资上的，台湾香港都发生过。
-
-2015-05-13 来自雪球
-网友说："交易的极致，无非是两种，一种是追最猛的强势，赚最快的钱；另外一种是买最深的底，赚最安全的钱。"俺自认是后者。
-
-涨时看势，跌时看质——这个就是为什么牛市价值股跑不赢题材股的原因，正常的很。`;
-
-  raw[19] = `2015-05-20 来自雪球
-一个优秀的交易高手的定义应该是：能够连续多年获得稳定持续的连续复利回报，经年累月地赚钱而不是一朝暴富，常赚而不是大赚。资本市场的高额利润应来源于长期累积低风险下的持续利润的结果，职业交易者只追求最可靠的，只有业余低手才只关注利润最大化和满足于短暂的辉煌中。这也是多数人易现辉煌，难有成就的根本原因。
-
-2015-05-30 来自雪球
-有人说：懂巴老的理念不太难，坚持巴老的投资理念难于上青天。段永平回答：坚持不了的人就是不懂！这里懂的意思是骨子里相信，不是可以照着念但其实不知道点什么。其实价值投资是所谓投资的唯一一条路，不然你投的是什么？`;
-
-  raw[20] = `2015-07-10 来自雪球 · 深读：价值之锚
-所有想在股市有所收获的投资者，首先要解决的一个问题就是：形成自己的操作体系。这个操作体系必须是你自己喜欢的风格，必须是能够长期盈利，并且有风控的保证回撤有限度的。如果做不到长期盈利和有限回撤，说明操作体系有缺陷，需要改进。
-
-股市主要盈利方法有三种方式：1、追逐最强的风；2、抱紧最低估值的好票；3、抓住确定性的技术走法的波动。第一与第三的做法都必须有一把快刀，会割肉，另外这两种做法都不适合大资金。但是一旦形成体系，并且切实有能力把控，那么小资金的盈利水平远超第二种。`;
-
-  raw[21] = `2015-07-11 来自雪球
-顶网友这句真理：盈利，虽然都体现为账户数字的增加，但有逻辑的盈利和没逻辑的盈利，短期看长相类似，长期看是生死之别。
-
-银行的底线在哪里？未来业绩没有大幅度下降预期的8-9%现金分红价，就是股价的底锚。不信你去看看历史，几乎所有的好股票，即使在最烂的大熊市，都在这个区域之前构筑成底部。`;
-
-  raw[22] = `2015-08-29 来自雪球
-价值投资也好，趋势投资也好，做短差也好，其实本质上没区别，目的是一个：赚钱。关键在于你是否找到了适合自己的方法。吾之蜜糖，汝之毒药。`;
-
-  raw[23] = `2015-09-18 来自雪球
-价值选股，趋势选时，估值定仓，波动降本——大部分高手都是把这四条中的全部或者部分做到极致。俺是四条都做，但每条都做不到极致，所以收益也就中上水平。`;
-
-  // Store
-  for(const [pg, text] of Object.entries(raw)){
-    ocrData[parseInt(pg)] = text;
-  }
-})();
-
-// ═══════════ INIT ═══════════
-function init(){
-  buildSidebar();
-  goTo(1);
-  document.addEventListener('keydown', function(e){
-    if(e.target.tagName==='INPUT') return;
-    if(e.key==='ArrowRight'||e.key===' ') navPage('next'),e.preventDefault();
-    if(e.key==='ArrowLeft') navPage('prev'),e.preventDefault();
-    if(e.key==='Home') goTo(1);
-    if(e.key==='End') goTo(TOTAL);
-  });
-}
-
-// ═══════════ SIDEBAR ═══════════
-function buildSidebar(){
-  const sb = document.getElementById('sidebar');
-  sb.innerHTML = '<h3>📖 目录导航</h3>';
-  chapters.forEach((ch,i) => {
-    const a = document.createElement('a');
-    a.className = 'chap';
-    a.setAttribute('data-chap', i);
-    a.innerHTML = ch.name + '<span class="pg">p.'+ch.start+'-'+ch.end+'</span>';
-    a.onclick = function(e){e.preventDefault();goTo(ch.start);};
-    sb.appendChild(a);
-  });
-}
-
-function updateSidebar(){
-  document.querySelectorAll('.chap').forEach((el,i) => {
-    const ch = chapters[i];
-    el.classList.toggle('active', currentPage >= ch.start && currentPage <= ch.end);
-  });
-}
-
-// ═══════════ PAGE RENDERING ═══════════
-function goTo(n){
-  if(n < 1) n = 1;
-  if(n > TOTAL) n = TOTAL;
-  currentPage = n;
-  
-  const content = document.getElementById('content');
-  const hasOcr = ocrData[n];
-  
-  document.getElementById('pgInput').value = n;
-  document.getElementById('pgIndicator').textContent = 'p.' + n;
-  
-  if(hasOcr){
-    content.innerHTML = renderOcrPage(n, hasOcr);
-  } else {
-    content.innerHTML = renderImagePage(n);
-  }
-  
-  updateSidebar();
-  window.scrollTo({top:0, behavior:'smooth'});
-  
-  // Preload neighboring images
-  if(!ocrData[n]) preloadImg(n);
-  if(!ocrData[n+1]) preloadImg(n+1);
-  if(!ocrData[n-1]) preloadImg(n-1);
-}
-
-function renderOcrPage(n, text){
-  const chap = chapters.find(c => n >= c.start && n <= c.end);
-  const chapName = chap ? chap.name : '';
-  
-  // Parse posts
-  const lines = text.split('\n').filter(l => l.trim());
-  
-  // Check if it's TOC-like content
-  if(n >= 4 && n <= 8){
-    let html = '<div class="page-section">';
-    html += '<div class="page-header"><span class="num">p.'+n+'</span><span class="chap-name">'+chapName+'</span></div>';
-    html += '<div class="ocr-text" style="font-size:14px;line-height:2.2">';
-    for(const line of lines){
-      const clean = line.replace(/[一—]+$/,'').trim();
-      if(!clean) continue;
-      if(clean.match(/^[一二三四五六七八九]、/) || clean.match(/^\d+[.．]/)){
-        html += '<p style="font-weight:600;color:var(--accent);margin-top:16px;text-indent:0">' + clean + '</p>';
-      } else if(clean.match(/^\d+[.．]/) || clean.startsWith('·') || clean.startsWith('-')){
-        html += '<p style="margin:2px 0 2px 20px;text-indent:0;font-size:13px;color:var(--text2)">' + clean + '</p>';
-      } else {
-        html += '<p>' + clean + '</p>';
-      }
-    }
-    html += '</div></div>';
-    return html;
-  }
-  
-  // Regular post content
-  let html = '<div class="page-section">';
-  html += '<div class="page-header"><span class="num">p.'+n+'</span><span class="chap-name">'+chapName+'</span></div>';
-  html += '<div class="ocr-text">';
-  
-  // Split into posts by date markers
-  const fullText = lines.join('\n');
-  const posts = fullText.split(/(?=20\d{2}[—-]\d{2}[—-]\d{2})/);
-  
-  for(const post of posts){
-    if(!post.trim()) continue;
-    const plines = post.trim().split('\n');
-    const firstLine = plines[0] || '';
-    const dateMatch = firstLine.match(/(20\d{2}[—-]\d{2}[—-]\d{2}.*)/);
-    
-    html += '<div class="post">';
-    if(dateMatch){
-      html += '<div class="date">📅 ' + dateMatch[1].replace(/[—-]/g,'-') + '</div>';
-      plines.shift();
-    }
-    for(const line of plines){
-      const clean = line.trim();
-      if(!clean) continue;
-      if(clean.startsWith('@网友') || clean.startsWith('鹿鼎公：') || clean.startsWith('鹿鼎公:')){
-        const who = clean.startsWith('@') ? '网友' : '鹿鼎公';
-        const txt = clean.replace(/^@网友[：:]?\s*/, '').replace(/^鹿鼎公[：:]\s*/, '');
-        html += '<div class="reply"><span class="who">' + who + '：</span>' + txt + '</div>';
-      } else if(clean.match(/^[\[【].*[\]】]$/)){
-        html += '<p style="text-indent:0;font-weight:600;color:var(--accent)">' + clean + '</p>';
-      } else {
-        html += '<p>' + clean + '</p>';
-      }
-    }
-    html += '</div>';
-  }
-  
-  html += '</div></div>';
-  return html;
-}
-
-function renderImagePage(n){
-  const chap = chapters.find(c => n >= c.start && c <= c.end);
-  const chapName = chap ? chap.name : '';
-  return '<div class="page-section">' +
-    '<div class="page-header"><span class="num">p.'+n+'</span><span class="chap-name">'+chapName+'</span></div>' +
-    '<div class="img-page">' +
-    '<img src="'+IMG_BASE+'p_'+pad(n)+'.webp" alt="p.'+n+'" onerror="this.parentElement.innerHTML=\'<p style=color:#b5a590;text-align:center;padding:40px>图片加载中…</p>\'">' +
-    '<div class="cap">第 '+n+' 页（文字提取进行中，暂显示扫描图）</div>' +
-    '</div></div>';
-}
-
-function preloadImg(n){
-  if(n<1||n>TOTAL) return;
-  const link = document.createElement('link');
-  link.rel = 'preload'; link.as = 'image';
-  link.href = IMG_BASE+'p_'+pad(n)+'.webp';
-  document.head.appendChild(link);
-}
-
-// ═══════════ NAVIGATION ═══════════
-function navPage(dir){
-  if(dir==='prev') goTo(currentPage - 1);
-  else goTo(currentPage + 1);
-}
-
-function scrollToToc(){
-  goTo(4);
-}
-
-window.addEventListener('DOMContentLoaded', init);
+function pad(n){return String(n).padStart(3,'0')}
+function init(){buildSidebar();goTo(1);document.addEventListener('keydown',function(e){if(e.target.tagName==='INPUT')return;if(e.key==='ArrowRight'||e.key===' ')navPage('next'),e.preventDefault();if(e.key==='ArrowLeft')navPage('prev'),e.preventDefault();if(e.key==='Home')goTo(1);if(e.key==='End')goTo(TOTAL)})}
+function buildSidebar(){var sb=document.getElementById('sidebar');sb.innerHTML='<h3>📖 目录导航</h3>';chapters.forEach(function(ch,i){var a=document.createElement('a');a.className='chap';a.setAttribute('data-chap',i);a.innerHTML=ch.name+'<span class="pg">p.'+ch.start+'-'+ch.end+'</span>';a.onclick=function(e){e.preventDefault();goTo(ch.start)};sb.appendChild(a)})}
+function updateSidebar(){document.querySelectorAll('.chap').forEach(function(el,i){var ch=chapters[i];el.classList.toggle('active',currentPage>=ch.start&&currentPage<=ch.end)})}
+function goTo(n){if(n<1)n=1;if(n>TOTAL)n=TOTAL;currentPage=n;var c=document.getElementById('content');var t=ocrData[String(n)];document.getElementById('pgInput').value=n;document.getElementById('pgIndicator').textContent='p.'+n;if(t){c.innerHTML=renderText(n,t)}else{c.innerHTML=renderImg(n)}updateSidebar();window.scrollTo({top:0,behavior:'smooth'});if(!ocrData[String(n)])preload(n);if(!ocrData[String(n+1)])preload(n+1)}
+function renderText(n,text){var chap=chapters.find(function(c){return n>=c.start&&n<=c.end});var cn=chap?chap.name:'';var lines=text.split('\n').filter(function(l){return l.trim()});if(n>=4&&n<=8){var h='<div class="page-section"><div class="page-header"><span class="num">p.'+n+'</span><span class="chap-name">'+cn+'</span></div><div class="ocr-text" style="font-size:14px;line-height:2.2">';for(var i=0;i<lines.length;i++){var ln=lines[i].replace(/[一—]+$/,'').trim();if(!ln)continue;if(ln.match(/^[一二三四五六七八九十]、/)||ln.match(/^\d+[.．]/))h+='<p style="font-weight:600;color:var(--accent);margin-top:16px;text-indent:0">'+ln+'</p>';else if(ln.match(/^\d+[.．]/)||ln.indexOf('·')===0)h+='<p style="margin:2px 0 2px 20px;text-indent:0;font-size:13px;color:var(--text2)">'+ln+'</p>';else h+='<p>'+ln+'</p>'}h+='</div></div>';return h}var h='<div class="page-section"><div class="page-header"><span class="num">p.'+n+'</span><span class="chap-name">'+cn+'</span></div><div class="ocr-text">';var posts=text.split(/(?=20\d{2}[-—]\d{2}[-—]\d{2})/);for(var i=0;i<posts.length;i++){var p=posts[i];if(!p.trim())continue;var pl=p.trim().split('\n');var fl=pl[0]||'';var dm=fl.match(/(20\d{2}[-—]\d{2}[-—]\d{2}.*)/);h+='<div class="post">';if(dm){h+='<div class="date">📅 '+dm[1].replace(/[—]/g,'-')+'</div>';pl.shift()}for(var j=0;j<pl.length;j++){var cl=pl[j].trim();if(!cl)continue;if(cl.indexOf('网友')===0||cl.indexOf('鹿鼎公')===0){var who=cl.indexOf('网友')===0?'网友':'鹿鼎公';var txt=cl.replace(/^(网友|鹿鼎公)[：:]\s*/,'');h+='<div class="reply"><span class="who">'+who+'：</span>'+txt+'</div>'}else{h+='<p>'+cl+'</p>'}}h+='</div>'}h+='</div></div>';return h}
+function renderImg(n){var chap=chapters.find(function(c){return n>=c.start&&n<=c.end});var cn=chap?chap.name:'';return '<div class="page-section"><div class="page-header"><span class="num">p.'+n+'</span><span class="chap-name">'+cn+'</span></div><div class="img-page"><img src="'+IMG_BASE+'p_'+pad(n)+'.webp" alt="p.'+n+'" onerror="this.parentElement.innerHTML=\'<p style=color:#b5a590;text-align:center;padding:40px>图片加载中…</p>\'"><div class="cap">第 '+n+' 页（文字提取进行中，暂显示扫描图）</div></div></div>'}
+function preload(n){if(n<1||n>TOTAL)return;var l=document.createElement('link');l.rel='preload';l.as='image';l.href=IMG_BASE+'p_'+pad(n)+'.webp';document.head.appendChild(l)}
+function navPage(d){if(d==='prev')goTo(currentPage-1);else goTo(currentPage+1)}
+function scrollToToc(){goTo(4)}
+window.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
 </html>
