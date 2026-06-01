@@ -5,404 +5,407 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>东周列国志 · 图文精读</title>
 <style>
-:root{--bg:#fdfaf3;--card:#fff;--border:#e0d5c1;--text:#2c2416;--text2:#6b5e4a;--text3:#9a8b75;--accent:#8b4513;--gold:#c9a84c;--red:#a03a2a;--spring:#5a8a4a;--autumn:#b87333;--warring:#7b3f5c;--tag-bg:#f5efe0}
+:root{--bg:#fdfaf3;--card:#fffbf5;--border:#e0d5c1;--text:#2c2416;--text2:#5c4e3a;--text3:#9a8b75;--accent:#8b4513;--gold:#c9a84c;--red:#a03a2a;--spring:#5a8a4a;--autumn:#b87333;--warring:#7b3f5c}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:"Songti SC","STSong","SimSun",serif;line-height:1.9}
-.header{background:linear-gradient(135deg,#2c1810 0%,#5c3a28 50%,#8b4513 100%);color:#f0e0c0;padding:40px 24px;text-align:center;border-bottom:4px solid var(--gold)}
-.header h1{font-size:32px;letter-spacing:4px;margin-bottom:8px}
+body{background:var(--bg);color:var(--text);font-family:"Songti SC","STSong","SimSun",serif;font-size:15px;line-height:2}
+.header{background:linear-gradient(135deg,#2c1810 0%,#5c3a28 50%,#8b4513 100%);color:#f0e0c0;padding:48px 24px;text-align:center;border-bottom:4px solid var(--gold)}
+.header h1{font-size:34px;letter-spacing:6px;margin-bottom:8px}
 .header .sub{font-size:14px;opacity:0.7;letter-spacing:2px}
 .header .era{font-size:12px;opacity:0.5;margin-top:8px}
-.container{max-width:1100px;margin:0 auto;padding:24px}
-.period-nav{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;justify-content:center}
-.period-btn{padding:8px 20px;border:1px solid var(--border);border-radius:20px;background:var(--card);color:var(--text2);font-size:13px;cursor:pointer;transition:all 0.2s}
-.period-btn:hover{border-color:var(--accent);color:var(--accent)}
-.period-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.era-section{margin-bottom:32px}
-.era-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--border)}
-.era-header .era-icon{font-size:28px}
-.era-header h2{font-size:20px;color:var(--accent)}
-.era-header .era-date{font-size:12px;color:var(--text3)}
-.story-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
-.story-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all 0.2s}
-.story-card:hover{border-color:#c9a84c;box-shadow:0 4px 20px rgba(139,69,19,0.08)}
-.story-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative}
-.story-img.spring{background:linear-gradient(135deg,#e8f5e4,#c8e6c0)}
-.story-img.autumn{background:linear-gradient(135deg,#fdf0e0,#f5d5b0)}
-.story-img.warring{background:linear-gradient(135deg,#f0e4f0,#e0c8e0)}
-.story-img.epic{background:linear-gradient(135deg,#e8e4f0,#d0c8e8)}
-.story-body{padding:16px}
-.story-body h3{font-size:16px;margin-bottom:4px;color:var(--accent)}
-.story-body .chapter{font-size:11px;color:var(--text3);margin-bottom:8px}
-.story-body p{font-size:13px;color:var(--text2);line-height:1.8}
-.story-body .annotations{margin-top:10px;padding-top:8px;border-top:1px dashed var(--border)}
-.story-body .annotations .ann{display:inline-block;font-size:11px;color:var(--text3);margin-right:12px;margin-bottom:4px}
-.story-body .annotations .ann .ruby{color:var(--red);font-size:9px;margin-right:2px}
-.figures{margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px}
-.figures h2{font-size:16px;color:var(--accent);margin-bottom:12px}
+.nav{display:flex;gap:8px;padding:16px 24px;justify-content:center;flex-wrap:wrap;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.nav-btn{padding:8px 20px;border:1px solid var(--border);border-radius:20px;background:#fff;color:var(--text2);font-size:13px;cursor:pointer;transition:all 0.2s}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+.nav-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.article{max-width:800px;margin:0 auto;padding:32px 24px 60px}
+.era-header{text-align:center;margin:40px 0 28px;padding-top:32px;border-top:1px solid var(--border)}
+.era-header:first-of-type{margin-top:0;padding-top:0;border-top:none}
+.era-header .era-icon{font-size:36px;display:block;margin-bottom:8px}
+.era-header h2{font-size:22px;color:var(--accent);letter-spacing:2px}
+.era-header .era-date{font-size:12px;color:var(--text3);margin-top:4px}
+.story{position:relative;padding:24px 0;border-bottom:1px dashed var(--border)}
+.story:last-child{border-bottom:none}
+.story-num{position:absolute;left:-40px;top:24px;font-size:11px;color:var(--text3);writing-mode:vertical-rl;letter-spacing:2px}
+@media(max-width:900px){.story-num{display:none}}
+.story-illustration{text-align:center;font-size:40px;padding:12px;margin:8px 0 16px;background:var(--bg);border-radius:8px;letter-spacing:8px}
+.story h3{font-size:18px;color:var(--accent);margin-bottom:4px}
+.story .chapter-tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:3px;margin-bottom:12px;color:#fff}
+.chapter-tag.spring{background:var(--spring)}
+.chapter-tag.autumn{background:var(--autumn)}
+.chapter-tag.warring{background:var(--warring)}
+.story p{text-indent:2em;margin-bottom:8px}
+.story p.transition{text-indent:0;font-style:italic;color:var(--text3);font-size:13px;margin:12px 0;padding:8px 14px;border-left:2px solid var(--gold);background:rgba(201,168,76,0.06)}
+.ann-box{margin:12px 0;padding:10px 14px;background:#fdf9f0;border:1px solid #e8dbbe;border-radius:6px;font-size:12px}
+.ann-box .ann-title{font-size:11px;color:var(--accent);font-weight:bold;margin-bottom:4px}
+.ann-box span{display:inline-block;margin-right:14px;color:var(--text2);line-height:1.8}
+.ann-box .ruby{color:var(--red);font-size:10px;margin-right:2px}
+ruby{font-size:15px} rt{font-size:9px;color:var(--red)}
+.figures{margin:32px 0;padding:24px;background:var(--card);border:1px solid var(--border);border-radius:10px}
+.figures h2{font-size:17px;color:var(--accent);margin-bottom:16px;text-align:center}
 .figures-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
-.figure-card{display:flex;gap:12px;padding:14px;border:1px solid var(--border);border-radius:8px;align-items:flex-start}
-.figure-card .avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.figure-card .info h4{font-size:14px;margin-bottom:2px}
-.figure-card .info p{font-size:11px;color:var(--text3);line-height:1.6}
-.figure-card .info .tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;margin-right:4px;margin-top:3px}
+.fig-card{display:flex;gap:10px;padding:12px;border:1px solid var(--border);border-radius:8px;align-items:flex-start}
+.fig-card .avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.fig-card h4{font-size:13px;margin-bottom:2px}
+.fig-card p{font-size:11px;color:var(--text3);line-height:1.6;text-indent:0}
+.fig-card .ftag{display:inline-block;font-size:9px;padding:1px 5px;border-radius:2px;margin-right:3px;margin-top:3px}
 .king{background:rgba(201,168,76,0.15);color:#8b6914}
 .general{background:rgba(160,58,42,0.1);color:var(--red)}
 .strategist{background:rgba(90,138,74,0.1);color:var(--spring)}
-.ruler{background:rgba(123,63,92,0.1);color:var(--warring)}
-.footer{text-align:center;padding:30px;color:var(--text3);font-size:12px}
-ruby{font-size:14px} rt{font-size:9px;color:var(--red)}
+.footer{text-align:center;padding:30px;color:var(--text3);font-size:12px;border-top:1px solid var(--border)}
 .hidden{display:none}
 </style>
 </head>
 <body>
 <div class="header">
   <h1>东周列国志</h1>
-  <div class="sub">冯梦龙 著 · 蔡元放 改编</div>
-  <div class="era">公元前770年 — 公元前221年 · 五百余年春秋战国</div>
+  <div class="sub">冯梦龙 著 · 蔡元放 改编 · 一百零八回</div>
+  <div class="era">公元前770年 — 公元前221年 · 五百四十九年春秋战国</div>
 </div>
 
-<div class="container">
-
-<div class="period-nav">
-  <span class="period-btn active" onclick="filterEra('all',this)">全部</span>
-  <span class="period-btn" onclick="filterEra('early-spring',this)">春秋早期</span>
-  <span class="period-btn" onclick="filterEra('mid-spring',this)">春秋中期</span>
-  <span class="period-btn" onclick="filterEra('late-spring',this)">春秋晚期</span>
-  <span class="period-btn" onclick="filterEra('warring',this)">战国时期</span>
+<div class="nav">
+  <span class="nav-btn active" onclick="filterEra('all',this)">全篇通读</span>
+  <span class="nav-btn" onclick="filterEra('early',this)">春秋早期</span>
+  <span class="nav-btn" onclick="filterEra('mid',this)">春秋中期</span>
+  <span class="nav-btn" onclick="filterEra('late',this)">春秋晚期</span>
+  <span class="nav-btn" onclick="filterEra('warring',this)">战国时期</span>
 </div>
 
-<!-- ═══ 春秋早期（前770-前650）：平王东迁 → 齐桓称霸 ═══ -->
-<div class="era-section" data-era="early-spring">
-<div class="era-header"><span class="era-icon">🏛️</span><h2>春秋早期</h2><span class="era-date">前770年 — 前650年 · 平王东迁至齐桓称霸</span></div>
-<div class="story-grid">
+<div class="article">
 
-<div class="story-card">
-  <div class="story-img spring">🔥🐺</div>
-  <div class="story-body">
-    <h3>烽火戏诸侯</h3>
-    <div class="chapter">第1-2回 · 西周覆灭</div>
-    <p><ruby>褒<rt>bāo</rt></ruby><ruby>姒<rt>sì</rt></ruby>，周幽王宠妃，性不喜笑。幽王为博一笑，数举<ruby>烽<rt>fēng</rt>燧</rt></ruby>，诸侯悉至而无寇，褒姒乃大笑。后犬戎真至，幽王举烽，诸侯不信，遂被杀于<ruby>骊<rt>lí</rt></ruby>山下，西周亡。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">bāo sì</span>褒姒：周幽王宠妃，褒国姒姓女子</span>
-      <span class="ann"><span class="ruby">fēng suì</span>烽燧：古代边防报警信号，白昼放烟为烽，夜间举火为燧</span>
-      <span class="ann"><span class="ruby">lí</span>骊山：今陕西临潼，秦始皇帝陵所在地</span>
-    </div>
+<!-- ═══════════ 春秋早期 ═══════════ -->
+<div class="era-header" data-era="early">
+  <span class="era-icon">🏛️</span>
+  <h2>第一卷 · 春秋早期</h2>
+  <span class="era-date">公元前770年 — 前650年 · 平王东迁至齐桓称霸</span>
+</div>
+
+<div class="story" data-era="early">
+  <div class="story-num">第一回</div>
+  <div class="story-illustration">🔥🐺🏔️</div>
+  <h3>烽火戏诸侯</h3>
+  <span class="chapter-tag spring">第1-2回</span>
+  <p>西周之末，自<ruby>褒<rt>bāo</rt>姒<rt>sì</rt></ruby>入宫始。褒姒者，褒国姒姓女子，周幽王伐褒所得。其貌倾城而性不喜笑，幽王百计求之一笑不可得。奸臣<ruby>虢<rt>guó</rt>石父</ruby>献计曰："先王昔置<ruby>烽<rt>fēng</rt>燧<rt>suì</rt></ruby>于<ruby>骊<rt>lí</rt></ruby>山，为备犬戎之寇。王若举烽，诸侯必悉兵至——至而无寇，王后必笑。"幽王从其言，大举烽火。诸侯见烽烟四起，以为犬戎来犯，纷纷率师勤王，及至骊山之下，但见幽王与褒姒宴饮于楼台之上，并无一兵一卒。褒姒见诸侯狼狈之状，抚掌大笑。幽王大喜，赏虢石父千金。</p>
+  <p>此后幽王数举烽火，诸侯屡至屡空，渐不信之。及至犬戎真率大兵来犯，幽王急举烽火，诸侯以为又是戏弄，无一至者。犬戎遂破<ruby>镐<rt>hào</rt>京</ruby>，杀幽王于骊山之下，掠褒姒而去。西周自武王伐纣立国三百余年，至此而亡。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">bāo sì</span>褒姒：褒国姒姓女子，周幽王宠妃</span>
+    <span><span class="ruby">fēng suì</span>烽燧：古代边防报警信号，白日放烟为烽，夜间举火为燧</span>
+    <span><span class="ruby">guó</span>虢：古国名，此处为姓氏</span>
+    <span><span class="ruby">lí</span>骊山：今陕西临潼</span>
+    <span><span class="ruby">hào</span>镐京：西周都城，今西安西南</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img autumn">🏇➡️🏙️</div>
-  <div class="story-body">
-    <h3>平王东迁</h3>
-    <div class="chapter">第3回 · 东周开篇</div>
-    <p>犬戎破<ruby>镐<rt>hào</rt>京</ruby>，周平王<ruby>宜臼<rt>yí jiù</rt></ruby>在秦襄公、晋文侯等护送下，迁都<ruby>洛<rt>luò</rt>邑</ruby>（今洛阳），史称东周之始。王室自此衰微，诸侯渐强。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">hào jīng</span>镐京：西周都城，今西安西南</span>
-      <span class="ann"><span class="ruby">yí jiù</span>宜臼：周平王名</span>
-    </div>
+<p class="transition">镐京残破，宗周丘墟。犬戎之祸虽去，然关中已不可守。继位的周平王<ruby>宜臼<rt>yí jiù</rt></ruby>面对断壁残垣，做出了一个改变中国历史走向的决定——</p>
+
+<div class="story" data-era="early">
+  <div class="story-num">第二回</div>
+  <div class="story-illustration">🏇➡️🏙️</div>
+  <h3>平王东迁</h3>
+  <span class="chapter-tag spring">第3回</span>
+  <p>公元前770年，周平王在秦襄公、晋文侯、郑武公等诸侯护送下，放弃残破的镐京，迁都<ruby>洛<rt>luò</rt>邑</ruby>（今洛阳）。此为周王室最后一次主动的战略决策，也是王室权威不可逆衰落的开始。迁都之后，关中故地尽封秦人，王室直辖疆域急剧缩减，而护送东迁有功的诸侯纷纷获得封赏，势力坐大。史家以平王东迁为界，将周朝分为西周与东周。东周又分为春秋（前770-前476）与战国（前475-前221）两个时期。</p>
+  <p>东迁初定，郑国首当其冲。郑武公、郑庄公父子两代皆任周王室卿士，执掌朝政。然而权力的天平正在悄然倾斜——</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">yí jiù</span>宜臼：周平王之名</span>
+    <span><span class="ruby">luò yì</span>洛邑：东周都城，今河南洛阳</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img epic">🗡️💀</div>
-  <div class="story-body">
-    <h3>郑伯克段于<ruby>鄢<rt>yān</rt></ruby></h3>
-    <div class="chapter">第4回 · 郑国内乱</div>
-    <p>郑庄公<ruby>寤<rt>wù</rt>生</ruby>因其母武姜偏爱幼弟共叔段，隐忍二十二年不发。待共叔段起兵叛乱，庄公一举击溃于鄢地，逐段于共。与母"不及黄泉无相见"后掘地见母，母子如初。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">yān</span>鄢：今河南鄢陵</span>
-      <span class="ann"><span class="ruby">wù shēng</span>寤生：难产而生，郑庄公之名</span>
-    </div>
+<div class="story" data-era="early">
+  <div class="story-num">第三回</div>
+  <div class="story-illustration">🗡️👑💀</div>
+  <h3>郑伯克段于<ruby>鄢<rt>yān</rt></ruby></h3>
+  <span class="chapter-tag spring">第4回</span>
+  <p>郑庄公<ruby>寤<rt>wù</rt>生</ruby>者，郑武公之子。其名"寤生"，乃因出生时难产，脚先出而惊其母，故其母武姜终身恶之，而偏爱幼子共叔段。武姜屡请武公立段为世子，武公不许。庄公即位后，武姜为共叔段请封于制邑（险要之地），庄公以"<ruby>虢<rt>guó</rt>叔</ruby>死焉"婉拒，改封于京邑。</p>
+  <p>共叔段至京邑后，逾制扩建城郭、收编边邑、蓄养甲兵，二十二年间步步为营。臣下屡谏庄公出手，庄公但言："多行不义必自毙，子姑待之。"直待共叔段与武姜里应外合起兵叛乱之日，庄公方命子封率二百乘战车伐京，京邑百姓倒戈，共叔段溃逃至鄢。庄公亲率大军追至鄢地，段再逃至共国，终身不复。</p>
+  <p>庄公平叛后，因母亲武姜助段作乱，怒而迁之于城<ruby>颍<rt>yǐng</rt></ruby>，立誓曰："不及黄泉，无相见也。"既而悔之。颍考叔闻之献计：掘地及泉，隧而相见。庄公从之，入隧赋诗："大隧之中，其乐也融融。"武姜出隧和之："大隧之外，其乐也<ruby>洩<rt>yì</rt>洩</ruby>。"母子遂和好如初。</p>
+  <p>庄公隐忍二十二年不动声色，一击即中——此"郑伯克段于鄢"为《春秋》开篇第一大事，左丘明评曰："段不弟，故不言弟；如二君，故曰克；称郑伯，讥失教也。"</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">yān</span>鄢：今河南鄢陵</span>
+    <span><span class="ruby">wù shēng</span>寤生：逆生（难产），郑庄公名</span>
+    <span><span class="ruby">yǐng</span>颍：城颍，今河南临颍</span>
+    <span><span class="ruby">yì yì</span>洩洩：和乐舒展貌（非"泄"字）</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img spring">🦷🛶</div>
-  <div class="story-body">
-    <h3>老马识途</h3>
-    <div class="chapter">第21回 · 齐桓公伐山戎</div>
-    <p>齐桓公率军北伐山戎，春往冬返，迷失归途于<ruby>瀚<rt>hàn</rt>海</ruby>之中。管仲曰：<ruby>"老马之智可用也。"</ruby>乃纵数匹老马前行，军随之，果得归路。此为经验智慧之喻。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">hàn hǎi</span>瀚海：泛指北方大漠</span>
-    </div>
+<p class="transition">郑庄公以小国之身，伐陈败宋、抗周繻葛，一时有"小霸"之名。然庄公身后诸子争立，郑国遂衰。而此时，东方的齐国正悄然崛起——</p>
+
+<div class="story" data-era="early">
+  <div class="story-num">第四回</div>
+  <div class="story-illustration">🎯🦷🛶</div>
+  <h3>管仲相齐 · 老马识途</h3>
+  <span class="chapter-tag spring">第15-21回</span>
+  <p>齐襄公无道被弑，流亡在外的公子小白与公子纠争相归国。纠之师傅管仲于途中射小白一箭，中带钩（腰带之钩），小白佯死得脱，日夜兼程先入临淄即位，是为齐桓公。桓公初欲杀管仲以报一箭之仇，其师鲍叔牙力谏曰："君将治齐，则高<ruby>傒<rt>xī</rt></ruby>与叔牙足矣。君欲霸王，非管<ruby>夷吾<rt>yí wú</rt></ruby>不可。"桓公遂不计前仇，拜管仲为相，尊称"仲父"。</p>
+  <p>管仲治齐，行"<ruby>叁<rt>sān</rt>其国而伍<rt>wǔ</rt>其鄙</ruby>"之制，定士农工商四民分业，设"官山海"以盐铁之利富国。对外高举"尊王攘夷"大旗：北伐山戎救燕，西伐大戎安周，南伐蔡楚会盟，九合诸侯一匡天下，使齐桓公成为春秋第一位名副其实的霸主。孔子曰："微管仲，吾其<ruby>被<rt>pī</rt>发左<rt>zuǒ</rt>衽<rt>rèn</rt></ruby>矣。"</p>
+  <p>其间有一轶事传颂千古：齐桓公率军北伐山戎，春往冬返。大军深入大漠，归途迷失方向。管仲曰："<ruby>老马之智可用也。</ruby>"乃纵营中数匹老马前行，军随其后，果得归路。后世"老马识途"成语即出于此——以老马喻经验之可贵。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">xī</span>傒：高傒，齐大夫</span>
+    <span><span class="ruby">yí wú</span>夷吾：管仲之名</span>
+    <span><span class="ruby">sān qí guó ér wǔ qí bǐ</span>叁其国而伍其鄙：管仲行政改革，将国都分为三部分、乡村分为五部分管理</span>
+    <span><span class="ruby">pī fà zuǒ rèn</span>被发左衽：披散头发、衣襟左掩，指未开化的蛮夷装束</span>
   </div>
 </div>
 
-</div></div>
+<p class="transition">齐桓公晚年，管仲病笃。桓公问谁可代相，管仲曰："<ruby>易牙<rt>yì yá</rt></ruby>烹其子以<ruby>适<rt>shì</rt>君</ruby>，<ruby>竖刁<rt>shù diāo</rt></ruby>自宫以事君，<ruby>开方<rt>kāi fāng</rt></ruby>弃千乘之太子而臣于君——人情莫爱于子、莫重于身、莫亲于父母，此三人者，皆不合人情，必不可用。"桓公不听。管仲卒后，三人专权。桓公病重时，三人作乱，筑高墙绝内外，桓公饿死于寿宫，尸虫出于户。齐国霸业由此中断。</p>
 
-<!-- ═══ 春秋中期（前650-前500）：晋文称霸 → 秦穆西霸 ═══ -->
-<div class="era-section" data-era="mid-spring">
-<div class="era-header"><span class="era-icon">⚔️</span><h2>春秋中期</h2><span class="era-date">前650年 — 前500年 · 晋文称霸至弭兵之盟</span></div>
-<div class="story-grid">
+<!-- ═══════════ 春秋中期 ═══════════ -->
+<div class="era-header" data-era="mid">
+  <span class="era-icon">⚔️</span>
+  <h2>第二卷 · 春秋中期</h2>
+  <span class="era-date">公元前650年 — 前500年 · 晋楚争霸百年</span>
+</div>
 
-<div class="story-card">
-  <div class="story-img warring">🛡️🏃</div>
-  <div class="story-body">
-    <h3>退避三舍</h3>
-    <div class="chapter">第37回 · 晋楚城濮之战</div>
-    <p>晋文公重耳流亡时受楚成王款待，<ruby>许以"他日治兵中原，请避君三<ruby>舍<rt>shè</rt></ruby>"</ruby>。后晋楚城濮之战，重耳果退兵九十里（一舍三十里）以践前诺，终大破楚军，一战定霸。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">shè</span>舍：古行军三十里为一舍，三舍即九十里</span>
-    </div>
+<div class="story" data-era="mid">
+  <div class="story-num">第五回</div>
+  <div class="story-illustration">🛡️🏃⚡</div>
+  <h3>退避三舍 · 城濮之战</h3>
+  <span class="chapter-tag autumn">第37-41回</span>
+  <p>齐桓既没，中原无主。此时，另一位传奇君主正从十九年的流亡中归来——晋公子重耳。</p>
+  <p>重耳者，晋献公之子。献公宠<ruby>骊<rt>lí</rt>姬<rt>jī</rt></ruby>，逼死太子申生，重耳与弟夷吾出逃。重耳流亡十九年，历<ruby>翟<rt>dí</rt></ruby>、卫、齐、曹、宋、郑、楚、秦八国，备尝艰辛。在卫，乞食于野人而得土块；在齐，沉溺温柔之乡被妻子灌醉拖走；在曹，<ruby>曹共公<rt>cáo gōng gōng</rt></ruby>趁其沐浴偷窥其<ruby>骈<rt>pián</rt>胁<rt>xié</rt></ruby>（肋骨相连如一片）；在楚，楚成王问："公子若返晋国，何以报我？"重耳答："<ruby>子女玉帛<rt>zǐ nǚ yù bó</rt></ruby>，君有之；羽毛齿革，君地生焉。其何以报君？虽然，<ruby>若不获命，其<rt>ruò bù huò mìng qí</rt></ruby>——</p>
+  <p><ruby>——其避君三舍。</ruby>"（古行军三十里为一舍，三舍即九十里）楚成王笑而送之。</p>
+  <p>公元前636年，六十二岁的重耳在秦穆公帮助下归国即位，是为晋文公。修内政、强军备，不出五年，晋国大治。公元前632年，楚成王率陈、蔡、郑、许联军围宋，宋求救于晋。晋文公率军南下，与楚军相遇于城濮（今山东<ruby>鄄<rt>juàn</rt>城</ruby>）。</p>
+  <p>战前，晋文公下令退兵九十里——以践当年"避君三舍"之诺。楚将<ruby>子玉<rt>zǐ yù</rt></ruby>以为晋军胆怯，不顾楚成王"不可与晋战"之命，挥师追击。两军对垒于城濮。晋文公以虎皮蒙马，先击楚之右翼（陈蔡联军），陈蔡溃败。又以"<ruby>曳<rt>yè</rt>柴</ruby>"扬尘佯败诱敌，伏兵四起大破楚左军。子玉率中军退走，至<ruby>连谷<rt>lián gǔ</rt></ruby>自杀。城濮一战，晋军大获全胜，献俘于周王。周襄王策命晋文公为<ruby>"侯伯"<rt>hóu bó</rt></ruby>（诸侯之长），赐<ruby>弓矢<rt>gōng shǐ</rt></ruby>、<ruby>秬<rt>jù</rt>鬯<rt>chàng</rt></ruby>（黑黍酒）。晋文公一战定霸，与齐桓并称"齐桓晋文"。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">lí jī</span>骊姬：晋献公宠妃，骊戎之女</span>
+    <span><span class="ruby">pián xié</span>骈胁：肋骨连成一片，传为重耳的生理特征</span>
+    <span><span class="ruby">juàn</span>鄄城：今山东鄄城</span>
+    <span><span class="ruby">yè chái</span>曳柴：拖拽柴枝扬尘，制造大军撤退假象</span>
+    <span><span class="ruby">jù chàng</span>秬鬯：黑黍和香草酿制的祭酒，天子赐诸侯之礼</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img epic">🐎🐄</div>
-  <div class="story-body">
-    <h3><ruby>崤<rt>xiáo</rt></ruby>之战</h3>
-    <div class="chapter">第44回 · 秦晋决裂</div>
-    <p>秦穆公趁晋文公新丧，遣<ruby>孟明<rt>mèng míng</rt></ruby>视等率师袭郑未果，灭滑而还。<ruby>晋襄公<rt>jìn xiāng gōng</rt></ruby>率军在崤山隘道设伏，全歼秦军，孟明视等三将被俘。秦晋之好自此终结，秦转而西向称霸。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">xiáo</span>崤：崤山，今河南洛宁西北，地势险要</span>
-      <span class="ann"><span class="ruby">mèng míng</span>孟明视：秦将，百里奚之子</span>
-    </div>
+<p class="transition">城濮之战奠定了晋国八十年霸权。然而当晋文公的灵柩送往<ruby>曲沃<rt>qū wò</rt></ruby>的路上，一个意外彻底改变了秦晋关系——</p>
+
+<div class="story" data-era="mid">
+  <div class="story-num">第六回</div>
+  <div class="story-illustration">⛰️🐎💀</div>
+  <h3><ruby>崤<rt>xiáo</rt></ruby>之战</h3>
+  <span class="chapter-tag autumn">第44回</span>
+  <p>秦国与晋国本为姻亲之邦，秦穆公曾三度扶立晋君（惠公、怀公、文公），有"秦晋之好"的美名。然晋文公新丧未葬之际，秦穆公悍然命<ruby>孟明<rt>mèng míng</rt></ruby>视、<ruby>西乞<rt>xī qǐ</rt>术<rt>shù</rt></ruby>、<ruby>白乙<rt>bái yǐ</rt>丙<rt>bǐng</rt></ruby>三将率师东出，欲趁晋丧偷袭郑国，扩大秦在中原的势力。</p>
+  <p>秦军过周北门时，王孙满观其<ruby>"轻而无礼"<rt>qīng ér wú lǐ</rt></ruby>，预言必败。至<ruby>滑<rt>huá</rt>国</ruby>，遇郑国商人<ruby>弦高<rt>xián gāo</rt></ruby>。弦高见秦军将至，急中生智——以十二头牛犒劳秦军，假称奉郑君之命前来迎接，同时派人飞驰告郑。孟明视以为郑已有备，遂灭滑而还师。</p>
+  <p>新任晋君襄公（文公之子）得知秦军趁丧来犯，大怒。时值晋文公灵柩尚在<ruby>曲沃<rt>qū wò</rt></ruby>，襄公<ruby>墨<rt>mò</rt>衰<rt>cuī</rt>绖<rt>dié</rt></ruby>（染黑丧服）亲率大军，在<ruby>崤<rt>xiáo</rt></ruby>山隘道设伏。崤山者，秦岭余脉，山高谷深，车不可并行。秦军满载滑国战利品入谷，晋军封其前路、断其后路，居高临下弓弩齐发。秦军三万余人全军覆没，孟明视等三将被生擒活捉。</p>
+  <p>后经晋文公夫人（秦穆公之女）说情，襄公释三将归秦。秦穆公素服郊迎，向三将哭曰："孤违<ruby>蹇<rt>jiǎn</rt>叔</ruby>之言以辱二三子，孤之罪也。"非但不责罚，反令三人官复原职。此后秦穆公尽弃东进之念，转而西向——"<ruby>益国十二，开地千里，遂霸西戎。</ruby>"秦晋之好自此终结。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">xiáo</span>崤：崤山，今河南洛宁西北，秦岭东段余脉</span>
+    <span><span class="ruby">mò cuī dié</span>墨衰绖：将白色丧服染黑以行军，古礼丧期不可纯白出征</span>
+    <span><span class="ruby">xián gāo</span>弦高：郑国商人，以十二牛犒秦军，智退秦师</span>
+    <span><span class="ruby">jiǎn shū</span>蹇叔：秦大夫，百里奚所荐，曾力谏穆公不可远袭</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img spring">👑🔪</div>
-  <div class="story-body">
-    <h3>一鸣惊人</h3>
-    <div class="chapter">第50回 · 楚庄王问鼎</div>
-    <p>楚庄王即位三年不理朝政，日夜为乐。大夫<ruby>申无畏<rt>shēn wú wèi</rt></ruby>谏曰："有鸟在<ruby>阜<rt>fù</rt></ruby>，三年不<ruby>蜚<rt>fēi</rt>不鸣</ruby>，是何鸟也？"庄王悟，答曰："三年不蜚，蜚将冲天；三年不鸣，鸣将惊人。"遂罢淫乐，励精图治，终问鼎中原成春秋五霸之一。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">fù</span>阜：土山，此处指南方的山丘</span>
-      <span class="ann"><span class="ruby">fēi</span>蜚：通"飞"，古语中飞/蜚通用</span>
-    </div>
+<p class="transition">秦晋决裂后，楚庄王趁势北伐。这位曾三年不理朝政的"昏君"，即将上演一场惊艳的蜕变——</p>
+
+<div class="story" data-era="mid">
+  <div class="story-num">第七回</div>
+  <div class="story-illustration">🐦⚡👑</div>
+  <h3>一鸣惊人</h3>
+  <span class="chapter-tag autumn">第50回</span>
+  <p>楚庄王即位之初，三年不视朝政，日夜为乐。下令曰："敢谏者死。"大夫<ruby>申无畏<rt>shēn wú wèi</rt></ruby>入见，庄王左抱郑姬右拥越女，问："大夫来欲饮酒乎，抑欲闻乐乎？"申无畏曰："臣非为酒乐。适有隐语，愿请教于王——有鸟在于<ruby>阜<rt>fù</rt></ruby>，三年不<ruby>蜚<rt>fēi</rt>不鸣</ruby>，是何鸟也？"</p>
+  <p>庄王知其讽己，笑而答曰："三年不<ruby>蜚<rt>fēi</rt></ruby>，<ruby>蜚<rt>fēi</rt>将冲天</ruby>；三年不鸣，<ruby>鸣将惊人</ruby>。子其退矣，寡人知之矣。"此后庄王果罢淫乐、退奸佞，重用孙叔敖为令尹，修明法度、整军经武。不出数年，平<ruby>若敖氏<rt>ruò áo shì</rt></ruby>之乱，伐陆浑之戎，兵临周疆问九鼎之轻重——"问鼎中原"由此而来——楚庄王终成春秋五霸之一。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">fù</span>阜：土山</span>
+    <span><span class="ruby">fēi</span>蜚：通"飞"，古语飞/蜚通用（非"蜚蠊"之蜚）</span>
+    <span><span class="ruby">ruò áo shì</span>若敖氏：楚国大族，长期把持朝政</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img autumn">🐑🌾</div>
-  <div class="story-body">
-    <h3>百里奚举于市</h3>
-    <div class="chapter">第26回 · 秦穆公用贤</div>
-    <p>百里奚原为虞国大夫，虞亡被<ruby>俘<rt>fú</rt></ruby>为奴，以五张<ruby>羖<rt>gǔ</rt>羊皮</ruby>赎身。秦穆公闻其贤，拜为上卿。百里奚相秦七年，举<ruby>蹇<rt>jiǎn</rt>叔</ruby>、<ruby>由余<rt>yóu yú</rt></ruby>，秦国大治，为日后一统天下奠基。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">gǔ</span>羖：黑色的公羊，五羖羊皮即五张黑羊皮</span>
-      <span class="ann"><span class="ruby">jiǎn</span>蹇叔：秦大夫，百里奚所荐贤臣</span>
-    </div>
+<p class="transition">晋楚争霸百年，中原小国苦不堪言。至公元前546年，宋国大夫向<ruby>戌<rt>xū</rt></ruby>奔走各国促成"弭兵之盟"——晋楚两大国各自承认对方势力范围，中原迎来数十年和平。然而南方的吴越之地，另一场惊心动魄的恩怨正在酝酿——</p>
+
+<!-- ═══════════ 春秋晚期 ═══════════ -->
+<div class="era-header" data-era="late">
+  <span class="era-icon">🏹</span>
+  <h2>第三卷 · 春秋晚期</h2>
+  <span class="era-date">公元前500年 — 前476年 · 吴越争霸 · 圣人出世</span>
+</div>
+
+<div class="story" data-era="late">
+  <div class="story-num">第八回</div>
+  <div class="story-illustration">🧔🌙⛰️</div>
+  <h3>伍子胥过昭关 · 一夜白头</h3>
+  <span class="chapter-tag warring">第71-76回</span>
+  <p>楚平王荒淫无道，夺太子建之妇为妃，又听信奸臣<ruby>费无极<rt>fèi wú jí</rt></ruby>谗言诛杀太子太傅<ruby>伍奢<rt>wǔ shē</rt></ruby>及其长子伍尚。伍奢之次子伍员（字子胥）逃亡。子胥携太子建之子公子胜，昼伏夜出，直奔宋、郑，辗转至吴楚边境的<ruby>昭关<rt>zhāo guān</rt></ruby>。</p>
+  <p>昭关盘查极严，有子胥画像于城门之上。子胥藏于民间，忧心如焚，辗转反侧一夜不得眠。及至天明，揽镜自照——<ruby>须发尽白。</ruby>一夜之间，三十余岁的壮年男子满头白发。面目全非，竟得以混出昭关，逃入吴国。</p>
+  <p>入吴后，子胥行乞于市，后结识勇士<ruby>专诸<rt>zhuān zhū</rt></ruby>。专诸以鱼肠剑刺杀吴王<ruby>僚<rt>liáo</rt></ruby>，助公子光即位，是为吴王<ruby>阖闾<rt>hé lǘ</rt></ruby>。阖闾用伍子胥、孙武（兵圣），整军经武，吴国一跃为强国。公元前506年，伍子胥与孙武率吴师三万，五战五捷，攻破楚国都城<ruby>郢<rt>yǐng</rt></ruby>。时楚平王已死，子胥掘其墓，<ruby>鞭<rt>biān</rt>尸三百</ruby>以报杀父之仇。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">zhāo guān</span>昭关：今安徽含山北，古吴楚边界</span>
+    <span><span class="ruby">hé lǘ</span>阖闾：吴王名（非"盍"），一作阖庐</span>
+    <span><span class="ruby">yǐng</span>郢：楚国都城，今湖北荆州</span>
+    <span><span class="ruby">zhuān zhū</span>专诸：吴国刺客，以鱼肠剑刺吴王僚</span>
   </div>
 </div>
 
-</div></div>
+<p class="transition">阖闾破楚之后，踌躇满志。然螳螂捕蝉，黄雀在后——南方的越国趁吴师在楚之机来袭，吴越之仇由此结下。阖闾伐越时遭越将<ruby>灵姑浮<rt>líng gū fú</rt></ruby>戈击伤脚趾，伤重而卒。其子夫差继位，誓报杀父之仇——</p>
 
-<!-- ═══ 春秋晚期（前500-前476）：吴越争霸 → 三家分晋前 ═══ -->
-<div class="era-section" data-era="late-spring">
-<div class="era-header"><span class="era-icon">🏹</span><h2>春秋晚期</h2><span class="era-date">前500年 — 前476年 · 吴越争霸 · 圣人出世</span></div>
-<div class="story-grid">
-
-<div class="story-card">
-  <div class="story-img warring">🧔⛰️</div>
-  <div class="story-body">
-    <h3>伍子胥过昭关</h3>
-    <div class="chapter">第71回 · 一夜白头</div>
-    <p>楚平王杀伍子胥父兄，子胥逃亡。至<ruby>昭关<rt>zhāo guān</rt></ruby>，关隘盘查甚严，<ruby>一夜之间，须发尽白</ruby>，面目全非，得以混出关隘。后辅佐吴王阖<ruby>闾<rt>lǘ</rt></ruby>，终率吴师破楚<ruby>郢<rt>yǐng</rt>都</ruby>，<ruby>鞭<rt>biān</rt>尸</ruby>三百以报父仇。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">zhāo guān</span>昭关：今安徽含山北，春秋吴楚边界</span>
-      <span class="ann"><span class="ruby">hé lǘ</span>阖闾：吴王名，一作阖庐</span>
-      <span class="ann"><span class="ruby">yǐng</span>郢都：楚国都城，今湖北荆州</span>
-    </div>
+<div class="story" data-era="late">
+  <div class="story-num">第九回</div>
+  <div class="story-illustration">🗡️🛌🌿</div>
+  <h3>卧薪尝胆</h3>
+  <span class="chapter-tag warring">第79-83回</span>
+  <p>夫差即位后日夜练兵，两年后大败越军于<ruby>夫<rt>fú</rt>椒<rt>jiāo</rt></ruby>（太湖中之山），乘胜攻入越境。越王勾践率残兵五千退守<ruby>会<rt>kuài</rt>稽<rt>jī</rt></ruby>山，命大夫文种以美女宝器贿赂吴太宰<ruby>伯<rt>bó</rt>嚭<rt>pǐ</rt></ruby>，向夫差乞降称臣。伍子胥力谏："<ruby>树德莫如滋，去疾莫如尽。</ruby>勾践贤君，种、<ruby>蠡<rt>lǐ</rt></ruby>良臣，若反国将为乱。"夫差不听。</p>
+  <p>勾践携夫人及范蠡入吴为奴三年，养马执鞭、尝粪问疾，极尽卑微。夫差以为其志已消，释之归国。</p>
+  <p>勾践归国后，不住宫室而卧于柴草之上，悬一苦胆于座前，饮食必先尝胆，自问："<ruby>女<rt>rǔ</rt>忘<rt>wàng</rt>会稽之耻<rt>huì jī zhī chǐ</rt>邪<rt>yé</rt>？</ruby>"（你忘了会稽山的耻辱吗？）用文种"伐吴九术"、范蠡治军，行"十年生聚、十年教训"之策——奖励生育、减免赋税、秘密练兵。</p>
+  <p>与此同时，越国献美女<ruby>西<rt>xī</rt>施<rt>shī</rt></ruby>、郑旦于夫差（范蠡于<ruby>苎<rt>zhù</rt>萝<rt>luó</rt></ruby>山下得之，教习三年而后献），又贿伯嚭离间君臣。夫差为西施建<ruby>馆<rt>guǎn</rt>娃<rt>wá</rt>宫</ruby>，沉溺酒色，日益疏远伍子胥。</p>
+  <p>夫差欲北伐齐国争霸中原，伍子胥再谏先灭越国："<ruby>越，腹心之疾。</ruby>"夫差怒，赐<ruby>属<rt>zhǔ</rt>镂<rt>lòu</rt></ruby>之剑令子胥自刎。子胥仰天长叹，嘱家人曰："必树吾墓以<ruby>槚<rt>jiǎ</rt></ruby>，<ruby>槚<rt>jiǎ</rt>可材<rt>kě cái</rt>也</ruby>。抉吾眼悬于吴东门之上，以观越兵之入也。"夫差闻之大怒，令人以<ruby>鸱<rt>chī</rt>夷<rt>yí</rt></ruby>（皮袋）盛子胥之尸，浮于江中。吴人怜之，为立祠于江上，名曰<ruby>"胥山"<rt>xū shān</rt></ruby>。</p>
+  <p>公元前473年，勾践趁夫差北上<ruby>黄池<rt>huáng chí</rt></ruby>会盟之机，举倾国之兵伐吴。围吴都三年，夫差求和遭拒，<ruby>伏剑<rt>fú jiàn</rt></ruby>自杀。临死以<ruby>幂<rt>mì</rt></ruby>覆面，曰："吾无面目以见子胥也。"越灭吴后，勾践北渡淮水，与齐晋诸侯会于徐州，周元王赐<ruby>胙<rt>zuò</rt></ruby>（祭肉），命为<ruby>"伯"<rt>bó</rt></ruby>。越国极盛一时，勾践成为春秋最后一位霸主。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">fú jiāo</span>夫椒：太湖中山名，"夫"不读fū</span>
+    <span><span class="ruby">kuài jī</span>会稽：山名，今浙江绍兴</span>
+    <span><span class="ruby">lǐ</span>范蠡：越国名臣，后隐退经商称陶朱公</span>
+    <span><span class="ruby">zhǔ lòu</span>属镂：剑名，夫差赐死伍子胥之剑</span>
+    <span><span class="ruby">chī yí</span>鸱夷：皮制口袋，盛尸浮江</span>
+    <span><span class="ruby">xī shī</span>西施：中国古代四大美女之首</span>
+    <span><span class="ruby">zuò</span>胙：天子祭祀用的肉，赐胙即承认其霸主地位</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img spring">🗡️🛌</div>
-  <div class="story-body">
-    <h3>卧薪尝胆</h3>
-    <div class="chapter">第80回 · 勾践复仇</div>
-    <p>吴王夫差大败越国于<ruby>夫<rt>fú</rt>椒<rt>jiāo</rt></ruby>，越王勾践被迫入吴为奴三年。归国后，<ruby>卧薪<rt>wò xīn</rt>悬<rt>xuán</rt>胆<rt>dǎn</rt></ruby>——睡柴草、尝苦胆以不忘亡国之耻。用范<ruby>蠡<rt>lǐ</rt></ruby>、文种之谋，"十年生聚、十年教训"，终灭吴雪耻。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">fú jiāo</span>夫椒：今江苏太湖中，夫不读fū</span>
-      <span class="ann"><span class="ruby">lǐ</span>范蠡：越国名臣，后隐退经商称"陶朱公"</span>
-    </div>
+<p class="transition">勾践灭吴后，范蠡不辞而别，泛舟五湖经商致富，世称陶朱公。文种不听劝告留在越国，终被勾践赐死。而勾践之后越国迅速衰落，最终为楚所灭。春秋时代至此画上句号——</p>
+
+<!-- ═══════════ 战国时期 ═══════════ -->
+<div class="era-header" data-era="warring">
+  <span class="era-icon">🏯</span>
+  <h2>第四卷 · 战国时期</h2>
+  <span class="era-date">公元前475年 — 前221年 · 七雄并立至天下一统</span>
+</div>
+
+<div class="story" data-era="warring">
+  <div class="story-num">第十回</div>
+  <div class="story-illustration">🧠⚔️🏙️</div>
+  <h3>孙庞斗智 · 围魏救赵</h3>
+  <span class="chapter-tag warring">第87-89回</span>
+  <p>三家分晋，战国拉开序幕。魏国率先变法成为首霸，而齐国的崛起则源于一对师兄弟的宿命对决——孙<ruby>膑<rt>bìn</rt></ruby>与庞涓。</p>
+  <p>孙膑者，齐国人，孙武之后，与庞涓同师鬼谷子学习兵法。庞涓先入魏国为将，自知才不及孙膑，乃诱其入魏，以<ruby>膑<rt>bìn</rt>刑</ruby>（挖去膝盖骨）加害，欲使其终身废弃。孙膑佯狂装疯，后在齐国使者帮助下逃回齐国，为将军田忌所重。</p>
+  <p>公元前354年，庞涓率魏师八万攻赵，围困赵都<ruby>邯郸<rt>hán dān</rt></ruby>。赵求救于齐。齐威王欲命孙膑为将，孙膑辞曰："刑余之人不可。"乃以田忌为将，孙膑为军师，坐于<ruby>辎<rt>zī</rt>车</ruby>（有帷盖的车）中运筹帷幄。</p>
+  <p>田忌欲率军直趋邯郸与魏军决战。孙膑阻之，曰："<ruby>夫解杂乱纷纠者不控<rt>fū jiě zá luàn fēn jiū zhě bù kòng</rt>拳<rt>quán</rt>，救斗者不搏<rt>jiù dòu zhě bù bó</rt>戟<rt>jǐ</rt></ruby>。批亢捣虚，形格势禁，则自为解耳。今梁（魏都大梁）之兵尽于外，国内空虚。君不若引兵疾走大梁，据其街路，冲其方虚，彼必释赵而自救。是我一举解赵之围而收<ruby>弊<rt>bì</rt>于魏</ruby>也。"</p>
+  <p>田忌从其计，率师直扑大梁。庞涓闻讯大惊，仓促回师。齐军于<ruby>桂陵<rt>guì líng</rt></ruby>设伏，以逸待劳大破魏军。庞涓仅以身免。十三载后，庞涓再度率师侵韩，孙膑依计再围大梁。庞涓不得不回师，孙膑用"减灶诱敌"之计——每日减少军灶数量，庞涓以为齐军怯战逃亡者众，率轻锐日夜兼程追击，至<ruby>马陵<rt>mǎ líng</rt></ruby>道狭处，见一树下有白光。举火照之——书曰："<ruby>庞涓死于此树之下。</ruby>"齐军万弩俱发，魏军大溃。庞涓自刎，曰："<ruby>遂成<rt>suì chéng</rt>竖子<rt>shù zǐ</rt></ruby>之名！"</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">bìn</span>膑：孙膑因受膑刑（去膝盖骨）而得名</span>
+    <span><span class="ruby">hán dān</span>邯郸：赵国都城</span>
+    <span><span class="ruby">guì líng</span>桂陵：今河南长垣</span>
+    <span><span class="ruby">mǎ líng</span>马陵：今山东莘县</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img epic">🌊👻</div>
-  <div class="story-body">
-    <h3>伍子胥<ruby>鸱<rt>chī</rt>夷</ruby>浮江</h3>
-    <div class="chapter">第83回 · 忠臣之死</div>
-    <p>夫差欲北伐齐，子胥力谏先灭越，夫差不听，反赐<ruby>属<rt>zhǔ</rt>镂</ruby>剑令其自刎。子胥临死曰："抉吾眼悬东门，以观越兵之入也。"夫差怒，以<ruby>鸱夷<rt>chī yí</rt></ruby>（皮袋）盛其尸浮于江中。后九年越果灭吴。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">chī yí</span>鸱夷：皮制的口袋，盛尸浮江</span>
-      <span class="ann"><span class="ruby">zhǔ lòu</span>属镂：剑名，赐死之剑</span>
-    </div>
+<p class="transition">魏国霸业在孙膑两击之下瓦解。而西陲的秦国，商鞅变法的种子正在结出累累果实。与此同时，纵横家登上历史舞台——</p>
+
+<div class="story" data-era="warring">
+  <div class="story-num">第十一回</div>
+  <div class="story-illustration">📜⚖️🏗️</div>
+  <h3>商鞅变法</h3>
+  <span class="chapter-tag warring">第86回</span>
+  <p><ruby>商鞅<rt>shāng yāng</rt></ruby>，卫国公族之后，故称卫鞅或<ruby>公孙鞅<rt>gōng sūn yāng</rt></ruby>。少好刑名之学，初仕于魏，为魏相公叔<ruby>痤<rt>cuó</rt></ruby>之中庶子。公叔痤病笃时向魏惠王荐商鞅——"若不能用，必杀之，勿令出境。"惠王不以为意。后商鞅闻秦孝公求贤令，携李<ruby>悝<rt>kuī</rt></ruby>《法经》西入秦。</p>
+  <p>商鞅三见秦孝公——先说帝道（道家无为），孝公昏昏欲睡；再说王道（儒家仁义），孝公不置可否；三说霸道（法家强国），孝公与语数日不倦，膝之前于席（促膝而谈）。遂拜商鞅为左庶长，主持变法。</p>
+  <p>变法之始，商鞅恐民不信，立三丈之木于国都市南门，募民能徙至北门者赏十金。民怪之，莫敢徙。复曰："能徙者予五十金。"一人徙之，<ruby>辄<rt>zhé</rt></ruby>（立即）予五十金。自此法令一出，民莫敢违。此"<ruby>徙木立信<rt>xǐ mù lì xìn</rt></ruby>"之典。</p>
+  <p>商鞅行新法十年：废井田、开<ruby>阡<rt>qiān</rt>陌<rt>mò</rt></ruby>，奖励耕织，军功授爵二十等，宗室非有军功不得属籍。秦国由是大治——道不拾遗、山无盗贼、家给人足，乡邑大治。然新法触怒旧贵族。孝公薨，太子<ruby>驷<rt>sì</rt></ruby>（秦惠文王）即位，公子<ruby>虔<rt>qián</rt></ruby>等告商鞅谋反。商鞅逃亡至边关，欲宿客舍，舍人不知其为商君，曰："商君之法，舍人无验者坐之（留宿无证件者受连坐）。"商鞅喟然叹曰："为法之弊，一至此哉！"终被擒，遭<ruby>车<rt>chē</rt>裂<rt>liè</rt></ruby>（五马分尸）而死。然商鞅虽死，其法不废。秦自此富国强兵，为日后始皇一统天下奠基。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">cuó</span>公叔痤：魏相</span>
+    <span><span class="ruby">kuī</span>李悝：战国法家先驱，著《法经》</span>
+    <span><span class="ruby">xǐ mù</span>徙木：搬动木头</span>
+    <span><span class="ruby">qiān mò</span>阡陌：田间小路，南北为阡、东西为陌</span>
+    <span><span class="ruby">chē liè</span>车裂：五马分尸，古代极刑</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img autumn">🌹👸</div>
-  <div class="story-body">
-    <h3>西施入吴</h3>
-    <div class="chapter">第79回 · 美人计</div>
-    <p>越国大夫范蠡于<ruby>苎<rt>zhù</rt>萝</ruby>山下寻得浣纱女西施、郑旦，教习歌舞三年后献予吴王夫差。夫差为建<ruby>馆<rt>guǎn</rt>娃<rt>wá</rt>宫</ruby>，沉溺酒色，荒废朝政，吴国由此渐衰。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">zhù luó</span>苎萝：山名，今浙江诸暨，西施故里</span>
-      <span class="ann"><span class="ruby">guǎn wá</span>馆娃宫：夫差为西施所建宫殿，在苏州灵岩山</span>
-    </div>
+<p class="transition">商鞅死后，秦惠文王继续推行法治。此时，鬼谷子的另一位高徒登上了历史舞台——他身佩六国相印，一时风光无两。</p>
+
+<div class="story" data-era="warring">
+  <div class="story-num">第十二回</div>
+  <div class="story-illustration">🗣️🎭🤝</div>
+  <h3>苏秦合纵 · 张仪连横</h3>
+  <span class="chapter-tag warring">第90-93回</span>
+  <p>苏秦，洛阳人，师从<ruby>鬼谷子<rt>guǐ gǔ zǐ</rt></ruby>。学成出游数岁，大困而归。妻不下织，嫂不为炊，父母不与言。苏秦闭门不出，发愤苦读。每读书欲睡，引锥自刺其股（大腿），血流至足——此"头悬梁锥刺股"之典。一年后，揣摩天下大势，悟出"合纵"之策。</p>
+  <p>苏秦先赴燕国，以"燕赵相合则可安"说燕文侯，得其资助。复至赵国，说赵肃侯曰："<ruby>安民之本，在于择交。</ruby>六国并力西向，则秦必破。"赵肃侯大悦，资以车马黄金使游说列国。苏秦依次说服韩、魏、齐、楚，六国"合纵"成功——<ruby>苏秦为纵约长，并相六国</ruby>（身佩六国相印）。</p>
+  <p>苏秦北报赵王，行过洛阳。父母闻之<ruby>清宫除道<rt>qīng gōng chú dào</rt></ruby>，张乐设饮，郊迎三十里。妻侧目而视，嫂<ruby>蛇行<rt>shé xíng</rt>匍<rt>pú</rt>匐<rt>fú</rt></ruby>（伏地爬行），四拜自跪而谢。苏秦问："嫂何前<ruby>倨<rt>jù</rt></ruby>而后卑也？"嫂曰："以季子位尊而多金。"苏秦喟然叹曰："此一人之身，富贵则亲戚畏惧之，贫贱则轻易之。且使我有洛阳负郭田二顷，吾岂能佩六国相印乎！"</p>
+  <p>然而合纵终被瓦解——瓦解之人正是苏秦的同窗师弟张仪。张仪受苏秦暗中资助入秦（苏秦自知合纵不可久，故意激怒张仪使其入秦以助己成事），以"连横"之策说秦惠文王。连横者，秦与六国分别结盟，远交近攻、各个击破。张仪欺楚怀王以六百里地换取楚齐绝交，怀王信之，与齐绝交后向秦索地，张仪曰："臣有<ruby>奉邑<rt>fèng yì</rt></ruby>六里，愿献于王。"怀王大怒伐秦，大败。自此外交术语"纵横捭阖"由此而来——<ruby>捭<rt>bǎi</rt></ruby>者开也，<ruby>阖<rt>hé</rt></ruby>者闭也。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">guǐ gǔ zǐ</span>鬼谷子：纵横家鼻祖，传为苏秦张仪之师</span>
+    <span><span class="ruby">bǎi hé</span>捭阖：开合，指分化拉拢、联合打击的谋略</span>
+    <span><span class="ruby">jù</span>倨：傲慢</span>
   </div>
 </div>
 
-</div></div>
+<p class="transition">纵横之术虽盛极一时，然归根结底——决定国家命运的，是实打实的国力。韩赵魏三家分晋以来，列国变法图强，弱肉强食之势已然形成。此时，几位光照千古的人物即将登场——</p>
 
-<!-- ═══ 战国时期（前475-前221） ═══ -->
-<div class="era-section" data-era="warring">
-<div class="era-header"><span class="era-icon">🏯</span><h2>战国时期</h2><span class="era-date">前475年 — 前221年 · 七雄并立至一统天下</span></div>
-<div class="story-grid">
-
-<div class="story-card">
-  <div class="story-img warring">🧠⚔️</div>
-  <div class="story-body">
-    <h3>围魏救赵</h3>
-    <div class="chapter">第87回 · 孙膑庞涓斗智</div>
-    <p>魏将庞涓攻赵都<ruby>邯郸<rt>hán dān</rt></ruby>，赵求救于齐。齐将田忌用军师孙<ruby>膑<rt>bìn</rt></ruby>之谋——不赴赵而直捣魏都大梁，庞涓回师自救，齐军于<ruby>桂陵<rt>guì líng</rt></ruby>设伏大破魏军。此为"攻其所必救"的兵家典范。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">bìn</span>膑：孙膑名，因受膑刑（挖去膝盖骨）而得名</span>
-      <span class="ann"><span class="ruby">guì líng</span>桂陵：今河南长垣，孙膑设伏处</span>
-    </div>
+<div class="story" data-era="warring">
+  <div class="story-num">第十三回</div>
+  <div class="story-illustration">💎🏛️⚡</div>
+  <h3>完璧归赵 · 负荆请罪</h3>
+  <span class="chapter-tag warring">第95-96回</span>
+  <p>赵国得楚人卞和所献<ruby>和氏<rt>hé shì</rt>璧<rt>bì</rt></ruby>——天下至宝。秦昭襄王闻之，遣使遗书赵惠文王，愿以十五城易之。赵王与群臣计议：欲予秦，恐秦得璧不偿城；欲勿予，又恐秦兵来伐。计未定，宦者令<ruby>缪<rt>miào</rt>贤<rt>xián</rt></ruby>荐其舍人<ruby>蔺<rt>lìn</rt>相如</ruby>可使。</p>
+  <p>蔺相如携璧入秦。秦王坐<ruby>章台<rt>zhāng tái</rt></ruby>见相如，相如奉璧进上。秦王大喜，传以示美人及左右，皆呼万岁。相如视秦王无意偿赵城，乃前曰："璧有瑕，请指示王。"秦王授璧，相如持璧倚柱，怒发上冲冠，谓秦王曰："大王欲得璧，使人发书至赵，赵王悉召群臣议。皆曰秦贪，负其强，以空言求璧，偿城恐不可得。臣以为布衣之交尚不相欺，况大国乎！今臣观大王无意偿赵王城邑，故臣复取璧。大王必欲急臣，臣头今与璧俱碎于柱矣！"相如持璧<ruby>睨<rt>nì</rt>柱</ruby>，欲以击柱。秦王恐其破璧，乃<ruby>辞谢<rt>cí xiè</rt></ruby>固请，召有司按图，指从此以往十五城予赵。</p>
+  <p>相如度秦王只是诈言，乃使其从者<ruby>衣<rt>yì</rt>褐<rt>hè</rt></ruby>（穿粗布衣），怀其璧，从径道亡归赵国。秦王终以礼毕而归相如。相如既归，赵王拜为上大夫。秦终不予赵城，赵亦不予秦璧。此"完璧归赵"之典。</p>
+  <p>其后秦赵<ruby>渑<rt>miǎn</rt>池</ruby>之会，蔺相如再展锋芒逼秦王击<ruby>缶<rt>fǒu</rt></ruby>（瓦盆），为赵挣足颜面。归国后，相如以功拜为上卿，位居老将廉颇之上。廉颇，赵之良将，以勇气闻于诸侯，有攻城野战之大功。不服相如以口舌之劳居己之上，扬言曰："我见相如，必辱之。"</p>
+  <p>相如闻之，每朝会称病不往，路遇廉颇则引车避匿。其舍人皆以为耻，相如曰："夫以秦王之威，而相如廷叱之，辱其群臣。相如虽<ruby>驽<rt>nú</rt></ruby>（愚钝），独畏廉将军哉？<ruby>顾吾念之<rt>gù wú niàn zhī</rt></ruby>，强秦之所以不敢加兵于赵者，徒以吾两人在也。今两虎共斗，其势不俱生。吾所以为此者，以先国家之急而后私仇也。"廉颇闻之，<ruby>肉<rt>ròu</rt>袒<rt>tǎn</rt></ruby>（赤裸上身）负<ruby>荆<rt>jīng</rt>条</ruby>，因宾客至蔺相如门谢罪。曰："鄙贱之人，不知将军宽之至此也。"卒相与欢，为<ruby>刎<rt>wěn</rt>颈</ruby>之交。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">hé shì bì</span>和氏璧：楚人卞和所献名玉</span>
+    <span><span class="ruby">lìn xiàng rú</span>蔺相如：赵上卿</span>
+    <span><span class="ruby">miǎn</span>渑池：今河南渑池，秦赵会盟处</span>
+    <span><span class="ruby">ròu tǎn</span>肉袒：脱去上衣，袒身谢罪</span>
+    <span><span class="ruby">wěn jǐng</span>刎颈之交：生死与共的交情</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img epic">💎🏃</div>
-  <div class="story-body">
-    <h3>完璧归赵</h3>
-    <div class="chapter">第95回 · 蔺相如使秦</div>
-    <p>秦王欲以十五城易赵之<ruby>和氏<rt>hé shì</rt>璧<rt>bì</rt></ruby>。赵遣<ruby>蔺<rt>lìn</rt>相如</ruby>持璧入秦，秦王得璧无意偿城，相如<ruby>佯<rt>yáng</rt></ruby>称璧有瑕，复取之倚柱怒发，许以头与璧俱碎。秦王无奈，相如完璧归赵，不辱使命。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">hé shì bì</span>和氏璧：楚人卞和所献宝玉，天下至宝</span>
-      <span class="ann"><span class="ruby">lìn xiàng rú</span>蔺相如：赵国上卿，以智勇闻名</span>
-    </div>
+<p class="transition">赵国在廉颇、蔺相如、赵奢等名将能臣支撑下，成为东方六国中唯一可单独抗秦的力量。然而，公元前260年的长平之战——赵<ruby>括<rt>kuò</rt></ruby>纸上谈兵、白起坑杀赵卒四十万——赵国元气大伤。六十年后，一位刺客从易水出发——</p>
+
+<div class="story" data-era="warring">
+  <div class="story-num">第十四回</div>
+  <div class="story-illustration">🗺️🗡️💀</div>
+  <h3>图穷匕见 · 荆轲刺秦</h3>
+  <span class="chapter-tag warring">第107回</span>
+  <p>秦将王<ruby>翦<rt>jiǎn</rt></ruby>破赵，兵临易水，燕国危在旦夕。燕太子丹曾在秦为质子，深知秦王（即后来的秦始皇）之暴戾，决意以刺杀挽回危局。经处士田光推荐，太子丹以国士之礼待荆<ruby>轲<rt>kē</rt></ruby>——舍上舍、车骑美女恣其所欲。</p>
+  <p>荆轲献计：以秦叛将樊<ruby>於<rt>wū</rt>期<rt>qī</rt></ruby>的首级和燕国<ruby>督<rt>dū</rt>亢<rt>kàng</rt></ruby>（燕最富庶之地）地图作为觐见之礼，方可近秦王之身。樊於期闻之，慷慨自刎，以头颅相托。太子丹求天下最锋利之匕首——赵国徐夫人匕首——以毒药<ruby>淬<rt>cuì</rt></ruby>之，试诸人，血<ruby>濡<rt>rú</rt>缕<rt>lǚ</rt></ruby>（沾染一丝即死）。</p>
+  <p>荆轲待客同行，客未至而太子丹疑其反悔。荆轲怒，遂与少年秦舞阳西行入秦。太子丹及宾客知其事者，皆白衣冠以送之，至易水之上。高渐离击<ruby>筑<rt>zhú</rt></ruby>（击弦乐器），荆轲和而歌，为<ruby>变徵<rt>biàn zhǐ</rt></ruby>之声（悲凉之调），士皆垂泪涕泣。复为<ruby>羽声<rt>yǔ shēng</rt></ruby>慷慨（激昂之调），士皆<ruby>瞋<rt>chēn</rt>目</ruby>（瞪眼怒视），发尽上指冠。于是荆轲遂就车而去，终已不顾——此时歌声起：</p>
+  <p style="text-align:center;font-size:16px;color:var(--accent);margin:16px 0;text-indent:0">
+  "<ruby>风萧萧兮<rt>fēng xiāo xiāo xī</rt></ruby><ruby>易水寒<rt>yì shuǐ hán</rt></ruby>，<ruby>壮士一去兮<rt>zhuàng shì yī qù xī</rt></ruby><ruby>不复还<rt>bù fù huán</rt></ruby>。"
+  </p>
+  <p>荆轲至咸阳，秦王大喜，设九宾之礼于咸阳宫见燕使者。荆轲捧樊於期首级函（匣），秦舞阳捧地图匣，以次进。至<ruby>陛<rt>bì</rt></ruby>（殿前台阶），舞阳色变振恐，群臣怪之。荆轲笑曰："北蛮夷之鄙人，未尝见天子，故振<ruby>慑<rt>shè</rt></ruby>。"遂取地图献上。秦王发图——图穷而匕首见。</p>
+  <p>荆轲左手把秦王之袖，右手持匕首<ruby>揕<rt>zhèn</rt></ruby>（刺）之。未至身，秦王惊起，袖绝。拔剑，剑长不可立拔，操其室（剑鞘）。荆轲逐秦王，秦王环柱而走。群臣惊愕，猝起不意，尽失其度——秦法，群臣侍殿上者不得持尺寸之兵。左右乃曰："<ruby>王负剑！</ruby>"秦王遂拔剑击荆轲，断其左股。荆轲<ruby>废<rt>fèi</rt></ruby>（倒下），乃引其匕首以掷秦王——不中，中铜柱。秦王复击轲。轲自知事不就，倚柱而笑，<ruby>箕<rt>jī</rt>踞<rt>jù</rt></ruby>（叉开腿坐）以骂曰："<ruby>事所以不成者，以欲生劫之，必得约<rt>shì suǒ yǐ bù chéng zhě yǐ yù shēng jié zhī bì dé yuē</rt>契<rt>qì</rt>以报<rt>yǐ bào</rt>太子<rt>tài zǐ</rt>也。</ruby>"左右上前杀轲。</p>
+  <p>秦王大怒，发兵伐燕。五年后，燕亡。又三年，齐亡。公元前221年，秦王政一统天下，称始皇帝。五百余年的春秋战国至此终结。</p>
+  <div class="ann-box"><div class="ann-title">📖 注音释义</div>
+    <span><span class="ruby">wū qī</span>樊於期：秦叛将，自刎献首</span>
+    <span><span class="ruby">dū kàng</span>督亢：燕最富庶之区，今河北涿州</span>
+    <span><span class="ruby">zhú</span>筑：古代击弦乐器，形似筝</span>
+    <span><span class="ruby">biàn zhǐ</span>变徵：古代音阶名，声调悲凉</span>
+    <span><span class="ruby">jī jù</span>箕踞：叉开腿坐（古代极不礼貌的坐姿）</span>
   </div>
 </div>
 
-<div class="story-card">
-  <div class="story-img autumn">🌿🥾</div>
-  <div class="story-body">
-    <h3>负荆请罪</h3>
-    <div class="chapter">第96回 · 将相和</div>
-    <p>蔺相如因完璧归赵与<ruby>渑<rt>miǎn</rt>池</ruby>之会功高，位居大将廉颇之上。廉颇不服，扬言辱之。相如以国事为重避让之。廉颇闻而大惭，<ruby>肉<rt>ròu</rt>袒<rt>tǎn</rt></ruby>负<ruby>荆<rt>jīng</rt>条</ruby>登门谢罪，遂成<ruby>刎<rt>wěn</rt>颈</ruby>之交。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">miǎn</span>渑池：今河南渑池，秦赵会盟之处</span>
-      <span class="ann"><span class="ruby">ròu tǎn</span>肉袒：脱去上衣，袒露身体以示谢罪</span>
-      <span class="ann"><span class="ruby">wěn jǐng</span>刎颈之交：同生共死的交情</span>
-    </div>
-  </div>
-</div>
-
-<div class="story-card">
-  <div class="story-img spring">🗺️🗡️</div>
-  <div class="story-body">
-    <h3>图穷匕见</h3>
-    <div class="chapter">第107回 · 荆轲刺秦</div>
-    <p>燕太子丹遣刺客荆<ruby>轲<rt>kē</rt></ruby>使秦，以献<ruby>督<rt>dū</rt>亢<rt>kàng</rt></ruby>地图及秦叛将樊<ruby>於<rt>wū</rt>期<rt>qī</rt></ruby>首级为名。图中藏<ruby>淬<rt>cuì</rt></ruby>毒匕首，展开至尽处图穷匕见。轲持匕刺秦王未中，反为秦王拔剑斩杀。易水送别，"风萧萧兮易水寒，壮士一去兮不复还"传唱千古。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">kē</span>荆轲：卫国人，燕国刺客</span>
-      <span class="ann"><span class="ruby">dū kàng</span>督亢：燕国最富庶地区，今河北涿州</span>
-      <span class="ann"><span class="ruby">wū qī</span>樊於期：秦叛将，自刎献首助荆轲刺秦</span>
-    </div>
-  </div>
-</div>
-
-<div class="story-card">
-  <div class="story-img epic">🗣️🤝</div>
-  <div class="story-body">
-    <h3>苏秦合纵 / 张仪连横</h3>
-    <div class="chapter">第90-93回 · 纵横捭阖</div>
-    <p>苏秦以"合纵"之策游说六国——联合抗秦，身佩六国相印。张仪则以"连横"瓦解合纵——分别与各国结盟使秦各个击破。二人同出<ruby>鬼谷子<rt>guǐ gǔ zǐ</rt></ruby>门下，师弟相争，<ruby>捭<rt>bǎi</rt>阖<rt>hé</rt></ruby>纵横之术由此名世。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">guǐ gǔ zǐ</span>鬼谷子：纵横家鼻祖，苏秦张仪之师</span>
-      <span class="ann"><span class="ruby">bǎi hé</span>捭阖：开合，纵横捭阖指分化拉拢之策</span>
-    </div>
-  </div>
-</div>
-
-<div class="story-card">
-  <div class="story-img warring">📜⚖️</div>
-  <div class="story-body">
-    <h3>商鞅变法</h3>
-    <div class="chapter">第86回 · 徙木立信</div>
-    <p>商鞅，卫国公族之后（故称卫鞅或<ruby>公孙鞅<rt>gōng sūn yāng</rt></ruby>），入秦得秦孝公重用，推行变法。<ruby>徙<rt>xǐ</rt>木</ruby>立信于南门——能徙木者赏金，以立政令之威。行新法十年，秦国大治，然商鞅终因得罪旧贵族遭<ruby>车裂<rt>chē liè</rt></ruby>。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">xǐ</span>徙：迁移；徙木即搬动木头</span>
-      <span class="ann"><span class="ruby">chē liè</span>车裂：五马分尸，古代极刑</span>
-    </div>
-  </div>
-</div>
-
-<div class="story-card">
-  <div class="story-img spring">👨‍👦🏚️</div>
-  <div class="story-body">
-    <h3>孟母三迁</h3>
-    <div class="chapter">第100回 · 亚圣孟轲</div>
-    <p>孟轲幼时，其母为择善邻，三度迁居：初近墓地，轲学葬事；迁市旁，轲学<ruby>贾<rt>gǔ</rt>人</ruby>叫卖；终迁学宫之旁，轲习礼让。孟母曰："此真吾子所居也。"孟子后为儒家"亚圣"，仅次于孔子。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">gǔ rén</span>贾人：商人（贾读gǔ不读jiǎ，意为坐商）</span>
-    </div>
-  </div>
-</div>
-
-<div class="story-card">
-  <div class="story-img epic">📖🏛️</div>
-  <div class="story-body">
-    <h3>屈原投<ruby>汨<rt>mì</rt>罗</ruby></h3>
-    <div class="chapter">第103回 · 楚辞之祖</div>
-    <p>屈原，楚怀王时为<ruby>三<rt>sān</rt>闾<rt>lǘ</rt>大夫</ruby>，力主联齐抗秦。遭<ruby>靳<rt>jìn</rt>尚</ruby>等谗言被放逐，行吟<ruby>泽<rt>zé</rt>畔</ruby>作《离骚》。后闻秦将白起拔楚都郢，怀石投汨罗江而死。楚人哀之，以<ruby>角<rt>jiǎo</rt>黍<rt>shǔ</rt></ruby>（粽子）投江祭之，是为端午之源。</p>
-    <div class="annotations">
-      <span class="ann"><span class="ruby">mì luó</span>汨罗：水名，在湖南，屈原投江处（汨≠汩）</span>
-      <span class="ann"><span class="ruby">sān lǘ</span>三闾大夫：楚国官职，掌管王族三姓</span>
-      <span class="ann"><span class="ruby">jiǎo shǔ</span>角黍：粽子古称</span>
-    </div>
-  </div>
-</div>
-
-</div></div>
-
-<!-- ═══ 核心人物 ═══ -->
+<!-- ═══════════ 人物志 ═══════════ -->
 <div class="figures">
-<h2>🎭 核心人物志</h2>
+<h2>🎭 人物志</h2>
 <div class="figures-grid">
-
-<div class="figure-card"><div class="avatar king">👑</div><div class="info"><h4>齐桓公 · 姜小白</h4><p>春秋首霸。用管仲为相，"尊王攘夷"九合诸侯一匡天下。晚年管仲病逝后亲信奸臣，饿死宫中尸虫出户。</p><span class="tag king">霸主</span><span class="tag strategist">春秋</span></div></div>
-
-<div class="figure-card"><div class="avatar strategist">🎯</div><div class="info"><h4>管仲 · 管夷吾</h4><p>春秋第一相。佐齐桓公成就霸业，提出"仓廪实而知礼节"的治国理论。齐桓公不计射钩之仇而用之，千古君臣典范。</p><span class="tag strategist">名相</span></div></div>
-
-<div class="figure-card"><div class="avatar king">🦁</div><div class="info"><h4>晋文公 · 重耳</h4><p>流亡十九年、遍历八国的传奇君主。六十二岁归国即位，城濮一战定霸中原。与齐桓并称"齐桓晋文"。</p><span class="tag king">霸主</span></div></div>
-
-<div class="figure-card"><div class="avatar general">⚡</div><div class="info"><h4>伍子胥 · 伍员</h4><p>楚人仕吴，一夜白头过昭关。辅阖闾破楚鞭尸报父仇，佐夫差败越称霸。终因忠谏被赐死，鸱夷浮江。吴人怜之立祠江上。</p><span class="tag general">名将</span><span class="tag ruler">忠臣</span></div></div>
-
-<div class="figure-card"><div class="avatar ruler">🌊</div><div class="info"><h4>越王勾践</h4><p>卧薪尝胆终雪国耻。入吴为奴三年归国后，"十年生聚十年教训"，终灭吴称霸，为春秋最后一位霸主。</p><span class="tag ruler">国君</span></div></div>
-
-<div class="figure-card"><div class="avatar strategist">📜</div><div class="info"><h4>商鞅 · 公孙鞅</h4><p>徙木立信推行变法，废井田开阡陌，奖励耕战。秦国由此富强，然触怒旧贵族遭车裂。法家实践第一人。</p><span class="tag strategist">变法</span></div></div>
-
-<div class="figure-card"><div class="avatar strategist">🎭</div><div class="info"><h4>苏秦 / 张仪</h4><p>鬼谷子门下师兄弟。苏主合纵——六国联合抗秦；张主连横——分别亲秦各个击破。纵横捭阖之术由此大兴。</p><span class="tag strategist">纵横</span></div></div>
-
-<div class="figure-card"><div class="avatar general">🗡️</div><div class="info"><h4>荆轲</h4><p>卫人，燕刺客。图穷匕见刺秦王未遂被杀。易水送别"风萧萧兮易水寒"千载传唱，侠客精神之极致。</p><span class="tag general">刺客</span></div></div>
-
+<div class="fig-card"><div class="avatar king">👑</div><div><h4>齐桓公 · 姜小白</h4><p>春秋首霸。不计射钩之仇用管仲为相，尊王攘夷九合诸侯。晚年不听管仲遗言亲信奸臣，饿死宫中。</p><span class="ftag king">霸主</span></div></div>
+<div class="fig-card"><div class="avatar strategist">🎯</div><div><h4>管仲 · 管夷吾</h4><p>春秋第一相。"仓廪实而知礼节"。佐桓公成霸业，孔子曰"微管仲，吾其被发左衽矣"。</p><span class="ftag strategist">名相</span></div></div>
+<div class="fig-card"><div class="avatar king">🦁</div><div><h4>晋文公 · 重耳</h4><p>流亡十九年遍历八国。六十二岁归国即位，城濮一战退避三舍大破楚军，定霸中原。与齐桓并称"齐桓晋文"。</p><span class="ftag king">霸主</span></div></div>
+<div class="fig-card"><div class="avatar king">🐦</div><div><h4>楚庄王 · 熊侣</h4><p>三年不鸣，一鸣惊人。平若敖氏之乱，问九鼎之轻重。孙叔敖为令尹，楚终成霸。春秋五霸之一。</p><span class="ftag king">霸主</span></div></div>
+<div class="fig-card"><div class="avatar general">⚡</div><div><h4>伍子胥 · 伍员</h4><p>一夜白头过昭关。佐阖闾破楚鞭尸，扶夫差败越称霸。被谗赐死，鸱夷浮江。吴人立祠胥山。</p><span class="ftag general">名将</span></div></div>
+<div class="fig-card"><div class="avatar ruler">🌿</div><div><h4>越王勾践</h4><p>卧薪尝胆二十年生聚教训，终灭吴雪耻。春秋最后一位霸主。然灭吴后诛文种、逐范蠡，可共患难不可共安乐。</p><span class="ftag ruler">国君</span></div></div>
+<div class="fig-card"><div class="avatar strategist">📜</div><div><h4>商鞅 · 公孙鞅</h4><p>徙木立信推行变法，废井田开阡陌奖励耕战。秦国由是富强。触怒旧贵族遭车裂——身死而法不废。</p><span class="ftag strategist">变法</span></div></div>
+<div class="fig-card"><div class="avatar strategist">🎭</div><div><h4>苏秦 · 张仪</h4><p>鬼谷子门下师兄弟。苏主合纵——六国并力抗秦；张主连横——远交近攻瓦解合纵。纵横捭阖之术由此兴。</p><span class="ftag strategist">纵横</span></div></div>
+<div class="fig-card"><div class="avatar strategist">💎</div><div><h4>蔺相如</h4><p>完璧归赵不辱使命，渑池之会廷叱秦王。以国家为重三让廉颇，终成刎颈之交。将相和之千古佳话。</p><span class="ftag strategist">上卿</span></div></div>
+<div class="fig-card"><div class="avatar general">🗡️</div><div><h4>荆轲</h4><p>卫人，燕刺客。易水送别风萧萧兮，图穷匕见刺秦王未遂被杀。侠客精神极致，千古传唱。</p><span class="ftag general">刺客</span></div></div>
 </div></div>
 
 </div>
 
 <div class="footer">
-  <p>《东周列国志》冯梦龙著 · 蔡元放改编 · 108回 叙春秋战国五百余年</p>
-  <p style="margin-top:4px">Hermes Agent 图文精读 · 拼音注音版 · 2026年6月</p>
+  <p>《东周列国志》冯梦龙 著 · 蔡元放 改编 · 一百零八回 · 叙春秋战国五百四十九年</p>
+  <p style="margin-top:4px">Hermes Agent 图文精读 · 拼音注音连贯叙事版 · 2026年6月</p>
 </div>
 
 <script>
 function filterEra(era, btn) {
-  var btns = document.querySelectorAll('.period-btn');
-  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  var btns = document.querySelectorAll('.nav-btn');
+  for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
   btn.classList.add('active');
-  var sections = document.querySelectorAll('.era-section');
-  for (var i = 0; i < sections.length; i++) {
-    if (era === 'all' || sections[i].getAttribute('data-era') === era) {
-      sections[i].classList.remove('hidden');
-    } else {
-      sections[i].classList.add('hidden');
-    }
+  var headers = document.querySelectorAll('.era-header');
+  var stories = document.querySelectorAll('.story');
+  var transitions = document.querySelectorAll('.transition');
+  for (var i = 0; i < headers.length; i++) {
+    headers[i].classList.toggle('hidden', era !== 'all' && headers[i].getAttribute('data-era') !== era);
+  }
+  for (var i = 0; i < stories.length; i++) {
+    stories[i].classList.toggle('hidden', era !== 'all' && stories[i].getAttribute('data-era') !== era);
+  }
+  for (var i = 0; i < transitions.length; i++) {
+    transitions[i].classList.toggle('hidden', era !== 'all');
   }
 }
 </script>
