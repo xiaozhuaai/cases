@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>迪信通 · 知识库</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f8f6f3;color:#2c2c2c;line-height:1.6}
+
+.hero{text-align:center;padding:50px 20px 30px;background:linear-gradient(180deg,#fff 0%,#f8f6f3 100%)}
+.hero h1{font-size:26px;font-weight:700;letter-spacing:3px;margin-bottom:6px}
+.hero .sub{font-size:13px;color:#999;letter-spacing:1px}
+
+.container{max-width:960px;margin:0 auto;padding:0 20px 40px}
+
+.section{margin-bottom:36px}
+.section-title{font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #d45d00;display:flex;align-items:center;gap:8px}
+.section-title .icon{font-size:22px}
+.section-title .count{font-size:12px;color:#999;font-weight:400;margin-left:auto}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+
+.card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:all .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:8px;border:1px solid transparent}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.1);border-color:#d45d00;transform:translateY(-1px)}
+.card .card-icon{font-size:28px}
+.card .card-title{font-size:15px;font-weight:600;color:#1a1a1a}
+.card .card-desc{font-size:12px;color:#999;line-height:1.6}
+.card .card-meta{font-size:11px;color:#ccc;margin-top:auto}
+.card .card-tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;background:#fff5ed;color:#d45d00;margin-right:4px}
+
+.card.external{border-left:3px solid #58a6ff}
+.card.local{border-left:3px solid #3fb950}
+
+.footer{text-align:center;padding:30px;color:#ccc;font-size:12px}
+
+@media(max-width:640px){
+  .card-grid{grid-template-columns:1fr}
+  .hero h1{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>迪信通 · 知识库</h1>
+  <p class="sub">工作台 · 知识库 · 工具箱</p>
+</div>
+
+<div class="container">
+
+<!-- 工作台 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📊</span> 工作台<span class="count">日常使用</span></div>
+  <div class="card-grid">
+    <a href="dashboard.html" class="card">
+      <div class="card-icon">📰</div>
+      <div class="card-title">信息看板</div>
+      <div class="card-desc">每日新闻、DeepSeek日报、监管政策、财务日历、行业分析</div>
+      <div class="card-meta">每日自动更新 · cron</div>
+    </a>
+    <a href="http://192.168.6.216:8080/accounting-handbook.html" class="card external">
+      <div class="card-icon">📋</div>
+      <div class="card-title">会计制度手册</div>
+      <div class="card-desc">迪信通内部会计制度，账务处理参考</div>
+      <div class="card-meta">本地HTTP服务 · 内网</div>
+    </a>
+    <div class="card" style="opacity:0.6">
+      <div class="card-icon">🔧</div>
+      <div class="card-title">财务分析模板库</div>
+      <div class="card-desc">杜邦分析、FCF、Z-score、税种拆分等模板</div>
+      <div class="card-meta"><span class="card-tag">即将上线</span></div>
+    </div>
+    <div class="card" style="opacity:0.6">
+      <div class="card-icon">🏭</div>
+      <div class="card-title">行业数据库</div>
+      <div class="card-desc">手机零售、煤炭、消费等行业关键指标</div>
+      <div class="card-meta"><span class="card-tag">即将上线</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 知识库 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📚</span> 知识库<span class="count">深度阅读</span></div>
+  <div class="card-grid">
+    <a href="books/ludinggong/" class="card">
+      <div class="card-icon">🐢</div>
+      <div class="card-title">超级鹿鼎公投资文集</div>
+      <div class="card-desc">414页全文 · 十年无年度亏损的价值投资体系</div>
+      <div class="card-meta"><span class="card-tag">投资</span>403/414页已OCR</div>
+    </a>
+    <a href="books/东周列国志_图文精读.html" class="card">
+      <div class="card-icon">🏯</div>
+      <div class="card-title">东周列国志 · 图文精读</div>
+      <div class="card-desc">22个故事 · 221处拼音注音 · 中式水墨插图</div>
+      <div class="card-meta"><span class="card-tag">历史</span>108回全覆盖</div>
+    </a>
+    <a href="books/缠斗_中心思想提炼报告.pdf" class="card">
+      <div class="card-icon">⚔️</div>
+      <div class="card-title">缠斗 · 中心思想提炼</div>
+      <div class="card-desc">缠论体系精读，交易哲学与实战要义</div>
+      <div class="card-meta"><span class="card-tag">交易</span>PDF</div>
+    </a>
+    <a href="books/黄帝内经_精读提炼.docx" class="card">
+      <div class="card-icon">🌿</div>
+      <div class="card-title">黄帝内经 · 精读提炼</div>
+      <div class="card-desc">中医经典体系化梳理</div>
+      <div class="card-meta"><span class="card-tag">中医</span>Word</div>
+    </a>
+    <a href="books/易经_深度精读.docx" class="card">
+      <div class="card-icon">☯️</div>
+      <div class="card-title">易经 · 深度精读</div>
+      <div class="card-desc">六十四卦精解与哲学体系</div>
+      <div class="card-meta"><span class="card-tag">哲学</span>Word</div>
+    </a>
+    <a href="books/陈奕蔚_会计准则判断框架.html" class="card">
+      <div class="card-icon">⚖️</div>
+      <div class="card-title">陈奕蔚 · 会计准则判断框架</div>
+      <div class="card-desc">会计视野论坛版主300问精华，收入确认/合并报表/政府补助</div>
+      <div class="card-meta"><span class="card-tag">会计</span>HE4框架</div>
+    </a>
+    <a href="改命记实录_随身口袋书.html" class="card">
+      <div class="card-icon">📖</div>
+      <div class="card-title">改命记实录 · 口袋书</div>
+      <div class="card-desc">随身阅读版</div>
+      <div class="card-meta"><span class="card-tag">随笔</span></div>
+    </a>
+    <a href="books/东周列国志_深度精读.docx" class="card">
+      <div class="card-icon">📜</div>
+      <div class="card-title">东周列国志 · 深度精读</div>
+      <div class="card-desc">Word完整版</div>
+      <div class="card-meta"><span class="card-tag">历史</span>Word</div>
+    </a>
+  </div>
+</div>
+
+<!-- 工具箱 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🛠️</span> 工具箱</div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">OCR文字识别</div>
+      <div class="card-desc">macOS Vision框架 · 中英文 · 批量处理</div>
+      <div class="card-meta">通过Hermes调用</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⏰</div>
+      <div class="card-title">看板自动更新</div>
+      <div class="card-desc">每日9:00自动刷新新闻看板并部署</div>
+      <div class="card-meta">cron · GitHub Pages</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📝</div>
+      <div class="card-title">报告生成</div>
+      <div class="card-desc">财务分析报告 · 读书报告 · Word/PDF输出</div>
+      <div class="card-meta">通过Hermes调用</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌐</div>
+      <div class="card-title">GitHub部署</div>
+      <div class="card-desc">一键推送到GitHub Pages，国内外可访问</div>
+      <div class="card-meta">xiaozhuaai/cases</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">迪信通知识库 · 持续构建中 · Hermes驱动</div>
+</body>
+</html>
