@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>财务分析模板库</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f8f6f3;color:#2c2c2c;line-height:1.6}
+
+.hero{text-align:center;padding:40px 20px 24px}
+.hero h1{font-size:24px;font-weight:700}
+.hero .sub{font-size:13px;color:#999;margin-top:4px}
+
+.container{max-width:1000px;margin:0 auto;padding:0 20px 60px}
+
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(460px,1fr));gap:16px}
+
+.tool{background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,0.05);overflow:hidden}
+.tool-header{background:#1a1a2e;color:#fff;padding:14px 18px;display:flex;align-items:center;gap:10px}
+.tool-header .icon{font-size:22px}
+.tool-header .name{font-size:15px;font-weight:600}
+.tool-header .formula{font-size:11px;color:#aaa;margin-left:auto}
+.tool-body{padding:18px}
+.tool-body .result{padding:12px;border-radius:8px;margin-bottom:12px;font-size:14px;display:none}
+.tool-body .result.show{display:block}
+.tool-body .result.good{background:#e8f5e9;border:1px solid #a5d6a7}
+.tool-body .result.warn{background:#fff3e0;border:1px solid #ffcc80}
+.tool-body .result.bad{background:#ffebee;border:1px solid #ef9a9a}
+
+.row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+.row label{font-size:13px;color:#666;min-width:90px;text-align:right}
+.row input{flex:1;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:14px;outline:none}
+.row input:focus{border-color:#d45d00}
+.row .unit{font-size:12px;color:#999;min-width:40px}
+.row .note{font-size:11px;color:#bbb;margin-left:4px}
+
+.btn{display:block;width:100%;padding:10px;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;transition:all .2s}
+.btn.primary{background:#d45d00;color:#fff}
+.btn.primary:hover{background:#b85000}
+.btn.secondary{background:#f5f5f5;color:#666}
+.btn.secondary:hover{background:#eee}
+
+.result-table{width:100%;font-size:13px;border-collapse:collapse;margin-top:8px}
+.result-table td{padding:4px 8px;border-bottom:1px solid #f0f0f0}
+.result-table td:last-child{text-align:right;font-weight:600}
+.result-table tr.total td{border-top:2px solid #d45d00;font-weight:700}
+
+/* Tabs */
+.tabs{display:flex;gap:2px;margin-bottom:16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.tab{flex:1;padding:10px;text-align:center;font-size:13px;cursor:pointer;border:none;background:#fff;transition:all .2s}
+.tab.active{background:#d45d00;color:#fff;font-weight:600}
+.tab:hover:not(.active){background:#f5f5f5}
+
+@media(max-width:640px){
+  .tools-grid{grid-template-columns:1fr}
+  .row label{min-width:70px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>📊 财务分析模板库</h1>
+  <p class="sub">杜邦分析 · 自由现金流 · Z-score · 税种拆分</p>
+</div>
+
+<div class="container">
+
+<div class="tools-grid">
+
+<!-- 1. 杜邦分析 -->
+<div class="tool">
+  <div class="tool-header"><span class="icon">🔺</span><span class="name">杜邦分析</span><span class="formula">ROE = 净利率 × 周转率 × 杠杆</span></div>
+  <div class="tool-body">
+    <div class="row"><label>净利润</label><input type="number" id="dup_np" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>营业收入</label><input type="number" id="dup_rev" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>总资产</label><input type="number" id="dup_ta" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>净资产</label><input type="number" id="dup_eq" placeholder="万元"><span class="unit">万元</span></div>
+    <button class="btn primary" onclick="calcDuPont()">计算</button>
+    <div class="result" id="dupResult"></div>
+  </div>
+</div>
+
+<!-- 2. 自由现金流 -->
+<div class="tool">
+  <div class="tool-header"><span class="icon">💵</span><span class="name">自由现金流 FCF</span><span class="formula">FCF = 经营CF - CapEx</span></div>
+  <div class="tool-body">
+    <div class="row"><label>经营活动现金流</label><input type="number" id="fcf_ocf" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>资本支出 CapEx</label><input type="number" id="fcf_capex" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>利息支出</label><input type="number" id="fcf_int" placeholder="可选"><span class="unit">万元</span><span class="note">（选填，算股权FCF用）</span></div>
+    <button class="btn primary" onclick="calcFCF()">计算</button>
+    <div class="result" id="fcfResult"></div>
+  </div>
+</div>
+
+<!-- 3. Z-score -->
+<div class="tool">
+  <div class="tool-header"><span class="icon">⚠️</span><span class="name">Altman Z-score</span><span class="formula">Z = 1.2X₁+1.4X₂+3.3X₃+0.6X₄+1.0X₅</span></div>
+  <div class="tool-body">
+    <div class="row"><label>营运资本</label><input type="number" id="z_wc" placeholder="流动资产-流动负债"><span class="unit">万元</span></div>
+    <div class="row"><label>留存收益</label><input type="number" id="z_re" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>EBIT</label><input type="number" id="z_ebit" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>总资产</label><input type="number" id="z_ta" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>总负债</label><input type="number" id="z_tl" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>营业收入</label><input type="number" id="z_rev" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>市值</label><input type="number" id="z_mv" placeholder="上市公司填市值"><span class="unit">万元</span><span class="note">（选填，用账面权益）</span></div>
+    <button class="btn primary" onclick="calcZScore()">计算</button>
+    <div class="result" id="zResult"></div>
+  </div>
+</div>
+
+<!-- 4. 税种拆分 -->
+<div class="tool">
+  <div class="tool-header"><span class="icon">📋</span><span class="name">税种拆分</span><span class="formula">增值税 + 所得税 + 附加税</span></div>
+  <div class="tool-body">
+    <div class="row"><label>营业收入</label><input type="number" id="tax_rev" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>增值税率</label><input type="number" id="tax_vat" value="13" placeholder="%"><span class="unit">%</span></div>
+    <div class="row"><label>毛利率</label><input type="number" id="tax_gm" placeholder="%"><span class="unit">%</span></div>
+    <div class="row"><label>利润总额</label><input type="number" id="tax_profit" placeholder="万元"><span class="unit">万元</span></div>
+    <div class="row"><label>所得税率</label><input type="number" id="tax_itr" value="25" placeholder="%"><span class="unit">%</span></div>
+    <button class="btn primary" onclick="calcTax()">计算</button>
+    <div class="result" id="taxResult"></div>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function fmt(n,unit='万元'){return (n/10000).toFixed(2)+' 亿'+(n<0?'':'');}
+function pct(n,d){return d?((n/d)*100).toFixed(2)+'%':'--';}
+function num(v){return parseFloat(v)||0;}
+
+function calcDuPont(){
+  let np=num(document.getElementById('dup_np').value);
+  let rev=num(document.getElementById('dup_rev').value);
+  let ta=num(document.getElementById('dup_ta').value);
+  let eq=num(document.getElementById('dup_eq').value);
+  if(!rev||!ta||!eq){alert('请填完必填项');return;}
+  
+  let pm=pct(np,rev), tat=(rev/ta).toFixed(2), em=(ta/eq).toFixed(2);
+  let roe=pct(np,eq);
+  
+  let cls=parseFloat(roe)>15?'good':parseFloat(roe)>5?'warn':'bad';
+  let el=document.getElementById('dupResult');
+  el.className='result show '+cls;
+  el.innerHTML=`<table class="result-table">
+    <tr><td>净利率（净利润/收入）</td><td>${pm}</td></tr>
+    <tr><td>总资产周转率（收入/总资产）</td><td>${tat} 次</td></tr>
+    <tr><td>权益乘数（总资产/净资产）</td><td>${em}</td></tr>
+    <tr class="total"><td>ROE（净资产收益率）</td><td>${roe}</td></tr>
+  </table><small style="color:#999">ROE>15%优秀，5-15%一般，<5%较差</small>`;
+}
+
+function calcFCF(){
+  let ocf=num(document.getElementById('fcf_ocf').value);
+  let capex=num(document.getElementById('fcf_capex').value);
+  let int=num(document.getElementById('fcf_int').value);
+  if(!ocf){alert('请填经营活动现金流');return;}
+  
+  let fcf=ocf-capex;
+  let efcf=int?fcf-int:fcf;
+  
+  let el=document.getElementById('fcfResult');
+  el.className='result show '+(fcf>0?'good':'bad');
+  el.innerHTML=`<table class="result-table">
+    <tr><td>经营活动现金流</td><td>${fmt(ocf)}</td></tr>
+    <tr><td>− 资本支出</td><td>${fmt(capex)}</td></tr>
+    <tr class="total"><td>= 企业自由现金流 FCFF</td><td>${fmt(fcf)}</td></tr>
+    ${int?`<tr><td>− 利息支出</td><td>${fmt(int)}</td></tr><tr class="total"><td>= 股权自由现金流 FCFE</td><td>${fmt(efcf)}</td></tr>`:''}
+  </table><small style="color:#999">FCF>0健康，FCF<0需关注融资依赖</small>`;
+}
+
+function calcZScore(){
+  let wc=num(document.getElementById('z_wc').value);
+  let re=num(document.getElementById('z_re').value);
+  let ebit=num(document.getElementById('z_ebit').value);
+  let ta=num(document.getElementById('z_ta').value);
+  let tl=num(document.getElementById('z_tl').value);
+  let rev=num(document.getElementById('z_rev').value);
+  let mv=num(document.getElementById('z_mv').value)||(ta-tl);
+  if(!ta||!rev||!tl){alert('请填完必填项');return;}
+  
+  let x1=wc/ta, x2=re/ta, x3=ebit/ta, x4=mv/tl, x5=rev/ta;
+  let z=1.2*x1+1.4*x2+3.3*x3+0.6*x4+1.0*x5;
+  
+  let cls=z>2.99?'good':z>1.81?'warn':'bad';
+  let desc=z>2.99?'安全区（破产风险低）':z>1.81?'灰色区（需关注）':'危险区（破产风险高）';
+  
+  let el=document.getElementById('zResult');
+  el.className='result show '+cls;
+  el.innerHTML=`<table class="result-table">
+    <tr><td>X₁ 营运资本/总资产</td><td>${x1.toFixed(4)}</td></tr>
+    <tr><td>X₂ 留存收益/总资产</td><td>${x2.toFixed(4)}</td></tr>
+    <tr><td>X₃ EBIT/总资产</td><td>${x3.toFixed(4)}</td></tr>
+    <tr><td>X₄ 市值/总负债</td><td>${x4.toFixed(4)}</td></tr>
+    <tr><td>X₅ 收入/总资产</td><td>${x5.toFixed(4)}</td></tr>
+    <tr class="total"><td>Z-score</td><td>${z.toFixed(2)}</td></tr>
+  </table><small>${desc}</small>`;
+}
+
+function calcTax(){
+  let rev=num(document.getElementById('tax_rev').value);
+  let vat=num(document.getElementById('tax_vat').value)/100;
+  let gm=num(document.getElementById('tax_gm').value)/100;
+  let profit=num(document.getElementById('tax_profit').value);
+  let itr=num(document.getElementById('tax_itr').value)/100;
+  if(!rev||!profit){alert('请填完必填项');return;}
+  
+  let cost=rev*(1-gm);
+  let vatOut=rev*vat/(1+vat);
+  let vatIn=cost*vat/(1+vat);
+  let vatPay=vatOut-vatIn;
+  let incomeTax=profit*itr;
+  let surtax=vatPay*0.12;
+  let total=vatPay+incomeTax+surtax;
+  
+  let el=document.getElementById('taxResult');
+  el.className='result show good';
+  el.innerHTML=`<table class="result-table">
+    <tr><td>增值税（销项−进项）</td><td>${fmt(vatPay)}（${(vatPay/rev*100).toFixed(2)}%）</td></tr>
+    <tr><td>附加税（城建+教育=增值税×12%）</td><td>${fmt(surtax)}</td></tr>
+    <tr><td>所得税</td><td>${fmt(incomeTax)}（${(itr*100).toFixed(0)}%）</td></tr>
+    <tr class="total"><td>综合税负</td><td>${fmt(total)}（占收入 ${(total/rev*100).toFixed(2)}%）</td></tr>
+  </table><small style="color:#999">假设：销项=收入×税率/(1+税率)，进项=成本×税率/(1+税率)</small>`;
+}
+</script>
+</body>
+</html>
