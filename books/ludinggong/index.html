@@ -3,549 +3,4411 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>超级鹿鼎公 · 投资体系</title>
+<title>超级鹿鼎公投资文集 · 全文精读</title>
 <style>
-:root{--bg:#faf8f4;--card:#fff;--border:#e8e0d0;--text:#2c2416;--t2:#6b5e4a;--accent:#8b4513;--gold:#c4a64a;--red:#c0392b;--blue:#2c5f8a;--green:#4a7c3f;--dark:#2c1810}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Hiragino Sans GB","Songti SC","STSong",serif;font-size:15px;line-height:1.8}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f8f6f3;color:#2c2c2c;line-height:1.8}
+.container{max-width:780px;margin:0 auto;padding:0 20px}
 
-/* NAV */
-nav{background:linear-gradient(135deg,var(--dark),#4a3020);color:#c4b89a;padding:0 32px;display:flex;align-items:center;position:sticky;top:0;z-index:1000;height:52px}
-nav h1{font-size:15px;letter-spacing:3px;color:#e8d5b7;font-weight:500}
-nav .nav-links{display:flex;gap:2px;margin-left:auto;overflow-x:auto}
-nav .nav-links a{color:#b5a080;text-decoration:none;font-size:11px;padding:6px 12px;border-radius:4px;white-space:nowrap;transition:all 0.2s}
-nav .nav-links a:hover,nav .nav-links a.active{color:#e8d5b7;background:rgba(255,255,255,0.06)}
+/* 顶部 */
+.hero{text-align:center;padding:60px 20px 30px;background:linear-gradient(180deg,#fff 0%,#f8f6f3 100%)}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:2px;margin-bottom:8px}
+.hero .subtitle{font-size:14px;color:#999}
+.hero .meta{margin-top:12px;font-size:13px;color:#aaa}
+.hero .meta span{margin:0 8px}
 
-/* HERO */
-.hero{background:linear-gradient(135deg,var(--dark) 0%,#4a3020 50%,#6b3a20 100%);color:#e8d5b7;padding:48px 32px;text-align:center}
-.hero h2{font-size:30px;letter-spacing:6px;font-weight:500;margin-bottom:8px}
-.hero .sub{font-size:13px;opacity:0.6;letter-spacing:2px;margin-bottom:24px}
-.hero .kpi{display:flex;justify-content:center;gap:40px;margin-bottom:24px}
-.hero .kpi-item{text-align:center}
-.hero .kpi-val{font-size:36px;font-weight:700;color:var(--gold)}
-.hero .kpi-lbl{font-size:11px;opacity:0.5;letter-spacing:1px}
-.hero .motto{font-size:17px;letter-spacing:3px;color:var(--gold);opacity:0.8}
+/* 标签筛选 */
+.filter-bar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #eee;padding:10px 0;text-align:center}
+.filter-bar .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:780px;margin:0 auto;padding:0 20px}
+.filter-tag{padding:4px 14px;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid #ddd;background:#fff;color:#666;transition:all .2s;white-space:nowrap}
+.filter-tag:hover,.filter-tag.active{background:#d45d00;color:#fff;border-color:#d45d00}
+.filter-tag.all{font-weight:600}
 
-/* SECTIONS */
-.container{max-width:1000px;margin:0 auto;padding:0 24px 80px}
-.section{margin-top:48px}
-.section-title{font-size:20px;color:var(--accent);letter-spacing:2px;padding-bottom:12px;border-bottom:2px solid var(--border);margin-bottom:24px;display:flex;align-items:center;gap:10px}
-.section-title .num{font-size:12px;color:var(--t2);opacity:0.4;font-weight:400;letter-spacing:0}
+/* 进度条 */
+.progress-mini{text-align:center;padding:4px;font-size:11px;color:#bbb}
+.progress-mini .bar{display:inline-block;width:120px;height:3px;background:#eee;border-radius:2px;vertical-align:middle;margin:0 6px;overflow:hidden}
+.progress-mini .bar div{height:100%;background:#d45d00;border-radius:2px;width:11.8%}
 
-/* CARDS */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:24px}
-.card{background:var(--card);border-radius:10px;padding:24px;border:1px solid var(--border);transition:all 0.2s}
-.card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.05)}
-.card .card-icon{font-size:28px;margin-bottom:8px}
-.card h4{font-size:15px;color:var(--accent);margin-bottom:8px}
-.card p,.card li{font-size:13px;color:var(--t2);line-height:1.7}
-.card ul{padding-left:16px}
-.card ul li{margin-bottom:4px}
+/* 章节标题 */
+.chapter-divider{margin:40px 0 24px;padding:16px 0;border-bottom:2px solid #d45d00}
+.chapter-title{font-size:22px;font-weight:700;color:#1a1a1a}
 
-/* PRINCIPLE ROW */
-.principle{display:flex;gap:20px;align-items:flex-start;padding:20px 24px;background:var(--card);border-radius:10px;border:1px solid var(--border);margin-bottom:16px}
-.principle .p-num{font-size:28px;font-weight:700;color:rgba(139,69,19,0.12);min-width:40px;line-height:1}
-.principle .p-body h4{font-size:15px;color:var(--accent);margin-bottom:6px}
-.principle .p-body p,.principle .p-body li{font-size:13px;color:var(--t2);line-height:1.7}
-.principle .p-body ul{padding-left:16px;margin-top:6px}
-.principle .p-body ul li{margin-bottom:3px}
+/* 页面卡片 */
+.page-card{background:#fff;border-radius:8px;padding:24px 28px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,0.06);transition:box-shadow .2s}
+.page-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.1)}
+.page-card.hidden{display:none}
+.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #f0f0f0}
+.page-num{font-size:12px;color:#bbb;font-weight:500}
+.page-tag{font-size:11px;color:#d45d00;background:#fff5ed;padding:2px 10px;border-radius:10px}
+.page-body{font-size:15px;color:#333}
+.page-body p{margin-bottom:8px}
+.page-body .ldg-quote{color:#d45d00;font-weight:500;border-left:3px solid #d45d00;padding-left:12px;margin:8px 0}
+.page-body .reply{color:#999;font-size:14px;margin-left:16px}
+.page-body .sub-title{font-size:16px;font-weight:600;margin:12px 0 6px;color:#1a1a1a}
+.ocr-pending{color:#ccc;font-size:14px;text-align:center;padding:20px;font-style:italic}
 
-/* TABLE */
-.info-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px;background:var(--card);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
-.info-table th{background:rgba(139,69,19,0.06);color:var(--accent);font-weight:600;padding:12px 16px;text-align:left;font-size:12px;letter-spacing:1px}
-.info-table td{padding:12px 16px;border-top:1px solid var(--border);color:var(--t2)}
-.info-table tr:hover td{background:rgba(139,69,19,0.02)}
+/* 底部 */
+.footer{text-align:center;padding:40px 20px;color:#ccc;font-size:12px}
+.back-top{position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;background:#d45d00;color:#fff;border:none;cursor:pointer;font-size:20px;box-shadow:0 2px 8px rgba(212,93,0,.3);display:none;z-index:200;transition:opacity .3s}
+.back-top.show{display:block}
 
-/* QUOTE */
-.quote{background:linear-gradient(135deg,rgba(196,166,74,0.06),rgba(196,166,74,0.02));border-left:3px solid var(--gold);padding:16px 20px;margin:16px 0;border-radius:0 8px 8px 0;font-size:14px;color:var(--accent);font-style:italic}
-
-/* TAGS */
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
-.tag{padding:3px 10px;background:rgba(196,166,74,0.1);border:1px solid rgba(196,166,74,0.2);border-radius:10px;font-size:10px;color:var(--accent)}
-
-/* STOCK CARDS */
-.stock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-.stock-card{background:var(--card);border-radius:10px;padding:20px;border:1px solid var(--border);text-align:center}
-.stock-card .code{font-size:10px;color:var(--t2);opacity:0.4;letter-spacing:1px}
-.stock-card h4{font-size:15px;color:var(--accent);margin:4px 0}
-.stock-card .sector{font-size:10px;color:var(--t2);margin-bottom:8px}
-.stock-card .yield{font-size:20px;font-weight:700;color:var(--gold)}
-.stock-card .note{font-size:11px;color:var(--t2);margin-top:4px}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .hero .kpi{gap:20px}
-  .hero .kpi-val{font-size:24px}
-  .card-grid{grid-template-columns:1fr}
-  .principle{flex-direction:column;gap:8px}
-  nav .nav-links{display:none}
+@media(max-width:640px){
+  .hero h1{font-size:22px}
+  .page-card{padding:16px}
+  .filter-tag{font-size:12px;padding:3px 10px}
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <h1>🦌 超级鹿鼎公</h1>
-  <div class="nav-links">
-    <a href="#core" class="active">核心理念</a>
-    <a href="#method">方法体系</a>
-    <a href="#returns">收益结构</a>
-    <a href="#risk">风险控制</a>
-    <a href="#position">仓位管理</a>
-    <a href="#industry">行业深研</a>
-    <a href="#stocks">经典标的</a>
-    <a href="#macro">宏观视野</a>
-    <a href="#lessons">投资启示</a>
-  </div>
-</nav>
-
 <div class="hero">
-  <h2>超级鹿鼎公 · 投资体系</h2>
-  <div class="sub">防御型价值投资的实战典范 —— 十年无年度亏损</div>
-  <div class="kpi">
-    <div class="kpi-item"><div class="kpi-val">~23%</div><div class="kpi-lbl">年化收益率</div></div>
-    <div class="kpi-item"><div class="kpi-val">0</div><div class="kpi-lbl">年度亏损次数</div></div>
-    <div class="kpi-item"><div class="kpi-val">414</div><div class="kpi-lbl">篇投资帖</div></div>
-    <div class="kpi-item"><div class="kpi-val">2014-24</div><div class="kpi-lbl">跨越周期</div></div>
-  </div>
-  <div class="motto">价值选股 · 趋势选时 · 估值定仓 · 波动降本</div>
+  <h1>超级鹿鼎公投资文集</h1>
+  <p class="subtitle">十年无年度亏损 · 价值选股 趋势选时 估值定仓 波动降本</p>
+  <p class="meta"><span>📄 共414页</span><span>📅 2014-2024</span><span>来源：雪球</span></p>
 </div>
 
-<div class="container">
-
-<!-- ═══════════ 一、核心投资理念 ═══════════ -->
-<div class="section" id="core">
-  <div class="section-title"><span class="num">01</span> 核心投资理念</div>
-  
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">🛡️</div>
-      <h4>防御优先 · 不输为赢</h4>
-      <p>以"不亏损"为第一原则。十年无年度亏损，靠的不是高超的进攻，而是极致的风险防御。孙子兵法："欲胜敌，先为不可胜"——想赚钱，先做到不亏钱。</p>
-      <ul><li>涨时不如纯价投，跌时能少亏很多</li><li>最重要的事：清晰地知道自己能力的边界</li></ul>
-    </div>
-    <div class="card">
-      <div class="card-icon">🔄</div>
-      <h4>三重收益闭环</h4>
-      <p>无论市场处于何种状态，都有收益来源：</p>
-      <ul>
-        <li><b>📉 下跌</b> → 赚股权（分红复投买更多）</li>
-        <li><b>📈 上涨</b> → 赚市值（估值修复+业绩增长）</li>
-        <li><b>📊 横盘</b> → 赚分红（高股息提供现金流）</li>
-      </ul>
-    </div>
-    <div class="card">
-      <div class="card-icon">🐢</div>
-      <h4>乌龟流策略</h4>
-      <p>"龟速赚钱，只要赚钱就行。"安全永远是第一考量。不想跑赢别人多少，只想跑赢自己内心的贪婪。遇上大风时等待高估，其他时间永远是安全第一、低估、确定性。</p>
-    </div>
+<div class="filter-bar">
+  <div class="progress-mini">
+    OCR进度 <span class="bar"><div></div></span> 49/414（11.8%）
   </div>
-
-  <div class="quote">"大多数股神都死在融资上。"<br>"不追求完美操作，追求长期复利。"</div>
-</div>
-
-<!-- ═══════════ 二、完整方法体系 ═══════════ -->
-<div class="section" id="method">
-  <div class="section-title"><span class="num">02</span> 完整方法体系 · 十六字方针</div>
-
-  <div class="principle">
-    <div class="p-num">🔍</div>
-    <div class="p-body">
-      <h4>价值选股 —— 六大硬标准</h4>
-      <ul>
-        <li><b>行业垄断壁垒</b> — 水电、煤炭、公用事业、铁路。所有高毛利全部来自垄断</li>
-        <li><b>低估值</b> — PE/PB历史低位，买入价约7-8折。低PE、低PB是铁律</li>
-        <li><b>现金流充沛</b> — 持续高分红的物质基础。水电现金流可达盈利的130%</li>
-        <li><b>股息率高且稳定</b> — 神华5-8%、长电3-5%。分红是0.9-0.95PB套现的机会</li>
-        <li><b>基本面确定性高</b> — 拒绝科技、创新药等高门槛行业。上市满5年是底线</li>
-        <li><b>抗风险能力强</b> — 公司必须"难倒闭"。银行会倒闭但不会全部倒闭，选最安全的</li>
-      </ul>
-      <div class="tags"><span class="tag">低PE</span><span class="tag">低PB</span><span class="tag">高ROE</span><span class="tag">行业垄断</span><span class="tag">上市满5年</span><span class="tag">确定性增长</span></div>
-    </div>
-  </div>
-
-  <div class="principle">
-    <div class="p-num">⏰</div>
-    <div class="p-body">
-      <h4>趋势选时 —— 等待五个积极信号</h4>
-      <p>在股价和估值双低的背景下，等待：</p>
-      <ul>
-        <li>宏观经济转好或预期改善</li>
-        <li>货币政策宽松，流动性充裕</li>
-        <li>企业经营基本面实质好转</li>
-        <li>市场极度低迷、公司积极回购</li>
-        <li>高分红信号确认（分红率>40%，或按盈利40%折算）</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="principle">
-    <div class="p-num">⚖️</div>
-    <div class="p-body">
-      <h4>估值定仓 —— 动态调整仓位</h4>
-      <ul>
-        <li><b>低估值 → 高仓位</b>：底部敢于重仓</li>
-        <li><b>高估值 → 低仓位</b>：高位果断减仓</li>
-        <li><b>绝不轻易满仓</b>，永远留有余地</li>
-        <li>5PE涨到10PE是100%利润，10PE到15PE是50%，15PE到20PE只有33%——吃掉大头就好</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="principle">
-    <div class="p-num">📉</div>
-    <div class="p-body">
-      <h4>波动降本 —— 做T增厚收益</h4>
-      <p>主仓位不变，利用技术分析判断高低点做T降低持仓成本，<b>增厚年收益5%-15%</b>。不追求完美——不苛求最低买、最高卖。</p>
-      
-      <table class="info-table">
-        <tr><th>股价阶段</th><th>操作策略</th><th>买卖顺序</th><th>价差要求</th></tr>
-        <tr><td>底部震荡</td><td><b>先买后卖</b></td><td>先买入底仓，后卖出</td><td>价差较小，灵活操作</td></tr>
-        <tr><td>趋势向上，波动加大</td><td><b>先卖后买</b></td><td>先卖出，后买回</td><td>价差拉大，确保利润</td></tr>
-        <tr><td>大幅上涨，估值偏高</td><td><b>先卖后买</b></td><td>先卖出，后买回</td><td>价差扩大，频率降低</td></tr>
-        <tr><td>严重高估</td><td><b>分批卖出，不买回</b></td><td>只卖不买</td><td>完成清仓，兑现全部利润</td></tr>
-      </table>
-    </div>
+  <div class="tags">
+    <span class="filter-tag all active" onclick="filterPosts('all',this)">全部</span>
+    <span class="filter-tag" onclick="filterPosts('产业周期',this)">产业周期</span><span class="filter-tag" onclick="filterPosts('人口趋势',this)">人口趋势</span><span class="filter-tag" onclick="filterPosts('前言',this)">前言</span><span class="filter-tag" onclick="filterPosts('大盘个股',this)">大盘个股</span><span class="filter-tag" onclick="filterPosts('宏观局势',this)">宏观局势</span><span class="filter-tag" onclick="filterPosts('技术分析',this)">技术分析</span><span class="filter-tag" onclick="filterPosts('投资理念',this)">投资理念</span><span class="filter-tag" onclick="filterPosts('杂谈',this)">杂谈</span><span class="filter-tag" onclick="filterPosts('煤炭电力',this)">煤炭电力</span><span class="filter-tag" onclick="filterPosts('风险控制',this)">风险控制</span>
   </div>
 </div>
 
-<!-- ═══════════ 三、三重收益结构 ═══════════ -->
-<div class="section" id="returns">
-  <div class="section-title"><span class="num">03</span> 三重收益结构</div>
+<div class="container" id="content">
 
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">💎</div>
-      <h4>第一层：分红复投</h4>
-      <p style="font-size:24px;color:var(--gold);font-weight:700;margin:8px 0">30~40%</p>
-      <p>长期持有高股息垄断资产，分红持续买入同类标的。熊市中分红提供安全垫，是"价值之锚"。8-9%现金分红价就是股价的底锚。</p>
+    <div class="chapter-divider" id="preface">
+      <span class="chapter-num"></span>
+      <h2 class="chapter-title">前言</h2>
     </div>
-    <div class="card">
-      <div class="card-icon">📈</div>
-      <h4>第二层：估值修复</h4>
-      <p style="font-size:24px;color:var(--gold);font-weight:700;margin:8px 0">40~50%</p>
-      <p>PE/PB历史低位买入优质公司，等待价值回归。经典案例：国投电力5倍。"只有以产业投资的眼光买股票，靠穿越经济周期的业绩增长。"</p>
+
+    <article class="page-card" data-page="1" data-tag="前言" data-chapter="preface">
+      <div class="page-header">
+        <span class="page-num">第1页</span>
+        <span class="page-tag">前言</span>
+      </div>
+      <div class="page-body"><p>超级鹿鼎公</p>
+<p>资料集</p></div>
+    </article>
+
+    <article class="page-card" data-page="2" data-tag="前言" data-chapter="preface">
+      <div class="page-header">
+        <span class="page-num">第2页</span>
+        <span class="page-tag">前言</span>
+      </div>
+      <div class="page-body"><p>关于本册资料</p>
+<p>超级鹿鼎公是一位长期保持无年度亏损的投资者。他的投资理念是：价值选股，趋势选时，估值定仓，波动降本。</p>
+<p>鹿鼎公注重价值投资，也对技术分析着迷。他既像一位朴素的格雷厄姆式价值投资者，又是一位擅长运用乌龟流策略（如搬砖、做T等）的交易员。</p>
+<p>鹿鼎公的文章具有宏观视角，具有时代性和穿透力。他擅长从国家历史经纬里，从他国的社会经济发展进程中，锚定及分析当前我国各行业所在的微妙处境。</p></div>
+    </article>
+
+    <article class="page-card" data-page="3" data-tag="前言" data-chapter="preface">
+      <div class="page-header">
+        <span class="page-num">第3页</span>
+        <span class="page-tag">前言</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第3页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="4" data-tag="前言" data-chapter="preface">
+      <div class="page-header">
+        <span class="page-num">第4页</span>
+        <span class="page-tag">前言</span>
+      </div>
+      <div class="page-body"><p>目录</p>
+<p>一、投资的理念：价值之锚、现金与穿越牛熊、独孤九剑与易筋经、波动的数学题、深爱老熊、管财主对撞宁静、认清自己很难、形成自己的盈利模式、别人眼里的最坏无非这两种情况、现金流才是价值之锚、龟速赚钱只要赚钱就行、没有利润下跌空间的低估、关于长期年化12%收益是不是好的问题、总结下我现在的投资理念、IBM与新泽西石油、11%年化确定性收益的投资有多珍贵、股市能不能财富自由、合理估值</p></div>
+    </article>
+
+    <article class="page-card" data-page="5" data-tag="前言" data-chapter="preface">
+      <div class="page-header">
+        <span class="page-num">第5页</span>
+        <span class="page-tag">前言</span>
+      </div>
+      <div class="page-body"><p>二、技术分析及交易：关于搬砖党、看的远但是不能做的远、技术玩法的弱点、4大流派的前世今生、关于做T的态度、完美的底部、成功的技术高手素描、网格交易、看K线少用复权</p>
+<p>三、大盘和个股：1.看大盘：都是老滑头的A股、从纯技术分析角度看大盘、从统计学派的角度看大盘；2.说个股：从营销角度看美的格力的王者之争、从陕煤回购说起、好股票、垄断才是长期高额利润的基础、永续组合、中煤能源2022年报、AH股30年长期投资组合、茅台数学题</p>
+<p>四、关于风险：高风险与低风险是相对的、常识与逻辑之一风险敞口、未雨绸缪很重要、紧急与重要</p>
+<p>五、产业与周期：1.地产行业 2.银行金融 3.互联网 4.钢铁业 5.其他产业 6.周期</p></div>
+    </article>
+
+    <article class="page-card" data-page="6" data-tag="前言" data-chapter="preface">
+      <div class="page-header">
+        <span class="page-num">第6页</span>
+        <span class="page-tag">前言</span>
+      </div>
+      <div class="page-body"><p>六、煤炭和电力能源：1.煤炭行业：谈谈煤炭的淡季不淡旺季不旺、从历史气候开始的乱谈、国际煤炭大局势、煤炭企业的优势分类、煤电博弈是虚幻、未来煤炭的出路、关于中国神华长协价、为什么更看好焦煤、煤价变化与持股企业盈利的变化、煤炭板块低估值原因分析、业内专家对于煤炭供应衰退的看法、电煤的消耗会有几个变数；2.电力能源：未来的用电量顶峰区域、等不来的均值回归、没有燃气机组调峰的中国电力还得靠煤电、这12年以来的煤电恩怨；3.神华与淮北：月线看神华、淮北矿业之优劣</p></div>
+    </article>
+
+    <article class="page-card" data-page="7" data-tag="前言" data-chapter="preface">
+      <div class="page-header">
+        <span class="page-num">第7页</span>
+        <span class="page-tag">前言</span>
+      </div>
+      <div class="page-body"><p>七、人口与趋势：食品消费股与人口结构、从日本人口变化与经济谈起、关于养老送终、人口老龄化后的经济（台湾）、60年后的7亿人口与200年后的7亿人口的差异、中日韩三国人口下降其实才刚刚开始、2023年后出生的中国孩子有多幸运</p>
+<p>八、局势及竞争：1.局势：通缩期的库存挤出效应、债务谭、美国的通胀是个无解的局、不能收割就很痛；2.竞争：日本的低欲望社会、越南注定是韭菜的命、关于印度、摸着鬼子走、日本股市和消费的经验</p>
+<p>九、闲言碎语：股市的好处与坏处、抄作业4个关键、推翻常识、想象的彼岸、怎么样看出别人的水平高低</p></div>
+    </article>
+
+    <article class="page-card" data-page="8" data-tag="" data-chapter="">
+      <div class="page-header">
+        <span class="page-num">第8页</span>
+        <span class="page-tag"></span>
+      </div>
+      <div class="page-body"><p>从日本人口变化与经济谈起一</p>
+<p>一张2010年的上海人口结构图</p>
+<p>关于养老送终</p>
+<p>人口老龄化后的经济（台湾）一</p>
+<p>60年后的7亿人口，与200年后的7亿人口的差异</p>
+<p>中日韩三国人口下降其实才刚刚开始</p>
+<p>2023年后出生的中国孩子有多幸运一</p>
+<p>八、局势及竞争</p>
+<p>1. 局势</p>
+<p>通缩期的库存挤出效应-</p>
+<p>债务谭--</p>
+<p>美国的通胀是个无解的局</p>
+<p>不能收割就很痛</p>
+<p>2. 竞争</p>
+<p>日本的低欲望社会-</p>
+<p>日本东京房价大致情况一</p>
+<p>越南，注定是韭菜的命-</p>
+<p>关于印度-</p>
+<p>摸着鬼子走</p>
+<p>日本股市和消费的经验-</p>
+<p>日韩以及台湾省的收入</p>
+<p>关于日本房产，几个事实-</p>
+<p>九、闲言碎语</p>
+<p>股市的好处与坏处一</p>
+<p>抄作业4个关键--</p>
+<p>推翻常识</p>
+<p>想象的彼岸</p>
+<p>怎么样看出别人的水平高低</p>
+<p>-334</p>
+<p>-340</p>
+<p>-343</p>
+<p>-345</p>
+<p>-347</p>
+<p>-352</p>
+<p>-376</p>
+<p>-381</p>
+<p>-397</p>
+<p>-400</p></div>
+    </article>
+
+    <article class="page-card" data-page="9" data-tag="" data-chapter="">
+      <div class="page-header">
+        <span class="page-num">第9页</span>
+        <span class="page-tag"></span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第9页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="10" data-tag="" data-chapter="">
+      <div class="page-header">
+        <span class="page-num">第10页</span>
+        <span class="page-tag"></span>
+      </div>
+      <div class="page-body"><p>一、投资的理念</p></div>
+    </article>
+
+    <article class="page-card" data-page="11" data-tag="" data-chapter="">
+      <div class="page-header">
+        <span class="page-num">第11页</span>
+        <span class="page-tag"></span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第11页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <div class="chapter-divider" id="ch1">
+      <span class="chapter-num"></span>
+      <h2 class="chapter-title">一、投资的理念</h2>
     </div>
-    <div class="card">
-      <div class="card-icon">🔄</div>
-      <h4>第三层：波段降本</h4>
-      <p style="font-size:24px;color:var(--gold);font-weight:700;margin:8px 0">+5~15%</p>
-      <p>利用市场波动反复做T降低成本，增厚年度收益。主仓位不动，技术分析辅助判断。三重收益构成完整的复利闭环，缺一不可。</p>
+
+    <article class="page-card" data-page="12" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第12页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2014-05-06 来自雪球</p>
+<p>海螺水泥和中国神华将是夕阳行业中的强企，俗称沙漠之花。万科还不能真正看出是不是沙漠之花。</p>
+<p class="reply">网友：万科管理还是远强于海螺，问题是万科无法垄断。海螺天生就在垄断行业，有级差地租。</p>
+<p class="ldg-quote">鹿鼎公：是的，所有高毛利全部来自垄断，不管是行政垄断，还是品牌垄断，或者资源垄断，又或是技术垄断。海螺的垄断来自资源、资金、布局的优势；神华来自资源、铁路、码头和上下游一体以及资金。</p></div>
+    </article>
+
+    <article class="page-card" data-page="13" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第13页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第13页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="14" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第14页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2014-05-28 来自雪球</p>
+<p>个人特别在意分红，原因其实很简单：在股价大幅度低于1PB的背景下，分红就是给你0.9-0.95PB套现的机会。股价没填权，就是给你极低PB买入的机会。这是我拿建设、工行、北京银行的逻辑。当然选择这三家，还有个主要原因是，都是风控最好的企业。</p></div>
+    </article>
+
+    <article class="page-card" data-page="15" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第15页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2014-06-05 来自雪球</p>
+<p>我的投资逻辑在最近1年又有一些变化。以前主要思路是低估值+安全+稳定成长，现在的思路+行业垄断。3家银行都是低估值，银行会倒闭，但是不会全部倒闭，所以选择最安全的3家。</p>
+<br>
+<p>2014-11-06 来自雪球</p>
+<p>不符合低PE、低PB、行业垄断、高ROE、长远有确定性增长、上市满5年这个标准的，我一律不买，包括新股。</p>
+<br>
+<p>2014-07-05 来自雪球</p>
+<p>能够长期保持超越95%普通投资者的有水平的人，基本上没人愿意帮人理财、帮人炒股票。自己的钱滚滚雪球收益足以养活自己。</p></div>
+    </article>
+
+    <article class="page-card" data-page="16" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第16页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2014-12-26 来自雪球</p>
+<p>只有以产业投资的眼光买股票，靠穿越经济周期的业绩增长，稳定提高的分红；以够低的合理价格买入，耐心持有，直到不再低估或发现了更好的才卖出。对商业模式定性是必要条件，对发展前景定量是充分条件，确定性则是王者之道，复利是最伟大的奇迹。</p>
+<br>
+<p>2015-01-02 来自雪球</p>
+<p>俺在股市的风格完全是乌龟流，安全永远是俺的第一考量。不想跑赢别人多少，只想跑赢自己内心的贪婪。</p></div>
+    </article>
+
+    <article class="page-card" data-page="17" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第17页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2015-02-27 来自雪球</p>
+<p>投资标的如同来来往往飞奔的兔子，只有撞到大树的那只才属于你的。因此，投资就是守株待兔。不成熟的投资者往往会举着一棵小树疲于奔命追兔子，效果适得其反。成熟的，往往在交通要道上找根大树，静静守着。</p>
+<br>
+<p>2015-03-31 来自雪球</p>
+<p>孙子曰：欲胜敌，先为不可胜。股票语言翻译：想赚钱，先做到不亏钱。所以俺的逻辑是赚钱事小，亏钱事大。</p></div>
+    </article>
+
+    <article class="page-card" data-page="18" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第18页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2015-05-06 来自雪球</p>
+<p>大额度融资上杠杆的线在哪里？1、股票业绩没有大幅度下降风险；2、分红覆盖融资利率。俺个人理解，这种情况下俺认为可以大比例融资。要知道大多数股神都是死在融资上的。</p>
+<br>
+<p>2015-05-13 来自雪球</p>
+<p>交易的极致，无非是两种，一种是追最猛的强势，赚最快的钱；另外一种是买最深的底，赚最安全的钱。俺自认是后者。</p>
+<br>
+<p>涨时看势，跌时看质。</p></div>
+    </article>
+
+    <article class="page-card" data-page="19" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第19页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2015-05-20 来自雪球</p>
+<p>一个优秀的交易高手的定义应该是：能够连续多年获得稳定持续的连续复利回报，经年累月地赚钱而不是一朝暴富，常赚而不是大赚。资本市场的高额利润应来源于长期累积低风险下的持续利润的结果。</p>
+<br>
+<p>2015-05-30 来自雪球</p>
+<p>有人说：懂巴老的理念不太难，坚持巴老的投资理念难于上青天。段永平回答：坚持不了的人就是不懂！这里懂的意思是骨子里相信。其实价值投资是所谓投资的唯一一条路。</p></div>
+    </article>
+
+    <article class="page-card" data-page="20" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第20页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2015-07-10 来自雪球 · 深读：价值之锚</p>
+<p>所有想在股市有所收获的投资者，首先要解决的一个问题就是：形成自己的操作体系。这个操作体系必须是你自己喜欢的风格，必须是能够长期盈利，并且有风控的保证回撤有限度的。</p>
+<br>
+<p>股市主要盈利方法有三种方式：1、追逐最强的风；2、抱紧最低估值的好票；3、抓住确定性的技术走法的波动。</p></div>
+    </article>
+
+    <article class="page-card" data-page="21" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第21页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2015-07-11 来自雪球</p>
+<p>盈利，虽然都体现为账户数字的增加，但有逻辑的盈利和没逻辑的盈利，短期看长相类似，长期看是生死之别。</p>
+<br>
+<p>银行的底线在哪里？未来业绩没有大幅度下降预期的8-9%现金分红价，就是股价的底锚。不信你去看看历史，几乎所有的好股票，即使在最烂的大熊市，都在这个区域之前构筑成底部。</p></div>
+    </article>
+
+    <article class="page-card" data-page="22" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第22页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2015-08-29 来自雪球</p>
+<p>价值投资也好，趋势投资也好，做短差也好，其实本质上没区别，目的是一个：赚钱。关键在于你是否找到了适合自己的方法。吾之蜜糖，汝之毒药。</p></div>
+    </article>
+
+    <article class="page-card" data-page="23" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第23页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2015-09-18 来自雪球</p>
+<p>价值选股，趋势选时，估值定仓，波动降本——大部分高手都是把这四条中的全部或者部分做到极致。俺是四条都做，但每条都做不到极致，所以收益也就中上水平。</p></div>
+    </article>
+
+    <article class="page-card" data-page="24" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第24页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p class="ldg-quote">鹿鼎公：不是说俺说的就对，俺一直坚持的是：每个人找到适合</p>
+<p>自己的方法，用时间收益去证明，才是投资的王道。俺的文章只是想</p>
+<p>找一条适合广大群众认知水平，简单易学的投资道路，不一定适合任</p>
+<p>何人，但是可以适合大多数。</p>
+<p>2016一01一1808：11．来自雪球</p>
+<p>做股票最重要的是，你要考虑到未来可能会发生哪些可能，面对</p>
+<p>这些可能，概率有多大，你又应该怎么去应对，这个才是俺的核心思</p>
+<p>想。</p>
+<p class="reply">@网友：然后选择概率最大的，而非收益最多的。</p>
+<p class="ldg-quote">鹿鼎公：在最低风险的背景下，去选择相对高收益的方法。</p>
+<p class="reply">@网友：资产配置的核心，就是如何在熊市稳步建立起大仓位，到</p>
+<p>财富毁灭的牛市卖出的过程。</p>
+<p class="ldg-quote">鹿鼎公：俺就是这个思想。</p>
+<p class="reply">@网友：趋势投资讲究顺势以增加获胜概率，夹头讲究安全边际在</p>
+<p>左侧买入荻得低价筹码，都觉得很有道理，搞成精神分裂了。</p>
+<p class="ldg-quote">鹿鼎公：这个简单，低位涨了学习趋势顺势加仓，高位大涨了学</p>
+<p>习夹头，逢高出货。</p>
+<p>2016一01一2206：42．来自雪球</p>
+<p>马克·吐温说过：</p>
+<p>“让我们陷入困境的，不是无知，而是看似正</p>
+<p>确的谬论。</p>
+<p>昨晚让俺想明白一件事情，让价投们完全不顾趋势的长期持有，</p>
+<p>表面看是懒，其实本质上是不知道卖点在哪里，不会卖而己，所以巴</p>
+<p>菲特的长期持有的观点被放大，事实上年轻的巴菲特也是经常买卖同</p>
+<p>一只股票，而年老的巴菲特因为股权大了，证券法规以及规模限制买</p>
+<p>卖而己。</p>
+<p>2016一03一0308：50·来自雪球</p>
+<p>跟长期持股的人比，涨的时候我们不如他，但是跌的时候，我们</p></div>
+    </article>
+
+    <article class="page-card" data-page="25" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第25页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>要少亏很多很多，跟做短线的高手比，我们赚钱能力不如他（主要是</p>
+<p>水平低），但是操作风险就低太多了（主要也是水平低，对水平要求</p>
+<p>少），俺是在追寻一条低风险，相对高收益的路，活的长，还想活的</p>
+<p>更好一点。</p>
+<p>2016一03一0709．08·来自雪球</p>
+<p>关于融资，俺个人理解，估值偏于合理的时候应该是最低，估值</p>
+<p>越低，敢于上杠杆的人就越多，上涨时期，敢于融资的越多。</p>
+<p>2016一03一2308：47．来自雪球</p>
+<p>合适的估值，合适的位置，应该有合适的仓位。早早满仓不足取，</p>
+<p>迟迟空仓也不可取。</p>
+<p>同一个位置，下跌途中的仓，就应该低于上涨途中的仓，因为这</p>
+<p>里有情绪仓位，不知道这句话有多少人能明白。</p>
+<p>说的通俗一点，同样2900点，3500跌到2600的途中，路过2900</p>
+<p>的时候的仓位应该低于2600上升到2900的仓，因为你在2600己经补</p>
+<p>仓过了，并且是上涨情绪主导市场。</p>
+<p class="reply">@网友：要是反复2600一2900震荡呢？那不是仓位越来越高？</p>
+<p class="ldg-quote">鹿鼎公：所以要T啊，小仓位的T，是可以防止震荡带来净值凝固，</p>
+<p>由于做T，震荡反而带来額外收益，明白？</p>
+<p class="reply">@网友：既然明确知道下跌途中，为何不清仓呢？</p>
+<p class="ldg-quote">鹿鼎公：所有说：为什么明知要下跌，为什么不空仓的，大多人</p>
+<p>最后都踏空了。</p>
+<p>所以说：底上猛抄一把，然后死死拿住的人，大多数都早早的套</p>
+<p>成粽子了。</p>
+<p>做股票，俺的思路永远是，</p>
+<p>不亏损，不亏损，不亏损，</p>
+<p>宁愿放弃一些利润，放弃一些机会，</p>
+<p>2016一04一0807：54</p>
+<p>．来自雪球</p></div>
+    </article>
+
+    <article class="page-card" data-page="26" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第26页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>也决不亏损。</p>
+<p>牛市少赚点没什么大不了的，俺熊市贏。</p>
+<p>当然这种策略虽然贏腰斩毛，银粉很容易，但是没有贏山神的可</p>
+<p>能，虽然熊市他输我一点点，但是牛市贏我N倍。</p>
+<p>发布于2018一09彐114：25来自雪球</p>
+<p>〖深读〗现金与穿越牛熊</p>
+<p>做股票的群众中，对于现金有两个很有意思的观点。</p>
+<p>一个是XX为代表的现金无用论，也就是号称满仓穿越牛熊的那帮</p>
+<p>人，所以这一派长期满仓，理由是股票才是所有资产中收益最高的资</p>
+<p>产，所以必须永远满仓，轮动，低估换更低估，高估换低估。这一派</p>
+<p>的眼里，股市是不可以预测的，预测正确率永远只有无限接近50％。</p>
+<p>股票是所有资产中收益最高的资产一一这个观点，在国运鼎盛的</p>
+<p>背景下，选对企业，从超长期来看，是正确的，百年股市，长期趋势</p>
+<p>向上，但是股市无限，人生短暂，我们可以在历史上找出很多10年不</p>
+<p>涨的行情出来，不管美国，日本，A股还是台股。比如最近30年，中</p>
+<p>国最好的资产是一二线城市的砖头地皮，这个无话可说吧。</p>
+<p>关于预测正确率永远只有无限接近50％的观点，短期看是对的，今</p>
+<p>天真的不知道明天会不会涨，会不会跌，但是长期看，整体估值30倍</p>
+<p>PE的股市，大概率会在某个时间段内出现大幅度下跌，整体估值6一8</p>
+<p>倍PE的股市，大概率会在某个时间段内出现大幅度上涨。</p>
+<p>所以这一派人的逻辑完全不在线，长期逻辑与常识符合他们的观</p>
+<p>点的时候，就拿长期逻辑说事，短期逻辑与常识符合他们的观点的时</p>
+<p>候，就拿短期逻辑说事。目前为止，没有任何一个成功的投资家永远</p>
+<p>满仓获得过高收益。</p>
+<p>一个是现金有用论，现金可以在低位的时候，给你买入的选择权。</p>
+<p>所以即使非常低估的时候，依然需要保留大把现金，应对更低迷的情</p>
+<p>况出现。</p>
+<p>我们保留现金的目的就是在低位换优质资产，现金并不能带来较</p>
+<p>高收益，所以当机会来临的时候，把现金换成优质低估资产才是提高</p></div>
+    </article>
+
+    <article class="page-card" data-page="27" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第27页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>收益的王道，刚开始低估时候的保守，我当然接受，毕竟上涨过程中</p>
+<p>的2900点，跟下跌过程中的2900点，估值一样，但是风险不一样，</p>
+<p>跟ETF拯救世界，沈潜那样，给出容错空间，我也没觉得不好，但是</p>
+<p>到了2700点还空仓，还10％仓位的人，未来踏空的概率必然会很大。</p>
+<p>我的观点是：最好的资产，是能够带来大量现金流的资产，现金</p>
+<p>显然不是。只有找不到更好的投资标的的时候，现金才是好资产，即</p>
+<p>使08年，巧年都一样有极好的资产可以买，比如08年的长期债，15</p>
+<p>年的杠基AO</p>
+<p>当然我不反对，在等跌的过程中，拿住现金或者等同于现金的货</p>
+<p>基什么的，这个时候的拿住现金的耐心非常重要（我自己就有血的教</p>
+<p>训），下跌过程中，估值合理绝对不是买入理由，股市永远都是钟摆，</p>
+<p>会忽左忽右，高估过头，低估过头，合理估值永远不是买入理由，低</p>
+<p>估才是建仓理由，非常低估才是重仓的理由。否则就实在对不起中国</p>
+<p>股市的大波了。</p>
+<p>最后还是强调一句老话：没有杠杆的时候，时间是你的朋友，上</p>
+<p>了大杠杆之后，你就是把自己的性命交给了一群蠢货去决定了。所以，</p>
+<p>确保自己资金的流动性安全，不要把生活费，或者下个季度要用的钱</p>
+<p>都投入进去，真的出现黑天鹅的时候，会让你无法应对的。</p>
+<p>整个雪球，ETF拯救世界，沈潜，佐罗，应该是最保守的三个股票</p>
+<p>大V，观察他们的仓位应该对大家的投资会有很大帮助。</p>
+<p>发布于2018一09一2209：40来自雪球</p>
+<p>〖深读〗独孤九剑与易筋经</p>
+<p>知道我最看不惯雪球什么吗？就是一群原教旨主义的价值投资分</p>
+<p>子，大肆贬低技术分析，看到别人看均线，MACD，欧杯，RSI就把别人</p>
+<p>当做邪教分子一样贬的一文不值。这种行为本身跟邪教分子有什么区</p>
+<p>游坦之固然依仗深厚内力在聚贤庄称雄，令狐冲还不是用独孤九</p>
+<p>剑大闹少林寺。</p>
+<p>价值投资固然牛B，出了巴菲特这样的大宗师，但是除了巴菲特等</p></div>
+    </article>
+
+    <article class="page-card" data-page="28" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第28页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>少数高手之外，也没见价值投资一统江湖，按照逻辑，如果价值投资</p>
+<p>真的是唯一有效，那么市场上技术派是不是该死完了啊？事实是并没</p>
+<p>有。并且价值投资并不是那好学的，即便俺这样入门价值投资超过15</p>
+<p>年，还不是一堆不懂的东西，什么医药，保险，白酒，电子，5G俺统</p>
+<p>统不懂，这些行业的入门，需要极广的基础知识和认识，有时候，即</p>
+<p>便是专业人士都不一定能够完全理解本行业的发展，如果专业人士就</p>
+<p>能看透，那么作为专业人士的老板，怎么会生意失败呢，金融行业出</p>
+<p>身，并且钻研了那么多年金融的云蒙，最后还不是在招商银行与华韙</p>
+<p>两次重大失误，巴菲特还不是看不懂沃尔玛的商业模式，一再错失。</p>
+<p>可见价值投资并不如大家想的这么容易。</p>
+<p>当然我们也不否认技术分析的难度，看看一堆原教旨主义的价投</p>
+<p>分子，大多数都曾经在技术分析上折翼，栽了大跟斗，但是这并不代</p>
+<p>表技术分析就是没用的，我身边的技术派大高手们，照样活的很滋润。</p>
+<p>技术分析流派最大的问题是资金容量小，不说百亿级别，10亿级</p>
+<p>别的转身就很费劲了，问题是你有1亿吗？同样是高手，在低资金阶</p>
+<p>段，确实是技术分析派的资金增长明显高过价值投资。</p>
+<p>有人会说，真的有一亿了，技术分析派岂不是要从头学艺？事实</p>
+<p>上技术分析派也在进步，统计学派也是技术分析的分支之一，是技术</p>
+<p>分析演化进步后的产物，只不过分析的是历史估值数据。通过投资指</p>
+<p>数，弥补了投资金额巨大对收益的限制，弥补了选股能力不足对投资</p>
+<p>收益的限制。</p>
+<p>所以在我眼里，只有内外兼修才能成为真正高手。</p>
+<p>游坦之遇上内外兼修的乔峰，还不是被打的满地找牙，令狐冲修</p>
+<p>得易筋经后，才实力大增变身顶尖高手。</p>
+<p>既懂价值投资，会分析筛选企业，估算企业价值，又懂技术分析，</p>
+<p>投资者心理行为，才是投资的光明大道。当然这条路必然是无比艰辛。</p>
+<p>如果我们无法做到内外兼修，那么我们就去学会自己能够学到的，能</p>
+<p>够掌握的，比如低PE中选增长，RSI高低区域结合KDJ，比如低估值</p>
+<p>区域定投，高估值时期股票换债券的转换，一招鲜，虽然不能吃遍天，</p>
+<p>但是是保证你长期盈利的重要手段，学不会独孤九剑，就学太祖长拳，</p></div>
+    </article>
+
+    <article class="page-card" data-page="29" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第29页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>没地方学易筋经，就学站桩马步，打不过武林高手，先学会干掉地痞</p>
+<p>流氓，跳不过2米栏杆，就学会跨半米低栏。投资是长跑，持续盈利</p>
+<p>才是胜利者。</p>
+<p>还有一个非常重要，就是避开自己不懂的行业企业，错过机会不</p>
+<p>可怕，就像巴菲特那样，错过沃尔玛又怎么样，照样成为投资大师。</p>
+<p>错过不要紧，不出错才重要，更重要的是出错能够马上改正。因</p>
+<p>为投资路上谁也避免不了错误，就像巴菲特那样，错买IBM不要紧，</p>
+<p>发现错误会卖出修正投资，是投资路上最重要的技能之一</p>
+<p class="reply">@网友：让我告诉你看指标做股票的感觉就是，你完全靠他，绝对</p>
+<p>是亏钱利器。当你看他，仅仅是复盘，绝对又是高概阜对。</p>
+<p class="ldg-quote">鹿鼎公：呵呵，我的铁粉都知道，俺靠技术指标做T，胜率超90％，</p>
+<p>你又怎么解释，在普通人手上，一根绣花针，屁用没有，换到东方不</p>
+<p>败手上试试？</p>
+<p class="reply">@网友：公公最大的缺点就是自己闷头做T賺钱，不带我们。</p>
+<p class="ldg-quote">鹿鼎公：做T是职业选手的工具，不是散户，散户努力工作賺钱</p>
+<p>才是王道。</p>
+<p class="reply">@网友：技术在投资中非常非常的有用，我可以确定的说。</p>
+<p>说技术没用的人，不是蠢就是坏。</p>
+<p>技术可以增大你判断的概率，提高获胜的把握。</p>
+<p>技术有用但是不能完全痴迷和过度依賴它。</p>
+<p>理性和耐心才是第一位。</p>
+<p class="ldg-quote">鹿鼎公：对的，基本面是道，技术是术，道就是三观正，明事理，</p>
+<p>让人站得高看得远，术就是你会烧很好吃的面条，开个小店勤勤恳恳</p>
+<p>也能活的不错。</p>
+<p class="reply">@网友：那为什么没有公认的走技术分析的投资大师出现？请公公</p>
+<p>说道说道，别扯什么剑什么经的。</p>
+<p class="ldg-quote">鹿鼎公：你这么问，说明你没看懂，纯技术派是有资金限制，作</p>
+<p>为几十年的老股民，身边见过超过10个从5、6位数做到8、9位数技</p>
+<p>术派高手，纯价值派的只有一个，还是靠买卖期权辅助的，真正赚钱</p>
+<p>无数价值派，大多数是靠着水平高+本钱厚+活得长，技术派之所以没</p></div>
+    </article>
+
+    <article class="page-card" data-page="30" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第30页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>有赫赫有名的，是因为超过9，10位数，技术派的招就失灵了，没了复</p>
+<p>利。俺那个去年刚刚达成小目标的同学，今年就拿出50％的资金开始玩</p>
+<p>价值去了。</p>
+<p class="reply">@网友：看博主的持仓，可不像个技术派。</p>
+<p class="ldg-quote">鹿鼎公：我是价投，只是经常在小的方面玩技术，</p>
+<p>卖出点。</p>
+<p>比如买入点，</p>
+<p>修改于2018一10一2407：20·来自雪球</p>
+<p>有的企业的市值就像钟摆，低估到高估，高估到低估，市值总是</p>
+<p>在一个大区间晃荡。</p>
+<p>有的企业的市值像楼梯，总是一步一步往上，虽然估值也会高低</p>
+<p>震荡，但是整体底部总是不断抬高，高点总是不停创出新高，（当然</p>
+<p>要时间，不是3个月5个月，而是3年5年）。</p>
+<p>所谓满仓穿越的逻辑就是来自后一种企业。</p>
+<p>我是荤素不论，多少不论，有吃就好，有赚就行，就是不能亏损，</p>
+<p>所以不论哪种企业，最重要的是低估，避免亏损比较重要。</p>
+<p class="reply">@网友：个人投资者要的是绝对收益。是这个意思吧。</p>
+<p class="ldg-quote">鹿鼎公：不是，这个是个人风格，我不是说我的思路一定就是最</p>
+<p>好的，但是纟色对是最适合自己性格的，也是我个人比较容易把握的，</p>
+<p>如果你觉得满仓穿越适合你，也没什么不好，如果你觉得投机更适合</p>
+<p>你，我觉得也没什么不好，关键在于适合自己，并且能够长期稳定获</p>
+<p>利，如果不能长期稳定获利，适合也没有什么鸟用。</p>
+<p>2018一ll一0211：01·来自雪球</p>
+<p>再一次说一下，我只是个喜欢吃红息，并且认为中国未来的整体</p>
+<p>经济不会再中高速发展的胆小鬼，所以牛市来了，我肯定收益很差，</p>
+<p>切切，切切，所以请大家去抄抄高手的作业，熊市我亏得少，不亏，</p>
+<p>都代表牛市俺有不小的概率跑输大盘。</p>
+<p>我只是个吃红利的胆小鬼，没想在股市发财。</p>
+<p>我只是个吃红利的胆小鬼，没想在股市发财。</p></div>
+    </article>
+
+    <article class="page-card" data-page="31" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第31页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>我只是个吃红利的胆小鬼，没想在股市发财。</p>
+<p>重要的话说三遍。</p>
+<p>修改于2018一11一2610：12来自雪球</p>
+<p>〖深读〗波动的数学题</p>
+<p class="reply">@宁静的冬日M的发言出来后，下面的评论并不高，1000个读者</p>
+<p>眼里有1000个哈姆雷特，所以俺也谈谈自己看到的哈姆雷特。</p>
+<p>股民最怕的是什么？股价不涨反跌，这个让很多股民日夜煎熬，</p>
+<p>我想关键有几点吧。</p>
+<p>一个是股民手持的股票不行，所以他的内心还是担忧的，时间这</p>
+<p>个称重器称出结果好不好，他自己没把握。</p>
+<p>二个是虽然拿的股票不错（当然这个不错是他自己以为），但是</p>
+<p>他的数学不好，或者数学还行，心理素质不行，所以今天我们来做一</p>
+<p>道数学题，算算清楚，加强一下心理素质。</p>
+<p>假设有一家公司净资产5元，股价8元，收益I.00元（我们假设</p>
+<p>净现金流也是1.00元），分红率50％，这个业绩可以长期稳定，会有</p>
+<p>波动，但是就在20％基本范围内波动，我们就忽略不计了。我们假设你</p>
+<p>初期持股10万股来分析一下。</p>
+<p>我们把长期股价走势分成5种来分析：</p>
+<p>大涨，小涨，只是填权，不填权，大跌。</p>
+<p>1、大涨。1年内翻倍，甚至翻出数倍，当然这是我们股民都希望</p>
+<p>看到的，很快赚大钱，谁不喜欢，我们可以卖出股票，寻找下一个目</p>
+<p>标，当然这种大涨，一般都是牛市，你也很难找到很便宜的股票，这</p>
+<p>个时候，是考验卖出后持币的耐心。如果三个月一个牛市，然后三个</p>
+<p>月一轮熊市，你早就发大财了，比尔算个屁，马云算个屁。</p>
+<p>2、每年股价填权之外，还小涨3％，10年后股价10．73元，PEIO.73</p>
+<p>倍，净资产10元，PB是1.073，如果每年红利都再投，这个时候你持</p>
+<p>股大约16，81万股，持仓净值180，4万，年化收益&45％，从图中我们</p>
+<p>看到，由于股价上涨，每年红利买入股价越来越高，实际收益率反而</p></div>
+    </article>
+
+    <article class="page-card" data-page="32" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第32页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>在下降，10年后，我们每年可以获得&4万元红利。</p>
+<p>赫年，犖，，抟犟</p>
+<p>寻私丰</p>
+<p>《》謐孬0，过0《：0000</p>
+<p>种巧7</p>
+<p>3、只是填权，10年后股价还是8元，净资产10元，持股数区33</p>
+<p>万股，持仓净值146．67万，PB是0．8，我们可以看到收益率是没有下</p>
+<p>降的，10年后每年我们可以获得9，165万元红利。</p>
+<p>E地年葺2年蕊3《年5年軍还蕊10年</p>
+<p>一《虹利内</p>
+<p>年化辜</p>
+<p>：@0就，和</p>
+<p>19瑟3100t07《</p>
+<p>國13H38巧0092H200孙2打</p>
+<p>國3[20</p>
+<p>4、不完全填权，每年股价跌3％，10年后股价5，91元，；争资产10</p>
+<p>兀，持股数20、42万股，持仓净值120、7万元，PBO.59，每年可以获</p>
+<p>《刊长00</p>
+<p>1刂盖</p>
+<p>年化过孓</p>
+<p>起的年1年：《《年0年0年1王e年，年《0年</p>
+<p>00以：到是510以</p>
+<p>以22</p>
+<p>0啕1]1010121412汁《+；02垤．1还18e．0辊</p>
+<p>瓿059到0</p>
+<p>得10．21万元红利。</p>
+<p>5、每年不填权，还大跌10‰，10年后，每股股价2．82元，持股</p>
+<p>数29．8万股，持仓净值84．17万元，PBO.28，10年后每年获得红利</p>
+<p>15万元。</p></div>
+    </article>
+
+    <article class="page-card" data-page="33" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第33页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>5，吼7《3。</p>
+<p>`》7074门</p>
+<p>2》3</p>
+<p>从持仓净值看，除了大涨以外，我们当然选择每年涨3％，但是4</p>
+<p>种股价走势最后的估值，获得红利是完全不一样。</p>
+<p>我们在假设两种情况。</p>
+<p>A:10年后的10年股价完全不变，也就是20年后，会是什么情况？</p>
+<p>B：10年后股价得到修复，回到IOPE或者IPBO</p>
+<p>这两个问题大家自己去思考吧。</p>
+<p>所以，投资最重要的是什么？还是企业的经营收益，现金流，能</p>
+<p>够长期稳定，甚至增长。</p>
+<p>当你以一个低估的价格买入企业后，股价的波动，事实上对你的</p>
+<p>收益的影响，并不如你想的那么大，甚至我们可以说：企业经营不变</p>
+<p>的情况下，跌的越惨，你未来的收益越大（前提是没有杠杆），当然</p>
+<p>这个时候，你大概率是不开心的，因为你8元买入，别人4元买入，</p>
+<p>你的收益远远落后于别人，幸福是比较出来的，不幸福也是，这个就</p>
+<p>是你的心理魔咒。</p>
+<p>除非你每天都在赚1一2％，或者每个月赚5％，不断换股，不断赚钱，</p>
+<p>那个确实是牛B，问题是你有这个本事吗？</p>
+<p class="reply">@网友：假设有一家公司净资产5元，股价8元，收益1．00元（我</p>
+<p>们假设净现金流也是1．00元），分红阜50％，这个业绩可以长期稳定，</p>
+<p>会有波动，但是就在20％基本范围内波动。</p>
+<p>符合这标准的，两市有几个啊？</p>
+<p class="ldg-quote">鹿鼎公：对的，但是肯定有，所以要找出这种股票，然后在自己</p>
+<p>理解的范围内，尽可能低成本大仓位的持有，然后等待复利。</p>
+<p class="reply">@网友：昨天晚上我也列了表袼算了下。不过我是按照每年分红后</p></div>
+    </article>
+
+    <article class="page-card" data-page="34" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第34页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>不填权算的，过程是特别考验心态的。</p>
+<p class="ldg-quote">鹿鼎公：关键在理解上，理解了，</p>
+<p>有一个人性的问题，幸福是比较出来的，</p>
+<p class="reply">@网友：难的是roe的保持。</p>
+<p>心理素质自然而然就高了，</p>
+<p>关键在跟谁比。</p>
+<p>还</p>
+<p class="ldg-quote">鹿鼎公：这里举的例子ROE实际还是下降的，只是盈利保持稳定。</p>
+<p>跟帖：哕里吧嗦一大堆，其实简单说就是：我的投资就是追求持</p>
+<p>仓现金流，跌的越深，红利再投获得现金流越强劲，本就有就不错分</p>
+<p>红的股票（业绩不能下降，上升当然更好），荻得的收益越大，股价</p>
+<p>如果1块钱一股，那么分红可买到的股票越多，总想让人明白的更清</p>
+<p>楚，所以写的越糊涂，文字水平不行。</p>
+<p>2018一12一0407：42．来自雪球</p>
+<p>孙子曰：以正合，以奇胜，欲胜敌，先为不可胜，可胜在敌，不</p>
+<p>可胜在己。所以，正大光明是为人，成事的基础，阳谋才是无敌之谋。</p>
+<p>做人如此，做股票亦如此，先为不可胜，在于选择不会输的股票，</p>
+<p>在于不去碰杠杆，不去把自己的命运交给傻子疯子去决定。</p>
+<p>一个很久没见面的同学，突然让我感觉大变样，就是因为他说：</p>
+<p>以前总是想能避的税为什么不去避啊，现在人到中年，总是想，承受</p>
+<p>范围内，能交的税，尽量去交了，心态转变很多了。</p>
+<p>堂堂正正做人，方能有底气，太太平平做股，才可以稳得起。</p>
+<p>2018一12一1709：14．来自雪球</p>
+<p>投资中，实事求是很重要，我们要经常考虑，为什么别人买A不</p>
+<p>买B，为什么可以接受A的估值高，为什么我要买B，不去买A，买B</p>
+<p>的好处在哪里，坏处在哪里，统统想明白才是投资。</p>
+<p>发布于2019一02一0909：19来自雪球</p>
+<p>〖深读〗深爱老熊</p>
+<p>前些日子，跟朋友讨论，在股市最怕什么？我自己想了又想，还</p>
+<p>是觉得牛市顶部最可怕。</p></div>
+    </article>
+
+    <article class="page-card" data-page="35" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第35页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>第一，牛市顶部基本上大家都赚的盘满钵满，风险意识淡薄，每</p>
+<p>个人想的都是下一个50％利润在哪里的问题，很少有人会去想什么时候</p>
+<p>大跌？而实际上，我们有很大概率去面对一轮暴跌，这种伤害，尤其</p>
+<p>是对于牛市牛B哄哄的心理的伤害，刀口都很大，刀疤都很深。</p>
+<p>对于我这种风险意识比较强的人来说，牛市顶部最大的痛苦是找</p>
+<p>不到好股票，找不到值得下重手买的股票，找不到让人心动的估值，</p>
+<p>拿着大把花纸头，看着货基的破收益率，实在是一件非常痛苦的事情。</p>
+<p>第二，在熊市的底部，总是嫌弃自己的钱不够，总是觉得这股票</p>
+<p>也不错，那股票也很好，为什么没有钱多买点，这种感觉就很美妙，</p>
+<p>在买入的时候，我们就知道，只要拿着不动，咱每年至少可以赚IX％，5一7</p>
+<p>年就可以翻一倍，30年可以翻30一60倍，稳稳的幸福，能用双手去碰</p>
+<p>触的幸福，平淡却美好。</p>
+<p>第三，拿着的股票，遇上牛市赚50％，甚至翻倍，虽然不错，但是</p>
+<p>哪有2018年那么美好，持仓的净值增长10％，但是估值居然还下跌10％，</p>
+<p>这种幸福看着不突出，但是确是极为暗爽，每年净值增长10％，估值下</p>
+<p>跌10％，只有10年，就是一场暴富，很多人看不明白这点，也选不好</p>
+<p>个股，所以他们爽不起来。</p>
+<p>牛市等于让你煎上一块大牛排，炖上一锅牛肉，砍上一条牛腿，</p>
+<p>看着肥美，吃着肥美，但是毕竟是牛肉，再肥美又这么比得过熊市的</p>
+<p>熊掌珍贵，别人吃风喝屁的时候，咱捧着冰糖蒸熊掌，拿着勺子挖一</p>
+<p>口，送进嘴里，这种甜美，无与伦比啊！</p>
+<p>跟帖：历史的轮回，今年的心境与19年写这篇文章的时候很像，</p>
+<p>18年是融资重仓陕煤。（2022一II一II)</p>
+<p class="reply">@网友：公公，您怎么看待融资上杠杆买股票呢？</p>
+<p class="ldg-quote">鹿鼎公：只是工具，但是是危险的工具，也是没有10年以上稳定</p>
+<p>盈利的人自杀的工具。</p>
+<p class="reply">@网友：杠杆的威力看看云蒙就知道了。</p>
+<p class="ldg-quote">鹿鼎公：所以我说是工具，一把刀子在某些人手上就是自杀工具，</p>
+<p>在我手上就是杀敌工具，怎么用很重要。</p>
+<p class="reply">@网友：公公杠杆最多加到多少？</p></div>
+    </article>
+
+    <article class="page-card" data-page="36" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第36页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p class="ldg-quote">鹿鼎公：2年分红比例，一般不超过15％，极端情况25％，这辈子</p>
+<p>超过20％的用过3次，第一次是94年场外加了100％杠杆，血的教训。</p>
+<p>发布于2019一03一1312，09来自雪球</p>
+<p>〖深读〗管财主对撞宁静</p>
+<p>先看图。</p>
+<p>们3《&53昊过到0</p>
+<p>大的是雲利发一个船票二市肠上石丰东西开后孳到瀟孬市肠上可</p>
+<p>这买入一个可以创造给廬的公司，谊个公创造骱0賺线的价0没资，其实是两种</p>
+<p>完全不同的生孬0式（尽管二背后和过要一些后0分听）。</p>
+<p>妊孬用利的方式，巅关根本不是什么寻找0的的。低尸引股票之类的工作，</p>
+<p>而是后楚．</p>
+<p>上是存在肖差的两个不同交易区。</p>
+<p>2用什么可囂乃过睾西到这个差分。</p>
+<p>癃清楚了这两点，后有：低P引．也一可以驀对成叻。</p>
+<p>氵《《楚这两点拖0一fip引和。价：的俪0等上多年，其实全鰹在过鰹一时</p>
+<p>同一忏，在發价下的同时：低F说不定及而置成了“靨P引月一方面公到经飞雯</p>
+<p>化不大，《尸引0多年的坝也见不雛，</p>
+<p>当然很多人可能会噗土不少远的近的，在：一波大行。中出从為王。B生“禹引的。价值</p>
+<p>回引，让自己大賺一的蒊巛记，柬证这种肖。然而貝过鎣很过地忙的</p>
+<p>放在一0@一个我这样智力很的人也耻一到这里面的司这种方法实</p>
+<p>上嘿生一發次行．线·而不是'0P3"咩线。的</p>
+<p>七十年前的大思七十年后依然偶大但这些的興偉醐卉，却多半卉全</p>
+<p>不河《泫是世星的穆的之财。0两0片《@不明飞尴的薛苁'互复@ISCOL'。。n·大</p>
+<p>师是自己成丈然公．拿走人《0@过0能</p>
+<p>一直以来，都非常认同宁静的很多说法，但是这个说法俺不认同，</p>
+<p>虽然不认同，但是很高兴，因为感觉到宁静也有短板，正所谓尺有所</p>
+<p>短寸有所长。</p>
+<p>我从两个方面来谈这个问题，实操&理论上。</p>
+<p>低PB投资领域，有两个活生生的例子，一个是最保守的投资大师</p>
+<p>沃尔特·施洛斯。他完全不跟外界沟通，保本比收益更重要、净值保</p>
+<p>本投资策略、喜欢“便宜货”、股票价格需要低于其净流动资产价值</p>
+<p>或净资产、低换仓并长期持股、他的成功中没有几个表现特别牛的股</p>
+<p>票（巴菲特在他2006年写给股东的信中指出：施洛斯的投资策略是一</p></div>
+    </article>
+
+    <article class="page-card" data-page="37" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第37页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>种保本型的投资方式，它避免涉及那些容易造成永久性本金损失的风</p>
+<p>险）（施洛斯认为，投资者在投资中应该努力减少遭受股票价格下跌</p>
+<p>带来的本金损失风险。他觉得能够实现降低风险的最好的方式是要把</p>
+<p>关注重点放在公司的资产上，而不是公司的收入上）。</p>
+<p>另一个是雪球的管财主，也是完完全全的施洛斯风格，一大把低</p>
+<p>PB的垃圾，但是长期收益并不低，长期看，比很多牛B哄哄的人高得</p>
+<p>多，回撤也非常的少。</p>
+<p>这个低PB的做法，有一个非常非常关键的重点：持股极度分散，</p>
+<p>不断的踩上狗屎，但是也经常遇上惊喜，长期收益却是非常不赖，施</p>
+<p>洛斯在可考据的1956年至2002年，47年中，获得了5455倍的收益，</p>
+<p>年化收益20％，而同期标普是79倍，10％的长期年化收益。管财主的收</p>
+<p>益也是如此，长期年化收益非常了得。</p>
+<p>我想从理论上谈谈为什么这种看上去毫无技术含量的低会跑贏</p>
+<p>大盘，跑赢很多股神。</p>
+<p>低PB的个股，大多数是因为经营上困难，业绩上垃圾，行业上被</p>
+<p>看衰，所以，市场给出了一个极其低的估值（当然这里大部分是从PB</p>
+<p>角度），但是实际上很多垃圾的业绩并不是估值看上去那么烂，是因</p>
+<p>为行业不被看好，或者企业前景很差，销售衰退，股东减持，等等各</p>
+<p>种原因。</p>
+<p>这些所谓的垃圾企业会有什么结果呢？</p>
+<p>无非是三个结果。</p>
+<p>1、企业经营，行业前景继续低迷，这个时候，我们持有的股票肯</p>
+<p>定有损失，但是这个低PB，是市场给出的极度看衰的价钱，所以经营</p>
+<p>不善，也是预期中的，即使有损失，也是有限，假如我们给出1％的仓</p>
+<p>位，也许也就损失20％，30％，即，使遇上最烂的情况，倒闭了，我们也</p>
+<p>就损失1％。</p>
+<p>2、企业经营不好不坏，死不掉，也赚不多，每年到了时候分分红，</p>
+<p>或者卖卖资产分钱，这个时候，我们以极低的PB买入的公司，会慢慢</p>
+<p>回归到本身的价值，也许行业不好，盈利一般，市场还是给出PB的折</p>
+<p>扣，但是从住5PB，回到0．7PB，就是一个相当不错的收益。</p>
+<p>一25-</p></div>
+    </article>
+
+    <article class="page-card" data-page="38" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第38页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>3、我们做过企业的人都知道，企业的经营好坏，有时候真的不是</p>
+<p>经营者说了算，看的清的，你以为要亏损的时候，行业转机来了，对</p>
+<p>手破产了，经营者自身努力新开发产品，或者新接到其他企业的订单，</p>
+<p>企业经营突然转好，这个时候，我们的持股就遇上了戴维斯双击，甚</p>
+<p>至三击。甚至出现收益翻几倍的惊喜。这就是为什么“管财主卖出概</p>
+<p>念股”经常继续大涨的缘故。</p>
+<p>我们都知道，这些低PB垃圾企业，必然会有一些被市场淘汰，但</p>
+<p>是一定也有一些困境逆转，经营的整体上必然是靠向均值。所以从上</p>
+<p>面三个角度，我们可以得出，低PB的选股方式，从理论上讲，就是个</p>
+<p>低损失，高收益的投资系统，但是关键是持股极度分散。</p>
+<p>个人即是宁静的粉丝，也是管财主的粉丝，最后再次分享了那么</p>
+<p>多知识看法。</p>
+<p>发布于2019一06一1308：39来自雪球</p>
+<p>〖深读〗认清自己很难</p>
+<p>企业高额利润来自垄断，这个很容易理解吧。</p>
+<p>投资的高收益来自企业的高收益，很容易理解吧。</p>
+<p>企业长期确定性的高收益才是投资高收益的根本，这个也很容易</p>
+<p>理解吧。</p>
+<p>低估值的投资具各长期确定性的高收益企业，是保证高收益低风</p>
+<p>险的必备条件，这一样很容易理解吧。</p>
+<p>但是为什么这么容易理解的东西，广大股票投资者不去践行？</p>
+<p>我想，可能是大家都以为自己有赚快钱的运气和眼光吧，深刻认</p>
+<p>清自己有没有赚快钱的能力很不容易。人性使然。</p>
+<p>2019一06一2410．49·来自雪球</p>
+<p>以我个人几十年经验看，股市难的是什么，是认错，会认错，就</p>
+<p>不会有大错，没有大错，基本上净值都会螺旋上升。</p>
+<p>跟我5，6年的老粉丝肯定见识我各种花样的百般出错，05年的格</p>
+<p>力之错虽然大家没见过，但是应该也听腻了，然后14年国电华能之错，</p></div>
+    </article>
+
+    <article class="page-card" data-page="39" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第39页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>浙江医药之错，长安B之错，兖煤A之错，但是老粉见过我亏钱吗？</p>
+<p>（个股百分之几的亏损还是有的，比如福建烂铁）。</p>
+<p class="reply">@网友：新粉问：公公在哪里公布操作啊。</p>
+<p class="ldg-quote">鹿鼎公：不想误导你们，我个人是追求绝对收益的保守主义，是</p>
+<p>根据我自身家庭，经济的思路，所以并不适合大多数群众，一直强调，</p>
+<p>打造适合自己的揉作模式，所以只有你自己才能打造。</p>
+<p class="reply">@网友：梏力要是拿久了，也没以后的错了吧。</p>
+<p class="ldg-quote">鹿鼎公：也会有，07年肯定也清仓，那时候44佣点俺就拿不住任</p>
+<p>何股票了。</p>
+<p class="reply">@网友：请教公公，长安B基本面大幅恶化您是怎么做到看错但是</p>
+<p>不亏钱的？</p>
+<p class="ldg-quote">鹿鼎公：买的时候够低估啊，市场给出的是极度坏的股价，当</p>
+<p>基本面开始出现变坏趋势的开始，股价并没有跟随大跌，但是足够让</p>
+<p>俺觉得不够低估了。</p>
+<p class="reply">@网友：翻脸是核心竞争力之一大金子这条做的特别好。</p>
+<p class="ldg-quote">鹿鼎公：是的，梁宏最牛B的就是能够很快否认自己曾经的认同，</p>
+<p>很厉害，说明他的自我进化能力超强。</p>
+<p>2019一06一24ll：27·来自雪球</p>
+<p>价值选股，趋势选时，估值定仓，波动降本。</p>
+<p>我的曾经的操作体系，但是现在更增加了一条，只在很难死掉的</p>
+<p>企业中择股。</p>
+<p>2019一08一270833·来自雪球</p>
+<p>做股票这事，是很难模仿的，每个人自己的操作体系里面，都有</p>
+<p>其主人的能力圈，性格，知识面，学习能力等等的深深烙印。</p>
+<p>我个人几乎从来都不投资科技，医药这种行业，对于高估值从来</p>
+<p>都不感兴趣，这个高估值只是字面意思，就是高PE，但是实际上我也</p>
+<p>知道，高成长之下有时候高PE也是低估值。</p>
+<p>这个跟我的性格应该是息息相关卵，因为我是怕死鬼。</p></div>
+    </article>
+
+    <article class="page-card" data-page="40" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第40页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>在投资一个股票之前，我最在意的是，最坏情况会到什么程度？</p>
+<p>过去曾经投资过长安汽车，买的是B股，当时的想法是最坏情况福特</p>
+<p>赚个70一80亿应该是最坏情况了吧，所以，当福特销量出现明显下滑</p>
+<p>的时候，福特赚个70一80亿这种自己想想的最坏情况可能就不是底线</p>
+<p>了，于是斩仓成了俺的唯一选择。幸亏斩仓的早，否则就死得难看了。</p>
+<p>所以之后，俺选择股票上，喜欢站在更高角度看这个风险问题。</p>
+<p>首先是这个行业不会被淘汰（看得到的20年时间长度的概念）。</p>
+<p>其次是行业大面积亏损的时候，这家企业还能够保持盈利（俺的</p>
+<p>煤炭股就是这个原则），或者哪怕出现亏损，也可以在短暂的时间范</p>
+<p>围内看到恢复到正常盈利的希望（持有的黔源电力如果出现一年的干</p>
+<p>旱发电大幅度不如预期）。重要的是企业的竞争力是不是在行业里继</p>
+<p>续保持，并且在行业不好的时候，估值还是不高，净现金流的估值还</p>
+<p>是很低（比如行业最低谷的时候也不超过10一巧PE）。</p>
+<p>最后是当行业出现最低谷的时候，我个人有没有能力去补仓，这</p>
+<p>个一定要给自己留有余地，这个就是资金管理能力的问题了。</p>
+<p>人总是在演化的，俺的学习能力，知识储各不足以让俺对于科技，</p>
+<p>医药有一个长远清晰的认识，所以放弃也是一种物竞天择演化的结果。</p>
+<p>2019一11一2310：53．来自雪球</p>
+<p>有些人自身认知有限，并且非常容易被人影响，运气好的去年看</p>
+<p>到张三说xx股份好，赚了，就说张三水平高，运气不好的上周看见张</p>
+<p>三继续说xx股份好，亏了，就骂张三水平差，其实所有的行为都是你</p>
+<p>自身认知能力的反映，加上一点点运气。</p>
+<p>跟帖：所以知道自己能力的边界很重要，俺是听大神的劝，多次</p>
+<p>买入过保险股，都赚钱，但是真拿不住，这个就是俺对于保险行业认</p>
+<p>知水平真实体现，水平不够，认知不够拿不住，也许真正危险的时候</p>
+<p>也认不清。所有的操作都是自我水平的体现。</p>
+<p>2020一01一0813：47·来自雪球</p>
+<p>低位大跌的时候，一定要相信常识和逻辑，这比什么都重要。</p></div>
+    </article>
+
+    <article class="page-card" data-page="41" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第41页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>2020一01一1712：11．来自雪球</p>
+<p>雪球有意思的在哪里，是不少球友都认为价投应该是投资者的大</p>
+<p>部分，科技股的炒作只是很少一部分人而己，我想问个常识问题，如</p>
+<p>果追涨杀跌的是少数人，那么庄家拉起来谁接盘啊，实际上并不是球</p>
+<p>友所想，而是大部分投资者是追涨杀跌的。</p>
+<p>举个小例子，俺同学中职业投资有4个，还有两个虽然有职业，</p>
+<p>但是主要精力是炒股，外加那个最富的，他的说法是：实业基本上在</p>
+<p>亏钱，近两年主要精力是砍掉，卖掉实业，精力放到炒股上。7个重心</p>
+<p>在炒股上的同学，除了我，个个都是追涨杀跌派，只是水平有高低罢</p>
+<p>了。</p>
+<p>跟帖：雪球还有一个有意思的是，部分价投，非要认为长期持股</p>
+<p>不动才叫价投，这种论调还挺有市场，我很奇怪，企业的基本面，估</p>
+<p>值是经常性在变化的，连茅台格力都不能避免，非得长期持股才算价</p>
+<p>我个人观点一直是：100个人，就一定会有100种操作思维和逻辑，</p>
+<p>只要长期稳定賺钱，管他是价投，还是追涨杀跌的技术派，热点派，</p>
+<p>适合自己才重要。</p>
+<p>另外，俺眼里的价投，就是以价值为核心选股的都算价投，哪怕</p>
+<p>他进场时机的选择是从技术面出发的（其实这种稍有水平就赚的更</p>
+<p>多）。非要坚持长期持有才叫价投的纯属教条主义。</p>
+<p>2020．07．2112：13．来自雪球</p>
+<p>太阳底下，没有新鲜事，这又是一个99年发生过的市梦率的股市，</p>
+<p>PE、PB、分红率都滚一边去，科技，梦想，未来才是“王道”</p>
+<p>我这种老实人，才会老老实实的守着估值，分红的一亩三分地。</p>
+<p class="reply">@网友：眼光向前看，科技成长期的企业，每一次技术变革都带来</p>
+<p>业绩的成倍增长，所谓的市梦率一下被稀释掉。你守着你的房地产银</p>
+<p>行吃分红。人家玩人家的高风险兼高收益。道不同不相为谋，不要去</p>
+<p>觉得别人傻，别人也会觉得你们只是不敢承担风险的人。想賺钱又怕</p></div>
+    </article>
+
+    <article class="page-card" data-page="42" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第42页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>亏，就只能守着金融吃分红，挺可悲的。</p>
+<p class="ldg-quote">鹿鼎公：同样的事情发生在100年前，贯穿东西岸的铁路，飞机</p>
+<p>的出现，都是和现在的科技没什么两样，那时候，铁路，飞机，汽车，</p>
+<p>就是新科技，但是做铁路造飞机的公司一堆，最后杀到剩下几家，太</p>
+<p>阳下没有新鲜事，不过是铁路飞机汽车换成了芯片，锂电池，基因疗</p>
+<p>法。</p>
+<p>发布于2020一11一1309：23来自雪球</p>
+<p>〖深读〗形成自己的盈利模式一一模式选择</p>
+<p>炒股无非几种。</p>
+<p>1、价投，这种模式主要还是几个超级大佬用的，比如巴菲特，段</p>
+<p>永平，深度了解企业价值和成长空间，深度理解企业的护城河和盈利</p>
+<p>模式，深度体会到企业的定价能力，其实这种价投非常非常难，对各</p>
+<p>个行业都要有深度的了解，对于商业模式的理解有非常深的功力，这</p>
+<p>种模式最大的好处在于有足够的空间容纳大资金，所谓大佬的长期持</p>
+<p>股不动是因为资金实在太大，进出不方便。或者是懒，或者是不懂短</p>
+<p>线，巴菲特拿着几十万的时候也是短线满天飞。</p>
+<p>价投里面还有很多分支，低PB分的散模式（管財主那种），高分</p>
+<p>红模式（比如俺）。</p>
+<p>2、听消息看政策追风口，这种模式最多人用，但是大多数是听别</p>
+<p>人说这股票好，那股票好，可以涨多少，这种肯定是错的，庄家只会</p>
+<p>在准备出货的时候让你知道这股票好。</p>
+<p>著名的高手赵老哥是典型的听消息看政策的策略，但是他们己经</p>
+<p>进化的很深刻了，他们用计算机扫描各大政府网站，功能性部局网站，</p>
+<p>新闻网站，会议网站，得到最新最快的资讯，然后对于这些政策，会</p>
+<p>议进行分析，探讨政策的影响，对行业对企业的影响，然后得出对股</p>
+<p>价的影响，然后集拢资金进行快速的炒作，快速吸货，快速拉高打板，</p>
+<p>热度起来就快速出货。这个策略最重要的是快，盯着放量的板块的龙</p>
+<p>头，炒完快速撤退，没消息，没政策的时候守得住现金。</p>
+<p>还有一个著名的追风口策略就是买入52周新高股，那只股票创出</p></div>
+    </article>
+
+    <article class="page-card" data-page="43" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第43页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>年内新高，就分仓追入，有非常严格的止损线，跌破必斩仓。还有这</p>
+<p>个策略最忌讳重仓几只股，分散很重要。</p>
+<p>3、技术，技术之所以能占一席之地，是因为任何股票的前景，热</p>
+<p>度，都会在价格，成交量，图形中反映出来，连续打板的最热，历史</p>
+<p>新高的必然热门，放量涨的必然热门。</p>
+<p>纯技术的根本不看基本面，他们的逻辑是你知道的信息，都是滞</p>
+<p>后的，春江鸭知道你不知道的，但是他们的进出都会在图形，价格，</p>
+<p>成交量上反映出来。</p>
+<p>但是技术的花样最多，各种各样，老鸭头，欧杯，底背离，双重，</p>
+<p>三重底背离，双重三重顶背离，各种15分钟，60分钟，日线，周线，</p>
+<p>级别的背离，应对短线，中线，长线。</p>
+<p>技术的东西别追求样样精通，都通的就会矛盾，精通一两项足矣，</p>
+<p>其他了解，知道，看得懂就好。懂什么做什么，做底背离的，就只做</p>
+<p>底背离，（而且要搞清楚自己做票长度，只做日线，或者只做周线），</p>
+<p>放弃其他的，实际走势不出自己的主打图形就不做，你懂得放弃，就</p>
+<p>是成功的一半。</p>
+<p>技术是有成功率的，不可能每次都成，要有止损概念。</p>
+<p>4、混合型，价投股里做技术，价投股里听消息，消息股里看图形，</p>
+<p>消息股里看成交放大等等等等。</p>
+<p>我个人认为大部分人应该走这条路，最简单的就是价值股里玩技</p>
+<p>术，那些是好企业很容易找，行业龙头，定一个PE或者PB内玩，比</p>
+<p>如不高于25PE，不高于2，5PB，然后用一个技术不断的玩到这只，玩</p>
+<p>到那只，这种股票也很好选，几个有点东西的价投持有的股票找一圈，</p>
+<p>圈一个范围，在这些股票里去玩技术。</p>
+<p>人不可能是万能的，股市既没有那么简单，也没有那么复杂，几</p>
+<p>个关键点。</p>
+<p>1、懂得放弃，放弃自己不擅长的，只做自己擅长的，没有自己擅</p>
+<p>长的守得住现金。</p>
+<p>2、学会认错。错了就认，止损并不可耻。</p>
+<p>3、不断自我琢磨，不断自我完善，不断反省自己为什么赢，为什</p></div>
+    </article>
+
+    <article class="page-card" data-page="44" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第44页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>么输，琢磨改进，反正很重要的就是你要不断琢磨怎么进化自己的模</p>
+<p>式，明白自己要什么。怎么要。</p>
+<p>4、盈利模式一定要适合自己性格，盈利模式一定要长期稳定盈利，</p>
+<p>长期稳定盈利不是说每年都盈利，而是说5年，10年长期看都盈利的</p>
+<p>不错，但是回撤不能太大，如果单年回撤超过25一30％，就应该琢磨怎</p>
+<p>么改进了。</p>
+<p>跟帖：你懂得放弃，就是成功了一半。</p>
+<p>2020一11一30ll：18．来自雪球</p>
+<p>牛市得到的经验，你会发现在熊市不但无效，而且更惨，熊市的</p>
+<p>经验在牛市会错的一塌糊涂，我是一直坚持熊市经验的人，牛市随便</p>
+<p>怎么样，我多少是可以赚一些的，肯定比大家差得多了，最近几年开</p>
+<p>始，我追求的是不输钱，而不是赚钱，这肯定让收益很烂，所以，只</p>
+<p>适合我自己。</p>
+<p>修改于2020一12一2916：20来自雪球</p>
+<p>〖深读〗别人眼里的最坏，无非这两种情况</p>
+<p>2020年底神华18元一股，净资产区50一股，100万买55400股，</p>
+<p>每股盈利2．20，分红1.20。</p>
+<p>1、每年都刚刚填权，不多涨，红利再投，持股11.1万股，12年</p>
+<p>翻倍，之后一年13万分红，股价继续18元，每股净资产30．00。</p>
+<p>2、每年都不涨，除权不填权。</p>
+<p>2021年年底</p>
+<p>2022年年底</p>
+<p>2023年年底</p>
+<p>2024年年底</p>
+<p>2025年年底</p>
+<p>2026年年底</p>
+<p>2027年年底</p>
+<p>2028年年底</p>
+<p>股价80</p>
+<p>股价巧．60</p>
+<p>股价14．40</p>
+<p>股价13、20</p>
+<p>股价12．00</p>
+<p>股价10．80</p>
+<p>股价9，60</p>
+<p>股价8．40</p>
+<p>红利再投后59300股，净资产19．50</p>
+<p>红利再投后63800股，净资产20．50</p>
+<p>红利再投后69100股，净资产21</p>
+<p>．50</p>
+<p>红利再投后75300股，净资产22．50</p>
+<p>红利再投后82800股，；争资产23．50</p>
+<p>红利再投后102000股，净资产24．50</p>
+<p>红利再投后114700股，净资产25．50</p>
+<p>红利再投后131000股，净资产26．50</p></div>
+    </article>
+
+    <article class="page-card" data-page="45" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第45页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>红利再投后152800股，净资产27．50</p>
+<p>红利再投后183300股，净资产2&50</p>
+<p>10年后持股18．33万股，一年22万分红，股价6元，如果跌幅超</p>
+<p>过这种设想，那更好，持股更多，当然表面看10年市值0涨幅，对于</p>
+<p>我这种看红利的人来看，一年分红比10年前多了3倍。</p>
+<p>你更喜欢那种我不知道，反正我更喜欢股价下跌的这种，别人用</p>
+<p>增长赚钱，我没本事，只好用红利赚钱。</p>
+<p class="reply">@网友：大家都认为他不能维持目前的利润，甚至要亏。你这个算</p>
+<p>法就没意义了。</p>
+<p class="ldg-quote">鹿鼎公：不管懂不懂神华的，就丿L乎没有人认为神华会亏吧，当</p>
+<p>然你说没意义就没意义，个人各观点。</p>
+<p class="reply">@网友：这2种假设，都是建立分红率持续的，假如分红一年比一</p>
+<p>年低呢？记得几年前有人分析银行股也是这样假设，现在银行股不但</p>
+<p>分红下降趋势，而且还一年一年杀估值一</p>
+<p class="ldg-quote">鹿鼎公：这就是银行股与神华的最大区别，神华完全没有杠杆，</p>
+<p>甚至手上13開亿元现金，危险性差了18条大街，其次神华是上下游</p>
+<p>一气贯通的企业，煤价高低对于盈利影响有，但是真的不大，而且神</p>
+<p>华下属煤矿的成本是行业最低的。</p>
+<p>2021一03一2209：旨．来自雪球</p>
+<p>投资就是在流动性，安全性，收益性找到一个平衡，你重视什么，</p>
+<p>就往哪个方向偏。</p>
+<p>赌博的人别往里面套。</p>
+<p>2021一04一0607：31·来自雪球</p>
+<p>投资的本质，是追求长期的现金流回报，就股票而言，分为两种，</p>
+<p>股价上涨；2、分红收益。</p>
+<p>所以本质上来讲，抱团也好，炒作也好，不管能不能长期盈利并</p>
+<p>能够安全退出，都是投资，当然这个的盈利可能是一只股票不管不顾</p>
+<p>2029年年底</p>
+<p>2030年年底</p>
+<p>股价7，20</p>
+<p>股价6、00</p></div>
+    </article>
+
+    <article class="page-card" data-page="46" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第46页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>的一直涨，或者A股票涨50％，换到B股票涨15％，再换到C股票涨2，</p>
+<p>而亏钱，不賺钱，也是投资，只不过是一个失败的投资而己。</p>
+<p>另一种就是每年的现金分红越来越多，分红再投也好，低分红换</p>
+<p>高分红也好，目的就是为了长期角度的越来越多的可持续分红。</p>
+<p>八仙过海各显神通，如果能长期稳定盈利，不管使用哪一种正确</p>
+<p>或者错误的方法，都是王者。</p>
+<p>所以我们要问自己的是，自己有没有这个能力去明白各个方法输</p>
+<p>赢的概率，以及自己有没有逆天的气运。</p>
+<p>2021一04一1421：08</p>
+<p>按照董承非的说法。价值投资要避免4大陷阱．</p>
+<p>商业模式有缺陷的公司不投，</p>
+<p>护城河脆弱的公司不投，</p>
+<p>治理结构有瑕疵的公司不投，</p>
+<p>安全边际不足的公司不投。</p>
+<p>·来自雪球</p>
+<p>跟帖：其实董说的没有大错，不过基金经理真正操盘的时候肯定</p>
+<p>不是这么做的，否则早就下岗了，俺这种比董混的还早的人，坚持价</p>
+<p>投这么多年的人，才了解坚持有多难，基金经理更多的是顺应股市风</p>
+<p>格，高手在泡沫破碎前离场，低手则后知后觉的改变风格。</p>
+<p>修改于2021一05彐207：41来自雪球</p>
+<p>〖深读〗现金流才是价值之锚</p>
+<p>赵本山买的私人飞机3000万美金，加上关税要2．8亿人民币，这</p>
+<p>有钱吧，现在赵收入锐减，一年500力元停机费都滩以支付，（可能</p>
+<p>不是付不出，而是觉得负担太重），所以想转让，但是这种私人飞机</p>
+<p>转让起来很难找到买主，有钱的主宁可买新的，按照自己意愿装潢，</p>
+<p>没钱的买不起。</p>
+<p>所有不带来现金的资产，值多少钱，就是市场上愿意接受的价格，</p>
+<p>有人愿意出1亿买个二手飞机，那么他就值一亿，有人愿意买回家拆</p>
+<p>破铜烂铁，那么他就值几百万，没人接手，就一文不值，还要倒贴500</p></div>
+    </article>
+
+    <article class="page-card" data-page="47" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第47页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>万一年的停机费。</p>
+<p>没有政权背书的数字货币何尝不是这个道理，无非是赌后面有人</p>
+<p>接盘，没人接盘的数字货币，本质上根本就是一文不值。</p>
+<p>我的投资逻辑，在经过宁静大神文章的洗脑后，已经进化成为获</p>
+<p>得更多的长期可持续红利，而利润保持和增加，股价反而下跌，对于</p>
+<p>我的这个逻辑最有利，未来获得的红利最多，所以求业绩大涨，股价</p>
+<p>大跌是我一贯美好愿望，当然这点很多人是无法理解的，有一部分人，</p>
+<p>可以理解，但难以接受，包括俺的家人。</p>
+<p>物品（包括房产，股票，股权，证券，债券，基金）带来的现金</p>
+<p>流是价值的最好背书和价值之锚。</p>
+<p>当然这个逻辑对于古董，字画之类的是无效的，古董，字画的稀</p>
+<p>缺性，注定了他们的价格是由哪个愿意出最高价格的人决定的。</p>
+<p class="reply">@网友：只有一点，股息能持续多久，因为新能源现在大家都对此</p>
+<p>不乐观。</p>
+<p class="ldg-quote">鹿鼎公：所以说对于产业知识的认知，是投资决策的重要凭据，</p>
+<p>幸运的是我们产业的发展，很多已经在国外预演过一遍，对于我们决</p>
+<p>策有极大的帮助，很多人的问题在于看的太远，做的太远，这点我也</p>
+<p>曾经自我检讨过数次，要看得远，做的近。</p>
+<p class="reply">@网友：本山那时买入没有现金流的茅台酒也縑。</p>
+<p class="ldg-quote">鹿鼎公：茅台酒是有现金流的，只是股价越涨，现金流越低，盈</p>
+<p>利越增长，现金流越高。</p>
+<p class="reply">@网友：就应如此，买入就得预设永远持有，值了才买，别整天想</p>
+<p>着能卖出割韭菜。</p>
+<p class="ldg-quote">鹿鼎公：呵呵，有更低估的股票出现不换吗，我又不是傻子。</p>
+<p>修改于2021一05一2806：56·来自雪球</p>
+<p>人类的发展历史中，总是想找出一条最优选择的道路，但是，人</p>
+<p>越是追求最优选择，越容易事与愿违。</p>
+<p>投资其实也一样，投资者总想找到一条最快的赚钱的路子，但是</p>
+<p>最高最快的利润背后，往往是最大的风险。这种最快赚钱的另一面，</p></div>
+    </article>
+
+    <article class="page-card" data-page="48" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第48页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>往往是最快的破产，但是人性又决定了几乎没人愿意去花几十年去慢</p>
+<p>慢变富。</p>
+<p>人性其实是一个很容易操纵的东西，扭曲起来说难很难，但是说</p>
+<p>容易又是很容易的，就是透过宣传，游说，赞美，抹黑，洗脑，每一</p>
+<p>个投资骗局台面上，都是各种各样垂手可得的盈利，跟我买就行，花</p>
+<p>点小钱跟庄就行，你看前面买进的就是几倍，几十倍，忽视，掩盖，</p>
+<p>哄骗让你看不见风险。</p>
+<p>慢且稳就是快，投资是一个极其反人性的行为。</p>
+<p>发布于2021．06．2514：39来自雪球</p>
+<p>〖深读〗龟速赚钱，只要赚钱就行</p>
+<p>我不是在防御，就是在去防御的路上。我干嘛要进攻，己经选择</p>
+<p>了最具进攻力的理财方式一股票，不输就是最大胜利。</p>
+<p>202008一20136·来自雪球</p>
+<p>市场很多时候是无效的，是错误的，市场要正确，也就是说大多</p>
+<p>数投资人（大多数资金拥有者）必须理性，实际上市场上一堆不理性</p>
+<p>的投资，低估的股票为什么跌的少，因为买这些股票的人大多相对理</p>
+<p>性。</p>
+<p>2021一08一3110．25</p>
+<p>有些钱，我不赚也没关系的，安全永远第一</p>
+<p>2021一09一0207：16</p>
+<p>有一只大牛股，10元涨到100元。</p>
+<p>现在有两个错误你必须选择，二选一</p>
+<p>·来自雪球</p>
+<p>·来自雪球</p>
+<p>1你没有办法准确抄底，所以等你看明白了15元才买入。</p>
+<p>2你基本上很精准的抄底了，平均ll元的成本，但是现在你没有</p>
+<p>办法很精准的逃顶，72元出头你就卖了。</p>
+<p>人很难100％准确，尤其抄底逃顶，如果这两个错误，让你必须选</p></div>
+    </article>
+
+    <article class="page-card" data-page="49" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第49页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>一个，你选哪一个去承受。</p>
+<p>2021一09一0409：43．来自雪球</p>
+<p>两位投资者，差不多资金量，在过去8年，同样差不多盈利了400％，</p>
+<p>年化差不多都在25％左右。</p>
+<p>两位投资者过去8年投资过的股票差不多都在10一20只股票。</p>
+<p>甲的利润主要由8只股票贡献了80％，其他股票贡献20％。</p>
+<p>乙的利润主要是由一只股票贡献了80％，其他股票贡献了20％。</p>
+<p>请问甲乙两方的水平差距大不大？有多大。</p>
+<p>修改于2021一09一0808：26．来自雪球</p>
+<p>做股票无非，选股，择时，选股无非两种，1优质，中低价，2不</p>
+<p>会死的行业，落难中。</p>
+<p>择时无非4种，低吸，起跳跟随，高位追涨，下坡捡屎。</p>
+<p>低吸的麻烦是无尽的等待，</p>
+<p>起跳跟随的痛点是诈尸，</p>
+<p>后两种是寻死路上死法不同而己。</p>
+<p>发布于2021一10一1209：40来自雪球</p>
+<p>〖深读〗没有利润下跌空间的低估</p>
+<p>我一直在讲低估值，低PE，PB背后，需要有一个很重要的条件，</p>
+<p>就是没有利润下跌空间。</p>
+<p>如果当下的高利润，是不可持续的，就没有长期的投资资金敢长</p>
+<p>期持股，手套股，集装箱海运股都是这个情况，利润说腰斩就腰斩，</p>
+<p>斩脚环都是可能的。</p>
+<p>孙子兵法早就说过，欲胜敌，先为不可胜，只有持有低估值，并且</p>
+<p>利润很难大幅下跌的股票，先把自己立于不败之地，那么剩下的唯有</p>
+<p>胜利一条道路，追求高弹性的后果，就有大胜，保平，大败三条路，</p>
+<p>最终走哪一条路，真的变化因子太多了。</p>
+<p>如果煤价回到1000元，神华会少赚吗，陕煤会少赚吗，淮北会少</p></div>
+    </article>
+
+    <article class="page-card" data-page="50" data-tag="投资理念" data-chapter="ch1">
+      <div class="page-header">
+        <span class="page-num">第50页</span>
+        <span class="page-tag">投资理念</span>
+      </div>
+      <div class="page-body"><p>赚吗，都很难，回到600元，礻申华也仅仅只有8，9PE，有啥好担心的，</p>
+<p>无非一年不赚，但是要亏本太难了，复利的威力仅仅需要中学数学就</p>
+<p>可以知道，但是有很多博士硕士，也仅仅会做这道中学数学题，而不</p>
+<p>是理解，形成本能。太多的人都太期待一夜暴富了，慢慢变富才是我</p>
+<p>们普通人唯一的光明大道。</p>
+<p class="reply">@网友：短板效应的又一经典举例，我举一个笼统的例子，如果几</p>
+<p>年大熊也亏不了多少钱，那么就不用担心牛市赚的比别人少。</p>
+<p class="ldg-quote">鹿鼎公：熊市为什么要亏钱？</p>
+<p>跟帖：过去的文章，打了自己现在的脸？不是，这里有两点要说</p>
+<p>明，1海狗质地发生一个重大改变，就是分红政策和未来2年的分红金</p>
+<p>额，2我不认为海狗的利润会保持的住，但是要看清楚，我主仓只有</p>
+<p>2．6％的仓位，游戏仓只有1％，扣除未来两年分红，主仓也就1.3％的仓</p>
+<p>位，游戏仓只有0．5％的仓位，这种仓位的亏损是极其有限的，腰斩又</p>
+<p>如何，我乐意至极，就像有的人买了1％仓位的兖煤，大涨5倍，对于</p>
+<p>其整体收益，不顶鸟用。</p>
+<p>海狗作为全球经济的服务业，行业大概率是永续生存的，就竞争力</p>
+<p>和成本而言，海狗未来死的概率极低，所有行业利润终宄会回归到经</p>
+<p>济的整体利润率水平，所以，2年后5元港币的海狗，对应着200亿利</p>
+<p>润，应该是便宜的，当然在利润走稳之前，俺并没有勇气去加仓，但</p>
+<p>是我随时会在利润出现走稳苗头的时候，去勇敢加仓。</p>
+<p>水平高还是低，除了要看用什么逻辑买的什么股票，还要看买了</p>
+<p>多大仓位，你是要头了好几只腰斩股，年收益超过30％，还是要买了好</p>
+<p>几只翻倍股，却年度亏损呢？（2022一09一ll)</p>
+<p class="reply">@网友：价安全边际重要，利润的安全边际更重要。</p>
+<p class="ldg-quote">鹿鼎公：我觉得都重要，毕竟大多数人的人生投资年限也就差不</p>
+<p>多40年（巴菲特这种老妖怪除外），70倍买茅台，至少要毁掉6一8</p>
+<p>年的投资时长。</p>
+<p>满腹文章，</p>
+<p>修改于2021一11一0814：16</p>
+<p>白发竟然不中；才疏学浅，少年及第登科。</p>
+<p>·来自雪球</p></div>
+    </article>
+
+    <div class="chapter-divider" id="ch2">
+      <span class="chapter-num"></span>
+      <h2 class="chapter-title">二、技术分析及交易</h2>
     </div>
-  </div>
+
+    <article class="page-card" data-page="51" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第51页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><p>做股票有时候真的跟这句话很像，就算是正确的东西也会在很长</p>
+<p>时间段没有收获。</p>
+<p>低估值，高成长是做股票的不二关键。</p>
+<p>低估值的高成长善之善者也，但是可遇不可求。</p>
+<p>低估值的不成长，合理估值的高成长，本勇；是投资的良机也。</p>
+<p>但是低估值高分红，在某些人嘴里，却成了陷阱，成了祸水，颠</p>
+<p>倒黑白的给一众网友洗脑，以一时的成败论英雄，以短暂的账面变化</p>
+<p>看得失，害人不浅也。</p>
+<p>股市虽然短期是投票器，但是长期最终是称重仪，黎明前的黑暗</p>
+<p>是最黑的，但也是短暂的，黑暗终宄还是会过去的。</p>
+<p>在10年回比例最大，绝对金额盈利依然10年最高的黑暗时刻，</p>
+<p>自勉。</p>
+<p>治大国若烹小鲜。</p>
+<p>2022一01一0708：32·来自雪球</p>
+<p>有些人开饭店（炒股），精通粤菜，淮扬菜，鲁菜，并集八大菜</p>
+<p>系之精华，推陈出新，融入川菜之香辣，浙菜之精巧。</p>
+<p>炒、爆、熘、烧、焖、煨、烩、卤、煎、炸、汆、炖、煲、蒸、</p>
+<p>烤、腌、熏、风十、凉拌、样样精通，花样百出，忠实的追随顾客（市</p>
+<p>场）的口味变化，引领着食客的口条。</p>
+<p>有些人则固执的守着一个面馆，坚持在面馆里遵循着本地的老传</p>
+<p>统，菜单翻来覆去一共才6种。</p>
+<p>面，其他，真没有，想吃出门右转，找那个集八大菜系之精华的饭</p>
+<p>店去。</p>
+<p>没有谁对，谁错，只有适者生存。你是雄心勃勃的集八大菜系之</p>
+<p>精华，还是固执的守着一个传统面馆，是你自己的选择，适不适合，</p>
+<p>只有你自己知道，唯一评判标准，就是能不能继续开下去，能不能赚</p>
+<p>到钱。</p>
+<p>发布于2022一01一2113：00来自雪球</p></div>
+    </article>
+
+    <article class="page-card" data-page="52" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第52页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><p>〖深读〗关于长期年化12％收益是不是好的问题</p>
+<p>股市投资，年化赚个8一9％，没有啥难度，承受一点波动的话，赚</p>
+<p>个12一15％也没啥太大难度，但是长期年化30％以上的话，难度指数就</p>
+<p>直线飙升了。</p>
+<p>如果赚个12一15％难度系数是1的话，那么赚30％的难度系数可能</p>
+<p>就是5到6。</p>
+<p>假设现在一个年轻人，有20力本金，就这个钱，按照年化1，</p>
+<p>30年后600万了，如果你25岁，你更重要的是让自己的年薪有15万，</p>
+<p>那么一年多就翻倍了，如果再拿部分薪资投入，等30年后3000力难</p>
+<p>度真的不高。</p>
+<p>为什么大家觉得12‰太慢呢，主要是因为过去30年北京上海房价</p>
+<p>的年度复利是巧％（30年66倍），如果有杠杆，就是40％+的年化收益。</p>
+<p>但是不要忘记，过去30年的收入年度涨幅其实达到12％，1992年</p>
+<p>普通人的工资收入是200元，现在差不多是6000元，所以大家觉得12％</p>
+<p>太慢了。</p>
+<p>当下中国的在职职工年工资（不是人均可支配收入）差不多I.2</p>
+<p>万美金（月收入6350元），中国在职职工达到3万美金的空间真的不</p>
+<p>多了，假设未来30年中国的人均年收入年均涨幅仅仅只要给3．1％，30</p>
+<p>年后中国人均收入就可以达到3万美金（世界发达国家水平）。</p>
+<p>所以未来如果工资收入的增速只有3．1％的时候，那么12％的投资</p>
+<p>收益，将会是一个巨大的收益。</p>
+<p>我们思考两点。</p>
+<p>1、未来房地产还会有巧％的增速吗？15％的话，30年后就是790</p>
+<p>万一平米。如果是5％，就是4．30倍，北京就是50万一平米。</p>
+<p>2、我们的收入还能以12％的增速增长吗？12％的话，就是30倍，</p>
+<p>30年后我们月薪20力。如果是5％的话，就是4．3倍，差不多2．7万</p>
+<p>元的月薪，年收入33万元。</p>
+<p>这样看下来，你就知道年化12％是不是一个很可观的收益了。想暴</p>
+<p>富很容易，全在刑法里，澳门赌桌上。</p>
+<p class="reply">@网友：说来说去，过去几十年买房的人是最聪明的。</p></div>
+    </article>
+
+    <article class="page-card" data-page="53" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第53页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><p class="ldg-quote">鹿鼎公：回头看历史就像穿越小说，世界首富指日可待。</p>
+<p>2022一01一26IO．29·来自雪球</p>
+<p>很奇怪，股价低还不好吗，除非你不是红利再投，想捞一把就走</p>
+<p class="reply">@网友：股价涨不好吗？能捞一把走人不好吗，除非你想红利再投。</p>
+<p class="ldg-quote">鹿鼎公：说的没错，问题是捞一把就走的人，有我賺得多吗？</p>
+<p class="reply">@网友：我要是有你那么有钱我也这么想，可是我没有啊！</p>
+<p class="ldg-quote">鹿鼎公：我是因为这么想，这么干，才这么有钱。</p>
+<p>2022一01一2821：54·来自雪球</p>
+<p>低估值，高分红，业绩没有下降空间，你最多输点时间而己，耐</p>
+<p>心是个好东西！</p>
+<p>2022一03一0908：40·</p>
+<p>我做期货原则：</p>
+<p>来自雪球</p>
+<p>、只做多</p>
+<p>2、只在历史低位做多农产品</p>
+<p>3、永远只用很小的仓位在历史低位做多农产品</p>
+<p>4、不赚钱，永不放弃仓位</p>
+<p>修改于2022一05一1014：38·来自雪球</p>
+<p>很多人都明白宁静的理论的正确，但是一跌就难受，心理关过不</p>
+<p>了，主要是两个问题：</p>
+<p>1、你用钱的地方太多，恨不得马上涨上去可以花钱；</p>
+<p>2、本质上，你理解的还是不够深刻。</p>
+<p>真正理解了，应该是更关心这个估值够不够低，经营是不是够稳，</p>
+<p>分红能不能持续，而不是关心股价，关心股价的重点是，红利再投的</p>
+<p>成本是不是足够低。</p>
+<p class="reply">@网友：主要是担心分红的长期稳定性。</p></div>
+    </article>
+
+    <article class="page-card" data-page="54" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第54页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第54页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="55" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第55页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第55页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="56" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第56页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第56页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="57" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第57页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第57页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="58" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第58页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第58页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="59" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第59页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第59页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="60" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第60页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第60页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="61" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第61页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第61页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="62" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第62页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第62页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="63" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第63页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第63页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="64" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第64页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第64页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="65" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第65页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第65页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="66" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第66页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第66页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="67" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第67页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第67页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="68" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第68页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第68页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="69" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第69页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第69页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="70" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第70页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第70页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="71" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第71页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第71页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="72" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第72页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第72页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="73" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第73页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第73页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="74" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第74页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第74页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="75" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第75页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第75页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="76" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第76页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第76页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="77" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第77页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第77页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="78" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第78页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第78页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="79" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第79页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第79页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="80" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第80页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第80页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="81" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第81页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第81页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="82" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第82页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第82页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="83" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第83页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第83页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="84" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第84页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第84页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="85" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第85页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第85页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="86" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第86页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第86页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="87" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第87页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第87页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="88" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第88页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第88页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="89" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第89页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第89页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="90" data-tag="技术分析" data-chapter="ch2">
+      <div class="page-header">
+        <span class="page-num">第90页</span>
+        <span class="page-tag">技术分析</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第90页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <div class="chapter-divider" id="ch3">
+      <span class="chapter-num"></span>
+      <h2 class="chapter-title">三、大盘和个股</h2>
+    </div>
+
+    <article class="page-card" data-page="91" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第91页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第91页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="92" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第92页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第92页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="93" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第93页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第93页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="94" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第94页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第94页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="95" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第95页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第95页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="96" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第96页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第96页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="97" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第97页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第97页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="98" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第98页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第98页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="99" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第99页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第99页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="100" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第100页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第100页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="101" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第101页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第101页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="102" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第102页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第102页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="103" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第103页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第103页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="104" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第104页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第104页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="105" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第105页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第105页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="106" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第106页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第106页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="107" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第107页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第107页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="108" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第108页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第108页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="109" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第109页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第109页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="110" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第110页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第110页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="111" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第111页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第111页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="112" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第112页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第112页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="113" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第113页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第113页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="114" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第114页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第114页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="115" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第115页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第115页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="116" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第116页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第116页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="117" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第117页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第117页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="118" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第118页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第118页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="119" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第119页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第119页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="120" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第120页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第120页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="121" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第121页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第121页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="122" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第122页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第122页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="123" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第123页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第123页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="124" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第124页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第124页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="125" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第125页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第125页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="126" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第126页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第126页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="127" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第127页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第127页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="128" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第128页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第128页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="129" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第129页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第129页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="130" data-tag="大盘个股" data-chapter="ch3">
+      <div class="page-header">
+        <span class="page-num">第130页</span>
+        <span class="page-tag">大盘个股</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第130页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <div class="chapter-divider" id="ch4">
+      <span class="chapter-num"></span>
+      <h2 class="chapter-title">四、关于风险</h2>
+    </div>
+
+    <article class="page-card" data-page="131" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第131页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第131页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="132" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第132页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第132页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="133" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第133页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第133页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="134" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第134页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第134页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="135" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第135页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第135页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="136" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第136页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第136页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="137" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第137页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第137页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="138" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第138页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第138页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="139" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第139页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第139页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="140" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第140页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第140页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="141" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第141页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第141页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="142" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第142页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第142页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="143" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第143页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第143页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="144" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第144页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第144页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="145" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第145页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第145页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="146" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第146页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第146页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="147" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第147页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第147页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="148" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第148页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第148页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="149" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第149页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第149页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="150" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第150页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第150页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="151" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第151页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第151页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="152" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第152页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第152页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="153" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第153页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第153页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="154" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第154页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第154页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="155" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第155页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第155页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="156" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第156页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第156页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="157" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第157页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第157页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="158" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第158页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第158页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="159" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第159页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第159页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="160" data-tag="风险控制" data-chapter="ch4">
+      <div class="page-header">
+        <span class="page-num">第160页</span>
+        <span class="page-tag">风险控制</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第160页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <div class="chapter-divider" id="ch5">
+      <span class="chapter-num"></span>
+      <h2 class="chapter-title">五、产业与周期</h2>
+    </div>
+
+    <article class="page-card" data-page="161" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第161页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第161页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="162" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第162页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第162页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="163" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第163页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第163页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="164" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第164页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第164页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="165" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第165页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第165页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="166" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第166页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第166页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="167" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第167页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第167页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="168" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第168页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第168页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="169" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第169页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第169页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="170" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第170页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第170页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="171" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第171页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第171页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="172" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第172页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第172页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="173" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第173页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第173页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="174" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第174页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第174页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="175" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第175页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第175页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="176" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第176页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第176页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="177" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第177页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第177页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="178" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第178页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第178页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="179" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第179页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第179页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="180" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第180页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第180页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="181" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第181页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第181页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="182" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第182页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第182页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="183" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第183页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第183页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="184" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第184页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第184页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="185" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第185页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第185页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="186" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第186页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第186页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="187" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第187页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第187页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="188" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第188页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第188页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="189" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第189页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第189页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="190" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第190页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第190页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="191" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第191页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第191页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="192" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第192页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第192页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="193" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第193页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第193页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="194" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第194页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第194页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="195" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第195页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第195页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="196" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第196页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第196页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="197" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第197页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第197页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="198" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第198页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第198页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="199" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第199页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第199页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="200" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第200页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第200页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="201" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第201页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第201页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="202" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第202页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第202页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="203" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第203页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第203页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="204" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第204页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第204页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="205" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第205页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第205页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="206" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第206页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第206页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="207" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第207页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第207页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="208" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第208页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第208页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="209" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第209页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第209页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="210" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第210页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第210页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="211" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第211页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第211页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="212" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第212页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第212页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="213" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第213页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第213页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="214" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第214页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第214页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="215" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第215页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第215页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="216" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第216页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第216页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="217" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第217页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第217页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="218" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第218页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第218页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="219" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第219页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第219页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="220" data-tag="产业周期" data-chapter="ch5">
+      <div class="page-header">
+        <span class="page-num">第220页</span>
+        <span class="page-tag">产业周期</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第220页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <div class="chapter-divider" id="ch6">
+      <span class="chapter-num"></span>
+      <h2 class="chapter-title">六、煤炭和电力能源</h2>
+    </div>
+
+    <article class="page-card" data-page="221" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第221页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第221页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="222" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第222页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第222页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="223" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第223页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第223页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="224" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第224页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第224页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="225" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第225页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第225页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="226" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第226页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第226页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="227" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第227页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第227页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="228" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第228页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第228页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="229" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第229页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第229页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="230" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第230页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第230页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="231" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第231页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第231页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="232" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第232页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第232页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="233" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第233页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第233页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="234" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第234页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第234页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="235" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第235页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第235页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="236" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第236页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第236页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="237" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第237页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第237页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="238" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第238页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第238页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="239" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第239页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第239页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="240" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第240页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第240页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="241" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第241页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第241页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="242" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第242页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第242页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="243" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第243页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第243页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="244" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第244页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第244页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="245" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第245页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第245页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="246" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第246页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第246页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="247" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第247页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第247页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="248" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第248页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第248页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="249" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第249页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第249页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="250" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第250页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第250页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="251" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第251页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第251页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="252" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第252页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第252页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="253" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第253页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第253页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="254" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第254页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第254页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="255" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第255页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第255页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="256" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第256页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第256页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="257" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第257页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第257页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="258" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第258页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第258页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="259" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第259页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第259页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="260" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第260页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第260页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="261" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第261页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第261页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="262" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第262页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第262页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="263" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第263页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第263页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="264" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第264页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第264页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="265" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第265页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第265页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="266" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第266页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第266页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="267" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第267页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第267页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="268" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第268页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第268页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="269" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第269页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第269页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="270" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第270页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第270页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="271" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第271页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第271页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="272" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第272页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第272页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="273" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第273页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第273页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="274" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第274页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第274页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="275" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第275页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第275页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="276" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第276页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第276页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="277" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第277页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第277页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="278" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第278页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第278页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="279" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第279页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第279页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="280" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第280页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第280页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="281" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第281页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第281页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="282" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第282页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第282页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="283" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第283页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第283页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="284" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第284页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第284页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="285" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第285页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第285页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="286" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第286页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第286页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="287" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第287页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第287页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="288" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第288页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第288页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="289" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第289页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第289页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="290" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第290页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第290页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="291" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第291页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第291页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="292" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第292页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第292页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="293" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第293页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第293页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="294" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第294页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第294页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="295" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第295页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第295页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="296" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第296页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第296页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="297" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第297页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第297页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="298" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第298页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第298页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="299" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第299页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第299页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="300" data-tag="煤炭电力" data-chapter="ch6">
+      <div class="page-header">
+        <span class="page-num">第300页</span>
+        <span class="page-tag">煤炭电力</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第300页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <div class="chapter-divider" id="ch7">
+      <span class="chapter-num"></span>
+      <h2 class="chapter-title">七、人口与趋势</h2>
+    </div>
+
+    <article class="page-card" data-page="301" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第301页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第301页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="302" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第302页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第302页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="303" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第303页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第303页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="304" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第304页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第304页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="305" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第305页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第305页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="306" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第306页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第306页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="307" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第307页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第307页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="308" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第308页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第308页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="309" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第309页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第309页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="310" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第310页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第310页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="311" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第311页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第311页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="312" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第312页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第312页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="313" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第313页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第313页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="314" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第314页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第314页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="315" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第315页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第315页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="316" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第316页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第316页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="317" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第317页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第317页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="318" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第318页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第318页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="319" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第319页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第319页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="320" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第320页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第320页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="321" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第321页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第321页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="322" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第322页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第322页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="323" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第323页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第323页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="324" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第324页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第324页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="325" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第325页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第325页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="326" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第326页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第326页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="327" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第327页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第327页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="328" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第328页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第328页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="329" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第329页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第329页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="330" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第330页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第330页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="331" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第331页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第331页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="332" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第332页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第332页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="333" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第333页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第333页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="334" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第334页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第334页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="335" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第335页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第335页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="336" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第336页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第336页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="337" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第337页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第337页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="338" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第338页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第338页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="339" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第339页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第339页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="340" data-tag="人口趋势" data-chapter="ch7">
+      <div class="page-header">
+        <span class="page-num">第340页</span>
+        <span class="page-tag">人口趋势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第340页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <div class="chapter-divider" id="ch8">
+      <span class="chapter-num"></span>
+      <h2 class="chapter-title">八、局势及竞争</h2>
+    </div>
+
+    <article class="page-card" data-page="341" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第341页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第341页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="342" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第342页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第342页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="343" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第343页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第343页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="344" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第344页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第344页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="345" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第345页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第345页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="346" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第346页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第346页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="347" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第347页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第347页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="348" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第348页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第348页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="349" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第349页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第349页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="350" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第350页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第350页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="351" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第351页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第351页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="352" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第352页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第352页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="353" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第353页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第353页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="354" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第354页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第354页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="355" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第355页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第355页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="356" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第356页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第356页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="357" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第357页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第357页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="358" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第358页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第358页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="359" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第359页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第359页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="360" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第360页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第360页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="361" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第361页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第361页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="362" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第362页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第362页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="363" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第363页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第363页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="364" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第364页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第364页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="365" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第365页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第365页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="366" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第366页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第366页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="367" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第367页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第367页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="368" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第368页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第368页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="369" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第369页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第369页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="370" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第370页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第370页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="371" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第371页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第371页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="372" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第372页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第372页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="373" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第373页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第373页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="374" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第374页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第374页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="375" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第375页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第375页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="376" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第376页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第376页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="377" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第377页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第377页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="378" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第378页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第378页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="379" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第379页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第379页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="380" data-tag="宏观局势" data-chapter="ch8">
+      <div class="page-header">
+        <span class="page-num">第380页</span>
+        <span class="page-tag">宏观局势</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第380页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <div class="chapter-divider" id="ch9">
+      <span class="chapter-num"></span>
+      <h2 class="chapter-title">九、闲言碎语</h2>
+    </div>
+
+    <article class="page-card" data-page="381" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第381页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第381页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="382" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第382页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第382页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="383" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第383页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第383页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="384" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第384页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第384页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="385" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第385页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第385页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="386" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第386页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第386页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="387" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第387页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第387页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="388" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第388页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第388页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="389" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第389页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第389页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="390" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第390页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第390页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="391" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第391页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第391页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="392" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第392页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第392页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="393" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第393页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第393页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="394" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第394页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第394页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="395" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第395页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第395页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="396" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第396页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第396页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="397" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第397页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第397页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="398" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第398页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第398页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="399" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第399页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第399页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="400" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第400页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第400页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="401" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第401页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第401页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="402" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第402页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第402页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="403" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第403页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第403页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="404" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第404页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第404页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="405" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第405页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第405页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="406" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第406页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第406页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="407" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第407页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第407页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="408" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第408页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第408页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="409" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第409页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第409页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="410" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第410页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第410页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="411" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第411页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第411页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="412" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第412页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第412页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="413" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第413页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第413页 — OCR处理中，稍后自动补全</div></div>
+    </article>
+
+    <article class="page-card" data-page="414" data-tag="杂谈" data-chapter="ch9">
+      <div class="page-header">
+        <span class="page-num">第414页</span>
+        <span class="page-tag">杂谈</span>
+      </div>
+      <div class="page-body"><div class="ocr-pending">📖 第414页 — OCR处理中，稍后自动补全</div></div>
+    </article>
 </div>
 
-<!-- ═══════════ 四、风险控制 ═══════════ -->
-<div class="section" id="risk">
-  <div class="section-title"><span class="num">04</span> 风险控制体系 · 十年不亏的核心保障</div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">🔒</div>
-      <h4>无杠杆铁律</h4>
-      <p>所有账户禁止使用融资或任何形式的杠杆。从根本上杜绝强制平仓和放大亏损的风险。大额度融资上杠杆的条件：1）业绩无大幅下降风险；2）分红覆盖融资利率——且即便如此仍要极度谨慎。</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">📉</div>
-      <h4>低估值安全边际</h4>
-      <p>以极低价格买入优质资产。即使股价短期下跌，盈利能力和资产价值也提供强有力支撑。买在最坏情况也不会亏的位置——"没有利润下跌空间的低估"。</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🏢</div>
-      <h4>高确定性标的</h4>
-      <p>只投资"难倒闭"的公司。行业低谷或市场危机中仍能生存并产生现金流。银行选风控最好的（建行工行北京银行），回避风控差的（平安光大不买）。</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🎯</div>
-      <h4>分散但集中</h4>
-      <p>主仓重仓少数核心行业（煤炭、水电），核心主仓位长期不动。小仓位波段调节。既不是过度分散（撒胡椒面），也不是All-in单票。</p>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ 五、仓位管理 ═══════════ -->
-<div class="section" id="position">
-  <div class="section-title"><span class="num">05</span> 仓位管理要诀</div>
-
-  <div class="card-grid">
-    <div class="card"><div class="card-icon">📦</div><h4>集中持仓</h4><p>深度研究后重仓核心行业和标的，不搞分散撒网。4个账户基本配置相同股票。</p></div>
-    <div class="card"><div class="card-icon">🏗️</div><h4>主仓位不动</h4><p>大部分资金配置在核心标的作为长期底仓，不受短期波动影响。</p></div>
-    <div class="card"><div class="card-icon">🔄</div><h4>小仓位波段</h4><p>少量资金用于波段做T降低整体成本，不改变主仓位布局。</p></div>
-    <div class="card"><div class="card-icon">🚫</div><h4>无杠杆</h4><p>宁可不赚也不借钱。无融资、无配资、无任何杠杆工具。</p></div>
-    <div class="card"><div class="card-icon">📊</div><h4>动态调整</h4><p>根据市场整体环境和个人风险承受能力灵活调整总仓位。</p></div>
-    <div class="card"><div class="card-icon">🧠</div><h4>清晰自知</h4><p>知道自身能力边界，不因贪婪突破纪律，不因恐惧放弃原则。</p></div>
-  </div>
-</div>
-
-<!-- ═══════════ 六、行业深研 ═══════════ -->
-<div class="section" id="industry">
-  <div class="section-title"><span class="num">06</span> 行业深度研究</div>
-
-  <div class="principle">
-    <div class="p-num">⚡</div>
-    <div class="p-body">
-      <h4>煤炭行业 —— 鹿鼎公最核心能力圈</h4>
-      <ul>
-        <li><b>供应端</b>：2020后增加供应主要靠老矿上调产能，新矿审批极严。2023年煤炭供应量大概率是历史大顶</li>
-        <li><b>需求端</b>：需求预计还要2-3年见顶。风光新能源让谁来调峰？风光占比多少以下才不会影响电力安全？</li>
-        <li><b>煤电博弈是虚幻</b>——没有燃气机组调峰的中国电力，还得靠煤电</li>
-        <li><b>焦煤优于动力煤</b>：风光能干趴动力煤但干不了焦煤</li>
-        <li><b>电煤消耗四大变数</b>：气候因素、水电变数、风光新增发电量、经济冷热</li>
-        <li><b>煤炭整体看供需双弱，供应更弱</b></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="principle">
-    <div class="p-num">🏦</div>
-    <div class="p-body">
-      <h4>银行金融 —— 剩着为王</h4>
-      <ul>
-        <li>银行会倒闭但不会全部倒闭——选择最安全的3家（建行、工行、北京银行）</li>
-        <li>风控是一切——建行最保守，最爱保守的银行</li>
-        <li>分红就是0.9-0.95PB套现机会，股价没填权就是极低PB买入机会</li>
-        <li>个人房屋贷款三大好处：省资本、稳定现金流、锁定账户</li>
-        <li>大热基金被赎成带鱼了基本上见底了——顶是基民买出来的，底是基民割出来的</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="principle">
-    <div class="p-num">🏠</div>
-    <div class="p-body">
-      <h4>地产行业 —— 周期已至</h4>
-      <ul>
-        <li>房价不是开跌而是已跌——三次房价崩盘的历史教训</li>
-        <li>房价不能让年轻人丧失希望</li>
-        <li>经营成本是地产的核心——万科的问题在于除了资金没有特别出众的垄断优势</li>
-        <li>关于房产税：需要关注其对估值的长期压制</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="principle">
-    <div class="p-num">🏭</div>
-    <div class="p-body">
-      <h4>钢铁、互联网及其他</h4>
-      <ul>
-        <li><b>钢铁</b>：周期行业，需关注供需缺口。对明年钢铁行业要看供需两端变化</li>
-        <li><b>互联网</b>：互联网速度形成一致性预期就是暴涨暴跌</li>
-        <li><b>医疗险</b>：靠什么赚钱是核心问题</li>
-        <li><b>高工资来自高毛利行业</b>——这是产业选择的基本原理</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ 七、经典标的 ═══════════ -->
-<div class="section" id="stocks">
-  <div class="section-title"><span class="num">07</span> 经典持仓标的</div>
-
-  <div class="stock-grid">
-    <div class="stock-card">
-      <div class="code">601088</div>
-      <h4>中国神华</h4>
-      <div class="sector">煤炭 · 垄断龙头</div>
-      <div class="yield">5%~8%</div>
-      <div class="note">高股息、垄断性煤炭龙头。资源、铁路、码头、上下游一体化优势</div>
-    </div>
-    <div class="stock-card">
-      <div class="code">600900</div>
-      <h4>长江电力</h4>
-      <div class="sector">水电 · 永续经营</div>
-      <div class="yield">3%~5%</div>
-      <div class="note">稳定现金流、永续经营。水电的巨大现金流是其他行业无法比拟的</div>
-    </div>
-    <div class="stock-card">
-      <div class="code">601006</div>
-      <h4>大秦铁路</h4>
-      <div class="sector">铁路 · 垄断运输</div>
-      <div class="yield">4%~6%</div>
-      <div class="note">垄断性运输通道、高分红。通胀跟随股</div>
-    </div>
-    <div class="stock-card">
-      <div class="code">600886</div>
-      <h4>国投电力</h4>
-      <div class="sector">电力 · 经典案例</div>
-      <div class="yield" style="color:var(--red)">+5倍</div>
-      <div class="note">2014年重仓案例。国投垄断雅砻江，低速增长30年可期</div>
-    </div>
-    <div class="stock-card">
-      <div class="code">600585</div>
-      <h4>海螺水泥</h4>
-      <div class="sector">建材 · 沙漠之花</div>
-      <div class="yield">周期</div>
-      <div class="note">夕阳行业中的强企。垄断来自资源、资金、布局的优势</div>
-    </div>
-    <div class="stock-card">
-      <div class="code">601939</div>
-      <h4>建设银行</h4>
-      <div class="sector">银行 · 风控标杆</div>
-      <div class="yield">5%~7%</div>
-      <div class="note">最保守的银行，最爱保守的银行。风控高过一切</div>
-    </div>
-  </div>
-
-  <div class="quote" style="margin-top:16px">"不符合低PE、低PB、行业垄断、高ROE、长远有确定性增长、上市满5年这个标准的，我一律不买，包括新股。"</div>
-</div>
-
-<!-- ═══════════ 八、宏观视野 ═══════════ -->
-<div class="section" id="macro">
-  <div class="section-title"><span class="num">08</span> 宏观视野 · 人口与趋势</div>
-
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">👥</div>
-      <h4>人口结构 —— 最重要的宏观变量</h4>
-      <ul>
-        <li>主力育龄妇女数据 + 平均生育意愿 → 总和生育率趋势</li>
-        <li>食品消费股与人口结构高度相关</li>
-        <li>中日韩三国人口下降其实才刚刚开始</li>
-        <li>2023年后出生的中国孩子有多幸运（竞争压力大幅减轻）</li>
-        <li>60年后的7亿人口与200年后的7亿人口的差异——断崖式vs渐进式</li>
-      </ul>
-    </div>
-    <div class="card">
-      <div class="card-icon">🇯🇵</div>
-      <h4>日本经验 —— 摸着鬼子走</h4>
-      <ul>
-        <li>日本低欲望社会：消费不振的长期化</li>
-        <li>东京房价大致情况——从日本人口变化与经济谈起</li>
-        <li>日本股市和消费的经验——人口老龄化后的经济（台湾也可参照）</li>
-        <li>日韩以及台湾省的收入水平参照</li>
-        <li>关于日本房产几个事实——2010年上海人口结构图的警示</li>
-      </ul>
-    </div>
-    <div class="card">
-      <div class="card-icon">🌏</div>
-      <h4>国际竞争格局</h4>
-      <ul>
-        <li><b>美国</b>：通胀是个无解的局。不能收割就很痛</li>
-        <li><b>越南</b>：注定是韭菜的命——产业转移的局限</li>
-        <li><b>印度</b>：需要深入研究的竞争对手</li>
-        <li><b>通缩</b>：通缩期的库存挤出效应需要高度警惕</li>
-        <li><b>债务</b>：债务问题不可回避</li>
-      </ul>
-    </div>
-    <div class="card">
-      <div class="card-icon">📊</div>
-      <h4>周期规律</h4>
-      <ul>
-        <li>行业周期性是逃不掉的规律</li>
-        <li>全球粮食生产成本大涨——通胀传导</li>
-        <li>未来10年每年4%增速应该是一件非常高兴的事</li>
-        <li>高善文4%增速预判的参考价值</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ 九、投资启示 ═══════════ -->
-
-<div class="section" id="sources">
-  <div class="section-title">📜 原文摘录（OCR持续补全中）</div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px">
-    <div class="card"><div class="card-icon">💎</div><h3>垄断与利润</h3><p style="font-size:13px;color:#999;line-height:1.8">"所有高毛利全部来自垄断，不管是行政垄断，还是品牌垄断，或者资源垄断，又或是技术垄断。海螺的垄断来自资源、资金、布局的优势；神华来自资源、铁路、码头和上下游一体以及资金。"<br><span style="color:#f0a500">— 2014年</span></p></div>
-    <div class="card"><div class="card-icon">🐢</div><h3>守株待兔</h3><p style="font-size:13px;color:#999;line-height:1.8">"投资标的如同来来往往飞奔的兔子，只有撞到大树的那只才属于你的。因此，投资就是守株待兔。成熟的投资者，往往在交通要道上找根大树，静静守着。"<br><span style="color:#f0a500">— 2014年</span></p></div>
-    <div class="card"><div class="card-icon">🎯</div><h3>选股铁律</h3><p style="font-size:13px;color:#999;line-height:1.8">"不符合低PE、低PB、行业垄断、高ROE、长远有确定性增长、上市满5年这个标准的，我一律不买，包括新股。"<br><span style="color:#f0a500">— 2014年</span></p></div>
-    <div class="card"><div class="card-icon">💰</div><h3>分红逻辑</h3><p style="font-size:13px;color:#999;line-height:1.8">"在股价大幅度低于1PB的背景下，分红就是给你0.9-0.95PB套现的机会。股价没填权，就是给你极低PB买入的机会。"<br><span style="color:#f0a500">— 2014年</span></p></div>
-    <div class="card"><div class="card-icon">⚖️</div><h3>杠杆红线</h3><p style="font-size:13px;color:#999;line-height:1.8">"大额度融资上杠杆的线：1）股票业绩没有大幅度下降风险；2）分红覆盖融资利率。要知道大多数股神都是死在融资上的。"<br><span style="color:#f0a500">— 2014年</span></p></div>
-    <div class="card"><div class="card-icon">🏦</div><h3>银行底锚</h3><p style="font-size:13px;color:#999;line-height:1.8">"未来业绩没有大幅度下降预期的8-9%现金分红价，就是股价的底锚。几乎所有的好股票，即使在最烂的大熊市，都在这个区域之前构筑成底部。"<br><span style="color:#f0a500">— 2014年</span></p></div>
-  </div>
-</div>
-
-<div class="section" id="lessons">
-  <div class="section-title"><span class="num">09</span> 对投资者的启示</div>
-
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">🏗️</div>
-      <h4>建立自己的操作体系</h4>
-      <p>所有想在股市有所收获的投资者，首先要解决的就是形成自己的操作体系。这个体系必须：<b>是你喜欢的风格、能够长期盈利、有风控保证回撤有限度</b>。如果做不到，说明体系有缺陷。</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🎯</div>
-      <h4>坚守能力圈</h4>
-      <p>只投看得懂的行业和公司。不懂的行业不做。鹿鼎公专注煤炭水电公用事业十余年，从不碰科技医药。"知道自己能力的边界"比聪明更重要。</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">⚠️</div>
-      <h4>风险永远第一位</h4>
-      <p>心态比策略重要，策略比技术重要，技术比运气重要——但"消息"绝不重要。盈利有逻辑的和没逻辑的，短期相似，长期是生死之别。</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">⏳</div>
-      <h4>耐心是核心竞争力</h4>
-      <p>"守株待兔"——不成熟的投资者举着小树追兔子，成熟的在交通要道上找棵大树静静守着。复利的伟大需要时间。</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">📋</div>
-      <h4>抄作业四关键</h4>
-      <p>1）理解对方的投资逻辑；2）匹配自己的风险承受力；3）纳入自己的操作体系验证；4）不符合自己体系的不买。所有无脑跟风都是愚蠢的。</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🔍</div>
-      <h4>怎么样看别人水平</h4>
-      <p>真正赚大钱的三类人：1）顶尖技术高手（极少）；2）行业估值研究透彻（极少）；3）在蓝筹里滚床单的技术高手。收益是投资思维的产物。</p>
-    </div>
-  </div>
-
-  <div class="quote" style="margin-top:24px">
-    "投资标的如同来来往往飞奔的兔子，只有撞到大树的那只才属于你的。因此，投资就是守株待兔。"<br>
-    <span style="font-size:12px;opacity:0.6">—— 超级鹿鼎公，2015年2月</span>
-  </div>
-</div>
-
-<!-- ═══════════ 局限性 ═══════════ -->
-<div class="section">
-  <div class="section-title">⚠️ 体系局限性</div>
-  <div class="card" style="max-width:100%">
-    <ul>
-      <li><b>行业集中风险</b>：高度集中于煤炭、水电、公用事业，若行业发生结构性变化（如能源革命加速），组合将受重大冲击</li>
-      <li><b>成长性不足</b>：重仓标的以成熟期企业为主，缺乏高成长性。在经济高速增长期可能跑输大盘</li>
-      <li><b>能力圈外机会错失</b>：对科技、消费、医药等行业的回避，可能错失大级别投资机会</li>
-      <li><b>做T的隐性成本</b>：频繁做T增加交易成本和税务负担，若判断失误可能导致"卖飞"或成本越做越高</li>
-      <li><b>个人化难复制</b>：鹿鼎公十余年深耕煤炭电力，行业认知深度极难复制。普通人缺乏同等研究深度时，"搬砖"可能搬成亏损</li>
-      <li><b>时代背景依赖</b>：策略在2014-2024年煤炭周期中获得验证，未来宏观环境变化（碳中和、能源转型）的有效性仍需观察</li>
-    </ul>
-  </div>
-</div>
-
-</div>
+<div class="footer">超级鹿鼎公投资文集 · OCR持续补全中 · 最后更新 {{UPDATE_TIME}}</div>
 
 <script>
-// Smooth scroll for nav links
-document.querySelectorAll('nav a').forEach(function(a){
-  a.addEventListener('click',function(e){
-    e.preventDefault();
-    var target=document.querySelector(this.getAttribute('href'));
-    if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+// 标签筛选
+function filterPosts(tag,el){
+  document.querySelectorAll('.filter-tag').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  document.querySelectorAll('.page-card').forEach(function(card){
+    if(tag==='all'||card.dataset.tag===tag){card.classList.remove('hidden')}
+    else{card.classList.add('hidden')}
   });
-});
+  // 显示被筛选出页面的章节标题
+  document.querySelectorAll('.chapter-divider').forEach(function(div){
+    var next=div.nextElementSibling;
+    var visible=false;
+    while(next&&!next.classList.contains('chapter-divider')){
+      if(!next.classList.contains('hidden')){visible=true;break}
+      next=next.nextElementSibling;
+    }
+    div.style.display=visible?'block':'none';
+  });
+}
 
-// Active nav on scroll
-var sections=document.querySelectorAll('.section');
-var navLinks=document.querySelectorAll('nav a');
+// 回到顶部按钮
 window.addEventListener('scroll',function(){
-  var current='';
-  sections.forEach(function(s){
-    if(s.getBoundingClientRect().top<120)current=s.id;
-  });
-  navLinks.forEach(function(a){
-    a.classList.toggle('active',a.getAttribute('href')==='#'+current);
-  });
+  document.getElementById('backTop').classList.toggle('show',window.scrollY>600);
 });
 </script>
-
-
-<div style="position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;color:#fff;padding:8px 20px;font-size:12px;z-index:9999;display:flex;align-items:center;gap:12px">
-  <span>📖 全书OCR进度</span>
-  <div style="flex:1;background:#333;border-radius:4px;height:8px;overflow:hidden">
-    <div style="width:11.4%;height:100%;background:linear-gradient(90deg,#f0a500,#ff6b35);border-radius:4px;transition:width 1s"></div>
-  </div>
-  <span style="white-space:nowrap">47/414 (11.4%)</span>
-  <span style="opacity:0.6">自动OCR中，每日补充~100页</span>
-</div>
 
 </body>
 </html>
