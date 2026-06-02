@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>行业数据库</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f8f6f3;color:#2c2c2c;line-height:1.6}
+
+.hero{text-align:center;padding:40px 20px 20px}
+.hero h1{font-size:22px;font-weight:700}
+.hero .sub{font-size:13px;color:#999;margin-top:4px}
+
+/* Tabs */
+.tabs{max-width:700px;margin:16px auto;display:flex;gap:0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.tab{flex:1;padding:12px;text-align:center;font-size:14px;cursor:pointer;border:none;background:#fff;transition:.2s;font-weight:500}
+.tab.active{background:#d45d00;color:#fff}
+.tab:hover:not(.active){background:#f5f5f5}
+
+.container{max-width:1000px;margin:0 auto;padding:0 20px 60px}
+.panel{display:none}
+.panel.active{display:block}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:20px}
+.kpi{background:#fff;border-radius:10px;padding:16px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.kpi .kpi-val{font-size:22px;font-weight:700;color:#d45d00}
+.kpi .kpi-label{font-size:11px;color:#999;margin-top:2px}
+.kpi .kpi-change{font-size:11px;margin-top:2px}
+.kpi .kpi-change.up{color:#2e7d32}
+.kpi .kpi-change.down{color:#c62828}
+
+/* Section */
+.section{margin-bottom:24px}
+.section-title{font-size:15px;font-weight:700;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:8px}
+.section-title .dot{width:8px;height:8px;border-radius:50%;background:#d45d00}
+
+/* Data table */
+.data-table{width:100%;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);font-size:13px}
+.data-table th{background:#fafafa;padding:10px 12px;text-align:left;font-weight:600;font-size:12px;color:#666;border-bottom:2px solid #eee}
+.data-table td{padding:9px 12px;border-bottom:1px solid #f5f5f5}
+.data-table tr:last-child td{border-bottom:none}
+.data-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.data-table .tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:6px;font-weight:600}
+.data-table .tag.green{background:#e8f5e9;color:#2e7d32}
+.data-table .tag.red{background:#ffebee;color:#c62828}
+.data-table .tag.orange{background:#fff3e0;color:#e65100}
+
+/* Insight cards */
+.insight-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.insight{background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);border-left:3px solid #d45d00}
+.insight .insight-title{font-size:14px;font-weight:600;margin-bottom:6px}
+.insight .insight-body{font-size:12px;color:#666;line-height:1.7}
+
+/* Update info */
+.update-info{text-align:center;font-size:11px;color:#ccc;padding:16px}
+
+.back-link{text-align:center;padding:10px}
+.back-link a{color:#d45d00;text-decoration:none;font-size:13px}
+
+@media(max-width:640px){
+  .kpi-row{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🏭 行业数据库</h1>
+  <p class="sub">手机零售 · 煤炭能源 — 关键指标追踪</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('phone')">📱 手机零售</button>
+  <button class="tab" onclick="switchTab('coal')">⛏️ 煤炭能源</button>
+</div>
+
+<div class="container">
+
+<!-- ====== 手机零售 ====== -->
+<div class="panel active" id="panel-phone">
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-val">2.73亿</div><div class="kpi-label">2025中国手机出货量</div><div class="kpi-change up">↑ 3.1% YoY</div></div>
+    <div class="kpi"><div class="kpi-val">~3,200元</div><div class="kpi-label">市场均价 ASP</div><div class="kpi-change up">↑ 8% YoY</div></div>
+    <div class="kpi"><div class="kpi-val">55%+</div><div class="kpi-label">线上渠道占比</div><div class="kpi-change up">↑ 持续提升</div></div>
+    <div class="kpi"><div class="kpi-val">18个月</div><div class="kpi-label">平均换机周期</div><div class="kpi-change down">延长中</div></div>
+    <div class="kpi"><div class="kpi-val">~5%</div><div class="kpi-label">线下零售毛利率</div><div class="kpi-change down">承压</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>品牌市场份额（2025估算）</div>
+    <table class="data-table">
+      <tr><th>品牌</th><th class="num">出货量份额</th><th class="num">收入份额</th><th>趋势</th><th>关键驱动</th></tr>
+      <tr><td>华为</td><td class="num">18%</td><td class="num">25%</td><td><span class="tag green">↑ 强劲</span></td><td>HarmonyOS NEXT生态闭环，nova中端放量</td></tr>
+      <tr><td>苹果</td><td class="num">15%</td><td class="num">28%</td><td><span class="tag orange">→ 持平</span></td><td>高端份额稳固，AI功能迭代</td></tr>
+      <tr><td>OPPO/vivo</td><td class="num">30%</td><td class="num">18%</td><td><span class="tag orange">→ 持平</span></td><td>线下渠道深厚，中低端基本盘</td></tr>
+      <tr><td>小米</td><td class="num">14%</td><td class="num">10%</td><td><span class="tag green">↑ 增长</span></td><td>小米SU7品牌效应带动，"人车家"生态</td></tr>
+      <tr><td>荣耀</td><td class="num">13%</td><td class="num">8%</td><td><span class="tag green">↑ 增长</span></td><td>独立后产品力回升，渠道重建</td></tr>
+      <tr><td>其他</td><td class="num">10%</td><td class="num">11%</td><td><span class="tag red">↓ 收缩</span></td><td>三星/中兴/努比亚等</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>渠道结构变化</div>
+    <div class="insight-grid">
+      <div class="insight"><div class="insight-title">线上占比突破55%</div><div class="insight-body">直播电商（抖音/快手）贡献线上增长的40%+。传统电商（京东/天猫）增速放缓至个位数。线下门店客流持续下滑，但高端体验店（华为旗舰店、Apple Store）逆势增长。</div></div>
+      <div class="insight"><div class="insight-title">运营商渠道回潮</div><div class="insight-body">三大运营商合约机占比回升至~15%。5G套餐捆绑销售、以旧换新补贴成为线下重要引流手段。对迪信通等传统连锁是机会也是挑战。</div></div>
+      <div class="insight"><div class="insight-title">二手/翻新市场爆发</div><div class="insight-body">2025年二手手机交易量超5000万台，增速20%+。转转、爱回收等平台蚕食新机市场。翻新机毛利率（15-25%）远高于新机零售（3-5%）。</div></div>
+      <div class="insight"><div class="insight-title">下沉市场争夺</div><div class="insight-body">OPPO/vivo在下沉市场（三线以下）份额超40%。荣耀加速县域渠道建设。华为nova系列主打2000-3000元下沉价位。价格战压缩渠道利润。</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>迪信通相关指标</div>
+    <table class="data-table">
+      <tr><th>指标</th><th class="num">数值</th><th>说明</th></tr>
+      <tr><td>行业平均毛利率</td><td class="num">4-6%</td><td>纯手机零售，不含售后和配件</td></tr>
+      <tr><td>配件毛利率</td><td class="num">30-50%</td><td>高毛利品类，应重点发展</td></tr>
+      <tr><td>运营商佣金</td><td class="num">50-200元/户</td><td>开卡/套餐佣金，重要补充收入</td></tr>
+      <tr><td>门店坪效</td><td class="num">3-8万/㎡/年</td><td>视位置和品牌授权而定</td></tr>
+      <tr><td>库存周转天数</td><td class="num">30-60天</td><td>华为/苹果紧俏机型<15天</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ====== 煤炭能源 ====== -->
+<div class="panel" id="panel-coal">
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-val">~700元/吨</div><div class="kpi-label">秦皇岛5500大卡</div><div class="kpi-change down">↓ 从高点回落</div></div>
+    <div class="kpi"><div class="kpi-val">47.5亿吨</div><div class="kpi-label">2025原煤产量</div><div class="kpi-change up">↑ 1.3% YoY</div></div>
+    <div class="kpi"><div class="kpi-val">~25%</div><div class="kpi-label">煤电占比</div><div class="kpi-change down">↓ 逐步下降</div></div>
+    <div class="kpi"><div class="kpi-val">5-8%</div><div class="kpi-label">神华股息率</div><div class="kpi-change up">高分红持续</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>重点煤企对比</div>
+    <table class="data-table">
+      <tr><th>企业</th><th class="num">PE(TTM)</th><th class="num">PB</th><th class="num">股息率</th><th class="num">ROE</th><th>特点</th></tr>
+      <tr><td>中国神华</td><td class="num">~8x</td><td class="num">~1.1x</td><td class="num">5-8%</td><td class="num">~13%</td><td>煤电路港航一体化，垄断性最强</td></tr>
+      <tr><td>陕西煤业</td><td class="num">~6x</td><td class="num">~1.5x</td><td class="num">4-6%</td><td class="num">~25%</td><td>优质动力煤，成本优势显著</td></tr>
+      <tr><td>中煤能源</td><td class="num">~7x</td><td class="num">~0.8x</td><td class="num">3-5%</td><td class="num">~12%</td><td>PB最低，资产重估潜力</td></tr>
+      <tr><td>淮北矿业</td><td class="num">~5x</td><td class="num">~0.9x</td><td class="num">4-7%</td><td class="num">~18%</td><td>焦煤为主，化工延伸</td></tr>
+      <tr><td>兖矿能源</td><td class="num">~7x</td><td class="num">~1.3x</td><td class="num">5-8%</td><td class="num">~20%</td><td>海外资源（澳洲），弹性大</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>行业关键判断</div>
+    <div class="insight-grid">
+      <div class="insight"><div class="insight-title">供给端：新增产能受限</div><div class="insight-body">双碳政策下新矿审批极严。"十四五"期间核准产能增长趋近于零。存量矿井资源枯竭加速（东部老矿区）。供给刚性是煤价的最大支撑。</div></div>
+      <div class="insight"><div class="insight-title">需求端：峰值已近</div><div class="insight-body">煤电占比从2020年61%降至2025年~55%。风光装机爆发式增长。但煤电仍是调峰主力（"没有燃气机组调峰的中国电力还得靠煤电"——鹿鼎公）。</div></div>
+      <div class="insight"><div class="insight-title">长协价机制</div><div class="insight-body">神华长协价（~550元/吨）远低于市场价。长协占比越高、盈利稳定性越强，但弹性越小。这是双刃剑——熊市利好，牛市利空。</div></div>
+      <div class="insight"><div class="insight-title">焦煤更看好</div><div class="insight-body">焦煤供给更稀缺（中国焦煤储量仅占煤炭总储量20%）。钢铁行业需求虽降，但优质主焦煤不可替代。鹿鼎公明确"更看好焦煤"——淮北矿业是代表标的。</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>估值逻辑（鹿鼎公体系）</div>
+    <table class="data-table">
+      <tr><th>指标</th><th>标准</th><th>说明</th></tr>
+      <tr><td>买入PE</td><td class="num"><8x，最好<6x</td><td>低PE是铁律，不符合不买</td></tr>
+      <tr><td>买入PB</td><td class="num"><1.2x，最好<1x</td><td>破净时股息率自然提升</td></tr>
+      <tr><td>股息率底线</td><td class="num">>5%</td><td>"8-9%现金分红价就是股价的底锚"</td></tr>
+      <tr><td>卖出标准</td><td class="num">不再低估或发现更好的</td><td>"耐心持有，直到不再低估"</td></tr>
+      <tr><td>核心风险</td><td>—</td><td>碳达峰后需求断崖式下滑、新能源储能突破</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="update-info">数据截至2025年底估算值 · 仅作行业参考 · 非投资建议</div>
+
+<div class="back-link"><a href="kb.html">← 返回知识库</a></div>
+
+</div>
+
+<script>
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
