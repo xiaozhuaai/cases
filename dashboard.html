@@ -110,7 +110,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <body>
 <div class="header">
   <h1><span class="dot"></span>Hermes 信息看板</h1>
-  <span class="date">2026年06月26日 · 自动更新</span>
+  <span class="date">2026年06月30日 · 自动更新</span>
 </div>
 <div class="nav">
   <span class="nav-btn active" onclick="switchTab('tab-news',this)">每日新闻</span>
@@ -154,94 +154,99 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div id="news-sections">
 
 <div class="section" data-cat="cat-tech"><div class="section-title"><span class="bar"></span>科技 / AI</div><div class="news-grid">
-<div class="news-card" onclick="openModal('美光财报"王炸"：营收增长超四倍，存储超级周期实锤')">
-  <div class="title">美光财报"王炸"：营收增长超四倍，存储超级周期实锤</div>
-  <div class="body">美光科技公布第三财季（3–5月）财报，营收增长超过四倍，业绩与下一季度指引全面远超市场预期，盘后股价大涨13%。财报会实录显示，公司已签署16份长期供应协议（SCA），行业紧缺预计延续至2027年。日本铠侠股价随之大涨15%，韩国SK海力士涨超10%，存储板块全面爆发。</div>
+<div class="news-card" onclick="openModal('OpenAI成立专项小组调查Codex额度异常消耗问题')">
+  <div class="title">OpenAI成立专项小组调查Codex额度异常消耗问题</div>
+  <div class="body">OpenAI已成立专项调查小组，针对近期大量用户反馈的Codex额度消耗异常加速问题展开紧急调查。自上周以来，多名ChatGPT付费用户报告Codex周额度在几乎没有使用的情况下从96%骤降至0%，Codex产品负责人Tibo Sottiaux承认团队已紧急开设作战室审查系统日志。此前6月27日的首次重置未能解决问题，目前团队已实施第二次全网用户硬重置。</div>
   <div class="tags"><span class="tag">一、科技/A</span></div>
 </div>
-<div class="news-card" onclick="openModal('雄安打造AI创新"强磁场"：从实验室到训练场')">
-  <div class="title">雄安打造AI创新"强磁场"：从实验室到训练场</div>
-  <div class="body">新华社"活力中国调研行"聚焦雄安新区，报道称雄安正从AI"实验室"迈向产业"训练场"，通过政策扶持、算力基础设施建设和人才引进，吸引大量AI企业和研究机构落地，成为京津冀AI创新的核心枢纽。</div>
+<div class="news-card" onclick="openModal('韩国宣布1461万亿韩元AI与半导体投资计划')">
+  <div class="title">韩国宣布1461万亿韩元AI与半导体投资计划</div>
+  <div class="body">韩国总统李在明29日公布总额超千万亿韩元的半导体、物理人工智能和AI数据中心政府投资计划。其中800万亿韩元用于西南地区半导体生产基地，81万亿韩元投资HBM封装基地，550万亿韩元投资AI数据中心，30万亿韩元用于下一代半导体研发。</div>
   <div class="tags"><span class="tag">一、科技/A</span></div>
 </div>
-<div class="news-card" onclick="openModal('中金：高端AI服务器散热方案将升级为"金刚石热沉+全液冷"')">
-  <div class="title">中金：高端AI服务器散热方案将升级为"金刚石热沉+全液冷"</div>
-  <div class="body">中金公司发布研报指出，随着AI算力密度持续攀升，未来高端AI服务器有望采用"金刚石热沉+全液冷"复合散热方案，以应对千瓦级芯片功耗。相关材料（金刚石、液冷板）和设备供应商将迎来新一轮增长机遇。</div>
+<div class="news-card" onclick="openModal('Meta因担心模型蒸馏风险限制Claude和Codex使用')">
+  <div class="title">Meta因担心模型蒸馏风险限制Claude和Codex使用</div>
+  <div class="body">内部文件显示，Meta因担心模型蒸馏风险，已对Anthropic的Claude和OpenAI的Codex在公司内部的使用施加限制。此举反映出头部科技公司对AI模型知识产权保护的敏感度正在急剧上升，模型蒸馏这一技术路径正在引发行业性合规争议。</div>
   <div class="tags"><span class="tag">📊 财经</span></div>
 </div>
-<div class="news-card" onclick="openModal('央行新增隔夜逆回购操作品种，精细化管理流动性')">
-  <div class="title">央行新增隔夜逆回购操作品种，精细化管理流动性</div>
-  <div class="body">中国人民银行公告，将在6月29日、30日公开市场操作中增加隔夜逆回购操作品种，采用固定利率、数量招标，以更好匹配银行体系短期流动性需求。此举进一步丰富了央行货币政策工具箱。</div>
+<div class="news-card" onclick="openModal('A股热点概念炒作频发，50余家公司密集发布风险提示')">
+  <div class="title">A股热点概念炒作频发，50余家公司密集发布风险提示</div>
+  <div class="body">6月17日以来，A股已有50多家公司针对AI服务器、光模块、人形机器人、可控核聚变等热点概念发布股价异动公告或风险提示。专家提醒投资者警惕"三无"信号——无核心技术迭代、无规模化订单、无现金流支撑。产业估值正从"叙事驱动"转向"业绩验证"逻辑。</div>
   <div class="tags"><span class="tag">📊 财经</span></div>
 </div>
-<div class="news-card" onclick="openModal('黄金跌破4000美元，贵金属全线暴跌终结三年牛市？')">
-  <div class="title">黄金跌破4000美元，贵金属全线暴跌终结三年牛市？</div>
-  <div class="body">国际金价盘中跌3.6%跌破4000美元/盎司关口，白银期货暴跌10%，国内沪银开盘跌超6%。美元走强叠加美联储加息预期重创贵金属市场，布伦特原油也跌至73美元/桶以下。市场热议三年金银牛市是否戛然而止。</div>
+<div class="news-card" onclick="openModal('科创50放量涨超4.5%，沪指深V回升站稳4000点')">
+  <div class="title">科创50放量涨超4.5%，沪指深V回升站稳4000点</div>
+  <div class="body">昨日A股市场表现强劲，科创50指数放量大涨超4.5%，芯片产业链持续爆发，全市场超190股涨超10%。沪指经历深V走势后重新站稳4000点整数关口，AI硬件端内部出现"两极分化"格局。美股方面，纳指涨超2%，道指再创新高。</div>
   <div class="tags"><span class="tag">📊 财经</span></div>
 </div>
-<div class="news-card" onclick="openModal('韩国KOSPI暴涨6%触发熔断，日经225站上70000点')">
-  <div class="title">韩国KOSPI暴涨6%触发熔断，日经225站上70000点</div>
-  <div class="body">6月25日亚洲早盘，韩国KOSPI指数涨幅扩大至6%触发熔断机制，SK海力士涨超10%、三星电子涨6%。日经225指数同步走高，向上触及70830点，日内涨2.39%。台股加权指数亦涨1.1%。存储芯片和AI产业链成为亚太股市暴涨核心驱动力。</div>
+<div class="news-card" onclick="openModal('年中银行揽储"一日游"冲量暗流涌动，居民存款首现月度净流出')">
+  <div class="title">年中银行揽储"一日游"冲量暗流涌动，居民存款首现月度净流出</div>
+  <div class="body">年中考核窗口期来临，银行揽储市场呈现分化：大行主动弱化季末冲刺，中小银行则暗地通过"一日游"冲量行为完成存款指标。值得关注的是，今年5月多年来首次出现居民存款月度净流出，存款利率下行促使居民资金大量流向理财、基金等资管产品。</div>
   <div class="tags"><span class="tag">三、国际</span></div>
 </div>
-<div class="news-card" onclick="openModal('日本东部近海发生6.9级强震，气象厅警告未来一周可能再有强震')">
-  <div class="title">日本东部近海发生6.9级强震，气象厅警告未来一周可能再有强震</div>
-  <div class="body">北京时间6月25日6时30分，日本本州东部海域发生6.9级地震，震源深度50公里。日本气象厅在记者会上表示，未来约一周内需注意同等规模地震，不排除发生震感更强地震的可能性，呼吁民众保持警惕。目前暂无海啸预警。</div>
+<div class="news-card" onclick="openModal('苹果"印度梦"遭遇重击：核心供应商被黑，iPhone 18 Pro机密泄露')">
+  <div class="title">苹果"印度梦"遭遇重击：核心供应商被黑，iPhone 18 Pro机密泄露</div>
+  <div class="body">窃取苹果印度供应商塔塔电子数据的勒索软件组织在暗网公开了iPhone 18 Pro的敏感组件清单、供应商信息及产品照片。此次泄密事件不仅威胁苹果的供应链保密体系，还可能损害苹果与塔塔集团的合作关系，并为竞争对手和假冒产品制造商提供可乘之机。</div>
   <div class="tags"><span class="tag">三、国际</span></div>
 </div>
-<div class="news-card" onclick="openModal('委内瑞拉1分钟内连发7.1级和7.5级强震')">
-  <div class="title">委内瑞拉1分钟内连发7.1级和7.5级强震</div>
-  <div class="body">据百度热搜，委内瑞拉在1分钟内连续发生7.1级和7.5级两次强烈地震，震情引发国际社会高度关注，目前救援和灾损评估仍在进行中。</div>
+<div class="news-card" onclick="openModal('日美实战化"夺岛"军演冲击亚太安全，俄乌双方伤亡近180万人')">
+  <div class="title">日美实战化"夺岛"军演冲击亚太安全，俄乌双方伤亡近180万人</div>
+  <div class="body">日本与美军近期开展实战化"夺岛"联合军演，引发亚太地区安全关切。与此同时，据最新统计俄乌冲突双方累计伤亡已接近180万人，战事持续消耗巨大。此外，国际原子能机构证实扎波罗热核电站实验室遭无人机袭击，核安全风险再度引发国际关注。</div>
   <div class="tags"><span class="tag">三、国际</span></div>
 </div>
-<div class="news-card" onclick="openModal('特朗普称"可能永远无法查明"伊朗小学遇袭责任方')">
-  <div class="title">特朗普称"可能永远无法查明"伊朗小学遇袭责任方</div>
-  <div class="body">美国总统特朗普6月24日表示，关于2月美军"战斧"导弹击中伊朗女子小学致175人死亡一事，责任方可能永远无法查明。他称"没人故意那样做……犯错难免，战争是肮脏的"。伊朗方面此前指控美军发动了此次袭击，美国以调查为由至今未予承认。</div>
+<div class="news-card" onclick="openModal('欧洲央行6月加息并非"预防性"，美国战略石油储备降至1983年以来最低')">
+  <div class="title">欧洲央行6月加息并非"预防性"，美国战略石油储备降至1983年以来最低</div>
+  <div class="body">欧洲央行行长拉加德表示，本月加息是基于数据预测而非预防性行动。同时，美国战略石油储备库存减少550万桶至3.257亿桶，创1983年以来新低，主因是填补伊朗冲突后的供应缺口。此外，委内瑞拉地震死亡人数已升至1719人，藤森庆子赢得秘鲁总统选举。</div>
   <div class="tags"><span class="tag">四、国内社会</span></div>
 </div>
-<div class="news-card" onclick="openModal('习近平在山东德州考察：不忘初心，走新的长征路')">
-  <div class="title">习近平在山东德州考察：不忘初心，走新的长征路</div>
-  <div class="body">习近平总书记赴山东德州考察，强调"不忘初心、牢记使命，走新的长征路"，深入调研当地"三夏"农业生产，要求抓好粮食生产、夯实全年丰收根基。同期专题报道聚焦德州发展成就和红色传承。</div>
+<div class="news-card" onclick="openModal('庆祝中国共产党成立105周年大会将于7月1日隆重举行')">
+  <div class="title">庆祝中国共产党成立105周年大会将于7月1日隆重举行</div>
+  <div class="body">庆祝中国共产党成立105周年音乐会已在北京举行，习近平会见白俄罗斯总统卢卡申科。7月1日将隆重召开庆祝大会，全国各地同步开展系列庆祝活动。记者手记《根脉在大地上，力量在人民中》等专题报道系统回顾党的百年奋斗历程。</div>
   <div class="tags"><span class="tag">四、国内社会</span></div>
 </div>
-<div class="news-card" onclick="openModal('国产大飞机C919首次飞抵延安')">
-  <div class="title">国产大飞机C919首次飞抵延安</div>
-  <div class="body">中国商飞C919国产大飞机完成首次延安航线飞行，标志着国产干线客机航线网络进一步向革命老区延伸。C919目前已累计交付多架，商业运营稳步推进。</div>
+<div class="news-card" onclick="openModal('7月1日起一批新规落地，电池新规引关注')">
+  <div class="title">7月1日起一批新规落地，电池新规引关注</div>
+  <div class="body">7月1日起将有一批涉及民生、环保、行业监管等方面的新规正式施行。其中电池行业新规引发广泛关注，涉及生产标准、回收体系及安全规范等方面的升级。同时，酒店行业推行"24小时退房"制度引发社会热议。</div>
   <div class="tags"><span class="tag">四、国内社会</span></div>
 </div>
-<div class="news-card" onclick="openModal('"双一流"高校扩招：重点投向AI、集成电路等国家战略领域')">
-  <div class="title">"双一流"高校扩招：重点投向AI、集成电路等国家战略领域</div>
-  <div class="body">教育部宣布"双一流"高校进一步扩招，新增招生计划重点投向人工智能、集成电路、生物医药、新能源等国家战略急需领域。同时2026年高考成绩陆续公布，多地出现高分考生。</div>
+<div class="news-card" onclick="openModal('教育部发布高考志愿防篡改预警，男子诋毁袁隆平被刑拘')">
+  <div class="title">教育部发布高考志愿防篡改预警，男子诋毁袁隆平被刑拘</div>
+  <div class="body">教育部发布紧急预警，提醒考生和家长保护个人信息，严防高考志愿被篡改。另据通报，一名男子因在网络平台诋毁袁隆平院士的科研成果被依法刑事拘留。北京近日连发暴雨、雷电、地质灾害等多个预警信号，防汛四级应急响应已启动。</div>
   <div class="tags"><span class="tag">五、体育/娱</span></div>
 </div>
-<div class="news-card" onclick="openModal('巴西3比0大胜苏格兰，内马尔时隔981天再度国家队登场')">
-  <div class="title">巴西3比0大胜苏格兰，内马尔时隔981天再度国家队登场</div>
-  <div class="body">2026世界杯小组赛，巴西队3比0战胜苏格兰。最受瞩目的是内马尔时隔981天再度身穿巴西国家队战袍替补登场，全场欢呼。威尼修斯梅开二度表现抢眼，内马尔在场边为其鼓掌，勾起球迷对其25岁巅峰时期的回忆。</div>
+<div class="news-card" onclick="openModal('世界杯爆冷：德国点球大战不敌巴拉圭遭淘汰，巴西补时绝杀日本')">
+  <div class="title">世界杯爆冷：德国点球大战不敌巴拉圭遭淘汰，巴西补时绝杀日本</div>
+  <div class="body">2026世界杯淘汰赛阶段惊现多场经典对决。德国队在点球大战中罚丢3粒点球，爆冷出局不敌巴拉圭，这也是德国队世界杯历史上点球大战首败。另一场焦点战中，巴西队在补时阶段完成绝杀，2-1淘汰日本队。日本主帅森保一赛后坦言"我水平不够"。</div>
   <div class="tags"><span class="tag">五、体育/娱</span></div>
 </div>
-<div class="news-card" onclick="openModal('世界杯战况：南非vs韩国激战正酣')">
-  <div class="title">世界杯战况：南非vs韩国激战正酣</div>
-  <div class="body">世界杯小组赛南非对阵韩国的比赛引发热议，两支球队都希望在小组中争取出线主动权。亚洲球队在本届世界杯的整体表现成为国内球迷关注焦点。</div>
+<div class="news-card" onclick="openModal('郑钦文温网一轮游，中国男队第12次捧起汤姆斯杯')">
+  <div class="title">郑钦文温网一轮游，中国男队第12次捧起汤姆斯杯</div>
+  <div class="body">中国网球名将郑钦文在温布尔登网球锦标赛首轮遭遇淘汰，遗憾止步。好消息是，中国羽毛球男队击败法国队，第12次捧起汤姆斯杯，延续了中国羽毛球男团在世界羽坛的统治力。37秒85的成绩让中国男子4×100米接力队以小组第一身份晋级。</div>
+  <div class="tags"><span class="tag">五、体育/娱</span></div>
+</div>
+<div class="news-card" onclick="openModal('《消失的人》领跑五一档，谢霆锋成都开唱引爆话题')">
+  <div class="title">《消失的人》领跑五一档，谢霆锋成都开唱引爆话题</div>
+  <div class="body">电影市场方面，《消失的人》与《给阿嬷的情书》连续实现票房逆跌，2026年五一档总票房突破4亿元，《消失的人》稳居票房榜首。音乐领域，谢霆锋"进化演唱会"成都首场演出引发歌迷热烈反响，被称为"等了20年的演唱会"。</div>
   <div class="tags"><span class="tag">六、汽车/新</span></div>
 </div>
-<div class="news-card" onclick="openModal('通用汽车向巴西追加投资近7亿美元，加速混动布局')">
-  <div class="title">通用汽车向巴西追加投资近7亿美元，加速混动布局</div>
-  <div class="body">通用汽车宣布向巴西追加投资35亿雷亚尔（约6.75亿美元），使其在当地汽车行业的投资额增加50%。资金将用于混合动力汽车生产及工厂现代化改造，显示了通用对南美市场和新能源转型的双重押注。</div>
+<div class="news-card" onclick="openModal('钙钛矿太空光伏电池明年或量产，赛道规模有望冲击万亿')">
+  <div class="title">钙钛矿太空光伏电池明年或量产，赛道规模有望冲击万亿</div>
+  <div class="body">全球最早研究钙钛矿光伏电池的科学家之一陈棋团队已完成上百次配方优化，钙钛矿电池成本仅为传统砷化镓电池的十分之一。目前全球首条钙钛矿太空光伏中试线已在北京昌平开建，预计2027年量产、2028年开启商业化销售。多家机构测算太空光伏远期市场规模有望冲击万亿级别。</div>
   <div class="tags"><span class="tag">六、汽车/新</span></div>
 </div>
-<div class="news-card" onclick="openModal('SK keyfoundry发布汽车半导体EMC保护技术，已进入量产')">
-  <div class="title">SK keyfoundry发布汽车半导体EMC保护技术，已进入量产</div>
-  <div class="body">韩国8英寸晶圆代工厂SK keyfoundry宣布开发出"基于双向SCR的片上EMC保护技术"，可大幅提升汽车半导体的电磁兼容性能，已应用于0.13微米BCD工艺产品并进入量产阶段。</div>
+<div class="news-card" onclick="openModal('多家A股上市公司抢滩太空光伏新赛道')">
+  <div class="title">多家A股上市公司抢滩太空光伏新赛道</div>
+  <div class="body">低轨卫星组网提速催生卫星电源增量需求，近期多家A股上市公司密集发布对外投资、战略合作及共建实验室等公告，企业从硅片、封装材料到钙钛矿电池全线布局太空光伏。业内人士指出，行业正加速组建太空光伏产业联盟协同攻关，多条技术路线同步开展在轨验证。</div>
   <div class="tags"><span class="tag">六、汽车/新</span></div>
 </div>
-<div class="news-card" onclick="openModal('核电概念股年内大幅回撤，低估值或迎布局窗口')">
-  <div class="title">核电概念股年内大幅回撤，低估值或迎布局窗口</div>
-  <div class="body">据统计，18只市盈率低于40倍的核电概念股中，8只年内回撤超30%，常辅股份回撤幅度最高达50.69%。华能国际滚动市盈率仅8.39倍为最低。核电作为清洁基荷能源，长期逻辑未变。 *本简报由 Hermes Agent 自动生成，新闻来源为百度新闻、36氪、财联社，仅供参考，不构成投资建议。*</div>
+<div class="news-card" onclick="openModal('珞石机器人、晶合集成、立讯精密相继冲刺港股IPO')">
+  <div class="title">珞石机器人、晶合集成、立讯精密相继冲刺港股IPO</div>
+  <div class="body">珞石机器人拟全球发售2303万股H股、发售价38港元；晶合集成拟发售约2.16亿股H股、发售价不超32.30港元；立讯精密拟发行3.834亿股H股、定价不高于63.28港元/股。三家硬科技企业密集赴港上市，涵盖机器人、半导体制造和精密制造等前沿领域。 *本简报基于2026年6月30日公开新闻自动生成，仅供参考，不构成任何投资建议。*</div>
   <div class="tags"><span class="tag">六、汽车/新</span></div>
 </div>
 </div></div>
 <div class="section-title"><span class="bar"></span>财政部 / 会计准则</div>
-<div class="policy-card"><span class="dept mof">财政部</span><div class="pinfo"><div class="ptitle">《企业会计准则解释第19号》正式发布</div><div class="pbody">涉及收入确认中"主要责任人vs代理人"判断（总额法vs净额法）、数据资源入表细则、碳排放权交易会计处理。对电商/平台型企业影响最大。</div><div class="pdate">2026-03-20 发布 · 2026年06月26日 · 自动更新</div></div></div>
+<div class="policy-card"><span class="dept mof">财政部</span><div class="pinfo"><div class="ptitle">《企业会计准则解释第19号》正式发布</div><div class="pbody">涉及收入确认中"主要责任人vs代理人"判断（总额法vs净额法）、数据资源入表细则、碳排放权交易会计处理。对电商/平台型企业影响最大。</div><div class="pdate">2026-03-20 发布 · 2026年06月30日 · 自动更新</div></div></div>
 <div class="policy-card"><span class="dept mof">财政部</span><div class="pinfo"><div class="ptitle">《企业数据资源相关会计处理暂行规定》修订</div><div class="pbody">明确数据资源确认为无形资产或存货的具体标准，新增数据资产减值测试指引。对拥有大量用户数据的商贸企业影响显著。</div><div class="pdate">2026-02-15 发布 · 2026年报适用</div></div></div>
 <div class="policy-card"><span class="dept mof">财政部</span><div class="pinfo"><div class="ptitle">政府补助会计准则应用指南更新</div><div class="pbody">细化"与收益相关"vs"与资产相关"政府补助的区分标准，新增新能源补贴、研发补贴的会计处理案例。</div><div class="pdate">2026-01-10 发布</div></div></div>
 <div class="section-title"><span class="bar"></span>税务总局</div>
